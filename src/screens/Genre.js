@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export class NewSeason extends Component {
+class Genre extends Component {
   render() {
     return (
       <View>
-        <Text>NewSeason</Text>
+        <Text>Genre</Text>
       </View>
     );
   }
 }
+
+export default Genre;

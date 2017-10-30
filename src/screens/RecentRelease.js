@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export class RecentRelease extends Component {
+class RecentRelease extends Component {
   render() {
     return (
       <View>
@@ -10,3 +10,5 @@ export class RecentRelease extends Component {
     );
   }
 }
+
+export default RecentRelease;
