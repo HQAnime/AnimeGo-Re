@@ -6,3 +6,4 @@ export * from './NewSeason';
 export * from './RecentRelease';
 export * from './SearchAnime';
 export * from './WatchAnime';
+export * from './Movie';
