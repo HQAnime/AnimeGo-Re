@@ -31,6 +31,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  // Change status bar to light content
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   return YES;
 }
 
