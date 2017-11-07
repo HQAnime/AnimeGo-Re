@@ -3,6 +3,7 @@ import { MainScreen, AnimeDetail, SearchAnime,
   WatchAnime, NewSeason, Genre, RecentRelease, Movie } from './src/screens/';
 import { Button } from 'react-native-elements';
 import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Platform } from 'react-native';
 
 class App extends Component {
   render() {
@@ -13,7 +14,7 @@ class App extends Component {
             titleStyle={styles.titleStyle} navigationBarStyle={styles.mainNavBarStyle}
             renderRightButton={(
               <Button
-                icon={{name: 'search', type: 'evil-icons', size: 30}}
+                icon={{name: 'search', type: 'evil-icons', size: (Platform.OS === 'ios') ? 22 : 30,}}
                 buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()}
               />
             )} backTitle='Back' initial/>
