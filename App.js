@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MainScreen, AnimeDetail, SearchAnime, 
   WatchAnime, NewSeason, Genre, RecentRelease, Movie } from './src/screens/';
-import { TouchableOpacity, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 class App extends Component {
@@ -12,9 +12,10 @@ class App extends Component {
           <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' 
             titleStyle={styles.titleStyle} navigationBarStyle={styles.mainNavBarStyle}
             renderRightButton={(
-              <TouchableOpacity onPress={() => Actions.SearchScreen()}  style={{width: 100, height: 40, backgroundColor:'white'}}>
-                <Text>Search</Text>
-              </TouchableOpacity>
+              <Button
+                icon={{name: 'search', type: 'evil-icons', size: 30}}
+                buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()}
+              />
             )} backTitle='Back' initial/>
             <Scene key='SearchScreen' component={ SearchAnime } title='Search an Anime' 
             titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
