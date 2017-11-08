@@ -18,9 +18,19 @@ class RecentRelease extends Component {
       var HTMLParser = require('fast-html-parser');
       
       var root = HTMLParser.parse(htmlText);
-      var episodes = root.querySelector('.items').rawText;
+      var episodes = root.querySelector('.items');
+      var newDataString = '';
+      for (var i = 0; i < episodes.childNodes.length; i++) {
+        var anime = episodes.childNodes[i];
+        // Somehow, next line is parsed as well
+        if (anime.isWhitespace) continue;
+        var animeLink = GoGoAnime.MainURL + anime.querySelector('.img').childNodes[1].attributes.href;
+        var animeName = anime.querySelector('.name').text;
+        var animeEpisode = anime.querySelector('.episode').text;
+        newDataString += animeName + '\n' + animeEpisode + '\n' + animeLink + '\n\n';
+      }
       this.setState({
-        data: episodes
+        data:newDataString
       })
     })
     .catch((error) => {
