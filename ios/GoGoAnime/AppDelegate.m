@@ -34,6 +34,7 @@
   
   // Change status bar to light content
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  
   return YES;
 }
 
