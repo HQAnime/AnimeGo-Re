@@ -21,7 +21,7 @@ class AnimeList extends Component {
       hasMorePage: true,
       isRefreshing: false,
       url: this.props.AnimeUrl,
-      columns: 2,
+      columns: -1,
     };
   }
 
@@ -61,16 +61,17 @@ class AnimeList extends Component {
   }
 
   getNumColumns = () => {
-    console.log(isPortrait() ? 'portrait' : 'landscape');
+    // console.log(isPortrait() ? 'portrait' : 'landscape');
     const { width, height } = Dimensions.get('window');
     columns = Math.floor(width / 200);
     if (columns < 2) columns = 2;
     else if (columns > 6) columns = 6;
     goodWidth = Math.round(width / columns);
 
+    // Prevent unnecessary updates
     if (columns == this.state.columns) return;    
 
-    console.log(columns, goodWidth);
+    // console.log(columns, goodWidth);
     this.setState({
       columns: columns,
       goodWidth: goodWidth,
@@ -82,8 +83,7 @@ class AnimeList extends Component {
     let loader = new AnimeLoader(this.state.url, this.state.page);
     loader.loadAnime()
     .then((animeData) => {
-      // console.log(animeData);
-      if (animeData == []) {
+      if (animeData.length == 0) {
        // No more pages
        this.setState({
          hasMorePage: false,

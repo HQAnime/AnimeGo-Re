@@ -18,13 +18,13 @@ export default class AnimeLoader {
         
         var root = HTMLParser.parse(htmlText).querySelector('.items');
         // Last page is reached
-        if (root == null) return [];
+        if (root == null) success([]);
 
         var items = root.childNodes;
         var animeData = [];
         var length = items.length;
         // This is only for new release
-        if (length == 0) return [];
+        if (length == 0) success([]);
            
         for (var i = 0; i < length; i++) {
           var anime = items[i];

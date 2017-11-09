@@ -14,12 +14,12 @@ class AnimeCell extends Component {
 
   render() {
     return (
-      <Card image={{uri: this.state.data.thumbnail}} containerStyle={{padding: 0, margin: 0, width: this.state.width}}>
-        <Text style={{marginBottom: 10}}>{this.state.data.name}</Text>
-        <Button backgroundColor='#03A9F4' title={this.state.data.info}
-          buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+      <Card image={{uri: this.state.data.thumbnail}} containerStyle={{padding: 0, margin: 0, width: this.state.width, justifyContent:'center'}}
+        imageStyle={{height: this.state.width * 1.45}}>
+          <Text style={{marginBottom: 10, textAlign: 'center'}} numberOfLines={2}>{this.state.data.name}</Text>
+          <Button backgroundColor='#03A9F4' title={this.state.data.info}
+            buttonStyle={{borderRadius: 5}} onPress={() => Linking.openURL(this.state.data.link).catch(err => console.error('An error occurred', err))}/>
       </Card>
-      
     )
   }
 }
