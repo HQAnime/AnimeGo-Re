@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router sceneStyle={{backgroundColor: 'white'}}>
         <Scene key='root' headerTintColor='white'>
           <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' 
             titleStyle={styles.titleStyle} navigationBarStyle={styles.mainNavBarStyle}

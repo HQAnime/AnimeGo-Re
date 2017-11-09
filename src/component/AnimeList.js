@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { RefreshControl, Linking, TouchableOpacity, Image, FlatList, View, Text, ActivityIndicator } from 'react-native';
+import { View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
 import { Colour, RecentReleaseStyles } from '../Styles';
 import AnimeLoader from '../core/AnimeLoader';
+import AnimeCell from './AnimeCell';
+
+const isPortrait = () => {
+  const dim = Dimensions.get('screen');
+  return dim.height >= dim.width;
+};
 
 class AnimeList extends Component {
 
-  keyExtractor = (item, index) => item.id;
+  keyExtractor = (item) => item.name;
 
   constructor(props) {
     super(props);
@@ -15,11 +21,13 @@ class AnimeList extends Component {
       hasMorePage: true,
       isRefreshing: false,
       url: this.props.AnimeUrl,
+      columns: 2,
     };
   }
 
   componentWillMount() {
      this.loadAnime();
+     this.getNumColumns();
   }
 
   render() {
@@ -33,19 +41,15 @@ class AnimeList extends Component {
     }
 
     return (
-      <FlatList
-        data={this.state.data} keyExtractor={item => item.name}
-        renderItem={({item}) => 
-        <View style={{padding: 10}}>
-          <TouchableOpacity onPress={() => Linking.openURL(item.link).catch(err => console.error('An error occurred', err))}>
-            <Text>{item.name}</Text>
-            <Text>{item.episode}</Text>
-            <Image source={{uri: item.thumbnail}} style={{width: 225, height: 326}} />
-          </TouchableOpacity>
-        </View>
-        } onEndReached={this.loadAnime} onEndReachedThreshold={0} 
-        onRefresh={this.refreshAnime} refreshing={this.state.isRefreshing}
-        contentContainerStyle={{alignItems: 'center'}} ListFooterComponent={this.renderFooterComponent}/>
+      <View style={{flex: 1}} onLayout={this.getNumColumns}>
+        <FlatList data={this.state.data} keyExtractor={this.keyExtractor} 
+          key={(isPortrait() ? 'portrait' : 'landscape')}
+          renderItem={({item}) => 
+            <AnimeCell data={item} width={this.state.goodWidth}/>
+          } onEndReached={this.loadAnime} onEndReachedThreshold={0} numColumns={this.state.columns}
+          onRefresh={this.refreshAnime} refreshing={this.state.isRefreshing}
+          ListFooterComponent={this.renderFooterComponent}/>
+      </View>
     );
   }
 
@@ -54,6 +58,23 @@ class AnimeList extends Component {
     else return (
       <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
     )
+  }
+
+  getNumColumns = () => {
+    console.log(isPortrait() ? 'portrait' : 'landscape');
+    const { width, height } = Dimensions.get('window');
+    columns = Math.floor(width / 200);
+    if (columns < 2) columns = 2;
+    else if (columns > 6) columns = 6;
+    goodWidth = Math.round(width / columns);
+
+    if (columns == this.state.columns) return;    
+
+    console.log(columns, goodWidth);
+    this.setState({
+      columns: columns,
+      goodWidth: goodWidth,
+    })
   }
 
   loadAnime = () => {
