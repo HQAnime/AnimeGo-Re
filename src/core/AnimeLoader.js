@@ -8,7 +8,7 @@ export default class AnimeLoader {
   }
 
   loadAnime() {
-    return new Promise((resolve, reject) => {
+    return new Promise((success, failure) => {
       // Loading data here
       // console.log(this.url + this.page);
       fetch(this.url + this.page)
@@ -16,15 +16,16 @@ export default class AnimeLoader {
       .then((htmlText) => {
         var HTMLParser = require('fast-html-parser');
         
-        var root = HTMLParser.parse(htmlText);
-        var items = root.querySelector('.items').childNodes;
+        var root = HTMLParser.parse(htmlText).querySelector('.items');
+        // Last page is reached
+        if (root == null) return [];
+        
+        var items = root.childNodes;
         var animeData = [];
-    
-        // In case last page is reached
         var length = items.length;
+        // This is only for new release
         if (length == 0) return [];
-        
-        
+           
         for (var i = 0; i < length; i++) {
           var anime = items[i];
           // Somehow, next line is parsed as well
@@ -39,11 +40,11 @@ export default class AnimeLoader {
           animeData.push({name: animeName, episode: extraInformation, link: animeLink, thumbnail: animeThumbnail});
         }
         // console.log(animeData);
-        resolve(animeData);
+        success(animeData);
       })
       .catch((error) => {
         // console.error(error);
-        reject(error);
+        failure(error);
       });
     })
   }
