@@ -45,10 +45,15 @@ class AnimeList extends Component {
         </View>
         } onEndReached={this.loadAnime} onEndReachedThreshold={0} 
         onRefresh={this.refreshAnime} refreshing={this.state.isRefreshing}
-        contentContainerStyle={{alignItems: 'center'}} ListFooterComponent={
-          <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
-        }/>
+        contentContainerStyle={{alignItems: 'center'}} ListFooterComponent={this.renderFooterComponent}/>
     );
+  }
+
+  renderFooterComponent = () => {
+    if (!this.state.hasMorePage) return null;
+    else return (
+      <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
+    )
   }
 
   loadAnime = () => {
@@ -56,7 +61,7 @@ class AnimeList extends Component {
     let loader = new AnimeLoader(this.state.url, this.state.page);
     loader.loadAnime()
     .then((animeData) => {
-      console.log(animeData);
+      // console.log(animeData);
       if (animeData == []) {
        // No more pages
        this.setState({
