@@ -19,7 +19,7 @@ export default class AnimeLoader {
         var root = HTMLParser.parse(htmlText).querySelector('.items');
         // Last page is reached
         if (root == null) return [];
-        
+
         var items = root.childNodes;
         var animeData = [];
         var length = items.length;
@@ -37,7 +37,7 @@ export default class AnimeLoader {
           // Only for NewRelease, it is displaying episode.
           var extraInformation = this.url == GoGoAnime.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
           var animeThumbnail = animeImage.childNodes[1].childNodes[1].attributes.src;
-          animeData.push({name: animeName, episode: extraInformation, link: animeLink, thumbnail: animeThumbnail});
+          animeData.push({name: animeName, info: extraInformation, link: animeLink, thumbnail: animeThumbnail});
         }
         // console.log(animeData);
         success(animeData);
