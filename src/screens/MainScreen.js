@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import { AnimeDetail, SearchAnime, 
-  WatchAnime, NewSeason, Genre, RecentRelease, Movie } from './';
+import { NewSeason, Genre, RecentRelease, Movie } from './';
+import { MainScreenStyles } from '../Styles';
 
 class MainScreen extends Component {
+  
+
   state = {
     index: 0,
     routes: [
@@ -21,9 +23,9 @@ class MainScreen extends Component {
       <TabBar
         {...props}
         scrollEnabled 
-        tabStyle = { styles.tabBarStyle }
-        indicatorStyle = { styles.indicatorStyle } 
-        style = { styles.tabStyle }/>
+        tabStyle = { tabStyle }
+        indicatorStyle = { indicatorStyle } 
+        style = { tabBarStyle }/>
     );
   };
 
@@ -46,17 +48,7 @@ class MainScreen extends Component {
   }
 }
 
-const styles = {
-  tabStyle: {
-    backgroundColor: '#f5c249',
-  },
-  tabBarStyle: {
-    height: 40,
-    backgroundColor: 'transparent',
-  },
-  indicatorStyle: {
-    backgroundColor: 'white',
-  },
-}
+// From styles.js
+const { tabBarStyle, indicatorStyle, tabStyle } = MainScreenStyles;
 
 export { MainScreen };
