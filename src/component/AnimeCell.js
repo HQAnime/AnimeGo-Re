@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Linking, Dimensions, Platform } from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import { View, Text, Linking, Dimensions } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 
 class AnimeCell extends Component {
 
