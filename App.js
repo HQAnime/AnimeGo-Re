@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MainScreen, AnimeDetail, SearchAnime, 
-  WatchAnime, NewSeason, Genre, RecentRelease, Movie } from './src/screens/';
+  WatchAnime, NewSeason, Genre, RecentRelease, Movie, GenreDetail } from './src/screens/';
 import { Button } from 'react-native-elements';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { Platform } from 'react-native';
@@ -19,7 +19,9 @@ class App extends Component {
               />
             )} backTitle='Back' initial/>
             <Scene key='SearchScreen' component={ SearchAnime } title='Search an Anime' 
-            titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+              titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+            <Scene key='GenreDetail' component={ GenreDetail } title='Genre' 
+              titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
         </Scene>
       </Router>
     );
