@@ -11,7 +11,7 @@ const isPortrait = () => {
 
 class AnimeList extends Component {
 
-  keyExtractor = (item) => item.name;
+  keyExtractor = (item) => item.link;
 
   constructor(props) {
     super(props);
@@ -46,7 +46,7 @@ class AnimeList extends Component {
           key={(isPortrait() ? 'portrait' : 'landscape')}
           renderItem={({item}) => 
             <AnimeCell data={item} width={this.state.goodWidth}/>
-          } onEndReached={this.loadAnime} onEndReachedThreshold={0} numColumns={this.state.columns}
+          } onEndReached={this.loadAnime} onEndReachedThreshold={1} numColumns={this.state.columns}
           onRefresh={this.refreshAnime} refreshing={this.state.isRefreshing}
           ListFooterComponent={this.renderFooterComponent}/>
       </View>
@@ -79,6 +79,7 @@ class AnimeList extends Component {
   }
 
   loadAnime = () => {
+    // console.log(this.state.hasMorePage ? 'morePage' : 'lastPage', this.state.isRefreshing ? 'refreshing' : 'not');
     if (!this.state.hasMorePage && !this.state.isRefreshing) return;
     let loader = new AnimeLoader(this.state.url, this.state.page);
     loader.loadAnime()
@@ -89,6 +90,13 @@ class AnimeList extends Component {
          hasMorePage: false,
          isRefreshing: false,
        })
+      } else if (animeData.length < 20) {
+        // Append data
+        this.setState({
+          data: this.state.data.concat(animeData),
+          isRefreshing: false,
+          hasMorePage: false,
+        })
       } else {
        // Append data
        this.setState({
