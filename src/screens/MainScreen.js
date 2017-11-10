@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { NewSeason, Genre, RecentRelease, Movie } from './';
 import { MainScreenStyles } from '../Styles';
 
 class MainScreen extends Component {
-  
 
   state = {
     index: 0,
@@ -38,7 +38,7 @@ class MainScreen extends Component {
 
   render() {
     return (
-      <TabViewAnimated
+      <TabViewAnimated initialLayout={{width: Dimensions.get('window').width, height: 0}}
         navigationState={this.state}
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}

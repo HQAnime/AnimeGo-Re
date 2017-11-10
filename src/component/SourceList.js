@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Dimensions } from 'react-native';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
 import { Colour, WatchAnimeStyles } from '../Styles';
 import SourceCell from './SourceCell';
@@ -41,7 +41,9 @@ class SourceList extends Component {
         <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
           renderItem={({item}) => 
             <SourceCell data={item}/>
-          } />
+          } ListFooterComponent={
+            <Text style={{padding: 20, textAlign: 'center'}}>Vidstreaming is recommended</Text>
+          }/>
       </View>
     );
   }
