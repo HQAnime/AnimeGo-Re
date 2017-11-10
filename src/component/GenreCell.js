@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Button, Dimensions, Text } from 'react-native';
 import { Colour } from '../Styles';
-import { GoGoAnime } from '../Constant';
 import { Actions } from 'react-native-router-flux';
 
 const { width } = Dimensions.get('window');

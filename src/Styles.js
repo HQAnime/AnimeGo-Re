@@ -24,3 +24,9 @@ export const RecentReleaseStyles = {
     padding: 10,
   },
 }
+
+export const WatchAnimeStyles = {
+  loadingStyle: {
+    padding: 10,
+  },
+}
