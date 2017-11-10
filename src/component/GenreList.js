@@ -7,11 +7,7 @@ const genreList = ['Action', 'Adventure', 'Cars', 'Comedy', 'Dementia', 'Demons'
 'Game', 'Harem', 'Historical', 'Horror', 'Josei', 'Kids', 'Magic', 'Martial Arts', 'Mecha', 'Military', 
 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 
 'Seinen', 'Shoujo', 'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Space', 'Sports', 'Super Power', 
-'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];/*[{name: 'Action'}, {name: 'Adventure'}, {name: 'Cars'}, {name: 'Comedy'}, {name: 'Dementia'}, {name: 'Demons'}, {name: 'Drama'}, {name: 'Ecchi'}, {name: 'Fantasy'}, 
-{name: 'Game'}, {name: 'Harem'}, {name: 'Historical'}, {name: 'Horror'}, {name: 'Josei'}, {name: 'Kids'}, {name: 'Magic'}, {name: 'Martial Arts'}, {name: 'Mecha'}, {name: 'Military'}, 
-{name: 'Music'}, {name: 'Mystery'}, {name: 'Parody'}, {name: 'Police'}, {name: 'Psychological'}, {name: 'Romance'}, {name: 'Samurai'}, {name: 'School'}, {name: 'Sci-Fi'}, 
-{name: 'Seinen'}, {name: 'Shoujo'}, {name: 'Shoujo Ai'}, {name: 'Shounen'}, {name: 'Shounen Ai'}, {name: 'Slice of Life'}, {name: 'Space'}, {name: 'Sports'}, {name: 'Super Power'}, 
-{name: 'Supernatural'}, {name: 'Thriller'}, {name: 'Vampire'}, {name: 'Yaoi'}, {name: 'Yuri'}];*/
+'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];
 
 const isPortrait = () => {
   const dim = Dimensions.get('screen');

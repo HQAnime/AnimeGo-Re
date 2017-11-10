@@ -22,6 +22,8 @@ class App extends Component {
               titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
             <Scene key='GenreDetail' component={ GenreDetail } title='Genre' 
               titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+            <Scene key='WatchAnime' component={ WatchAnime } title='Anime' 
+            titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
         </Scene>
       </Router>
     );
