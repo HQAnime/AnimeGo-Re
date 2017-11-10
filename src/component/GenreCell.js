@@ -17,8 +17,8 @@ class GenreCell extends Component {
   GenreDetail = () => {
     const title = this.props.data;
     // replace only works for first match
-    const genre = title.split(' ').join('-'); + '?page=';
-    // console.log(title, genre);
+    const genre = title.split(' ').join('-') + '?page=';
+     console.log(title, genre);
     Actions.GenreDetail({title: title, genre: genre});
   }
 }
