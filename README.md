@@ -7,7 +7,7 @@ This is just a practise app made with react native and it is also my first react
 * Getting recent release, movie, new season, popular and genre anime
 * Displaying anime information and listing its episodes
 * Choosing a server and play anime inside your broswer (Only video)
-* Downloading anime (maybe)
+* Downloading anime ~~(maybe)~~
 
 There might be ads popping up when you play videos but it is from the website itself. There is nothing you could do about it.
 
@@ -26,4 +26,4 @@ For IOS, you need to download xcode and run this project. Please note this app w
 <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/New%20Release.jpg" width="270px" height="466px" />
 
 ## Known issues
-* Three finger gesture will crash this app on OnePlus devices
+~~* Three finger gesture will crash this app on OnePlus devices~~
