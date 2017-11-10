@@ -23,7 +23,7 @@ For Android, there will be apk file under release tab.
 For IOS, you need to download xcode and run this project. Please note this app will only work for 7 days if you do not have a developer account. You have to run it again after 7 days. I dont think this app will be on AppStore
 
 ## Screenshots
-![New Release](https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/New%20Release.jpg)
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/New%20Release.jpg" width="270px" height="466px" />
 
 ## Known issues
 * Three finger gesture will crash this app on OnePlus devices
