@@ -21,11 +21,13 @@ For Android, you could download [here](https://github.com/HenryQuan/React-Native
 For IOS, you need to download xcode and run this project. Please note this app will only work for 7 days if you do not have a developer account. You have to run it again after 7 days. ~~I dont think this app will be on AppStore~~
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/New%20Release.jpg" width="270px" height="466px" />
-<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Genre.jpg" width="270px" height="466px" />
-<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Info.jpg" width="270px" height="466px" />
-<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/WatchAnime.jpg" width="270px" height="466px" />
-<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Search.jpg" width="270px" height="466px" />
+<div>
+  <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/New%20Release.jpg" width="270px" height="466px" />
+  <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Genre.jpg" width="270px" height="466px" />
+  <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Info.jpg" width="270px" height="466px" />
+  <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/WatchAnime.jpg" width="270px" height="466px" />
+  <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/Search.jpg" width="270px" height="466px" />
+</div>
 
 ## Known issues
 ~~* Three finger gesture will crash this app on OnePlus devices (debug)~~
