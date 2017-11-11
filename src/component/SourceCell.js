@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Button, Linking } from 'react-native';
 import { Colour } from '../Styles';
 
-class SourceCell extends Component {
+class SourceCell extends React.PureComponent {
   
   render() {
     return (

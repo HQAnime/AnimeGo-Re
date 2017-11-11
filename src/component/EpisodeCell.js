@@ -3,7 +3,7 @@ import { View, Button, Alert, Dimensions } from 'react-native';
 import { Colour } from '../Styles';
 import { Actions } from 'react-native-router-flux'; 
 
-var width = Dimensions.get('screen').width / 5;
+var width = Dimensions.get('window').width / 5 - 8;
 
 class EpisodeCell extends React.PureComponent {
   
@@ -15,7 +15,7 @@ class EpisodeCell extends React.PureComponent {
 
   render() {
     return (
-      <View style={{width: width, margin: 4}}>
+      <View style={{flex: 1, width: width, margin: 4}}>
         <Button title={this.episode} color={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
       </View>
     )

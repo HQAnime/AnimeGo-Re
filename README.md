@@ -11,19 +11,27 @@ This is just a practise app made with react native and it is also my first react
 
 There might be ads popping up when you play videos but it is from the website itself. There is nothing you could do about it.
 
-This is still under development. As for now, it could only get recent release, movie, new season and genre and you will be redirected to your web broswer.
-
 ## How to run this project
 ~~~~
 npm install
 react-native run-ios
 ~~~~
-For Android, there will be apk file under release tab.
+For Android, you could download [here](https://github.com/HenryQuan/React-Native-GoGoAnime/releases)
 
-For IOS, you need to download xcode and run this project. Please note this app will only work for 7 days if you do not have a developer account. You have to run it again after 7 days. I dont think this app will be on AppStore
+For IOS, you need to download xcode and run this project. Please note this app will only work for 7 days if you do not have a developer account. You have to run it again after 7 days. ~~I dont think this app will be on AppStore~~
 
 ## Screenshots
 <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/New%20Release.jpg" width="270px" height="466px" />
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/Genre.jpg" width="270px" height="466px" />
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/Info.jpg" width="270px" height="466px" />
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/WatchAnime.jpg" width="270px" height="466px" />
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/Function/screenshots/Search.jpg" width="270px" height="466px" />
 
 ## Known issues
-~~* Three finger gesture will crash this app on OnePlus devices~~
+~~* Three finger gesture will crash this app on OnePlus devices (debug)~~
+* May crush randomly
+* Slow and buggy 
+
+(try search conan or one piece..., it is fine for short anime)
+* Episode may not be in order
+* May have weird issues if you scroll SUPER fast
