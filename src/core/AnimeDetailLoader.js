@@ -31,8 +31,25 @@ export default class AnimeDetailLoader {
         var animeRelease = info[13].childNodes[1].rawText;
         var animeStatus = info[15].childNodes[1].rawText;
 
+        // Get episodes
+        var animeEpisode = '0';
+        var episodes = root.querySelector('#episode_page');
+        // console.log(episodes);
+        if (episodes != null) {
+          var episode = episodes.childNodes;
+          var animeEpisode = episode[episode.length - 2].childNodes[1].rawAttrs.split(' ep_end = ')[1];
+          animeEpisode = animeEpisode.split("'").join('');
+          // console.log(animeEpisode);
+        }
+
+        // Getting movie_id
+        var animeId = '';
+        var movieId = root.querySelector('.movie_id');
+        if (movieId != null) animeId = movieId.attributes.value;
+        console.log(animeId);
+
         var animeInfo = {name: animeName, image: animeImage, type: animeType, typeLink: animeTypeLink, plot: animePlot, 
-          genre: animeGenre, release: animeRelease, status: animeStatus};
+          genre: animeGenre, release: animeRelease, status: animeStatus, episode: animeEpisode, id: animeId};
         
         // console.log(animeInfo);
         success(animeInfo);

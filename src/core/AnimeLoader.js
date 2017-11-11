@@ -42,6 +42,7 @@ export default class AnimeLoader {
           var animeName = anime.querySelector('.name').text;
           // Only for NewRelease, it is displaying episode.
           var extraInformation = this.url == GoGoAnime.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
+          if (extraInformation == '') extraInformation = '??';
           var animeThumbnail = animeImage.childNodes[1].childNodes[1].attributes.src;
           animeData.push({name: animeName, info: extraInformation, link: animeLink, thumbnail: animeThumbnail});
         }
