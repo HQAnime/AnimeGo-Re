@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AnimeList } from '../component/';
+import { GoGoAnime } from '../Constant';
 
 class NewSeason extends Component {
   render() {
     return (
-      <View>
-        <Text>NewSeason</Text>
-      </View>
+      <AnimeList AnimeUrl={GoGoAnime.NewSeason}/>
     );
   }
 }

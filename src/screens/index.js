@@ -7,3 +7,4 @@ export * from './RecentRelease';
 export * from './SearchAnime';
 export * from './WatchAnime';
 export * from './Movie';
+export * from './GenreDetail';
