@@ -3,7 +3,7 @@ import { View, Text, Linking, Dimensions } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
-class AnimeCell extends Component {
+class AnimeCell extends React.PureComponent {
 
   constructor(props) {
     super(props);

@@ -6,4 +6,5 @@ export const GoGoAnime = {
   Movie: 'https://ww3.gogoanime.io/anime-movies.html?page=',
   Genre: 'https://ww3.gogoanime.io/genre/',
   Search: 'https://ww3.gogoanime.io/search.html?keyword=',
+  Episode: 'https://ww3.gogoanime.io/load-list-episode?ep_start=',
 }

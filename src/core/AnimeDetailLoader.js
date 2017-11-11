@@ -46,7 +46,7 @@ export default class AnimeDetailLoader {
         var animeId = '';
         var movieId = root.querySelector('.movie_id');
         if (movieId != null) animeId = movieId.attributes.value;
-        console.log(animeId);
+        // console.log(animeId);
 
         var animeInfo = {name: animeName, image: animeImage, type: animeType, typeLink: animeTypeLink, plot: animePlot, 
           genre: animeGenre, release: animeRelease, status: animeStatus, episode: animeEpisode, id: animeId};
