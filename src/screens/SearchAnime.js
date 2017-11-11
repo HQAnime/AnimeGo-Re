@@ -18,7 +18,7 @@ class SearchAnime extends Component {
       return (
         <View>
           <TextInput autoCapitalize='none' autoCorrect={false}
-            style={styles.inputStyle}
+            style={styles.inputStyle} autoFocus
             onChangeText={(text) => {this.textInput = text}}
             onEndEditing={this.searchAnime}
           />
@@ -28,13 +28,7 @@ class SearchAnime extends Component {
       return <AnimeList AnimeUrl={GoGoAnime.Search + this.state.animeName + '&page='}/>
     }
   }
-
-  renderAnimeList() {
-    return (
-      <AnimeList AnimeUrl={GoGoAnime.Search + this.state.animeName + '&page='}/>
-    )
-  }
-
+  
   searchAnime = () => {
     if (this.textInput.length < 3) Alert.alert('Length < 3')
     else {
@@ -48,7 +42,7 @@ class SearchAnime extends Component {
 
 const styles = {
   inputStyle: {
-    height: 40,
+    height: (Platform.OS === 'ios') ? 40 : 50,
     textAlign: 'center',
     borderColor: 'gray',
     borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,

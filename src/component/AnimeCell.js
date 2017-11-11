@@ -7,32 +7,33 @@ class AnimeCell extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      data: this.props.data,
-      width: this.props.width,
-    };   
+    this.data = this.props.data;
+    this.width = this.props.width;
+    this.title = this.data.info.replace('Released: ', '');
   }
 
   render() {
     return (
-      <Card image={{uri: this.state.data.thumbnail}} containerStyle={{padding: 0, margin: 0, width: this.state.width, justifyContent:'center'}}
-        imageStyle={{height: this.state.width * 1.45}}>
-          <Text style={{marginBottom: 10, textAlign: 'center', height: 50}} numberOfLines={2}>{this.state.data.name}</Text>
-          <Button backgroundColor='#03A9F4' title={this.state.data.info.replace('Released: ', '')}
-            buttonStyle={{borderRadius: 15, height: 30, flex: 1}} onPress={() => {
-              if (this.state.data.link.includes('-episode-')) {
-                // Only NewRelease redirects you to that new episode
-                Actions.WatchAnime({title: this.state.data.name, link: this.state.data.link});
-              } else if (this.state.data.link == 'Error') {
-                // Go back
-                Actions.pop();
-              } else {
-                // AnimeDetail will be shown here
-                Linking.openURL(this.state.data.link).catch(err => console.error('An error occurred', err));
-              }
-            }}/>
+      <Card image={{uri: this.data.thumbnail}} imageStyle={{height: this.width * 1.45}}
+        containerStyle={{padding: 0, margin: 0, width: this.width, justifyContent:'center'}}>
+          <Text style={{marginBottom: 10, textAlign: 'center', height: 50}} numberOfLines={2}>{this.data.name}</Text>
+          <Button backgroundColor='#03A9F4' title={this.title}
+            buttonStyle={{borderRadius: 15, height: 30, flex: 1}} onPress={this.buttonPressed}/>
       </Card>
     )
+  }
+
+  buttonPressed = () => {
+    if (this.data.link.includes('-episode-')) {
+      // Only NewRelease redirects you to that new episode
+      Actions.WatchAnime({title: this.data.name, link: this.data.link});
+    } else if (this.data.link == 'Error') {
+      // No anime found go back
+      Actions.pop();
+    } else {
+      // AnimeDetail will be shown here
+      Actions.AnimeDetail({title: 'Loading...', link: this.data.link})
+    }
   }
 }
 

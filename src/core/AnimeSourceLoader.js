@@ -1,5 +1,3 @@
-import { GoGoAnime } from '../Constant';
-
 export default class AnimeSourceLoader {
 
   constructor(url) {
