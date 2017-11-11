@@ -20,10 +20,13 @@ class SourceList extends Component {
     let source = new AnimeSourceLoader(this.props.link);
     source.loadSource()
     .then((animeSource) => {
-       console.log(animeSource);
+      // console.log(animeSource);
       this.setState({
         data: animeSource,
       })  
+    })
+    .catch((error) => {
+      console.error(error);
     });
   }
 
