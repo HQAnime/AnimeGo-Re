@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { View, FlatList, ActivityIndicator, Dimensions, Text } from 'react-native';
 import { Colour, RecentReleaseStyles } from '../Styles';
 import AnimeLoader from '../core/AnimeLoader';
 import AnimeCell from './AnimeCell';
@@ -32,10 +32,11 @@ class AnimeList extends Component {
 
   render() {
     /* A loading indictor */
-    if (this.state.data == '') {
+    if (this.state.data.length == 0) {
       return (
         <View>
           <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
+          <Text style={{textAlign: 'center'}}>Loading...</Text>
         </View>
       )
     }

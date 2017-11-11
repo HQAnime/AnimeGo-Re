@@ -21,11 +21,17 @@ export default class AnimeLoader {
         if (root == null) success([]);
 
         var items = root.childNodes;
+        // For search when no reult has been found
+        if (items["0"].rawText.includes('Sorry')) {
+          success([{name: 'Anime not found\n>_<', info: 'Back', link: 'Error', thumbnail: 'https://ww3.gogoanime.io/img/icon/logo.png'}]);
+        }
+
         var animeData = [];
         var length = items.length;
         // This is only for new release
         if (length == 0) success([]);
-           
+
+        // console.log(length, items);
         for (var i = 0; i < length; i++) {
           var anime = items[i];
           // Somehow, next line is parsed as well

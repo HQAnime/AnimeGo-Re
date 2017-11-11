@@ -23,6 +23,9 @@ class AnimeCell extends Component {
               if (this.state.data.link.includes('-episode-')) {
                 // Only NewRelease redirects you to that new episode
                 Actions.WatchAnime({title: this.state.data.name, link: this.state.data.link});
+              } else if (this.state.data.link == 'Error') {
+                // Go back
+                Actions.pop();
               } else {
                 // AnimeDetail will be shown here
                 Linking.openURL(this.state.data.link).catch(err => console.error('An error occurred', err));
