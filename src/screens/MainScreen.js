@@ -9,7 +9,7 @@ class MainScreen extends Component {
   state = {
     index: 0,
     routes: [
-      { key: '1', title: 'New Release' },
+      { key: '1', title: 'Lastest' },
       { key: '2', title: 'New Season' },
       { key: '3', title: 'Movie' },
       { key: '4', title: 'Genre'},

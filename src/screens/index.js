@@ -8,3 +8,4 @@ export * from './SearchAnime';
 export * from './WatchAnime';
 export * from './Movie';
 export * from './GenreDetail';
+export * from './PlayVideo';
