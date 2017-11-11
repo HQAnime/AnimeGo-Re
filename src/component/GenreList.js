@@ -27,8 +27,8 @@ class GenreList extends Component {
     return (
       <View style={{flex: 1}} onLayout={this.updateView}>
         <FlatList data={genreList} keyExtractor={(genre) => genre}
-          renderItem={(genre) => 
-            <GenreCell data={genre.item}/>
+          renderItem={({item}) => 
+            <GenreCell data={item}/>
           } numColumns={2}/>
       </View>
     )

@@ -10,19 +10,19 @@ class App extends Component {
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
         <Scene key='root' headerTintColor='white'>
-          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' 
+          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' initial
             titleStyle={styles.titleStyle} navigationBarStyle={styles.mainNavBarStyle}
             renderRightButton={(
               <Button
-                icon={{name: 'search', type: 'evil-icons', size: (Platform.OS === 'ios') ? 22 : 30,}}
+                icon={{name: 'search', type: 'evil-icons', size: (Platform.OS === 'ios') ? 22 : 30}}
                 buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()}
               />
             )} backTitle='Back' initial/>
-            <Scene key='SearchScreen' component={ SearchAnime } title='Search an Anime' 
+            <Scene key='SearchScreen' component={ SearchAnime } title='Search'
               titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
             <Scene key='GenreDetail' component={ GenreDetail } title='Genre' 
               titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
-            <Scene key='WatchAnime' component={ WatchAnime } title='Anime' 
+            <Scene key='WatchAnime' component={ WatchAnime } title='Anime'
             titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
         </Scene>
       </Router>

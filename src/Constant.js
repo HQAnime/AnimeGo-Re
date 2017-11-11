@@ -5,4 +5,5 @@ export const GoGoAnime = {
   NewSeason: 'https://ww3.gogoanime.io/new-season.html?page=',
   Movie: 'https://ww3.gogoanime.io/anime-movies.html?page=',
   Genre: 'https://ww3.gogoanime.io/genre/',
+  Search: 'https://ww3.gogoanime.io/search.html?keyword=',
 }
