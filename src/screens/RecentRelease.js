@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AnimeList } from '../component/';
+import { GoGoAnime } from '../Constant';
 
 class RecentRelease extends Component {
   render() {
     return (
-      <View>
-        <Text>RecentRelease</Text>
-      </View>
-    );
+      <AnimeList AnimeUrl={GoGoAnime.NewRelease}/>
+    )
   }
 }
 

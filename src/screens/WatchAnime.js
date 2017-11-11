@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { SourceList } from '../component/';
 
 class WatchAnime extends Component {
   render() {
     return (
-      <View>
-        <Text>WatchAnime</Text>
-      </View>
+      <SourceList link={this.props.link}/>
     );
   }
 }

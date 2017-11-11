@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { GenreList } from '../component/GenreList'; 
 
 class Genre extends Component {
   render() {
     return (
-      <View>
-        <Text>Genre</Text>
-      </View>
+      <GenreList />
     );
   }
 }
