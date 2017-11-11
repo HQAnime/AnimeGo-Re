@@ -18,11 +18,13 @@ class App extends Component {
                 buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()}
               />
             )} backTitle='Back' initial/>
-            <Scene key='SearchScreen' component={ SearchAnime } title='Search'
-              titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
-            <Scene key='GenreDetail' component={ GenreDetail } title='Genre' 
-              titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
-            <Scene key='WatchAnime' component={ WatchAnime } title='Anime'
+          <Scene key='SearchScreen' component={ SearchAnime } title='Search'
+            titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+          <Scene key='GenreDetail' component={ GenreDetail } title='GenreDetail' 
+            titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+          <Scene key='WatchAnime' component={ WatchAnime } title='WatchAnime'
+            titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
+          <Scene key='AnimeDetail' component={ AnimeDetail } title='AnimeDetail'
             titleStyle={styles.titleStyle} navigationBarStyle={styles.searchNavBarStyle}/>
         </Scene>
       </Router>
@@ -32,7 +34,7 @@ class App extends Component {
 
 const styles = {
   titleStyle: {
-    width: '80%',
+    width: '90%',
   },
   mainNavBarStyle: {
     backgroundColor: '#1b1b1b',
