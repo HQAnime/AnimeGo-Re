@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Linking, Dimensions } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import { Colour } from '../Styles';
+import { GoGoAnime } from '../Constant';
 
 class AnimeCell extends React.PureComponent {
 
@@ -17,7 +19,7 @@ class AnimeCell extends React.PureComponent {
       <Card image={{uri: this.data.thumbnail}} imageStyle={{height: this.width * 1.45}}
         containerStyle={{padding: 0, margin: 0, width: this.width, justifyContent:'center'}}>
           <Text style={{marginBottom: 10, textAlign: 'center', height: 50}} numberOfLines={2}>{this.data.name}</Text>
-          <Button backgroundColor='#03A9F4' title={this.title}
+          <Button backgroundColor={Colour.GoGoAnimeBlue} title={this.title}
             buttonStyle={{borderRadius: 15, height: 30, flex: 1}} onPress={this.buttonPressed}/>
       </Card>
     )
@@ -26,7 +28,7 @@ class AnimeCell extends React.PureComponent {
   buttonPressed = () => {
     if (this.data.link.includes('-episode-')) {
       // Only NewRelease redirects you to that new episode
-      Actions.WatchAnime({title: this.data.name, link: this.data.link});
+      Actions.WatchAnime({title: this.title, link: this.data.link,fromInfo: false});
     } else if (this.data.link == 'Error') {
       // No anime found go back
       Actions.pop();

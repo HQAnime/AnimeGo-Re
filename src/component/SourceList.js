@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, FlatList, Button, ActivityIndicator, Dimensions, Vibration } from 'react-native';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
-import { Colour, WatchAnimeStyles } from '../Styles';
+import { Colour } from '../Styles';
 import SourceCell from './SourceCell';
 import { LoadingIndicator } from '../component';
+import { Actions } from 'react-native-router-flux';
 
 class SourceList extends Component {
 
@@ -13,6 +14,7 @@ class SourceList extends Component {
     super(props);
     this.state = {
       data: [],
+      name: '', link: '',
     }
   }
 
@@ -21,8 +23,11 @@ class SourceList extends Component {
     source.loadSource()
     .then((animeSource) => {
       // console.log(animeSource);
+      if (animeSource.length == 0) return;
       this.setState({
         data: animeSource,
+        name: animeSource[1].animeName,
+        link: animeSource[1].infoLink,
       })  
     })
     .catch((error) => {
@@ -45,12 +50,24 @@ class SourceList extends Component {
             <SourceCell data={item}/>
           } ListFooterComponent={
             <Text style={{padding: 20, textAlign: 'center'}}>Vidstreaming is recommended</Text>
-          }/>
+          } ListHeaderComponent={this.renderHeader}/>
       </View>
     );
   }
-}
 
-const { loadingStyle } = WatchAnimeStyles;
+  renderHeader = () => {
+    return (
+      <Button title={this.state.name} color={Colour.GoGoAnimeBlue} style={{margin: 4}}
+        onPress={this.infoBtnPressed}/>
+    )
+  }
+
+  infoBtnPressed = () => {
+    // In case user wants infinite loop
+    Vibration.vibrate(500);
+    if (this.props.fromInfo) Actions.pop();
+    else Actions.AnimeDetail({title: this.state.name, link: this.state.link})
+  }
+}
 
 export { SourceList };

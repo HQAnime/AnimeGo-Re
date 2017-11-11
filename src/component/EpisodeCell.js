@@ -24,7 +24,7 @@ class EpisodeCell extends React.PureComponent {
   WatchAnime = () => {
     // console.log(this.episode, this.link);
     if (this.episode == '??') Alert.alert('No episodes were found');
-    else Actions.WatchAnime({title: this.episode, link: this.link})
+    else Actions.WatchAnime({title: 'Episode ' + this.episode, link: this.link, fromInfo: true})
   }
 }
 
