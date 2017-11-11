@@ -3,6 +3,7 @@ import { View, Text, FlatList, ActivityIndicator, Dimensions } from 'react-nativ
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
 import { Colour, WatchAnimeStyles } from '../Styles';
 import SourceCell from './SourceCell';
+import { LoadingIndicator } from '../component';
 
 class SourceList extends Component {
 
@@ -30,9 +31,7 @@ class SourceList extends Component {
     /* A loading indictor */
     if (this.state.data.length == 0) {
       return (
-        <View>
-          <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
-        </View>
+        <LoadingIndicator />
       )
     }
 

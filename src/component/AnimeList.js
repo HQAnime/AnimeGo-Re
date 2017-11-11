@@ -3,6 +3,7 @@ import { View, FlatList, ActivityIndicator, Dimensions, Text } from 'react-nativ
 import { Colour, RecentReleaseStyles } from '../Styles';
 import AnimeLoader from '../core/AnimeLoader';
 import AnimeCell from './AnimeCell';
+import { LoadingIndicator } from '../component';
 
 const isPortrait = () => {
   const dim = Dimensions.get('screen');
@@ -33,12 +34,7 @@ class AnimeList extends Component {
   render() {
     /* A loading indictor */
     if (this.state.data.length == 0) {
-      return (
-        <View>
-          <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
-          <Text style={{textAlign: 'center'}}>Loading...</Text>
-        </View>
-      )
+      return <LoadingIndicator />
     }
 
     return (
@@ -57,7 +53,7 @@ class AnimeList extends Component {
   renderFooterComponent = () => {
     if (!this.state.hasMorePage) return null;
     else return (
-      <ActivityIndicator color={Colour.GoGoAnimeOrange} style={loadingStyle} size='large'/>
+      <LoadingIndicator />
     )
   }
 
@@ -122,7 +118,5 @@ class AnimeList extends Component {
     }, () => {this.loadAnime()})
   }
 }
-
-const { loadingStyle } = RecentReleaseStyles;
 
 export { AnimeList };
