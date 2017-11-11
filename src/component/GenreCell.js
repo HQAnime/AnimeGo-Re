@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 
 const { width } = Dimensions.get('window');
 
-class GenreCell extends Component {
+class GenreCell extends React.PureComponent {
   render() {
     return (
       <View style={{flex: 1, width: width / 2, margin: 2, padding: 4}}>
@@ -18,7 +18,7 @@ class GenreCell extends Component {
     const title = this.props.data;
     // replace only works for first match
     const genre = title.split(' ').join('-') + '?page=';
-     console.log(title, genre);
+    // console.log(title, genre);
     Actions.GenreDetail({title: title, genre: genre});
   }
 }

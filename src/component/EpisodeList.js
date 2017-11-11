@@ -6,7 +6,11 @@ import { Colour } from '../Styles';
 import EpisodeCell from './EpisodeCell';
 import { LoadingIndicator } from '../component';
 
-var width = Dimensions.get('screen').width / 2;
+var width = Dimensions.get('window').width / 2;
+const isPortrait = () => {
+  const dim = Dimensions.get('screen');
+  return dim.height >= dim.width;
+};
 
 class EpisodeList extends Component {
 
@@ -20,7 +24,7 @@ class EpisodeList extends Component {
       genre: data.genre, release: data.release, episode: data.episode,
       plot: data.plot, image: data.image, id: data.id, 
       ep_start: 0, ep_end: 99, ascending: true, hasMorePage: true,
-      data: [],
+      data: [], orientation: isPortrait() ? 'portrait' : 'landscape',
     }
   }
 
@@ -34,15 +38,23 @@ class EpisodeList extends Component {
       return <LoadingIndicator />
     } else {
       return (
-        <View>
+        <View style={{flex: 1}} onLayout={this.updateView}>
           <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
-            renderItem={({item}) => <EpisodeCell data={item} />}  numColumns={5}
+            renderItem={({item}) => <EpisodeCell data={item} />}  numColumns={4}
             ListFooterComponent={this.renderFooter} 
             ListHeaderComponent={this.renderHeader}
-            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={1}/>
+            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0}/>
         </View>
       )
     }
+  }
+
+  updateView = () => {
+    var currOrientation = isPortrait() ? 'portrait' : 'landscape';
+    if (this.state.orientation == currOrientation) return;
+    this.setState({
+      orientation: currOrientation,
+    })
   }
 
   loadEpisode = () => {
@@ -90,7 +102,7 @@ class EpisodeList extends Component {
 
   renderHeader = () => {
     return (
-      <Card title={this.state.name} containerStyle={{margin: 8}}>
+      <Card title={this.state.name}>
         <View style={{flexDirection: 'row', height: width * 1.429}}>
           <View style={{flex: 0.5}}>
             <Image source={{uri: this.state.image}} resizeMode='cover' style={{flex: 1}}/>
