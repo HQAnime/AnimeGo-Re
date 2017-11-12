@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button, Image, Dimensions } from 'react-native';
+import { View, Text, FlatList, Image, Button, Dimensions, Platform, Linking } from 'react-native';
 import { Card } from 'react-native-elements';
 import EpisodeLoader from '../core/EpisodeLoader';
 import { Colour } from '../Styles';
@@ -12,8 +12,9 @@ const isPortrait = () => {
   const dim = Dimensions.get('screen');
   return dim.height >= dim.width;
 };
+var currOS = Platform.OS;
 
-class EpisodeList extends Component {
+class EpisodeList extends React.PureComponent {
 
   keyExtractor = (data) => data.number;
 
@@ -107,17 +108,40 @@ class EpisodeList extends Component {
           <View style={{flex: 0.5}}>
             <Image source={{uri: this.state.image}} resizeMode='cover' style={{flex: 1}}/>
           </View>
-          <View style={{flex: 0.5, justifyContent: 'space-around'}}>
-            <Button title={this.state.type} color={Colour.GoGoAnimeBlue} onPress={() => {
-              console.log(this.state.typeLink);
-              Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='})
-            }}/>
+          <View style={{flex: 0.5, justifyContent: 'space-around', padding: 4}}>
             <Text style={styles.centerText}>{'Genre:\n' + this.state.genre}</Text>
             <Text style={styles.centerText}>{'Release:\n' + this.state.release}</Text>
             <Text style={styles.centerText}>{'Episode:\n' + this.state.episode}</Text>
+            <View style={{alignItems: 'center'}}>
+              <Text>Type:</Text>
+              <Button title={this.state.type.replace(' Anime', '')} color={Colour.GoGoAnimeGreen} onPress={() => {
+                console.log(this.state.typeLink);
+                Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='})
+              }} />
+            </View>
           </View>
         </View>
-        <Text>{'\n' + this.state.plot}</Text>
+        <Text>{'\n' + this.state.plot + '\n'}</Text>
+        <View style={{flex: 1, padding: 4}}>
+          <Button title='Google it' color={Colour.GoGoAnimeBlue} onPress={() => {
+              var google = 'https://www.google.com/search?q=' + this.state.name.split(' ').join('%20');
+              if (currOS == 'ios') {
+                var Browser = require('react-native-browser');
+                Browser.open(google);
+              } else {
+                Linking.openURL(google).catch(err => console.error('An error occurred', err));                    
+              }
+            }} />
+          <Button title='Buy it' color={Colour.GoGoAnimeRed} onPress={() => {
+              var amazon = 'https://www.amazon.com/s/url=search-alias%3Dmovies-tv&field-keywords=' + this.state.name.split(' ').join('+');
+              if (currOS == 'ios') {
+                var Browser = require('react-native-browser');
+                Browser.open(amazon);
+              } else {
+                Linking.openURL(amazon).catch(err => console.error('An error occurred', err));                    
+              }
+          }} />
+        </View>
       </Card>
     )
   }

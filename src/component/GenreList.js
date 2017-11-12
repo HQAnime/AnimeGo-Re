@@ -14,7 +14,7 @@ const isPortrait = () => {
   return dim.height >= dim.width;
 };
 
-class GenreList extends Component {
+class GenreList extends React.PureComponent {
 
   constructor(props) {
     super(props);

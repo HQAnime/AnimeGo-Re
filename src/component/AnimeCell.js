@@ -29,7 +29,7 @@ class AnimeCell extends React.PureComponent {
   buttonPressed = () => {
     if (this.data.link.includes('-episode-')) {
       // Only NewRelease redirects you to that new episode
-      Actions.WatchAnime({title: this.title, link: this.data.link,fromInfo: false});
+      Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false});
     } else if (this.data.link == 'Error') {
       // No anime found go back
       Actions.pop();
@@ -41,4 +41,3 @@ class AnimeCell extends React.PureComponent {
 }
 
 export default AnimeCell;
-

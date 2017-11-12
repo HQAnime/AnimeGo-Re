@@ -6,9 +6,9 @@ import { Actions } from 'react-native-router-flux';
 class GenreCell extends React.PureComponent {
   render() {
     return (
-      <View style={{flex: 0.5, margin: 0, padding: 0}}>
+      <View style={{flex: 0.5, margin: 0, padding: 4}}>
         <Button title={this.props.data} color={Colour.GoGoAnimeOrange}
-         onPress={this.GenreDetail} style={{padding: 2}}/>
+         onPress={this.GenreDetail} />
       </View>
     )
   }

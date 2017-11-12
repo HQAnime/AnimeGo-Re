@@ -57,8 +57,10 @@ class SourceList extends Component {
 
   renderHeader = () => {
     return (
-      <Button title={this.state.name} color={Colour.GoGoAnimeBlue} style={{margin: 4}}
+      <View style={{padding: 8}}>
+        <Button title={this.state.name} color={Colour.GoGoAnimeBlue}
         onPress={this.infoBtnPressed}/>
+      </View>
     )
   }
 
