@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MainScreen, AnimeDetail, SearchAnime, 
-  WatchAnime, GenreDetail } from './src/screens/';
+  WatchAnime, GenreDetail, SubCategory } from './src/screens/';
 import { Button } from 'react-native-elements';
 import { NavigationStyles } from './src/Styles';
 import { Router, Scene, Actions } from 'react-native-router-flux';
@@ -38,6 +38,8 @@ class App extends Component {
           <Scene key='WatchAnime' component={ WatchAnime } title='WatchAnime'
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
           <Scene key='AnimeDetail' component={ AnimeDetail } title='AnimeDetail'
+            titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
+          <Scene key='SubCategory' component={ SubCategory } title='SubCategory'
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
         </Scene>
       </Router>
