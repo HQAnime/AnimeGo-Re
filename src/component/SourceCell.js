@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Linking, Platform, Linking } from 'react-native';
+import { View, Button, Platform, Linking } from 'react-native';
 import { Colour } from '../Styles';
 
 class SourceCell extends React.PureComponent {

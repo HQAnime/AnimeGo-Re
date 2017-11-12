@@ -2,11 +2,10 @@ import { GoGoAnime } from '../Constant';
 
 export default class EpisodeLoader {
   
-    constructor(ep_start, ep_end, id, ascending) {
+    constructor(ep_start, ep_end, id, lastest) {
       this.start = ep_start;
       this.end = ep_end;
       this.id = id;
-      this.ascending = ascending;
     }
   
     loadEpisode() {
@@ -42,7 +41,7 @@ export default class EpisodeLoader {
           }
 
           // By default, it is starting from ep_end. Only need to reverse this.
-          if (this.ascending) animeData = animeData.reverse();
+          animeData = animeData.reverse();
           // console.log(animeData);
           success(animeData);
         })
