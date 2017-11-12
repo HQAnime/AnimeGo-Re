@@ -3,13 +3,12 @@ import { View, Button, Dimensions, Text } from 'react-native';
 import { Colour } from '../Styles';
 import { Actions } from 'react-native-router-flux';
 
-const { width } = Dimensions.get('window');
-
 class GenreCell extends React.PureComponent {
   render() {
     return (
-      <View style={{flex: 1, width: width / 2, margin: 2, padding: 4}}>
-        <Button title={this.props.data} color={Colour.GoGoAnimeOrange} onPress={this.GenreDetail} />
+      <View style={{flex: 0.5, margin: 0, padding: 0}}>
+        <Button title={this.props.data} color={Colour.GoGoAnimeOrange}
+         onPress={this.GenreDetail} style={{padding: 2}}/>
       </View>
     )
   }

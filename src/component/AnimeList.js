@@ -66,13 +66,13 @@ class AnimeList extends Component {
     goodWidth = Math.round(width / columns);
 
     // Prevent unnecessary updates
-    if (columns == this.state.columns) return;    
-
-    // console.log(columns, goodWidth);
-    this.setState({
-      columns: columns,
-      goodWidth: goodWidth,
-    })
+    if (columns != this.state.columns) {
+      // console.log(columns, goodWidth);
+      this.setState({
+        columns: columns,
+        goodWidth: goodWidth,
+      }, () => console.log(goodWidth))
+    }
   }
 
   loadAnime = () => {
