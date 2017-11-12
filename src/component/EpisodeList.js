@@ -43,7 +43,7 @@ class EpisodeList extends Component {
             renderItem={({item}) => <EpisodeCell data={item} />}  numColumns={4}
             ListFooterComponent={this.renderFooter} 
             ListHeaderComponent={this.renderHeader}
-            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0}/>
+            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0.5}/>
         </View>
       )
     }
