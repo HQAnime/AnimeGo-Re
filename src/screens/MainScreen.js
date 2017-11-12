@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import { NewSeason, Genre, RecentRelease, Movie } from './';
+import { NewSeason, Genre, RecentRelease, Movie, Popular } from './';
 import { MainScreenStyles } from '../Styles';
 
 class MainScreen extends Component {
@@ -12,37 +12,39 @@ class MainScreen extends Component {
       { key: '1', title: 'Lastest' },
       { key: '2', title: 'New Season' },
       { key: '3', title: 'Movie' },
-      { key: '4', title: 'Genre'},
+      { key: '4', title: 'Popular'},
+      { key: '5', title: 'Genre'},
     ],
   };
 
-  _handleIndexChange = index => this.setState({ index });
+  handleIndexChange = index => this.setState({ index });
   
-  _renderHeader = props => {
+  renderHeader = props => {
     return (
       <TabBar
         {...props}
-        scrollEnabled 
+        scrollEnabled useNativeDriver
         tabStyle = { tabStyle }
         indicatorStyle = { indicatorStyle } 
         style = { tabBarStyle }/>
     );
   };
 
-  _renderScene = SceneMap({
+  renderScene = SceneMap({
     '1': RecentRelease,
     '2': NewSeason,
     '3': Movie,
-    '4': Genre,
+    '4': Popular,
+    '5': Genre,
   });
 
   render() {
     return (
       <TabViewAnimated initialLayout={{width: Dimensions.get('window').width, height: 0}}
         navigationState={this.state}
-        renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
-        onIndexChange={this._handleIndexChange}
+        renderScene={this.renderScene}
+        renderHeader={this.renderHeader}
+        onIndexChange={this.handleIndexChange}
       />
     );
   }

@@ -59,7 +59,7 @@ class EpisodeList extends Component {
 
   loadEpisode = () => {
     if (!this.state.hasMorePage) return;
-    let source = new EpisodeLoader(this.state.ep_start, this.state.ep_end, this.state.id, this.state.ascending);
+    let source = new EpisodeLoader(this.state.ep_start, this.state.ep_end, this.state.id, this.state.episode);
     source.loadEpisode()
     .then((animeEpisode) => {
       if ((this.state.ep_start == 0 && animeEpisode.length < 99) 
