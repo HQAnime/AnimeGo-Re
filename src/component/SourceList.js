@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button, ActivityIndicator, Dimensions, Vibration } from 'react-native';
+import { View, Text, FlatList, Button, ActivityIndicator, Dimensions } from 'react-native';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
 import { Colour } from '../Styles';
 import SourceCell from './SourceCell';
@@ -64,7 +64,6 @@ class SourceList extends Component {
 
   infoBtnPressed = () => {
     // In case user wants infinite loop
-    Vibration.vibrate(500);
     if (this.props.fromInfo) Actions.pop();
     else Actions.AnimeDetail({title: this.state.name, link: this.state.link})
   }
