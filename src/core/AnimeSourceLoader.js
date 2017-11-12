@@ -1,3 +1,5 @@
+import { GoGoAnime } from '../Constant';
+
 export default class AnimeSourceLoader {
 
   constructor(url) {
@@ -23,6 +25,17 @@ export default class AnimeSourceLoader {
         // // Somwhow it does not have any sources
         if (length == 0) success([]);
 
+        // Getting anime information
+        animeInfoLink = '';
+        animeName = '';
+        var animeInfo = root.querySelector('.anime-info');
+        if (animeInfo != null) {
+          // Getting info link
+          animeInfoLink = GoGoAnime.MainURL + animeInfo.childNodes[3].attributes.href;
+          animeName = animeInfo.childNodes[3].attributes.title;
+          // console.log(animeInfoLink, animeName);
+        }
+
         // Get download link
         var download = root.querySelector('.download-anime').childNodes[1].attributes.href;
         animeData.push({source: download, name: 'Download this episode'});
@@ -36,7 +49,7 @@ export default class AnimeSourceLoader {
           var sourceName = source.removeWhitespace().rawText.replace('Choose this server', '');
           // The first source does not include https:
           if (!animeSource.startsWith('http')) animeSource = 'https:' + animeSource;
-          animeData.push({source: animeSource, name: sourceName});
+          animeData.push({source: animeSource, name: sourceName, animeName: animeName, infoLink: animeInfoLink});
         }
         // console.log(animeData);
         success(animeData);
