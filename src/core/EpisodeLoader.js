@@ -43,7 +43,7 @@ export default class EpisodeLoader {
 
             if (this.start == 0 && i == length - 1) {
               // Add latest episode in front of this one
-              var lastestLink = animeLink.split('-').slice(0, -1).join('-') + this.lastest;
+              var lastestLink = animeLink.split('-').slice(0, -1).join('-') + '-' +this.lastest;
               animeData.push({link: lastestLink, number: this.lastest});
             }
           }
