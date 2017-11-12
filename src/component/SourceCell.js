@@ -12,7 +12,7 @@ class SourceCell extends React.PureComponent {
 
   render() {
     return (
-      <View>
+      <View style={{padding: 2}}>
         <Button title={this.props.data.name} color={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
       </View>
     )

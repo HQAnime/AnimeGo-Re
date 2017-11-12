@@ -10,7 +10,7 @@ const isPortrait = () => {
   return dim.height >= dim.width;
 };
 
-class AnimeList extends Component {
+class AnimeList extends React.PureComponent {
 
   keyExtractor = (item) => item.link;
 
@@ -38,7 +38,7 @@ class AnimeList extends Component {
     }
 
     return (
-      <View style={{flex: 1}} onLayout={this.getNumColumns}>
+      <View onLayout={this.getNumColumns}>
         <FlatList data={this.state.data} keyExtractor={this.keyExtractor} 
           key={(isPortrait() ? 'portrait' : 'landscape')}
           renderItem={({item}) => 
@@ -58,21 +58,17 @@ class AnimeList extends Component {
   }
 
   getNumColumns = () => {
-    // console.log(isPortrait() ? 'portrait' : 'landscape');
-    const { width, height } = Dimensions.get('window');
+    const { width } = Dimensions.get('window');
     columns = Math.floor(width / 200);
     if (columns < 2) columns = 2;
     else if (columns > 6) columns = 6;
-    goodWidth = Math.round(width / columns);
-
-    // Prevent unnecessary updates
-    if (columns != this.state.columns) {
-      // console.log(columns, goodWidth);
-      this.setState({
-        columns: columns,
-        goodWidth: goodWidth,
-      }, () => console.log(goodWidth))
-    }
+    if (columns == this.state.columns) return;
+    var goodWidth = width / columns;
+    
+    this.setState({
+      columns: columns,
+      goodWidth: goodWidth,
+    })
   }
 
   loadAnime = () => {

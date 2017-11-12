@@ -5,6 +5,8 @@ export const Colour = {
   GoGoAnimeOrange: '#f5c249',
   GoGoAnimeBlack: '#1b1b1b',
   GoGoAnimeBlue: '#03A9F4',
+  GoGoAnimeRed: '#FF6D6B',
+  GoGoAnimeGreen: '#2CCC90',
 }
 
 export const MainScreenStyles = {

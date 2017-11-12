@@ -16,8 +16,7 @@ class App extends Component {
             renderRightButton={(
               <Button
                 icon={{name: 'search', type: 'evil-icons', size: (Platform.OS === 'ios') ? 22 : 30}}
-                buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()}
-              />
+                buttonStyle={{backgroundColor: 'transparent'}} onPress={() => Actions.SearchScreen()} />
             )} renderLeftButton={(
               <Button
                 icon={{name: 'logo-github',type: 'ionicon', size: (Platform.OS === 'ios') ? 22 : 30}}
@@ -28,8 +27,7 @@ class App extends Component {
                   } else {
                     Linking.openURL('https://github.com/HenryQuan/React-Native-GoGoAnime').catch(err => console.error('An error occurred', err));                    
                   }
-                }}
-              />
+                }} />
             )} backTitle='Back' initial/>
           <Scene key='SearchScreen' component={ SearchAnime } title='Search'
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
