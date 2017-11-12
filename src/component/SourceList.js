@@ -65,7 +65,7 @@ class SourceList extends Component {
   infoBtnPressed = () => {
     // In case user wants infinite loop
     if (this.props.fromInfo) Actions.pop();
-    else Actions.AnimeDetail({title: this.state.name, link: this.state.link})
+    else Actions.AnimeDetail({title: this.state.name, link: this.state.link});
   }
 }
 
