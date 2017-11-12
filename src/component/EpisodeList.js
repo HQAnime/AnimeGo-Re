@@ -63,7 +63,7 @@ class EpisodeList extends Component {
     let source = new EpisodeLoader(this.state.ep_start, this.state.ep_end, this.state.id, this.state.episode);
     source.loadEpisode()
     .then((animeEpisode) => {
-      if (this.state.ep_start > 0 && animeEpisode.length < 100) {
+      if (animeEpisode.length < 100) {
         // Some anime has episode 0...
         this.setState({
           data: this.state.data.concat(animeEpisode),
