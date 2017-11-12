@@ -2,11 +2,11 @@ import { GoGoAnime } from '../Constant';
 
 export default class EpisodeLoader {
   
-    constructor(ep_start, ep_end, id, ascending) {
+    constructor(ep_start, ep_end, id, lastest) {
       this.start = ep_start;
       this.end = ep_end;
       this.id = id;
-      this.ascending = ascending;
+      this.lastest = lastest;
     }
   
     loadEpisode() {
@@ -38,11 +38,19 @@ export default class EpisodeLoader {
             // It has an empty space for some reason...
             var animeLink = GoGoAnime.MainURL + episode.childNodes["0"].attributes.href.replace(' ', '');
             var episodeNumber = episode.childNodes["0"].childNodes[1].text.replace(' EP', '');
+
             animeData.push({link: animeLink, number: episodeNumber});
+
+            if (this.start == 0 && i == length - 1) {
+              if (this.lastest < 48) break; 
+              // Add latest episode in front of this one
+              var lastestLink = animeLink.split('-').slice(0, -1).join('-') + '-' +this.lastest;
+              animeData.push({link: lastestLink, number: this.lastest});
+            }
           }
 
           // By default, it is starting from ep_end. Only need to reverse this.
-          if (this.ascending) animeData = animeData.reverse();
+          animeData = animeData.reverse();
           // console.log(animeData);
           success(animeData);
         })

@@ -1,6 +1,6 @@
 {
 	"name": "GoGoAnime",
-	"version": "0.0.1",
+	"version": "0.3.6",
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
@@ -10,6 +10,7 @@
 		"fast-html-parser": "^1.0.1",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.3",
+		"react-native-browser": "^0.6.2",
 		"react-native-elements": "^0.18.2",
 		"react-native-router-flux": "^4.0.0-beta.22",
 		"react-native-tab-view": "^0.0.70",

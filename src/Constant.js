@@ -7,4 +7,5 @@ export const GoGoAnime = {
   Genre: 'https://ww3.gogoanime.io/genre/',
   Search: 'https://ww3.gogoanime.io/search.html?keyword=',
   Episode: 'https://ww3.gogoanime.io/load-list-episode?ep_start=',
+  Popular: 'https://ww3.gogoanime.io/popular.html?page=',
 }

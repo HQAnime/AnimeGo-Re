@@ -5,6 +5,7 @@ import EpisodeLoader from '../core/EpisodeLoader';
 import { Colour } from '../Styles';
 import EpisodeCell from './EpisodeCell';
 import { LoadingIndicator } from '../component';
+import { Actions } from 'react-native-router-flux';
 
 var width = Dimensions.get('window').width / 2;
 const isPortrait = () => {
@@ -43,7 +44,7 @@ class EpisodeList extends Component {
             renderItem={({item}) => <EpisodeCell data={item} />}  numColumns={4}
             ListFooterComponent={this.renderFooter} 
             ListHeaderComponent={this.renderHeader}
-            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0}/>
+            onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0.5}/>
         </View>
       )
     }
@@ -59,11 +60,10 @@ class EpisodeList extends Component {
 
   loadEpisode = () => {
     if (!this.state.hasMorePage) return;
-    let source = new EpisodeLoader(this.state.ep_start, this.state.ep_end, this.state.id, this.state.ascending);
+    let source = new EpisodeLoader(this.state.ep_start, this.state.ep_end, this.state.id, this.state.episode);
     source.loadEpisode()
     .then((animeEpisode) => {
-      if ((this.state.ep_start == 0 && animeEpisode.length < 99) 
-        || (this.state.ep_start > 0 && animeEpisode.length < 100)) {
+      if (animeEpisode.length < 100) {
         // Some anime has episode 0...
         this.setState({
           data: this.state.data.concat(animeEpisode),
@@ -108,7 +108,10 @@ class EpisodeList extends Component {
             <Image source={{uri: this.state.image}} resizeMode='cover' style={{flex: 1}}/>
           </View>
           <View style={{flex: 0.5, justifyContent: 'space-around'}}>
-            <Text style={styles.centerText}>{'Category:\n' + this.state.type}</Text>
+            <Button title={this.state.type} color={Colour.GoGoAnimeBlue} onPress={() => {
+              console.log(this.state.typeLink);
+              Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='})
+            }}/>
             <Text style={styles.centerText}>{'Genre:\n' + this.state.genre}</Text>
             <Text style={styles.centerText}>{'Release:\n' + this.state.release}</Text>
             <Text style={styles.centerText}>{'Episode:\n' + this.state.episode}</Text>
