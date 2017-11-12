@@ -22,7 +22,12 @@ class App extends Component {
               <Button
                 icon={{name: 'logo-github',type: 'ionicon', size: (Platform.OS === 'ios') ? 22 : 30}}
                 buttonStyle={{backgroundColor: 'transparent'}} onPress={() => {
-                  Linking.openURL('https://github.com/HenryQuan/React-Native-GoGoAnime').catch(err => console.error('An error occurred', err));
+                  if (Platform.OS == 'ios') {
+                    var Browser = require('react-native-browser');
+                    Browser.open('https://github.com/HenryQuan/React-Native-GoGoAnime');
+                  } else {
+                    Linking.openURL('https://github.com/HenryQuan/React-Native-GoGoAnime').catch(err => console.error('An error occurred', err));                    
+                  }
                 }}
               />
             )} backTitle='Back' initial/>
