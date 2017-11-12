@@ -6,6 +6,7 @@ export default class EpisodeLoader {
       this.start = ep_start;
       this.end = ep_end;
       this.id = id;
+      this.lastest = lastest;
     }
   
     loadEpisode() {
@@ -37,7 +38,14 @@ export default class EpisodeLoader {
             // It has an empty space for some reason...
             var animeLink = GoGoAnime.MainURL + episode.childNodes["0"].attributes.href.replace(' ', '');
             var episodeNumber = episode.childNodes["0"].childNodes[1].text.replace(' EP', '');
+
             animeData.push({link: animeLink, number: episodeNumber});
+
+            if (this.start == 0 && i == length - 1) {
+              // Add latest episode in front of this one
+              var lastestLink = animeLink.split('-').slice(0, -1).join('-') + this.lastest;
+              animeData.push({link: lastestLink, number: this.lastest});
+            }
           }
 
           // By default, it is starting from ep_end. Only need to reverse this.
