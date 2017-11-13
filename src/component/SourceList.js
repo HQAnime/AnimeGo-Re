@@ -48,8 +48,6 @@ class SourceList extends Component {
         <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
           renderItem={({item}) => 
             <SourceCell data={item}/>
-          } ListFooterComponent={
-            <Text style={{padding: 20, textAlign: 'center'}}>Vidstreaming is recommended</Text>
           } ListHeaderComponent={this.renderHeader}/>
       </View>
     );

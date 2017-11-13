@@ -53,8 +53,13 @@ you need to download xcode and run this project. Please note this app will only 
 * Slow and buggy 
 
 
-(try search conan or one piece..., it is fine for short anime)
+(Try searching conan or one piece..., it is fine for short anime)
 * Episode may not be in order
 * May have weird issues if you scroll SUPER fast
 
 Hopefully, they could be fixed in the future
+
+## What's next?
+I will rewrite [WoWs Info](https://github.com/HenryQuan/WoWs_Info_Swift) using react native and it will be open sourced as well (why not >_<). It is going to be published on Google Play. 
+
+For IOS, it might be a bit troublesome but it should be fine I hope. I need to draw my diagrams >_<.

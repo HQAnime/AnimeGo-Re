@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Platform, Alert } from 'react-native';
+import { View, TextInput, Platform } from 'react-native';
 import { AnimeList } from '../component/';
 import { GoGoAnime } from '../Constant';
 import { Actions } from 'react-native-router-flux';
@@ -30,7 +30,7 @@ class SearchAnime extends Component {
   }
   
   searchAnime = () => {
-    if (this.textInput.length < 3) Alert.alert('Length < 3')
+    if (this.textInput.length < 3) return;
     else {
       Actions.refresh({title: this.textInput});
       this.setState({

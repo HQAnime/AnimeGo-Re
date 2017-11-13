@@ -41,8 +41,8 @@ class EpisodeList extends React.PureComponent {
     } else {
       return (
         <View style={{flex: 1}} onLayout={this.updateView}>
-          <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
-            renderItem={({item}) => <EpisodeCell data={item} />}  numColumns={4}
+          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} numColumns={4}
+            renderItem={({item}) => <EpisodeCell data={item} isLastest={item.number == this.state.episode ? true : false}/>}  
             ListFooterComponent={this.renderFooter} 
             ListHeaderComponent={this.renderHeader}
             onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0.5}/>
@@ -112,8 +112,8 @@ class EpisodeList extends React.PureComponent {
             <Text style={styles.centerText}>{'Genre:\n' + this.state.genre}</Text>
             <Text style={styles.centerText}>{'Release:\n' + this.state.release}</Text>
             <Text style={styles.centerText}>{'Episode:\n' + this.state.episode}</Text>
-            <View style={{alignItems: 'center'}}>
-              <Text>Type:</Text>
+            <View>
+              <Text style={{textAlign: 'center'}}>Type:</Text>
               <Button title={this.state.type.replace(' Anime', '')} color={Colour.GoGoAnimeGreen} onPress={() => {
                 console.log(this.state.typeLink);
                 Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='})
@@ -121,8 +121,8 @@ class EpisodeList extends React.PureComponent {
             </View>
           </View>
         </View>
-        <Text>{'\n' + this.state.plot + '\n'}</Text>
-        <View style={{flex: 1, padding: 4}}>
+        <Text style={{padding: 4}}>{this.state.plot}</Text>
+        <View>
           <Button title='Google it' color={Colour.GoGoAnimeBlue} onPress={() => {
               var google = 'https://www.google.com/search?q=' + this.state.name.split(' ').join('%20');
               if (currOS == 'ios') {
@@ -132,15 +132,7 @@ class EpisodeList extends React.PureComponent {
                 Linking.openURL(google).catch(err => console.error('An error occurred', err));                    
               }
             }} />
-          <Button title='Buy it' color={Colour.GoGoAnimeRed} onPress={() => {
-              var amazon = 'https://www.amazon.com/s/url=search-alias%3Dmovies-tv&field-keywords=' + this.state.name.split(' ').join('+');
-              if (currOS == 'ios') {
-                var Browser = require('react-native-browser');
-                Browser.open(amazon);
-              } else {
-                Linking.openURL(amazon).catch(err => console.error('An error occurred', err));                    
-              }
-          }} />
+          <Text style={{textAlign: 'center', padding: 4}}>* Please consider buying its DVD</Text>
         </View>
       </Card>
     )
