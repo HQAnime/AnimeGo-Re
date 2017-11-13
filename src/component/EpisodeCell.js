@@ -11,15 +11,32 @@ class EpisodeCell extends React.PureComponent {
     super(props);
     this.episode = this.props.data.number;
     this.link = this.props.data.link;
+    this.isLastest = this.props.isLastest;
   }
 
   render() {
     return (
-      <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
-        <Button title={this.episode} color={Colour.GoGoAnimeOrange} 
-          onPress={this.WatchAnime}/>
-      </View>
+      this.renderButton()
     )
+  }
+
+  renderButton = () => {
+    if (this.isLastest) {
+      // Different colour
+      return (
+        <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
+          <Button title={this.episode} color={Colour.GoGoAnimeRed} 
+            onPress={this.WatchAnime}/>
+        </View>
+      )
+    } else {
+      return (
+        <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
+          <Button title={this.episode} color={Colour.GoGoAnimeOrange} 
+            onPress={this.WatchAnime}/>
+        </View>
+      )
+    }
   }
 
   WatchAnime = () => {

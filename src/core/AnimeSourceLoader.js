@@ -38,7 +38,7 @@ export default class AnimeSourceLoader {
 
         // Get download link
         var download = root.querySelector('.download-anime').childNodes[1].attributes.href;
-        animeData.push({source: download, name: 'Download this episode'});
+        animeData.push({source: download, name: 'Download'});
 
         for (var i = 0; i < length; i++) {
           var source = items[i];
