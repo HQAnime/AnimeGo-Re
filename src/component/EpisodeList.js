@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 
 var width = Dimensions.get('window').width / 2;
 const isPortrait = () => {
-  const dim = Dimensions.get('screen');
+  const dim = Dimensions.get('window');
   return dim.height >= dim.width;
 };
 var currOS = Platform.OS;
