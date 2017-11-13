@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Linking } from 'react-native';
+import { View, Button, Platform, Linking, Alert } from 'react-native';
 import { Colour } from '../Styles';
 
 class SourceCell extends React.PureComponent {
@@ -7,7 +7,6 @@ class SourceCell extends React.PureComponent {
   constructor(props) {
     super(props);
     this.source = this.props.data.name;
-    this.animeName = this.props.data.name;
     this.link = this.props.data.source;
   }
 

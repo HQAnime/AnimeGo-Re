@@ -48,7 +48,7 @@ export default class AnimeSourceLoader {
           var animeSource = source.childNodes[1].attributes["data-video"];
           var sourceName = source.removeWhitespace().rawText.replace('Choose this server', '');
           // The first source does not include https:
-          if (!animeSource.startsWith('http')) animeSource = 'https:' + animeSource;
+          if (!animeSource.includes('http')) animeSource = 'https:' + animeSource;
           animeData.push({source: animeSource, name: sourceName, animeName: animeName, infoLink: animeInfoLink});
         }
         // console.log(animeData);
