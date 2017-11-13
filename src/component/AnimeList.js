@@ -6,7 +6,7 @@ import AnimeCell from './AnimeCell';
 import { LoadingIndicator } from '../component';
 
 const isPortrait = () => {
-  const dim = Dimensions.get('screen');
+  const dim = Dimensions.get('window');
   return dim.height >= dim.width;
 };
 
