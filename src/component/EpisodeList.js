@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Image, Button, Dimensions, Platform, Linking } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View, Text, FlatList, Image, Dimensions, Platform, Linking } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import EpisodeLoader from '../core/EpisodeLoader';
 import { Colour } from '../Styles';
 import EpisodeCell from './EpisodeCell';
@@ -114,7 +114,7 @@ class EpisodeList extends React.PureComponent {
             <Text style={styles.centerText}>{'Episode:\n' + this.state.episode}</Text>
             <View>
               <Text style={{textAlign: 'center'}}>Type:</Text>
-              <Button title={this.state.type.replace(' Anime', '')} color={Colour.GoGoAnimeGreen} onPress={() => {
+              <Button title={this.state.type.replace(' Anime', '')} backgroundColor='transparent' color={Colour.GoGoAnimeGreen} onPress={() => {
                 console.log(this.state.typeLink);
                 Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='})
               }} />
@@ -123,7 +123,7 @@ class EpisodeList extends React.PureComponent {
         </View>
         <Text style={{padding: 4}}>{this.state.plot}</Text>
         <View>
-          <Button title='Google it' color={Colour.GoGoAnimeBlue} onPress={() => {
+          <Button title='Google it' color={Colour.GoGoAnimeBlue} backgroundColor='transparent' onPress={() => {
               var google = 'https://www.google.com/search?q=' + this.state.name.split(' ').join('%20');
               if (currOS == 'ios') {
                 var Browser = require('react-native-browser');

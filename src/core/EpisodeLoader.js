@@ -55,8 +55,7 @@ export default class EpisodeLoader {
           success(animeData);
         })
         .catch((error) => {
-          // console.error(error);
-          failure(error);
+          Alert.alert(error);
         });
       })
     }

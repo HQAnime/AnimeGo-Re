@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, Dimensions, Text } from 'react-native';
+import { View, ActivityIndicator, Dimensions, Text, FlatList } from 'react-native';
 import { Colour, RecentReleaseStyles } from '../Styles';
 import AnimeLoader from '../core/AnimeLoader';
 import AnimeCell from './AnimeCell';
@@ -12,7 +12,10 @@ const isPortrait = () => {
 
 class AnimeList extends React.PureComponent {
 
-  keyExtractor = (item) => item.link;
+  keyExtractor = (item) => {
+    console.log(item.name + item.link);
+    return item.name + item.link;
+  };
 
   constructor(props) {
     super(props);
@@ -38,14 +41,14 @@ class AnimeList extends React.PureComponent {
     }
 
     return (
-      <View onLayout={this.getNumColumns}>
-        <FlatList data={this.state.data} keyExtractor={this.keyExtractor} 
-          key={(isPortrait() ? 'portrait' : 'landscape')}
+      <View style={{flex: 1}} onLayout={this.getNumColumns}>
+        <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
+          key={(isPortrait() ? 'portrait' + this.state.columns: 'landscape' + this.state.columns)}
           renderItem={({item}) => 
             <AnimeCell data={item} width={this.state.goodWidth}/>
-          } onEndReached={this.loadAnime} onEndReachedThreshold={1} numColumns={this.state.columns}
+          } onEndReached={this.loadAnime} onEndReachedThreshold={0.5} numColumns={this.state.columns}
           onRefresh={this.refreshAnime} refreshing={this.state.isRefreshing}
-          ListFooterComponent={this.renderFooterComponent}/>
+          ListFooterComponent={this.renderFooterComponent} />
       </View>
     );
   }
@@ -74,35 +77,37 @@ class AnimeList extends React.PureComponent {
   loadAnime = () => {
     // console.log(this.state.hasMorePage ? 'morePage' : 'lastPage', this.state.isRefreshing ? 'refreshing' : 'not');
     if (!this.state.hasMorePage && !this.state.isRefreshing) return;
-    let loader = new AnimeLoader(this.state.url, this.state.page);
-    loader.loadAnime()
-    .then((animeData) => {
-      if (animeData.length == 0) {
-       // No more pages
-       this.setState({
-         hasMorePage: false,
-         isRefreshing: false,
-       })
-      } else if (animeData.length < 20) {
-        // Append data
-        this.setState({
-          data: this.state.data.concat(animeData),
-          isRefreshing: false,
-          hasMorePage: false,
-        })
-      } else {
-       // Append data
-       this.setState({
-         data: this.state.data.concat(animeData),
-         page: this.state.page + 1,
-         isRefreshing: false,
-       })
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      this.setState({isRefreshing: false})
-    })
+    setTimeout(() => {
+      let loader = new AnimeLoader(this.state.url, this.state.page);
+      loader.loadAnime()
+      .then((animeData) => {
+        if (animeData.length == 0) {
+         // No more pages
+         this.setState({
+           hasMorePage: false,
+           isRefreshing: false,
+         })
+        } else if (animeData.length < 20) {
+          // Append data
+          this.setState({
+            data: this.state.data.concat(animeData),
+            isRefreshing: false,
+            hasMorePage: false,
+          })
+        } else {
+         // Append data
+         this.setState({
+           data: this.state.data.concat(animeData),
+           page: this.state.page + 1,
+           isRefreshing: false,
+         })
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({isRefreshing: false})
+      })
+    }, 500);
   }
 
   refreshAnime = () => {

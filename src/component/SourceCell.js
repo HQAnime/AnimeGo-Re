@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Linking, Alert } from 'react-native';
+import { View, Platform, Linking, Alert } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Colour } from '../Styles';
 
 class SourceCell extends React.PureComponent {
@@ -21,19 +22,19 @@ class SourceCell extends React.PureComponent {
       // This is recommened
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnime} />
+          <Button title={this.source} backgroundColor='transparent' color={Colour.GoGoAnimeRed} onPress={this.WatchAnime} />
         </View>
       )
     } else if (this.source.includes('Download')) {
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeGreen} onPress={this.WatchAnime} />
+          <Button title={this.source} backgroundColor='transparent' color={Colour.GoGoAnimeGreen} onPress={this.WatchAnime} />
         </View>
       )
     } else {
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
+          <Button title={this.source} backgroundColor='transparent' color={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
         </View>
       )
     }

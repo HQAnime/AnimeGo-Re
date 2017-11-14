@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
 import { Colour } from '../Styles';
 import SourceCell from './SourceCell';
@@ -57,7 +58,7 @@ class SourceList extends Component {
     return (
       <View style={{padding: 8}}>
         <Button title={this.state.name} color={Colour.GoGoAnimeBlue}
-        onPress={this.infoBtnPressed}/>
+        onPress={this.infoBtnPressed} backgroundColor='transparent'/>
       </View>
     )
   }
