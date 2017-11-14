@@ -42,9 +42,10 @@ class SearchAnime extends Component {
 
 const styles = {
   inputStyle: {
-    height: (Platform.OS === 'ios') ? 40 : 50,
+    height: 30,
     textAlign: 'center',
     borderColor: 'gray',
+    alignSelf: 'center',
     borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
   }
 }

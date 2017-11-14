@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Alert, Dimensions } from 'react-native';
+import { View, Alert, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Colour } from '../Styles';
 import { Actions } from 'react-native-router-flux'; 
 
@@ -25,14 +26,14 @@ class EpisodeCell extends React.PureComponent {
       // Different colour
       return (
         <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
-          <Button title={this.episode} color={Colour.GoGoAnimeRed} 
+          <Button title={this.episode} color={Colour.GoGoAnimeRed} backgroundColor='transparent'
             onPress={this.WatchAnime}/>
         </View>
       )
     } else {
       return (
         <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
-          <Button title={this.episode} color={Colour.GoGoAnimeOrange} 
+          <Button title={this.episode} color={Colour.GoGoAnimeOrange} backgroundColor='transparent'
             onPress={this.WatchAnime}/>
         </View>
       )
