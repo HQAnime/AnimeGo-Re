@@ -1,4 +1,4 @@
-package com.gogoanime;
+package com.yihengquan;
 
 import android.app.Application;
 
