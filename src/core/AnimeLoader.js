@@ -50,7 +50,6 @@ export default class AnimeLoader {
         success(animeData);
       })
       .catch((error) => {
-        // console.error(error);
         failure(error);
       });
     })
