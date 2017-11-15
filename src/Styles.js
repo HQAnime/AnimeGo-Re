@@ -15,6 +15,8 @@ export const MainScreenStyles = {
   },
   tabStyle: {
     height: 40,
+    justifyContent: 'center',
+    padding: 0,
     backgroundColor: 'transparent',
   },
   indicatorStyle: {
