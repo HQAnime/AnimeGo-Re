@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { LoadingIndicator, EpisodeList } from '../component';
-import { Alert } from 'react-native';
 import AnimeDetailLoader from '../core/AnimeDetailLoader';
 
 class AnimeDetail extends Component {
@@ -38,7 +37,6 @@ class AnimeDetail extends Component {
       });
     })
     .catch((error) => {
-      Actions.pop();
       console.error(error);
     });
   }
