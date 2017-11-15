@@ -1,1 +1,0 @@
-react-native bundle --platform windows --entry-file index.js --bundle-output windows\GoGoAnime\ReactAssets\index.windows.bundle --assets-dest windows\GoGoAnime\ReactAssets

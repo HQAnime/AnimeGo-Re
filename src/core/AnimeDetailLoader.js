@@ -20,15 +20,13 @@ export default class AnimeDetailLoader {
         // Somwhow it does not exist
         if (animeSources == null) success({});
         var info = animeSources.childNodes;
-         console.log(info);
+        // console.log(info);
 
         var animeName = info[3].rawText;
         var animeImage = info[1].attributes.src;
         var animeType = info[7].childNodes[2].attributes.title;
         var animeTypeLink = GoGoAnime.MainURL + info[7].childNodes[2].attributes.href;
-        var plot = 'No information';
-        var animePlot = info[9].childNodes[1];
-        if (animePlot != null) plot = animePlot.rawText;
+        var animePlot = info[9].childNodes[1].rawText;
         var animeGenre = info[11].structuredText.replace('Genre: ', '');
         var animeRelease = info[13].childNodes[1].rawText;
         var animeStatus = info[15].childNodes[1].rawText;
@@ -50,13 +48,14 @@ export default class AnimeDetailLoader {
         if (movieId != null) animeId = movieId.attributes.value;
         // console.log(animeId);
 
-        var animeInfo = {name: animeName, image: animeImage, type: animeType, typeLink: animeTypeLink, plot: plot, 
+        var animeInfo = {name: animeName, image: animeImage, type: animeType, typeLink: animeTypeLink, plot: animePlot, 
           genre: animeGenre, release: animeRelease, status: animeStatus, episode: animeEpisode, id: animeId};
         
         // console.log(animeInfo);
         success(animeInfo);
       })
       .catch((error) => {
+        // console.error(error);
         failure(error);
       });
     })
