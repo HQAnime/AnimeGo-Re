@@ -9,21 +9,19 @@
 	"dependencies": {
 		"fast-html-parser": "^1.0.1",
 		"react": "16.0.0-beta.5",
-		"react-native": "^0.49.3",
+		"react-native": "0.49.3",
 		"react-native-browser": "^0.6.2",
 		"react-native-elements": "^0.18.2",
 		"react-native-router-flux": "^4.0.0-beta.22",
 		"react-native-tab-view": "^0.0.70",
 		"react-native-vector-icons": "^4.4.2",
-		"react-native-windows": "^0.49.0-rc.2",
 		"util": "^0.10.3"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",
 		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0-beta.5",
-		"rnpm-plugin-windows": "^0.2.8"
+		"react-test-renderer": "16.0.0-beta.5"
 	},
 	"jest": {
 		"preset": "react-native"
