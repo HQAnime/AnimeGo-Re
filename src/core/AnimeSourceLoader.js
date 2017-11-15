@@ -55,6 +55,7 @@ export default class AnimeSourceLoader {
         success(animeData);
       })
       .catch((error) => {
+        // console.error(error);
         failure(error);
       });
     })
