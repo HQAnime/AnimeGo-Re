@@ -10,3 +10,4 @@ export * from './Movie';
 export * from './GenreDetail';
 export * from './Popular';
 export * from './SubCategory';
+export * from './PlayAnime';
