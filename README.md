@@ -26,6 +26,8 @@ react-native run-ios
 you could download [here](https://github.com/HenryQuan/React-Native-GoGoAnime/releases)
 ### IOS
 you need to download xcode and run this project. Please note this app will only work for 7 days if you do not have a developer account. You have to run it again after 7 days. ~~I dont think this app will be on AppStore~~
+### Windows 10
+You could get it from [microsoft store](https://www.microsoft.com/en-AU/store/p/anime-go/9mx3qr26zfdj?rtc=1)
 
 ## Screenshots
 <div>
