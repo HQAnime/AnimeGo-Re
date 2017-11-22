@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Alert } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { View, Button, Platform, Alert, Linking } from 'react-native';
+import { Action, Actions } from 'react-native-router-flux';
 import { Colour } from '../Styles';
 
 class SourceCell extends React.PureComponent {
@@ -22,7 +22,7 @@ class SourceCell extends React.PureComponent {
       // This is recommened
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnime} />
+          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnimeInApp} />
         </View>
       )
     } else if (this.source.includes('Download')) {
@@ -40,9 +40,21 @@ class SourceCell extends React.PureComponent {
     }
   }
 
+  WatchAnimeInApp = () => {
+    Actions.PlayAnime({title: this.source, link: this.link});
+  }
+
   WatchAnime = () => {
     console.log(this.link);
-    Actions.PlayAnime({title: this.source, link: this.link});
+
+    if (Platform.OS == 'ios') {
+      var Browser = require('react-native-browser');
+      Browser.open(this.link, {
+        showPageTitles: false,
+      });
+    } else {
+      Linking.openURL(this.link).catch(error => {console.error(error)});
+    }
   }
 }
 

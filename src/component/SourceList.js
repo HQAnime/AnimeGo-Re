@@ -44,7 +44,7 @@ class SourceList extends Component {
     }
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
           renderItem={({item}) => 
             <SourceCell data={item}/>
