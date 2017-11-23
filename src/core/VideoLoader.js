@@ -14,9 +14,9 @@ export default class VideoLoader {
         var HTMLParser = require('fast-html-parser');
         
         var root = HTMLParser.parse(htmlText);
-        console.log(root);
+        // console.log(root);
         var videoClass = root.querySelector('.video-js');
-        // Somwhow it does not exist
+        // Somehow it does not exist
         if (videoClass == null) success('');
         var link = videoClass.childNodes[1].attributes.src;
 

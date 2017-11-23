@@ -10,7 +10,7 @@ const genreList = ['Action', 'Adventure', 'Cars', 'Comedy', 'Dementia', 'Demons'
 'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];
 
 const isPortrait = () => {
-  const dim = Dimensions.get('screen');
+  const dim = Dimensions.get('window');
   return dim.height >= dim.width;
 };
 

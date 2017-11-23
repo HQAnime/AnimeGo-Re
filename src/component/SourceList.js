@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Dimensions } from 'react-native';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
+import { Button } from 'react-native-elements';
 import { Colour } from '../Styles';
 import SourceCell from './SourceCell';
 import { LoadingIndicator } from '../component';
@@ -56,7 +57,7 @@ class SourceList extends Component {
   renderHeader = () => {
     return (
       <View style={{padding: 8}}>
-        <Button title={this.state.name} color={Colour.GoGoAnimeBlue}
+        <Button title={this.state.name} backgroundColor={Colour.GoGoAnimeBlue}
         onPress={this.infoBtnPressed}/>
       </View>
     )

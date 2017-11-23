@@ -63,8 +63,8 @@ class AnimeList extends React.PureComponent {
   getNumColumns = () => {
     const { width } = Dimensions.get('window');
     columns = Math.floor(width / 200);
-    if (columns < 2) columns = 2;
-    else if (columns > 6) columns = 6;
+    if (columns < 3) columns = 2;
+    else if (columns > 5) columns = 5;
     if (columns == this.state.columns) return;
     var goodWidth = width / columns;
     
