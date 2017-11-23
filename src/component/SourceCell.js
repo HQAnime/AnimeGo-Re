@@ -65,15 +65,7 @@ class SourceCell extends React.PureComponent {
 
   WatchAnime = () => {
     console.log(this.link);
-
-    if (Platform.OS == 'ios') {
-      var Browser = require('react-native-browser');
-      Browser.open(this.link, {
-        showPageTitles: false,
-      });
-    } else {
-      Linking.openURL(this.link).catch(error => {console.error(error)});
-    }
+    Linking.openURL(this.link).catch(error => {console.error(error)});
   }
 }
 
