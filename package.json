@@ -1,6 +1,6 @@
 {
 	"name": "GoGoAnime",
-	"version": "0.3.6",
+	"version": "0.3.9",
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
@@ -16,14 +16,14 @@
 		"react-native-router-flux": "^4.0.0-beta.22",
 		"react-native-tab-view": "^0.0.70",
 		"react-native-vector-icons": "^4.4.2",
-		"react-native-video": "^2.0.0",
 		"util": "^0.10.3"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",
 		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0-beta.5"
+		"react-test-renderer": "16.0.0-beta.5",
+		"rnpm-plugin-windows": "^0.2.8"
 	},
 	"jest": {
 		"preset": "react-native"
