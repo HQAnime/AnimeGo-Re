@@ -13,7 +13,7 @@ const isPortrait = () => {
 class AnimeList extends React.PureComponent {
 
   keyExtractor = (item) => {
-    console.log(item.name + item.link);
+    // console.log(item.name + item.link);
     return item.name + item.link;
   };
 

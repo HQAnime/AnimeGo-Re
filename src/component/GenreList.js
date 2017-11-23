@@ -44,6 +44,4 @@ class GenreList extends React.PureComponent {
 
 }
 
-
-
 export {GenreList};

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Alert, Linking } from 'react-native';
+import { View, Button, Platform, Alert, Linking, processColor } from 'react-native';
 import { Action, Actions } from 'react-native-router-flux';
 import { Colour } from '../Styles';
+import VideoLoader from '../core/VideoLoader';
 
 class SourceCell extends React.PureComponent {
   
@@ -41,7 +42,25 @@ class SourceCell extends React.PureComponent {
   }
 
   WatchAnimeInApp = () => {
-    Actions.PlayAnime({title: this.source, link: this.link});
+    let loader = new VideoLoader(this.link);
+    loader.getVideoUrl()
+    .then((url) => {
+      if (url != '') {
+        if (Platform.OS == 'ios') {
+          // IOS
+          var Browser = require('react-native-browser');
+          Browser.open(url, {
+            showPageTitles: false,
+          });
+        } else {
+          // Android
+          Linking.openURL(url).catch(error => {console.error(error)});
+        }
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    })
   }
 
   WatchAnime = () => {
