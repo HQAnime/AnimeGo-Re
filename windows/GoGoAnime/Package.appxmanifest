@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GoGoAnime.App">
       <uap:VisualElements DisplayName="Anime Go" Square150x150Logo="Assets\Medium Tile.png" Square44x44Logo="Assets\AppIcon.png" Description="An unofficial app for gogoanime.io" BackgroundColor="transparent">
-        <uap:LockScreen Notification="badge" BadgeLogo="Assets\Badge Logo.png" />
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\Badge Logo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide Tile.png" ShortName="Anime Go" Square71x71Logo="Assets\Small Tile.png" Square310x310Logo="Assets\Large Tile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
