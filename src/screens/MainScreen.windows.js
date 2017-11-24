@@ -23,7 +23,7 @@ class MainScreen extends Component {
     return (
       <TabBar
         {...props}
-        useNativeDriver scrollEnabled
+        useNativeDriver
         tabStyle = { tabStyle }
         indicatorStyle = { indicatorStyle } 
         style = { tabBarStyle }/>
