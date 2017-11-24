@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Platform, Alert, Linking, processColor } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import { Colour } from '../Styles';
+import { Colour, WindowsButtonStyles } from '../Styles';
 import VideoLoader from '../core/VideoLoader';
 
 class SourceCell extends React.PureComponent {
@@ -24,19 +24,19 @@ class SourceCell extends React.PureComponent {
       // This is recommened
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} buttonStyle={styles.buttonStyle} backgroundColor={Colour.GoGoAnimeRed} onPress={this.WatchAnimeInApp} />
+          <Button title={this.source} buttonStyle={WindowsButtonStyles.buttonStyle} backgroundColor={Colour.GoGoAnimeRed} onPress={this.WatchAnimeInApp} />
         </View>
       )
     } else if (this.source.includes('Download')) {
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} buttonStyle={styles.buttonStyle} backgroundColor={Colour.GoGoAnimeGreen} onPress={this.WatchAnime} />
+          <Button title={this.source} buttonStyle={WindowsButtonStyles.buttonStyle} backgroundColor={Colour.GoGoAnimeGreen} onPress={this.WatchAnime} />
         </View>
       )
     } else {
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} buttonStyle={styles.buttonStyle} backgroundColor={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
+          <Button title={this.source} buttonStyle={WindowsButtonStyles.buttonStyle} backgroundColor={Colour.GoGoAnimeOrange} onPress={this.WatchAnime} />
         </View>
       )
     }
@@ -59,14 +59,6 @@ class SourceCell extends React.PureComponent {
     console.log(this.link);
     // Only for windows
     Actions.PlayAnime({title: this.source, link: this.link})
-  }
-}
-
-const styles = {
-  buttonStyle: {
-    height: 30,
-    padding: 0,
-    margin: 0,
   }
 }
 

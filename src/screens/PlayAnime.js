@@ -6,7 +6,7 @@ class PlayAnime extends Component {
 
   render() {
     return (
-      <WebView source={{uri: this.props.link}} />      
+      <WebView source={{uri: this.props.link}} onError={this.goBack}/>      
     );
   }
 
