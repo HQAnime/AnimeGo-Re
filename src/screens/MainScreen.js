@@ -10,7 +10,7 @@ class MainScreen extends Component {
     index: 0,
     routes: [
       { key: '1', title: 'Lastest' },
-      { key: '2', title: 'New Season' },
+      { key: '2', title: 'Seasonal' },
       { key: '3', title: 'Movie' },
       { key: '4', title: 'Popular'},
       { key: '5', title: 'Genre'},
@@ -23,7 +23,7 @@ class MainScreen extends Component {
     return (
       <TabBar
         {...props}
-        scrollEnabled useNativeDriver
+        useNativeDriver scrollEnabled
         tabStyle = { tabStyle }
         indicatorStyle = { indicatorStyle } 
         style = { tabBarStyle }/>

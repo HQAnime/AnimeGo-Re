@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, Button, FlatList, ActivityIndicator, Dimensions } from 'react-native';
 import AnimeSourceLoader from '../core/AnimeSourceLoader';
 import { Colour } from '../Styles';
 import SourceCell from './SourceCell';
@@ -44,7 +44,7 @@ class SourceList extends Component {
     }
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
           renderItem={({item}) => 
             <SourceCell data={item}/>
@@ -57,7 +57,7 @@ class SourceList extends Component {
     return (
       <View style={{padding: 8}}>
         <Button title={this.state.name} color={Colour.GoGoAnimeBlue}
-        onPress={this.infoBtnPressed}/>
+          onPress={this.infoBtnPressed}/>
       </View>
     )
   }

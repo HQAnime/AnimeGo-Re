@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Linking, Alert } from 'react-native';
+import { View, Button, Platform, Alert, Linking, processColor } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Colour } from '../Styles';
+import VideoLoader from '../core/VideoLoader';
 
 class SourceCell extends React.PureComponent {
   
@@ -21,7 +23,7 @@ class SourceCell extends React.PureComponent {
       // This is recommened
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnime} />
+          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnimeInApp} />
         </View>
       )
     } else if (this.source.includes('Download')) {
@@ -39,15 +41,32 @@ class SourceCell extends React.PureComponent {
     }
   }
 
+  WatchAnimeInApp = () => {
+    let loader = new VideoLoader(this.link);
+    loader.getVideoUrl()
+    .then((url) => {
+      if (url != '') {
+        let currOS = Platform.OS;
+        if (currOS == 'ios') {
+          // IOS
+          var Browser = require('react-native-browser');
+          Browser.open(url, {
+            showPageTitles: false,
+          });
+        } else {
+          // Android
+          Linking.openURL(url).catch(error => {console.error(error)});
+        }
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+  }
+
   WatchAnime = () => {
     console.log(this.link);
-    var currOS = Platform.OS;
-    if (currOS == 'ios') {
-      var Browser = require('react-native-browser');
-      Browser.open(this.link);
-    } else {
-      Linking.openURL(this.link).catch(err => console.error('An error occurred', err));
-    }
+    Linking.openURL(this.link).catch(error => {console.error(error)});
   }
 }
 

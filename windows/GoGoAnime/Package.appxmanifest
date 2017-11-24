@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="7e17264b-ac08-498f-9f1b-eb16a7e09ed0" Publisher="CN=Yiheng Quan" Version="1.2.1.0" />
+  <mp:PhoneIdentity PhoneProductId="7e17264b-ac08-498f-9f1b-eb16a7e09ed0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>Anime Go</DisplayName>
+    <PublisherDisplayName>Yiheng Quan</PublisherDisplayName>
+    <Logo>Assets\Package Logo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GoGoAnime.App">
+      <uap:VisualElements DisplayName="Anime Go" Square150x150Logo="Assets\Medium Tile.png" Square44x44Logo="Assets\AppIcon.png" Description="An unofficial app for gogoanime.io" BackgroundColor="transparent">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\Badge Logo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide Tile.png" ShortName="Anime Go" Square71x71Logo="Assets\Small Tile.png" Square310x310Logo="Assets\Large Tile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\Splash Screen.png" BackgroundColor="#f5c249" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
