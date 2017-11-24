@@ -6,8 +6,7 @@ This is just a practise app made with react native and it is also my first react
 ## What could it do
 * [x] Getting recent release, movie, new season, popular and genre anime
 * [x] Displaying anime information and listing its episodes
-* [x] Choosing a server and play anime inside this app (ios only)
-~~* [ ] Adding vibration feedback (does not feel right)~~
+* [x] Choosing a server and play anime inside this app (uwp only)
 * [x] Latest -> WatchAnime -> AnimeDetail
 * [x] Adding sub category list
 * [x] Adding about inside this app

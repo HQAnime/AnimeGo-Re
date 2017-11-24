@@ -2,4 +2,4 @@ Android:
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
 
 Windows:
-react-native bundle --platform windows --entry-file index.js --bundle-output windows\GoGoAnime\ReactAssets\index.windows.bundle --assets-dest windows\myapp\ReactAssets --dev false
+react-native bundle --platform windows --entry-file index.js --bundle-output windows\GoGoAnime\ReactAssets\index.windows.bundle --assets-dest windows\GoGoAnime\ReactAssets --dev false
