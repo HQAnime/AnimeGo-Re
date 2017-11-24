@@ -3,7 +3,7 @@ import { View, Button, Alert, Dimensions } from 'react-native';
 import { Colour } from '../Styles';
 import { Actions } from 'react-native-router-flux'; 
 
-const { width } = Dimensions.get('screen');
+const { width } = Dimensions.get('window');
 
 class EpisodeCell extends React.PureComponent {
   

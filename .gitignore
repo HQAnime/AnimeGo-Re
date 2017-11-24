@@ -94,4 +94,6 @@ Pods/
 # Carthage
 Carthage/Checkouts
 Carthage/Build
+
 GoGoAnime.mp4
+*.bundle

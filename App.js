@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MainScreen, AnimeDetail, SearchAnime, 
-  WatchAnime, GenreDetail, SubCategory } from './src/screens/';
-import { Button } from 'react-native-elements';
+  WatchAnime, GenreDetail, SubCategory, PlayAnime } from './src/screens/';
+import { Button, Icon } from 'react-native-elements';
 import { NavigationStyles } from './src/Styles';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { Platform, Linking } from 'react-native';
@@ -10,8 +10,8 @@ class App extends Component {
   render() {
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
-        <Scene key='root' headerTintColor='white'>
-          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' initial
+        <Scene key='root' headerTintColor='white' renderBackButton={this.backButton}>
+          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime'
             titleStyle={titleStyle} navigationBarStyle={mainNavBarStyle}
             renderRightButton={(
               <Button
@@ -39,9 +39,17 @@ class App extends Component {
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
           <Scene key='SubCategory' component={ SubCategory } title='SubCategory'
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
+          <Scene key='PlayAnime' component={ PlayAnime } title='PlayAnime'
+            titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
         </Scene>
       </Router>
     );
+  }
+
+  backButton = () => {
+    return (
+      <Icon name="arrow-back" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.pop()} />
+    )
   }
 }
 

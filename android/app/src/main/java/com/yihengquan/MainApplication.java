@@ -3,6 +3,7 @@ package com.yihengquan;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
