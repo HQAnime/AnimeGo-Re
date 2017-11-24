@@ -11,8 +11,8 @@ class App extends Component {
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
         <Scene key='root' headerTintColor='white'>
-          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime' initial
-            titleStyle={titleStyle} navigationBarStyle={mainNavBarStyle}
+          <Scene key='MainScreen' component={ MainScreen } title='GoGoAnime'
+            titleStyle={titleStyle} navigationBarStyle={mainNavBarStyle} headerTintColor='white'
             renderRightButton={(
               <Button
                 icon={{name: 'search', type: 'evil-icons', size: (Platform.OS === 'ios') ? 22 : 30}}

@@ -3,7 +3,10 @@ using ReactNative.Modules.Launch;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -39,6 +42,20 @@ namespace GoGoAnime
         {
             base.OnLaunched(e);
             OnCreate(e.Arguments);
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                if (titleBar != null)
+                {
+                    // Change titleBar colour globally
+                    var GoGoAnimeBlack = Color.FromArgb(255, 27, 27, 27);
+                    titleBar.ButtonBackgroundColor = GoGoAnimeBlack;
+                    titleBar.ButtonForegroundColor = Colors.White;
+                    titleBar.BackgroundColor = GoGoAnimeBlack;
+                    titleBar.ForegroundColor = Colors.White;
+                }
+            }
         }
 
         /// <summary>
