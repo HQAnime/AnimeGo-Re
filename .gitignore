@@ -94,5 +94,6 @@ Pods/
 # Carthage
 Carthage/Checkouts
 Carthage/Build
+
 GoGoAnime.mp4
-windows/GoGoAnime/ReactAssets/index.windows.bundle
+*.bundle
