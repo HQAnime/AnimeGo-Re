@@ -47,6 +47,7 @@ class SourceCell extends React.PureComponent {
     loader.getVideoUrl()
     .then((url) => {
       if (url != '') {
+        if (!url.includes('https')) url = 'https:' + url;
         Actions.PlayAnime({title: this.source, link: url});
       }
     })
