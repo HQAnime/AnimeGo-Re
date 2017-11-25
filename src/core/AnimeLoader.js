@@ -15,6 +15,7 @@ export default class AnimeLoader {
       .then((html) => html.text())
       .then((htmlText) => {
         var HTMLParser = require('fast-html-parser');
+        
         var root = HTMLParser.parse(htmlText).querySelector('.items');
         // Last page is reached
         if (root == null) success([]);
@@ -22,7 +23,7 @@ export default class AnimeLoader {
         var items = root.childNodes;
         // For search when no reult has been found
         if (items["0"].rawText.includes('Sorry')) {
-          success([{name: 'Anime not found\n>_<', info: 'Back', link: 'Error', thumbnail: 'https://ww4.gogoanime.io/img/icon/logo.png'}]);
+          success([{name: 'Anime not found\n>_<', info: 'Back', link: 'Error', thumbnail: 'https://ww3.gogoanime.io/img/icon/logo.png'}]);
         }
 
         var animeData = [];
