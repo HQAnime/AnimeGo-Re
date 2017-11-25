@@ -16,8 +16,11 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>GoGoAnime_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>427FECE6647A3F49481FE5624E74AB8C05709382</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>GoGoAnime_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>858515AB7BCC53B8DE0C214D2570297E427C3127</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -215,6 +218,7 @@
       <Link>Assets\Zocial.ttf</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="GoGoAnime_StoreKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -241,11 +245,6 @@
     <Content Include="Assets\AppIcon.targetsize-256.png" />
     <Content Include="Assets\AppIcon.targetsize-32.png" />
     <Content Include="Assets\AppIcon.targetsize-48.png" />
-    <Content Include="Assets\Badge Logo.scale-100.png" />
-    <Content Include="Assets\Badge Logo.scale-125.png" />
-    <Content Include="Assets\Badge Logo.scale-150.png" />
-    <Content Include="Assets\Badge Logo.scale-200.png" />
-    <Content Include="Assets\Badge Logo.scale-400.png" />
     <Content Include="Assets\Large Tile.scale-100.png" />
     <Content Include="Assets\Large Tile.scale-125.png" />
     <Content Include="Assets\Large Tile.scale-150.png" />
@@ -276,6 +275,7 @@
     <Content Include="Assets\Wide Tile.scale-150.png" />
     <Content Include="Assets\Wide Tile.scale-200.png" />
     <Content Include="Assets\Wide Tile.scale-400.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
