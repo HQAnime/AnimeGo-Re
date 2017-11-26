@@ -16,14 +16,26 @@ export default class VideoLoader {
         var HTMLParser = require('fast-html-parser');
         
         var root = HTMLParser.parse(htmlText);
-        // console.log(root);
         var videoClass = root.querySelector('.video-js');
+         console.log(videoClass);
         // Somehow it does not exist
         if (videoClass == null) {
           Alert.alert('Error', 'No video');
           success('');
         }
-        var link = videoClass.childNodes[1].attributes.src;
+
+        let videos = videoClass.childNodes;
+        var link = '';
+        for (var i = 0; i < videos.length; i++) {
+          var video = videos[i];
+          // Somehow, next line is parsed as well
+          if (video.isWhitespace) continue;
+          // console.log(video);
+          // Choose the best quality
+          if (video.attributes.label == "auto") {
+            link = video.attributes.src;
+          }
+        }
 
         // console.log(link);
         success(link);
