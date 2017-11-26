@@ -1,4 +1,5 @@
 import { GoGoAnime } from '../Constant';
+import { Alert } from 'react-native';
 
 export default class AnimeSourceLoader {
 
@@ -18,12 +19,18 @@ export default class AnimeSourceLoader {
         var root = HTMLParser.parse(htmlText);
         var animeSources = root.querySelector('.anime_muti_link');
         // Somwhow it does not exist
-        if (animeSources == null) success([]);
+        if (animeSources == null) {
+          Alert.alert('Error', 'Source not found');
+          success([]);
+        }
         var items = animeSources.childNodes[1].childNodes;
         var animeData = [];
         var length = items.length;
-        // // Somwhow it does not have any sources
-        if (length == 0) success([]);
+        // Somwhow it does not have any sources
+        if (length == 0) {
+          Alert.alert('Error', 'No sources are available');
+          success([]);
+        }
 
         // Getting anime information
         animeInfoLink = '';
@@ -34,6 +41,8 @@ export default class AnimeSourceLoader {
           animeInfoLink = GoGoAnime.MainURL + animeInfo.childNodes[3].attributes.href;
           animeName = animeInfo.childNodes[3].attributes.title;
           // console.log(animeInfoLink, animeName);
+        } else {
+          Alert.alert('Warning', 'No anime info');
         }
 
         // Get download link
@@ -56,6 +65,7 @@ export default class AnimeSourceLoader {
       })
       .catch((error) => {
         // console.error(error);
+        Alert.alert('Error', 'Source not found');
         failure(error);
       });
     })

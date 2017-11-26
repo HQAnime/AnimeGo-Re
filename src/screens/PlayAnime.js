@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, WebView } from 'react-native';
+import { Alert, WebView, Linking } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 class PlayAnime extends Component {  
@@ -11,8 +11,9 @@ class PlayAnime extends Component {
   }
 
   goBack = () => {
-    Alert.alert('Error', 'Video could not be played');
+    Alert.alert('Error', 'Video could not be played\nVideo will be played inside your browser');
     Actions.pop();
+    Linking.openURL(this.props.link).catch(error => console.error(error));
   }
 }
 

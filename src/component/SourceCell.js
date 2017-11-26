@@ -46,7 +46,7 @@ class SourceCell extends React.PureComponent {
     loader.getVideoUrl()
     .then((url) => {
       if (url != '') {
-        if (!url.includes('https')) url = 'https:' + url;
+        if (!url.includes('http')) url = 'https:' + url;
         let currOS = Platform.OS;
         if (currOS == 'ios') {
           // IOS

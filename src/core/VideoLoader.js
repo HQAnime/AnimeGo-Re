@@ -1,3 +1,5 @@
+import { Alert } from 'react-native';
+
 export default class VideoLoader {
 
   constructor(url) {
@@ -17,7 +19,10 @@ export default class VideoLoader {
         // console.log(root);
         var videoClass = root.querySelector('.video-js');
         // Somehow it does not exist
-        if (videoClass == null) success('');
+        if (videoClass == null) {
+          Alert.alert('Error', 'No video');
+          success('');
+        }
         var link = videoClass.childNodes[1].attributes.src;
 
         // console.log(link);
@@ -25,6 +30,7 @@ export default class VideoLoader {
       })
       .catch((error) => {
         // console.error(error);
+        Alert.alert('Error', 'No video');        
         failure(error);
       });
     })
