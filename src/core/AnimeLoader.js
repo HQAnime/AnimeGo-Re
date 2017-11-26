@@ -1,4 +1,5 @@
 import { GoGoAnime } from '../Constant';
+import { Alert } from 'react-native';
 
 export default class AnimeLoader {
 
@@ -17,7 +18,10 @@ export default class AnimeLoader {
         var HTMLParser = require('fast-html-parser');
         var root = HTMLParser.parse(htmlText).querySelector('.items');
         // Last page is reached
-        if (root == null) success([]);
+        if (root == null) {
+          Alert.alert('Error', 'Anime not found');
+          success([]);
+        }
 
         var items = root.childNodes;
         // For search when no reult has been found
@@ -28,7 +32,10 @@ export default class AnimeLoader {
         var animeData = [];
         var length = items.length;
         // This is only for new release
-        if (length == 0) success([]);
+        if (length == 0) { 
+          Alert.alert('Error', 'Anime not found');
+          success([]);
+        }
 
         // console.log(length, items);
         for (var i = 0; i < length; i++) {
@@ -50,6 +57,7 @@ export default class AnimeLoader {
       })
       .catch((error) => {
         // console.error(error);
+        Alert.alert('Error', 'Anime not found');
         failure(error);
       });
     })
