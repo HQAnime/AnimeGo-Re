@@ -19,18 +19,13 @@ export default class AnimeSourceLoader {
         var root = HTMLParser.parse(htmlText);
         var animeSources = root.querySelector('.anime_muti_link');
         // Somwhow it does not exist
-        if (animeSources == null) {
-          Alert.alert('Error', 'Source not found');
-          success([]);
-        }
+        if (animeSources == null) success([]);
+
         var items = animeSources.childNodes[1].childNodes;
         var animeData = [];
         var length = items.length;
         // Somwhow it does not have any sources
-        if (length == 0) {
-          Alert.alert('Error', 'No sources are available');
-          success([]);
-        }
+        if (length == 0) success([]);
 
         // Getting anime information
         animeInfoLink = '';
@@ -41,8 +36,6 @@ export default class AnimeSourceLoader {
           animeInfoLink = GoGoAnime.MainURL + animeInfo.childNodes[3].attributes.href;
           animeName = animeInfo.childNodes[3].attributes.title;
           // console.log(animeInfoLink, animeName);
-        } else {
-          Alert.alert('Warning', 'No anime info');
         }
 
         // Get download link
