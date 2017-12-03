@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Button, Platform, Alert, Linking, processColor } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Colour } from '../Styles';
-import VideoLoader from '../core/VideoLoader';
 
 class SourceCell extends React.PureComponent {
   
@@ -23,7 +22,7 @@ class SourceCell extends React.PureComponent {
       // This is recommened
       return (
         <View style={{padding: 2}}>
-          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnimeInApp} />
+          <Button title={this.source} color={Colour.GoGoAnimeRed} onPress={this.WatchAnime} />
         </View>
       )
     } else if (this.source.includes('Download')) {
@@ -39,30 +38,6 @@ class SourceCell extends React.PureComponent {
         </View>
       )
     }
-  }
-
-  WatchAnimeInApp = () => {
-    let loader = new VideoLoader(this.link);
-    loader.getVideoUrl()
-    .then((url) => {
-      if (url != '') {
-        if (!url.includes('http')) url = 'https:' + url;
-        let currOS = Platform.OS;
-        if (currOS == 'ios') {
-          // IOS
-          var Browser = require('react-native-browser');
-          Browser.open(url, {
-            showPageTitles: false,
-          });
-        } else {
-          // Android
-          Linking.openURL(url).catch(error => {console.error(error)});
-        }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    })
   }
 
   WatchAnime = () => {

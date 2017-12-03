@@ -19,10 +19,7 @@ export default class AnimeDetailLoader {
         var root = HTMLParser.parse(htmlText);
         var animeSources = root.querySelector('.anime_info_body_bg');
         // Somwhow it does not exist
-        if (animeSources == null) {
-          Alert.alert('Error', 'Info could not be loaded');
-          success({});
-        }
+        if (animeSources == null) success({});
         var info = animeSources.childNodes;
         // console.log(info);
 
@@ -46,8 +43,6 @@ export default class AnimeDetailLoader {
           var animeEpisode = episode[episode.length - 2].childNodes[1].rawAttrs.split(' ep_end = ')[1];
           animeEpisode = animeEpisode.split("'").join('');
           // console.log(animeEpisode);
-        } else {
-          Alert.alert('Warning', 'No episodes');
         }
 
         // Getting movie_id

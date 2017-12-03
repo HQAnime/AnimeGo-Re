@@ -11,7 +11,7 @@ class PlayAnime extends Component {
   }
 
   goBack = () => {
-    Alert.alert('Error', 'Video could not be played\nVideo will be played inside your browser');
+    Alert.alert('Error', 'Video could not be loaded\nIt will be played inside your browser');
     Actions.pop();
     Linking.openURL(this.props.link).catch(error => console.error(error));
   }

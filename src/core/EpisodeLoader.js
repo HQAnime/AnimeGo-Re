@@ -23,18 +23,12 @@ export default class EpisodeLoader {
           var root = HTMLParser.parse(htmlText);
           var animeEpisodes = root.querySelector('#episode_related');
           // Somehow it is empty
-          if (animeEpisodes == null) { 
-            Alert.alert('Error', 'No episodes?!');
-            return [{link: 'Error', number: '??'}];
-          }
+          if (animeEpisodes == null) return [{link: 'Error', number: '??'}];
 
           animeEpisodes = animeEpisodes.childNodes;
           var length = animeEpisodes.length;
           // Somehow it does not have any episodes
-          if (length == 0) {
-            Alert.alert('Error', 'No episodes?!');            
-            return [{link: 'Error', number: '??'}];
-          }
+          if (length == 0) return [{link: 'Error', number: '??'}];
 
           var animeData = [];
 
@@ -63,8 +57,7 @@ export default class EpisodeLoader {
         })
         .catch((error) => {
           // console.error(error);
-          Alert.alert('Error', 'No episodes?!');
-          
+          Alert.alert('Error', 'No episodes?!');          
           failure(error);
         });
       })
