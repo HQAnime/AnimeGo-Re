@@ -6,14 +6,14 @@ class PlayAnime extends Component {
 
   render() {
     return (
-      <WebView source={{uri: this.props.link}} onError={this.goBack}/>      
+      <WebView source={{uri: this.props.link}} onError={this.goBack()}/>      
     );
   }
 
   goBack = () => {
+    Actions.pop();    
     Alert.alert('Error', 'Video could not be loaded\nIt will be played inside your browser');
-    Actions.pop();
-    Linking.openURL(this.props.link).catch(error => console.error(error));
+    Linking.openURL(this.props.link).catch(error => console.error(error));      
   }
 }
 
