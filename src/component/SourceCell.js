@@ -41,8 +41,9 @@ class SourceCell extends React.PureComponent {
   }
 
   WatchAnime = () => {
-    console.log(this.link);
-    Linking.openURL(this.link).catch(error => {console.error(error)});
+    // console.log(this.link);    
+    if (Platform.OS == 'ios') Actions.PlayAnime({title: this.source, link: this.link});
+    else Linking.openURL(this.link).catch(error => {console.error(error)});
   }
 }
 
