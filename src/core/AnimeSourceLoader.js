@@ -21,7 +21,8 @@ export default class AnimeSourceLoader {
         // Somwhow it does not exist
         if (animeSources == null) success([]);
 
-        var items = animeSources.childNodes[1].childNodes;
+        var items = animeSources.childNodes[0].childNodes;
+        // console.log(items);
         var animeData = [];
         var length = items.length;
         // Somwhow it does not have any sources
@@ -30,7 +31,7 @@ export default class AnimeSourceLoader {
         // Getting anime information
         animeInfoLink = '';
         animeName = '';
-        var animeInfo = root.querySelector('.anime-info');
+        var animeInfo = root.querySelector('.anime-info');      
         if (animeInfo != null) {
           // Getting info link
           animeInfoLink = GoGoAnime.MainURL + animeInfo.childNodes[3].attributes.href;
