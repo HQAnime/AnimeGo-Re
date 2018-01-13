@@ -1,1 +1,1 @@
-C:\Users\Yiheng Quan\Documents\Programming\React Native\React-Native-GoGoAnime\windows\GoGoAnime\bin\ARM\ReleaseBundle\Upload\GoGoAnime_1.2.1.0_ReleaseBundle\GoGoAnime_1.2.1.0_x86_x64_arm_ReleaseBundle.appxbundle
+C:\Users\Yiheng Quan\Documents\Programming\React Native\React-Native-GoGoAnime\windows\GoGoAnime\bin\ARM\ReleaseBundle\Upload\GoGoAnime_1.2.5.0_ReleaseBundle\GoGoAnime_1.2.5.0_x86_x64_arm_ReleaseBundle.appxbundle
