@@ -29,7 +29,7 @@ class App extends Component {
                   }
                 }} />
             )} backTitle='Back' initial/>
-          <Scene key='SearchScreen' component={ SearchAnime } title='Search'
+          <Scene key='SearchScreen' component={ SearchAnime } title=''
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>
           <Scene key='GenreDetail' component={ GenreDetail } title='GenreDetail' 
             titleStyle={titleStyle} navigationBarStyle={searchNavBarStyle}/>

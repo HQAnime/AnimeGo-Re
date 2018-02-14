@@ -19,7 +19,7 @@ class AnimeCell extends React.PureComponent {
     return (
       <Card image={{uri: this.data.thumbnail}} imageStyle={{height: this.width * 1.45}}
         containerStyle={{padding: 0, margin: 0, flex: this.flex, justifyContent:'center'}}>
-          <Text style={{marginBottom: 10, textAlign: 'center', height: 50}} numberOfLines={2}>{this.data.name}</Text>
+          <Text style={{marginBottom: 10, textAlign: 'center'}}>{this.data.name}</Text>
           <Button backgroundColor={Colour.GoGoAnimeBlue} title={this.title}
             buttonStyle={{borderRadius: 15, height: 30, flex: 1}} onPress={this.buttonPressed}/>
       </Card>

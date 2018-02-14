@@ -8,35 +8,30 @@ class SearchAnime extends Component {
   constructor(props) {
     super(props);
     this.textInput = '';
-    this.state = {
-      animeName: ''
-    };
+    this.state = {animeName: ''};
+    Actions.refresh({renderTitle: this.renderSearch()});
   }
 
   render() {
-    if (this.state.animeName == '') {
-      return (
-        <View>
-          <TextInput autoCapitalize='none' autoCorrect={false}
-            style={styles.inputStyle} autoFocus
-            onChangeText={(text) => {this.textInput = text}}
-            onEndEditing={this.searchAnime}
-          />
-        </View>
-      )
-    } else {
-      return <AnimeList AnimeUrl={GoGoAnime.Search + this.state.animeName + '&page='}/>
-    }
+    if (this.state.animeName == '') return null;
+    else return <AnimeList AnimeUrl={GoGoAnime.Search + this.state.animeName + '&page='}/>
+  }
+
+  renderSearch() {
+    return (
+      <View style={{width: '90%'}}>
+        <TextInput autoCapitalize='none' autoCorrect={false}
+          style={styles.inputStyle} autoFocus
+          onChangeText={(text) => {this.textInput = text}}
+          onEndEditing={this.searchAnime}
+        />
+      </View>
+    )
   }
   
   searchAnime = () => {
     if (this.textInput.length < 3) return;
-    else {
-      Actions.refresh({title: this.textInput});
-      this.setState({
-        animeName: this.textInput,
-      });
-    }
+    else this.setState({animeName: this.textInput});
   }
 }
 
@@ -44,8 +39,7 @@ const styles = {
   inputStyle: {
     height: (Platform.OS === 'ios') ? 40 : 50,
     textAlign: 'center',
-    borderColor: 'gray',
-    borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
+    color: 'white',
   }
 }
 
