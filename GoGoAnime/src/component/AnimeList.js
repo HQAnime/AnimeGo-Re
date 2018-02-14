@@ -24,14 +24,20 @@ class AnimeList extends React.PureComponent {
       page: 1,
       hasMorePage: true,
       isRefreshing: false,
-      url: this.props.AnimeUrl,
+      url: props.AnimeUrl,
       columns: -1,
     };
   }
 
   componentWillMount() {
-     this.loadAnime();
-     this.getNumColumns();
+    console.log('Mount');
+    this.loadAnime();
+    this.getNumColumns();
+  }
+
+  componentDidUpdate() {
+    console.log('Update');
+    this.componentWillMount();
   }
 
   render() {
@@ -63,8 +69,8 @@ class AnimeList extends React.PureComponent {
   getNumColumns = () => {
     const { width } = Dimensions.get('window');
     columns = Math.floor(width / 200);
-    if (columns < 4) columns = 2;
-    else if (columns > 5) columns = 5;
+    if (columns < 2) columns = 2;
+    if (columns > 2) columns = 4;
     if (columns == this.state.columns) return;
     var goodWidth = width / columns;
     
