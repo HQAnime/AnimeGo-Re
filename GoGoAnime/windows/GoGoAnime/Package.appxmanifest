@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="38362YihengQuan.AnimeGo" Publisher="CN=29AB28BD-08D9-4C82-9346-8413EEB4C611" Version="1.2.5.0" />
+  <Identity Name="38362YihengQuan.AnimeGo" Publisher="CN=29AB28BD-08D9-4C82-9346-8413EEB4C611" Version="1.2.7.0" />
   <mp:PhoneIdentity PhoneProductId="11481e25-3c29-4d6d-a7cb-00a169806f49" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Anime Go</DisplayName>
