@@ -20,7 +20,7 @@ export default class App extends Component {
     // The width for the drawer should be 61.8% of the device width
     return (
       <DrawerLayoutAndroid ref='Drawer'
-        drawerWidth={deviceWidth * 0.618}
+        drawerWidth={deviceWidth * 0.75}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={this.renderNavigation}>
         <StatusBar backgroundColor={StatusBarColour} barStyle='light-content'/>
@@ -38,11 +38,11 @@ export default class App extends Component {
   }
 
   renderNavigation = () => {
-    const { dividerStyle, navigationStyle, iconViewStyle, imageStyle } = styles;    
+    const { dividerStyle, navigationStyle, iconViewStyle, drawerTitleStyle } = styles;    
     return (
       <ScrollView style={navigationStyle}>
         <View style={iconViewStyle}>
-          <Image source={require('../img/IconWhite.png')} style={imageStyle}/>      
+          <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
         <DrawerCell text='New Release' onPress={() => this.onScreenChanging('NewRelease') }/>
         <DrawerCell text='New Season' onPress={() => this.onScreenChanging('NewSeason')}/>

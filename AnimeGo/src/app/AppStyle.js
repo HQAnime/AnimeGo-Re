@@ -12,10 +12,10 @@ export const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: 'white'
   },
-  imageStyle: {
-    margin: 16,
-    height: deviceWidth * 0.618 * 0.25,
-    width: deviceWidth * 0.618 * 0.25
+  drawerTitleStyle: {
+    fontSize: 24,
+    marginLeft: 12,
+    color: 'white',
   },
   iconViewStyle: {
     backgroundColor: AnimeGoColour,
