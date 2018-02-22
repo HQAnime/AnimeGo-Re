@@ -3,7 +3,7 @@ import { GreyColour } from '../../value';
 
 export const styles = StyleSheet.create({
   textStyle: {
-    marginLeft: 16,
+    margin: 16,
     color: GreyColour,
     fontWeight: 'bold'
   },
