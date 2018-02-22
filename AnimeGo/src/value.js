@@ -5,4 +5,7 @@
   USED TO STORE CONSTANTS
 */
 
-export const AnimeGoColour = '#E6B367';
+export const AnimeGoColour = '#FF9800';
+export const StatusBarColour = '#F57C00';
+export const SecondaryColour = '#FFB74D';
+export const GreyColour = '#607D8B';

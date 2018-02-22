@@ -5,11 +5,12 @@ import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
 export const styles = StyleSheet.create({
   dividerStyle: {
     height: 0.75,
-    backgroundColor: 'white'
+    marginBottom: 4,
+    marginTop: 4
   },
   navigationStyle: {
     flex: 1, 
-    backgroundColor: AnimeGoColour
+    backgroundColor: 'white'
   },
   imageStyle: {
     margin: 16,
@@ -17,10 +18,22 @@ export const styles = StyleSheet.create({
     width: deviceWidth * 0.618 * 0.25
   },
   iconViewStyle: {
-    backgroundColor: 'white',
+    backgroundColor: AnimeGoColour,
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
     elevation: 2,
+  },
+  naviBarStyle: {
+    backgroundColor: AnimeGoColour,
+  },
+  naviTitleStyle: {
+    width: '90%',
+  },
+  buttonViewStyle: {
+    height: 36, width: 36, 
+    marginLeft: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 })
