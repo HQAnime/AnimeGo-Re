@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { GreyColour } from '../../value';
 
 export const styles = StyleSheet.create({
   textStyle: {
     marginLeft: 16,
-    color: 'white',
-    fontSize: 18,
+    color: GreyColour,
+    fontWeight: 'bold'
   },
   textViewStyle: {
-    height: 48,
+    height: 44,
     justifyContent: 'center'
   }
 })

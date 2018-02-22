@@ -6,9 +6,9 @@ const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : Touchab
 
 class SmartTouchable extends Component {
   render() {
-    const { onPress, style, children } = this.props;
+    const { onPress, children, round } = this.props;
     return (
-      <Touchable onPress={onPress} style={style}>
+      <Touchable onPress={onPress} background={round ? Touchable.SelectableBackgroundBorderless() : Touchable.SelectableBackground()}>
         {children}
       </Touchable>
     )
