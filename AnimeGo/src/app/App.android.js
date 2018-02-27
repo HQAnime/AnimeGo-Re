@@ -9,11 +9,12 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid } from 'r
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { NewRelease, NewSeason, Movie, Popular, Genre } from '../screen';
-import { AnimeGoColour, StatusBarColour } from '../value';
+import { NewRelease, NewSeason, Movie, Popular, Genre, About } from '../screen';
+import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
 
+let header = {headerTintColor: 'white'};
 export default class App extends Component {
   render() {
     const { naviBarStyle, naviTitleStyle } = styles;
@@ -24,13 +25,14 @@ export default class App extends Component {
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={this.renderNavigation}>
         <StatusBar backgroundColor={StatusBarColour} barStyle='light-content'/>
-        <Router sceneStyle={{backgroundColor: 'white'}}>
-          <Scene key='root' titleStyle={naviTitleStyle} navigationBarStyle={naviBarStyle} backTitle='Back'>
-            <Scene key='NewRelease' component={NewRelease} title='New Release' headerTintColor='white' renderLeftButton={this.renderLeftBtn} initial/>
-            <Scene key='NewSeason' component={NewSeason} title='New Season' renderLeftButton={this.renderLeftBtn}/>
-            <Scene key='Movie' component={Movie} title='Movie' renderLeftButton={this.renderLeftBtn}/>
-            <Scene key='Popular' component={Popular} title='Popular' navigationBarStyle={naviBarStyle} renderLeftButton={this.renderLeftBtn}/>
-            <Scene key='Genre' component={Genre} title='Genre' navigationBarStyle={naviBarStyle} renderLeftButton={this.renderLeftBtn}/>
+        <Router sceneStyle={{backgroundColor: 'white'}} backAndroidHandler={this.onBackPress}>
+          <Scene key='root' titleStyle={naviTitleStyle} navigationBarStyle={naviBarStyle} backTitle='Back' renderLeftButton={this.renderLeftBtn}>
+            <Scene key='NewRelease' component={NewRelease} title='New Release' headerTintColor='white' initial/>
+            <Scene key='NewSeason' component={NewSeason} title='New Season'/>
+            <Scene key='Movie' component={Movie} title='Movie'/>
+            <Scene key='Popular' component={Popular} title='Popular' navigationBarStyle={naviBarStyle}/>
+            <Scene key='Genre' component={Genre} title='Genre' navigationBarStyle={naviBarStyle}/>
+            <Scene key='About' component={About} title='About AnimeGo' navigationBarStyle={naviBarStyle}/>
           </Scene>
         </Router>
       </DrawerLayoutAndroid>
@@ -44,14 +46,14 @@ export default class App extends Component {
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
-        <DrawerCell text='New Release' onPress={() => this.onScreenChanging('NewRelease') }/>
-        <DrawerCell text='New Season' onPress={() => this.onScreenChanging('NewSeason')}/>
+        <DrawerCell text='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
+        <DrawerCell text='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='Movie' onPress={() => this.onScreenChanging('Movie')}/>
-        <DrawerCell text='Popular' onPress={() => this.onScreenChanging('Popular')}/>
-        <DrawerCell text='Genre' onPress={() => this.onScreenChanging('Genre')}/>
+        <DrawerCell text='Movie' onPress={() => this.onChangingScreen(ScreenIndex.Movie)}/>
+        <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
+        <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='About'/>        
+        <DrawerCell text='About' onPress={() => this.onChangingScreen(ScreenIndex.About)}/>        
       </ScrollView>
     )
   }
@@ -71,8 +73,27 @@ export default class App extends Component {
     this.refs['Drawer'].openDrawer();
   }
 
-  onScreenChanging(name) {
-    Actions.reset(name, {headerTintColor: 'white'});
+  onBackPress = () => {
+    if (Actions.state.index == 0) return false;
+    else if (Actions.state.index > 4) Actions.reset('NewRelease', header);
+    else Actions.pop(); return true;
+  }
+
+  onChangingScreen(index) {
+    switch (index) {
+      case ScreenIndex.NewRelease:
+        Actions.NewRelease(header); break;
+      case ScreenIndex.NewSeason:
+        Actions.NewSeason(header); break;
+      case ScreenIndex.Movie:
+        Actions.Movie(header); break;
+      case ScreenIndex.Popular:
+        Actions.Popular(header); break;
+      case ScreenIndex.Genre:
+        Actions.Genre(header); break;   
+      case ScreenIndex.About:
+        Actions.About(header); break;      
+    }
     this.refs['Drawer'].closeDrawer();
   }
 }

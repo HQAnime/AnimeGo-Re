@@ -4,7 +4,7 @@ import { GreyColour } from '../../value';
 export const styles = StyleSheet.create({
   textStyle: {
     margin: 16,
-    color: GreyColour,
+    color: 'black',
     fontWeight: 'bold'
   },
   textViewStyle: {
