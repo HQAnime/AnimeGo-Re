@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, Dimensions, Image } from 'react-native';
 import { SmartTouchable } from '../../component';
 import { deviceProtrait, deviceWidth, deviceHeight } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
 import { Actions } from 'react-native-router-flux';
 
-class AnimeCell extends React.Component {
+class AnimeCell extends PureComponent {
 
   constructor(props) {
     super();
@@ -47,14 +47,6 @@ class AnimeCell extends React.Component {
       )
     }
   }
-  /*
-  <Card image={{}} imageStyle={{}}
-        containerStyle={{padding: 0, margin: 0, flex: this.flex, justifyContent:'center'}}>
-          <Text style={{marginBottom: 10, textAlign: 'center'}}>{this.data.name}</Text>
-          <Button title={this.title}
-            buttonStyle={{borderRadius: 15, height: 30, flex: 1}} onPress={this.buttonPressed}/>
-      </Card>
-  */
 
   buttonPressed = () => {
     if (this.data.link.includes('-episode-')) {
