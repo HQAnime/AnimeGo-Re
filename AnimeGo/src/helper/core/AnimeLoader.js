@@ -1,4 +1,4 @@
-import { GoGoAnime } from '../Constant';
+import { MajorLink } from '../../value';
 import { Alert } from 'react-native';
 
 export default class AnimeLoader {
@@ -38,10 +38,10 @@ export default class AnimeLoader {
           if (anime.isWhitespace) continue;
           // console.log(anime);
           var animeImage = anime.querySelector('.img');
-          var animeLink = GoGoAnime.MainURL + animeImage.childNodes[1].attributes.href;
+          var animeLink = MajorLink.MainURL + animeImage.childNodes[1].attributes.href;
           var animeName = anime.querySelector('.name').text;
           // Only for NewRelease, it is displaying episode.
-          var extraInformation = this.url == GoGoAnime.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
+          var extraInformation = this.url == MajorLink.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
           if (extraInformation == '') extraInformation = '??';
           var animeThumbnail = animeImage.childNodes[1].childNodes[1].attributes.src;
           animeData.push({name: animeName, info: extraInformation, link: animeLink, thumbnail: animeThumbnail});
