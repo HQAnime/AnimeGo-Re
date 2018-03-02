@@ -16,5 +16,5 @@ export const ScreenIndex = {
   Movie: 2,
   Popular: 3,
   Genre: 4,
-  About: 5
+  Setting: 5
 }

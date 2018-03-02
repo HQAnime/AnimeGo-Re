@@ -9,7 +9,7 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid } from 'r
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { NewRelease, NewSeason, Movie, Popular, Genre, About } from '../screen';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
@@ -32,7 +32,7 @@ export default class App extends Component {
             <Scene key='Movie' component={Movie} title='Movie'/>
             <Scene key='Popular' component={Popular} title='Popular' navigationBarStyle={naviBarStyle}/>
             <Scene key='Genre' component={Genre} title='Genre' navigationBarStyle={naviBarStyle}/>
-            <Scene key='About' component={About} title='About AnimeGo' navigationBarStyle={naviBarStyle}/>
+            <Scene key='Setting' component={Setting} title='Settings' navigationBarStyle={naviBarStyle}/>
           </Scene>
         </Router>
       </DrawerLayoutAndroid>
@@ -53,7 +53,7 @@ export default class App extends Component {
         <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
         <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='About' onPress={() => this.onChangingScreen(ScreenIndex.About)}/>        
+        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>        
       </ScrollView>
     )
   }
@@ -91,8 +91,8 @@ export default class App extends Component {
         Actions.Popular(header); break;
       case ScreenIndex.Genre:
         Actions.Genre(header); break;   
-      case ScreenIndex.About:
-        Actions.About(header); break;      
+      case ScreenIndex.Setting:
+        Actions.Setting(header); break;      
     }
     this.refs['Drawer'].closeDrawer();
   }

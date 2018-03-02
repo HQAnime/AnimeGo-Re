@@ -1,4 +1,4 @@
-export * from './About';
+export * from './Setting';
 export * from './Genre';
 export * from './Movie';
 export * from './NewRelease';
