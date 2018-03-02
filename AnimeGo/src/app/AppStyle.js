@@ -14,15 +14,19 @@ export const styles = StyleSheet.create({
   },
   drawerTitleStyle: {
     fontSize: 24,
+    fontWeight: 'bold',
     marginLeft: 12,
-    color: 'white',
+    width: '90%',
+    marginBottom: 8,
+    color: 'white'
   },
   iconViewStyle: {
     backgroundColor: AnimeGoColour,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 80,
-    elevation: 2,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    height: 128,
+    padding: 0,
+    elevation: 2
   },
   naviBarStyle: {
     backgroundColor: AnimeGoColour,
@@ -34,6 +38,6 @@ export const styles = StyleSheet.create({
     height: 36, width: 36, 
     marginLeft: 12,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 })
