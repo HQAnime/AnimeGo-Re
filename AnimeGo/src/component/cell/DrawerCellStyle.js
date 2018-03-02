@@ -9,6 +9,6 @@ export const styles = StyleSheet.create({
   },
   textViewStyle: {
     height: 44,
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 })

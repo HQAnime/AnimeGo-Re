@@ -12,10 +12,15 @@ import { Divider, Button, Icon } from 'react-native-elements';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
+import { DataManager } from '../helper/';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
 
 let header = {headerTintColor: 'white'};
 export default class App extends Component {
+  async componentWillMount() {
+    await DataManager.setupData();
+  }
+
   render() {
     const { naviBarStyle, naviTitleStyle } = styles;
     // The width for the drawer should be 61.8% of the device width
