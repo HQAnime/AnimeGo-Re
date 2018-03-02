@@ -36,6 +36,7 @@ class Setting extends Component {
   writeReview() {
     switch (Platform.OS) {
       case 'android': this.openLink(GooglePlay); break;
+      // Add more system later, HENRY!!
     }
   }
 

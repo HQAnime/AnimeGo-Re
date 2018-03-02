@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { MajorLink } from '../value';
+import { AnimeList } from '../component/';
 
 class NewRelease extends Component {
   render() {
-    return null;
+    return (
+      <AnimeList AnimeUrl={MajorLink.NewRelease}/>
+    )
   }
 }
 
