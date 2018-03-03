@@ -9,6 +9,9 @@ export const AnimeGoColour = '#FF9800';
 export const StatusBarColour = '#F57C00';
 export const SecondaryColour = '#FFB74D';
 export const GreyColour = '#607D8B';
+export const BlueColour = '#2196F3';
+export const RedColour = '#F44336';
+export const GreenColour = '#4CAF50';
 
 export const Github = 'https://github.com/HenryQuan/React-Native-GoGoAnime';
 export const GoGoAnime = 'http://www.gogoanime.io';
