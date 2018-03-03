@@ -15,10 +15,10 @@ class AnimeCell extends PureComponent {
     this.title = data.info.replace('Released: ', '');
 
     if (deviceProtrait) {
-      this.width = deviceWidth / 2 - 16;
+      this.width = deviceWidth / 2 - 12;
       this.flex = 0.5;
     } else {
-      this.width = deviceHeight / 4 - 32;
+      this.width = deviceHeight / 4 - 24;
       this.flex = 0.25;
     }
   }
@@ -27,7 +27,7 @@ class AnimeCell extends PureComponent {
     const { viewStyle, textStyle } = styles;
     return (
       <View style={[viewStyle, {flex: this.flex}]}>
-        { this.renderImage }
+        { this.renderImage() }
         <View style={{justifyContent: 'space-between'}}>
           <Text numberOfLines={3} style={{width: this.width, textAlign: 'center', alignSelf: 'center'}}>{this.data.name}</Text> 
           <Text style={{textAlign: 'center', alignSelf: 'center'}}>{this.title}</Text>
@@ -36,14 +36,12 @@ class AnimeCell extends PureComponent {
     )
   }
 
-  renderImage = () => {
-    if (global.dataSaver) {
-      return null;
-    } else {
+  renderImage() {
+    console.log(global.dataSaver);
+    if (global.dataSaver) return null;
+    else {
       return (
-        <SmartTouchable>
-          <Image source={{uri: this.data.thumbnail}} style={{width: this.width, height: this.width, borderRadius: 10}} resizeMode='cover'/>                      
-        </SmartTouchable>
+        <Image source={{uri: this.data.thumbnail}} style={{width: this.width, height: this.width, borderRadius: 4}} resizeMode='cover'/>          
       )
     }
   }

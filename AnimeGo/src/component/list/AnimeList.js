@@ -7,15 +7,9 @@ import { LoadingIndicator } from '../../component';
 const isPortrait = () => {
   const dim = Dimensions.get('window');
   return dim.height >= dim.width;
-};
+}
 
 class AnimeList extends PureComponent {
-
-  keyExtractor = (item) => {
-    // console.log(item.name + item.link);
-    return item.name + item.link;
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,50 +18,56 @@ class AnimeList extends PureComponent {
       hasMorePage: true,
       isRefreshing: false,
       url: props.AnimeUrl,
-      columns: -1,
+      column: isPortrait ? 2 : 4
     };
   }
 
   componentWillMount() {
-    console.log('Mount');
+    // Loading anime
     this.loadAnime();
+    this.updateColumn();
   }
 
-  componentDidUpdate() {
-    console.log('Update');
-    this.componentWillMount();
+  animeKey = (item, index) => {
+    return item.link;
+  }
+
+  updateColumn = () => {
+    this.setState({column: isPortrait ? 2 : 4});
+    console.log(this.state.column)
   }
 
   render() {
-    /* A loading indictor */
-    if (this.state.data.length == 0) {
-      return <LoadingIndicator />
+    const { data, isRefreshing, column } = this.state;
+    if (data.length == 0) return <LoadingIndicator />
+    else {
+      return (
+        <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item}/>} 
+        key={(isPortrait() ? 'p' : 'l')} numColumns={(isPortrait() ? 2 : 4)} refreshing={isRefreshing}
+        onRefresh={this.refreshAnime} ListFooterComponent={this.renderFooterComponent()}/>
+      )
     }
-
-    return (
-      <FlatList data={this.state.data} keyExtractor={this.keyExtractor}
-        key={(isPortrait() ? 'p' : 'l')}
-        renderItem={({item}) => 
-          <AnimeCell data={item} width={this.state.goodWidth}/>
-        } numColumns={isPortrait() ? 2 : 4} isRefreshing={false}
-        ListFooterComponent={this.renderFooterComponent} />
-    );
   }
 
-  renderFooterComponent = () => {
+  refreshAnime = () => {
+    this.setState({
+      data: [],
+      page: 1,
+      hasMorePage: true,
+      isRefreshing: false,
+    }, () => this.loadAnime())
+  }
+
+  renderFooterComponent() {
     if (!this.state.hasMorePage) return null;
-    else return (
-      <LoadingIndicator />
-    )
+    else return <LoadingIndicator />
   }
 
-  loadAnime = () => {
-    // console.log(this.state.hasMorePage ? 'morePage' : 'lastPage', this.state.isRefreshing ? 'refreshing' : 'not');
-    if (!this.state.hasMorePage && !this.state.isRefreshing) return;
-    let loader = new AnimeLoader(this.state.url, this.state.page);
-    loader.loadAnime()
-    .then((animeData) => {
-      console.log(this.state.url)
+  loadAnime() {
+    const { hasMorePage, isRefreshing, url, page, data } = this.state;
+    if (!hasMorePage && !isRefreshing) return;
+    let loader = new AnimeLoader(url, page);
+    loader.loadAnime().then((animeData) => {
       if (animeData.length == 0) {
         // No more pages
         this.setState({
@@ -77,15 +77,15 @@ class AnimeList extends PureComponent {
       } else if (animeData.length < 20) {
         // Append data
         this.setState({
-          data: this.state.data.concat(animeData),
+          data: data.concat(animeData),
           isRefreshing: false,
           hasMorePage: false,
         })
       } else {
         // Append data
         this.setState({
-          data: this.state.data.concat(animeData),
-          page: this.state.page + 1,
+          data: data.concat(animeData),
+          page: page + 1,
           isRefreshing: false,
         })
       }
@@ -94,15 +94,6 @@ class AnimeList extends PureComponent {
       console.error(error);
       this.setState({isRefreshing: false})
     })
-  }
-
-  refreshAnime = () => {
-    this.setState({
-      data: [],
-      page: 1,
-      hasMorePage: true,
-      isRefreshing: true,
-    }, () => {this.loadAnime()})
   }
 }
 
