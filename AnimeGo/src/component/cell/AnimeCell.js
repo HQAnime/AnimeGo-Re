@@ -17,13 +17,13 @@ class AnimeCell extends PureComponent {
   }
 
   render() {
-    const { viewStyle, textStyle } = styles;
+    const { viewStyle, textStyle, titleStyle, episodeStyle } = styles;
     return (
       <SmartTouchable onPress={this.buttonPressed}>
         <View style={[viewStyle, {flex: this.flex}]}>
           { this.renderImage() }
-          <Text numberOfLines={3} style={{width: this.width, textAlign: 'center', alignSelf: 'center'}}>{this.data.name}</Text> 
-          <Text style={{textAlign: 'center', alignSelf: 'center'}}>{this.title}</Text>
+          <Text numberOfLines={3} style={[titleStyle, {width: this.width}]}>{this.data.name}</Text> 
+          <Text style={episodeStyle}>{this.title}</Text>
         </View>
       </SmartTouchable>
     )

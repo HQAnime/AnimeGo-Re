@@ -42,6 +42,7 @@ class Setting extends Component {
 
   updateSaver = () => {
     let newValue = !this.state.dataSaver;
+    global.dataSaver = newValue;
     this.setState({dataSaver: newValue});
     AsyncStorage.setItem('@dataSaver', JSON.stringify(newValue));
   }
