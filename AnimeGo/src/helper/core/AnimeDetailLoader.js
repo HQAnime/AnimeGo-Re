@@ -1,4 +1,4 @@
-import { GoGoAnime } from '../Constant';
+import { MajorLink } from '../../value';
 import { Alert } from 'react-native';
  
 export default class AnimeDetailLoader {
@@ -26,7 +26,7 @@ export default class AnimeDetailLoader {
         var animeName = info[3].rawText;
         var animeImage = info[1].attributes.src;
         var animeType = info[7].childNodes[2].attributes.title;
-        var animeTypeLink = GoGoAnime.MainURL + info[7].childNodes[2].attributes.href;
+        var animeTypeLink = MajorLink.MainURL + info[7].childNodes[2].attributes.href;
         var plot = 'No Information';
         var animePlot = info[9].childNodes[1];
         if (animePlot != null) plot = animePlot.rawText;

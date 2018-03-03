@@ -9,7 +9,7 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid } from 'r
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo } from '../screen';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
@@ -31,11 +31,14 @@ export default class App extends Component {
         renderNavigationView={this.renderNavigation}>
         <StatusBar backgroundColor={StatusBarColour} barStyle='light-content'/>
         <Router sceneStyle={{backgroundColor: 'white'}} backAndroidHandler={this.onBackPress}>
-          <Scene key='root' titleStyle={naviTitleStyle} navigationBarStyle={naviBarStyle} backTitle='Back' renderLeftButton={this.renderLeftBtn}>
-            <Scene key='NewRelease' component={NewRelease} title='New Release' headerTintColor='white' initial/>
+          <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle} backTitle='Back' renderLeftButton={this.renderLeftBtn}>
+            <Scene key='NewRelease' component={NewRelease} title='New Release' initial/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
             <Scene key='Movie' component={Movie} title='Movie'/>
             <Scene key='Popular' component={Popular} title='Popular'/>
+
+            <Scene key='WatchAnime' component={WatchAnime}/>
+            <Scene key='AnimeDetail' component={AnimeDetail}/>
 
             <Scene key='Genre' component={Genre} title='Genre'/>
             <Scene key='GenreInfo' component={GenreInfo}/>

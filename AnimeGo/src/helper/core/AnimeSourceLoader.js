@@ -1,4 +1,4 @@
-import { GoGoAnime } from '../Constant';
+import { MajorLink } from '../../value';
 import { Alert } from 'react-native';
 
 export default class AnimeSourceLoader {
@@ -34,7 +34,7 @@ export default class AnimeSourceLoader {
         var animeInfo = root.querySelector('.anime-info');      
         if (animeInfo != null) {
           // Getting info link
-          animeInfoLink = GoGoAnime.MainURL + animeInfo.childNodes[3].attributes.href;
+          animeInfoLink = MajorLink.MainURL + animeInfo.childNodes[3].attributes.href;
           animeName = animeInfo.childNodes[3].attributes.title;
           // console.log(animeInfoLink, animeName);
         }

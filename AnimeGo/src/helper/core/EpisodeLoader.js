@@ -1,4 +1,4 @@
-import { GoGoAnime } from '../Constant';
+import { MajorLink } from '../../value';
 import { Alert } from 'react-native';
 
 export default class EpisodeLoader {
@@ -13,7 +13,7 @@ export default class EpisodeLoader {
     loadEpisode() {
       return new Promise((success, failure) => {
         // Loading data here
-        var url = GoGoAnime.Episode + this.start + '&ep_end=' + this.end + '&id=' + this.id;
+        var url = MajorLink.Episode + this.start + '&ep_end=' + this.end + '&id=' + this.id;
         // console.log(url);
         fetch(url)
         .then((html) => html.text())
@@ -37,7 +37,7 @@ export default class EpisodeLoader {
             // Just in case but ther should not be any empty entries
             if (episode.isWhitespace) continue;
             // It has an empty space for some reason...
-            var animeLink = GoGoAnime.MainURL + episode.childNodes["0"].attributes.href.replace(' ', '');
+            var animeLink = MajorLink.MainURL + episode.childNodes["0"].attributes.href.replace(' ', '');
             var episodeNumber = episode.childNodes["0"].childNodes[1].text.replace(' EP', '');
 
             animeData.push({link: animeLink, number: episodeNumber});

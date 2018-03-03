@@ -5,3 +5,5 @@ export * from './NewRelease';
 export * from './NewSeason';
 export * from './Popular';
 export * from './GenreInfo';
+export * from './AnimeDetail';
+export * from './WatchAnime';

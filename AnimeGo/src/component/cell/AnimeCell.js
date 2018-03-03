@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Dimensions, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { SmartTouchable } from '../../component';
-import { devicePortrait, deviceWidth, deviceHeight } from '../../helper/DeviceDimensions';
+import { deviceWidth } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
 import { Actions } from 'react-native-router-flux';
 
@@ -19,13 +19,13 @@ class AnimeCell extends PureComponent {
   render() {
     const { viewStyle, textStyle } = styles;
     return (
-      <View style={[viewStyle, {flex: this.flex}]}>
-        { this.renderImage() }
-        <View style={{justifyContent: 'space-between'}}>
+      <SmartTouchable onPress={this.buttonPressed}>
+        <View style={[viewStyle, {flex: this.flex}]}>
+          { this.renderImage() }
           <Text numberOfLines={3} style={{width: this.width, textAlign: 'center', alignSelf: 'center'}}>{this.data.name}</Text> 
           <Text style={{textAlign: 'center', alignSelf: 'center'}}>{this.title}</Text>
         </View>
-      </View>
+      </SmartTouchable>
     )
   }
 
@@ -42,13 +42,13 @@ class AnimeCell extends PureComponent {
   buttonPressed = () => {
     if (this.data.link.includes('-episode-')) {
       // Only NewRelease redirects you to that new episode
-      Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false});
+      Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false, headerTintColor: 'white'});
     } else if (this.data.link == 'Error') {
       // No anime found go back
       Actions.pop();
     } else {
       // AnimeDetail will be shown here
-      Actions.AnimeDetail({title: 'Loading...', link: this.data.link})
+      Actions.AnimeDetail({title: 'Loading...', link: this.data.link, headerTintColor: 'white'})
     }
   }
 }
