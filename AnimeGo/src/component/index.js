@@ -7,3 +7,4 @@ export * from './cell/DrawerCell';
 
 // List
 export * from './list/AnimeList';
+export * from './list/GenreList';

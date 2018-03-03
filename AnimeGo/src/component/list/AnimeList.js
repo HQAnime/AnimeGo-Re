@@ -1,13 +1,9 @@
 import React, { PureComponent } from 'react';
-import { View, ActivityIndicator, Dimensions, Text, FlatList } from 'react-native';
+import { View, ActivityIndicator, Text, FlatList } from 'react-native';
+import { isPortrait } from '../../helper/DeviceDimensions';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
 import { LoadingIndicator } from '../../component';
-
-const isPortrait = () => {
-  const dim = Dimensions.get('window');
-  return dim.height >= dim.width;
-}
 
 class AnimeList extends PureComponent {
   constructor(props) {
@@ -18,7 +14,6 @@ class AnimeList extends PureComponent {
       hasMorePage: true,
       isRefreshing: false,
       url: props.AnimeUrl,
-      column: isPortrait ? 2 : 4
     };
   }
 
@@ -33,7 +28,7 @@ class AnimeList extends PureComponent {
   }
 
   updateColumn = () => {
-    this.setState({column: isPortrait ? 2 : 4});
+    this.setState({column: isPortrait() ? 2 : 4});
     console.log(this.state.column)
   }
 
@@ -43,15 +38,17 @@ class AnimeList extends PureComponent {
     else {
       return (
         <View style={{flex: 1}} onLayout={this.updateColumn}>
-          <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item}/>} 
+          <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item} column={column}/>} 
             key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
-            onRefresh={this.refreshAnime} ListFooterComponent={this.renderFooterComponent()}/>
+            ListFooterComponent={this.renderFooterComponent}
+            onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
         </View>
       )
     }
   }
 
   updateColumn = () => {
+    console.log(isPortrait());    
     this.setState({column: isPortrait() ? 2 : 4})
   }
 
@@ -64,12 +61,13 @@ class AnimeList extends PureComponent {
     }, () => this.loadAnime())
   }
 
-  renderFooterComponent() {
+  renderFooterComponent = () => {
     if (!this.state.hasMorePage) return null;
     else return <LoadingIndicator />
   }
 
-  loadAnime() {
+  loadAnime = () => {
+    console.log('Loading anime');
     const { hasMorePage, isRefreshing, url, page, data } = this.state;
     if (!hasMorePage && !isRefreshing) return;
     let loader = new AnimeLoader(url, page);
@@ -98,7 +96,7 @@ class AnimeList extends PureComponent {
     })
     .catch((error) => {
       console.error(error);
-      this.setState({isRefreshing: false})
+      this.setState({isRefreshing: false, hasMorePage: false})
     })
   }
 }
