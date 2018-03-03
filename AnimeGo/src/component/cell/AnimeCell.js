@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Dimensions, Image } from 'react-native';
 import { SmartTouchable } from '../../component';
-import { deviceProtrait, deviceWidth, deviceHeight } from '../../helper/DeviceDimensions';
+import { devicePortrait, deviceWidth, deviceHeight } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
 import { Actions } from 'react-native-router-flux';
 
@@ -9,18 +9,11 @@ class AnimeCell extends PureComponent {
 
   constructor(props) {
     super();
-    const { data, width } = props;
+    const { data, column } = props;
     this.data = data;
-    this.flex = this.width / Dimensions.get('window').width;
+    this.flex = 1 / column;    
     this.title = data.info.replace('Released: ', '');
-
-    if (deviceProtrait) {
-      this.width = deviceWidth / 2 - 16;
-      this.flex = 0.5;
-    } else {
-      this.width = deviceHeight / 4 - 24;
-      this.flex = 0.25;
-    }
+    this.width = deviceWidth / 2 - 16;
   }
 
   render() {

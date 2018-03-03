@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { GenreList } from '../component';
 
 class Genre extends Component {
   render() {
-    return null;
+    return <GenreList />;
   }
 }
 
