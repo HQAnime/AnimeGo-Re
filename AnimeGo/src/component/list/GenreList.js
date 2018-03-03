@@ -25,7 +25,7 @@ class GenreList extends React.PureComponent {
     )
   }
 
-  updateColumn = () => this.setState({column: isPortrait() ? 2 : 3});
+  updateColumn = () => this.setState({column: isPortrait() ? 3 : 6});
 }
 
 export {GenreList};

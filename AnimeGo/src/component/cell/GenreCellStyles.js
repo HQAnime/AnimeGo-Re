@@ -1,8 +1,15 @@
 import { StyleSheet } from 'react-native';
-import { SecondaryColour } from '../../value';
+import { GreyColour } from '../../value';
 
 export const styles = StyleSheet.create({
   viewStyle: {
-    flex: 0.5, margin: 0, padding: 4
+    margin: 4, 
+    padding: 4,
+    height: 64,
+    justifyContent: 'center'
+  },
+  textStyle: {
+    color: GreyColour,
+    textAlign: 'center'
   }
 })
