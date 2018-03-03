@@ -79,6 +79,8 @@ export default class App extends Component {
   }
 
   onBackPress = () => {
+    // Close the drawer as well
+    this.refs['Drawer'].closeDrawer();
     if (Actions.state.index == 0) return false;
     else if (Actions.state.index > 4) Actions.reset('NewRelease', header);
     else Actions.pop(); return true;
