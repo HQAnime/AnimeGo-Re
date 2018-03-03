@@ -15,7 +15,7 @@ class AnimeCell extends PureComponent {
     this.title = data.info.replace('Released: ', '');
 
     if (deviceProtrait) {
-      this.width = deviceWidth / 2 - 12;
+      this.width = deviceWidth / 2 - 16;
       this.flex = 0.5;
     } else {
       this.width = deviceHeight / 4 - 24;
