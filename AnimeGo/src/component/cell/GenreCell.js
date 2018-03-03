@@ -15,7 +15,7 @@ class GenreCell extends PureComponent {
   render() {
     const { viewStyle, textStyle } = styles;  
     return (
-      <SmartTouchable onPress={this.showGenreInfo}>
+      <SmartTouchable onPress={this.showGenreInfo} round>
         <View style={[viewStyle, {flex: this.flex}]}>
           <Text style={textStyle}>{this.title}</Text>
         </View>
