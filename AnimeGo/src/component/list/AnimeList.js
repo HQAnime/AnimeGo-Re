@@ -42,11 +42,17 @@ class AnimeList extends PureComponent {
     if (data.length == 0) return <LoadingIndicator />
     else {
       return (
-        <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item}/>} 
-        key={(isPortrait() ? 'p' : 'l')} numColumns={(isPortrait() ? 2 : 4)} refreshing={isRefreshing}
-        onRefresh={this.refreshAnime} ListFooterComponent={this.renderFooterComponent()}/>
+        <View style={{flex: 1}} onLayout={this.updateColumn}>
+          <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item}/>} 
+            key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
+            onRefresh={this.refreshAnime} ListFooterComponent={this.renderFooterComponent()}/>
+        </View>
       )
     }
+  }
+
+  updateColumn = () => {
+    this.setState({column: isPortrait() ? 2 : 4})
   }
 
   refreshAnime = () => {
