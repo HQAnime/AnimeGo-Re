@@ -1,6 +1,7 @@
 // Common
 export * from './common/SmartTouchable';
 export * from './common/LoadingIndicator';
+export * from './common/FabButton';
 
 // Cell
 export * from './cell/DrawerCell';

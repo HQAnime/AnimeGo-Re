@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text, FlatList } from 'react-native';
 import { isPortrait } from '../../helper/DeviceDimensions';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
-import { LoadingIndicator } from '../../component';
+import { LoadingIndicator, FabButton } from '../../component';
 
 class AnimeList extends PureComponent {
   constructor(props) {
@@ -42,6 +42,7 @@ class AnimeList extends PureComponent {
             key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
             ListFooterComponent={this.renderFooterComponent}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
+          <FabButton />
         </View>
       )
     }
