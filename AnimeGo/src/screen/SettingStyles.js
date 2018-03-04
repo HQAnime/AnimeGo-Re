@@ -18,5 +18,10 @@ export const styles = StyleSheet.create({
   versionStyle: {
     fontSize: 12,
     padding: 16,
+  },
+  dividerStyle: {
+    height: 0.75,
+    marginBottom: 4,
+    marginTop: 4
   }
 })
