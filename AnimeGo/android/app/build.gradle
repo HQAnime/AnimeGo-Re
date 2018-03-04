@@ -98,11 +98,11 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.animego"
+        applicationId "com.yihengquan.gogoanime"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 25
+        versionCode 4
+        versionName "1.0.54321"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
