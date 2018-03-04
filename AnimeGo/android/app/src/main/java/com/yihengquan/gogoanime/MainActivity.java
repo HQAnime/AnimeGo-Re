@@ -1,4 +1,4 @@
-package com.animego;
+package com.yihengquan.gogoanime;
 
 import com.facebook.react.ReactActivity;
 
