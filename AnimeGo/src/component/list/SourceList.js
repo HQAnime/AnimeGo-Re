@@ -43,7 +43,7 @@ class SourceList extends Component {
         <View>
           <FlatList keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader}
             data={data} renderItem={({item}) => <SourceCell data={item}/>} />
-          <Text style={{padding: 8, fontSize: 12}}>{'Ads are from website itself.\nThis app does not have any controls over it.'}</Text>
+          <Text style={styles.adStyle}>{'Ads are from website itself.\nThis app does not have any controls over it.'}</Text>
         </View>
       )
     }

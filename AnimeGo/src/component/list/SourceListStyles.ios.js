@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     padding: 4
   },
   adStyle: {
-    padding: 8, fontSize: 12
+    padding: 8, fontSize: 12,
+    textAlign: 'center'
   }
 })
