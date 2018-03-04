@@ -49,6 +49,7 @@
 		F8808A63C798441B81C15ABA /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F3031DB34DA4C49AD4A485C /* Octicons.ttf */; };
 		F19BF77619374A97B22B8728 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D539A2630CE340BB8A7EC0DB /* SimpleLineIcons.ttf */; };
 		962224493A95491A9F429548 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3C0499A012B44328DFD1B65 /* Zocial.ttf */; };
+		FC92EE2A8F5649CC981C3591 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B34B2D1E409493B93AB29AD /* libRNAdMobManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +314,8 @@
 		3F3031DB34DA4C49AD4A485C /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D539A2630CE340BB8A7EC0DB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A3C0499A012B44328DFD1B65 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4E053C42BEF42B0A3A9C140 /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; name = "RNAdMobManager.xcodeproj"; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9B34B2D1E409493B93AB29AD /* libRNAdMobManager.a */ = {isa = PBXFileReference; name = "libRNAdMobManager.a"; path = "libRNAdMobManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +346,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				035EDF2ED0094FE5943A92FD /* libRCTBrowser.a in Frameworks */,
 				2688891CDBF94D00BA094015 /* libRNVectorIcons.a in Frameworks */,
+				FC92EE2A8F5649CC981C3591 /* libRNAdMobManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +526,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				A212215B558841C8BF530E9A /* RCTBrowser.xcodeproj */,
 				D69375554D1F447D8C0F8D79 /* RNVectorIcons.xcodeproj */,
+				D4E053C42BEF42B0A3A9C140 /* RNAdMobManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1125,11 +1130,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Debug;
@@ -1152,11 +1159,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Release;
@@ -1180,6 +1189,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Debug;
@@ -1202,6 +1212,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Release;
@@ -1233,11 +1244,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Debug;
@@ -1269,11 +1282,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-browser/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 			};
 			name = Release;
@@ -1300,6 +1315,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1324,6 +1340,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
