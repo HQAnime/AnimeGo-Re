@@ -5,7 +5,7 @@ import { MajorLink } from '../value';
 class GenreInfo extends Component {
   render() {
     return (
-      <AnimeList AnimeUrl={MajorLink.Genre + this.props.genre}/>
+      <AnimeList AnimeUrl={MajorLink.Genre + this.props.genre} showFab={false}/>
     );
   }
 }
