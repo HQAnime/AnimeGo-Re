@@ -42,10 +42,16 @@ class AnimeList extends PureComponent {
             key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
             ListFooterComponent={this.renderFooterComponent}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
-          <FabButton />
+          { this.renderFabButton() }
         </View>
       )
     }
+  }
+
+  // Sometimes, FAB is not needed
+  renderFabButton = () => {
+    if (this.props.showFab != false) return <FabButton />
+    else return null;
   }
 
   updateColumn = () => {

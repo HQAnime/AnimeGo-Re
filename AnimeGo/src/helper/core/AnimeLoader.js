@@ -11,10 +11,8 @@ export default class AnimeLoader {
   loadAnime() {
     return new Promise((success, failure) => {
       // Loading data here
-      // console.log(this.url + this.page);
-      fetch(this.url + this.page)
-      .then((html) => html.text())
-      .then((htmlText) => {
+      // console.log(this.url, this.page);
+      fetch(this.url + this.page).then((html) => html.text()).then((htmlText) => {
         var HTMLParser = require('fast-html-parser');
         var root = HTMLParser.parse(htmlText).querySelector('.items');
         // Last page is reached
