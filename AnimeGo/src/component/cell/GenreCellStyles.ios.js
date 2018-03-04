@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     margin: 4, 
     padding: 4,
     height: 64,
+    width: '100%',
     justifyContent: 'center'
   },
   textStyle: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { isPortrait } from '../../helper/DeviceDimensions';
 import GenreCell from '../cell/GenreCell';
 
@@ -18,10 +18,10 @@ class GenreList extends React.PureComponent {
   render() {
     const { column } = this.state;
     return (
-      <View style={{flex: 1}} onLayout={this.updateColumn}>
+      <SafeAreaView style={{flex: 1}} onLayout={this.updateColumn}>
         <FlatList data={genreList} keyExtractor={(genre) => genre} key={isPortrait ? 'p' + column : 'h' + column}
-          renderItem={({item}) => <GenreCell data={item} column={column}/> } numColumns={column}/>
-      </View>
+          renderItem={({item}) => <GenreCell data={item} column={column}/> } numColumns={column} automaticallyAdjustContentInsets={false}/>
+      </SafeAreaView>
     )
   }
 

@@ -35,7 +35,7 @@ class EpisodeList extends React.PureComponent {
         <View style={{flex: 1}} onLayout={this.updateColumn}>
           <FlatList data={data} keyExtractor={this.keyExtractor} numColumns={column} key={isPortrait() ? 'p' + column : 'h' + column}
             renderItem={({item}) => <EpisodeCell data={item} isLastest={item.number == episode ? true : false}/>}  
-            ListFooterComponent={this.renderFooter} ListHeaderComponent={this.renderHeader}
+            ListFooterComponent={this.renderFooter} ListHeaderComponent={this.renderHeader} automaticallyAdjustContentInsets={false}
             onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0.5}/>
         </View>
       )

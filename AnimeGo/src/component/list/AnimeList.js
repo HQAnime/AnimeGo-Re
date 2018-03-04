@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, ActivityIndicator, Text, FlatList } from 'react-native';
+import { ActivityIndicator, Text, FlatList, Platform, View } from 'react-native';
 import { isPortrait } from '../../helper/DeviceDimensions';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
@@ -40,7 +40,7 @@ class AnimeList extends PureComponent {
         <View style={{flex: 1}} onLayout={this.updateColumn}>
           <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item} column={column}/>} 
             key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
-            ListFooterComponent={this.renderFooterComponent}
+            ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
           { this.renderFabButton() }
         </View>
@@ -50,7 +50,7 @@ class AnimeList extends PureComponent {
 
   // Sometimes, FAB is not needed
   renderFabButton = () => {
-    if (this.props.showFab != false) return <FabButton />
+    if (this.props.showFab != false && Platform.OS == 'android') return <FabButton />
     else return null;
   }
 

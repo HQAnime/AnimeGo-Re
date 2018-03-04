@@ -5,21 +5,17 @@ export const styles = StyleSheet.create({
   viewStyle: {
     borderRadius: 4,
     margin: 4, padding: 2,
-    elevation: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   titleStyle: {
-    textAlign: 'center', 
-    fontWeight: 'bold',
-    color: 'black'
+    textAlign: 'center',
   },
   episodeStyle: {
     textAlign: 'center', 
-    justifyContent: 'center',
-    padding: 2, margin: 2,
+    color: 'white', backgroundColor: BlueColour,
     fontSize: 12,
     height: 24, width: '50%',
-    borderRadius: 12, elevation: 1
+    borderRadius: 12,
   }
 })

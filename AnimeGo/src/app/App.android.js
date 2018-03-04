@@ -15,7 +15,6 @@ import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
 
-let header = {headerTintColor: 'white'};
 export default class App extends Component {
   async componentWillMount() {
     await DataManager.setupData();
@@ -91,24 +90,24 @@ export default class App extends Component {
     // Close the drawer as well
     this.refs['Drawer'].closeDrawer();
     if (Actions.state.index == 0) return false;
-    else if (Actions.state.index > 4) Actions.reset('NewRelease', header);
+    else if (Actions.state.index > 4) Actions.reset('NewRelease', {headerTintColor='white'});
     else Actions.pop(); return true;
   }
 
   onChangingScreen(index) {
     switch (index) {
       case ScreenIndex.NewRelease:
-        Actions.NewRelease(header); break;
+        Actions.NewRelease(); break;
       case ScreenIndex.NewSeason:
-        Actions.NewSeason(header); break;
+        Actions.NewSeason(); break;
       case ScreenIndex.Movie:
-        Actions.Movie(header); break;
+        Actions.Movie(); break;
       case ScreenIndex.Popular:
-        Actions.Popular(header); break;
+        Actions.Popular(); break;
       case ScreenIndex.Genre:
-        Actions.Genre(header); break;   
+        Actions.Genre(); break;   
       case ScreenIndex.Setting:
-        Actions.Setting(header); break;      
+        Actions.Setting(); break;      
     }
     this.refs['Drawer'].closeDrawer();
   }
