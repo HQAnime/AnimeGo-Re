@@ -4,7 +4,7 @@ import AnimeSourceLoader from '../../helper/core/AnimeSourceLoader';
 import SourceCell from '../cell/SourceCell';
 import { LoadingIndicator } from '../../component';
 import { Actions } from 'react-native-router-flux';
-import { SecondaryColour, RedColour } from '../../value';
+import { SecondaryColour, RedColour, GreenColour } from '../../value';
 import { styles } from './SourceListStyles';
 
 class SourceList extends Component {
@@ -40,9 +40,10 @@ class SourceList extends Component {
     if (data.length == 0) return <LoadingIndicator />
     else {
       return (
-        <View style={{flex: 1}}>
+        <View>
           <FlatList keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader}
             data={data} renderItem={({item}) => <SourceCell data={item}/>} />
+          <Text style={{padding: 8, fontSize: 12}}>{'Ads are from website itself.\nThis app does not have any controls over it.'}</Text>
         </View>
       )
     }
@@ -53,7 +54,7 @@ class SourceList extends Component {
     return (
       <View style={headerViewStyle}>
         <Text style={textStyle}>Anime Detail</Text>
-        <Button title={this.state.name} onPress={this.infoBtnPressed} color={RedColour}/>
+        <Button title={this.state.name} onPress={this.infoBtnPressed} color={GreenColour}/>
       </View>
     )
   }
