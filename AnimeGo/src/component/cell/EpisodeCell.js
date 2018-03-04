@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, Button, Alert, Dimensions } from 'react-native';
+import { View, Button, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux'; 
-
-const { width } = Dimensions.get('window');
+import { styles } from './EpisodeCellStyles';
+import { RedColour, SecondaryColour }  from '../../value';
 
 class EpisodeCell extends React.PureComponent {
   
   constructor(props) {
     super(props);
-    this.episode = this.props.data.number;
-    this.link = this.props.data.link;
-    this.isLastest = this.props.isLastest;
+    const { data, isLastest } = props;
+    this.episode = data.number;
+    this.link = data.link;
+    this.isLastest = isLastest;
   }
 
   render() {
@@ -20,22 +21,12 @@ class EpisodeCell extends React.PureComponent {
   }
 
   renderButton = () => {
-    if (this.isLastest) {
-      // Different colour
-      return (
-        <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
-          <Button title={this.episode} 
-            onPress={this.WatchAnime}/>
-        </View>
-      )
-    } else {
-      return (
-        <View style={{flex: 1, width: width / 4 - 8, padding: 4, margin: 0}}>
-          <Button title={this.episode}
-            onPress={this.WatchAnime}/>
-        </View>
-      )
-    }
+    const { viewStyle } = styles;
+    return (
+      <View style={viewStyle}>
+        <Button title={this.episode} color={this.isLastest ? RedColour : SecondaryColour} onPress={this.WatchAnime}/>
+      </View>
+    )
   }
 
   WatchAnime = () => {

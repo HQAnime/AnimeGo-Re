@@ -4,6 +4,8 @@ import AnimeSourceLoader from '../../helper/core/AnimeSourceLoader';
 import SourceCell from '../cell/SourceCell';
 import { LoadingIndicator } from '../../component';
 import { Actions } from 'react-native-router-flux';
+import { SecondaryColour, RedColour } from '../../value';
+import { styles } from './SourceListStyles';
 
 class SourceList extends Component {
 
@@ -47,9 +49,11 @@ class SourceList extends Component {
   }
 
   renderHeader = () => {
+    const { headerViewStyle, textStyle } = styles;
     return (
-      <View style={{padding: 8}}>
-        <Button title={this.state.name} onPress={this.infoBtnPressed}/>
+      <View style={headerViewStyle}>
+        <Text style={textStyle}>Anime Detail</Text>
+        <Button title={this.state.name} onPress={this.infoBtnPressed} color={RedColour}/>
       </View>
     )
   }
