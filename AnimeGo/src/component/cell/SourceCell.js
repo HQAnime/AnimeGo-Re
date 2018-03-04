@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Button, Platform, Alert, Linking } from 'react-native';
+import { View, Button, Text, Linking } from 'react-native';
+import { styles } from './SourceCellStyles'
 import { Actions } from 'react-native-router-flux';
+import { GreyColour, BlueColour } from '../../value';
 
 class SourceCell extends React.PureComponent {
   constructor(props) {
@@ -15,23 +17,18 @@ class SourceCell extends React.PureComponent {
   }
 
   renderButton = () => {
-    if (this.source.includes('Vidstreaming')) {
-      // This is recommened
+    const { viewStyle, textStyle } = styles;
+    if (this.source.includes('Download')) {
       return (
-        <View style={{padding: 2}}>
-          <Button title={this.source} onPress={this.WatchAnime} />
-        </View>
-      )
-    } else if (this.source.includes('Download')) {
-      return (
-        <View style={{padding: 2}}>
-          <Button title={this.source} onPress={this.WatchAnime} />
+        <View style={viewStyle}>
+          <Button title={this.source} onPress={this.WatchAnime} color={GreyColour}/>
+          <Text style={textStyle}>Server list</Text>
         </View>
       )
     } else {
       return (
-        <View style={{padding: 2}}>
-          <Button title={this.source} onPress={this.WatchAnime} />
+        <View style={viewStyle}>
+          <Button title={this.source} onPress={this.WatchAnime} color={BlueColour}/>
         </View>
       )
     }
