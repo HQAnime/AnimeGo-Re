@@ -9,7 +9,7 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid } from 'r
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime } from '../screen';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
@@ -44,6 +44,7 @@ export default class App extends Component {
             <Scene key='GenreInfo' component={GenreInfo}/>
 
             <Scene key='SearchAnime' component={SearchAnime}/>
+            <Scene key='SubCategory' component={SubCategory}/>
 
             <Scene key='Setting' component={Setting} title='Settings'/>
           </Scene>

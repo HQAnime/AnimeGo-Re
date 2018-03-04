@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Button, Text, Linking } from 'react-native';
 import { styles } from './SourceCellStyles'
 import { Actions } from 'react-native-router-flux';
-import { GreyColour, BlueColour } from '../../value';
+import { GreyColour, BlueColour, RedColour } from '../../value';
 
 class SourceCell extends React.PureComponent {
   constructor(props) {
@@ -21,7 +21,7 @@ class SourceCell extends React.PureComponent {
     if (this.source.includes('Download')) {
       return (
         <View style={viewStyle}>
-          <Button title={this.source} onPress={this.WatchAnime} color={GreyColour}/>
+          <Button title={this.source} onPress={this.WatchAnime} color={RedColour}/>
           <Text style={textStyle}>Server list</Text>
         </View>
       )

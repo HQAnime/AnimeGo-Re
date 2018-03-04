@@ -24,8 +24,7 @@ class Setting extends Component {
         <DrawerCell text='Write a review' onPress={() => this.writeReview()}/>
         <DrawerCell text='Email feedback' onPress={() => this.openLink(Email)}/>
         <DrawerCell text='Support this app (Ad)' onPress={() => this.showAd()}/> 
-        <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                             
-        <DrawerCell text='Licences'/>    
+        <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                              
         <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>                
         <Text style={versionStyle}>{VERSION}</Text>
       </View>

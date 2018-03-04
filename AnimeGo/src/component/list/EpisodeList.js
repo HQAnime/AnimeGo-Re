@@ -72,7 +72,7 @@ class EpisodeList extends React.PureComponent {
           <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
           <View>
             <Text style={basicTextStyle}>Type:</Text>
-            <Button title={type.replace(' Anime', '')} color={GreenColour}/>
+            <Button title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
           </View>
         </View>
       )
@@ -86,7 +86,7 @@ class EpisodeList extends React.PureComponent {
             <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
             <View>
               <Text style={basicTextStyle}>Type:</Text>
-              <Button title={type.replace(' Anime', '')} color={GreenColour}/>
+              <Button title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
             </View>
           </View>
         </View>
@@ -97,6 +97,10 @@ class EpisodeList extends React.PureComponent {
   renderFooter = () => {
     if (this.state.hasMorePage) return <LoadingIndicator />
     else return null;
+  }
+
+  goSubCategory = () => {
+    Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='});
   }
 
   updateColumn = () => {
