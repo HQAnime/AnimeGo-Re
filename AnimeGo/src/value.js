@@ -19,7 +19,7 @@ export const GooglePlay = 'https://play.google.com/store/apps/details?id=com.yih
 export const Email = 'mailto:development.henryquan@gmail.com';
 
 export const AD_IS_OPTIONAL = 'This is completely optional.'
-export const VERSION = '1.0.54321';
+export const VERSION = '1.0.666';
 
 export const ScreenIndex = {
   NewRelease: 0,

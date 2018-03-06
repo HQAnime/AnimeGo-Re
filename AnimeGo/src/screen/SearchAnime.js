@@ -22,16 +22,18 @@ class SearchAnime extends Component {
 
   renderHeader() {
     const { inputStyle } = styles;
-    return <TextInput style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} onChangeText={(text) => {this.name = text}} onEndEditing={this.searchAnime}/>;
+    return <TextInput autoFocus style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} onChangeText={(text) => {this.name = text}} onEndEditing={this.searchAnime}/>;
   }
 
   searchAnime = () => {
     this.setState({keyword: ''});
     // Clear old result
     setTimeout(() => {
-      this.name = this.name.split(' ').join('%20');
-      if (this.name.length < 3) return;
-      else this.setState({keyword: this.name});
+      if (this.name == null || this.name.length < 3) return;
+      else {
+        this.name = this.name.split(' ').join('%20');
+        this.setState({keyword: this.name});
+      }
     }, 1000)
   }
 }

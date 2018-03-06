@@ -4,9 +4,9 @@ import { TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-nativ
 class SmartTouchable extends Component {
   render() {
     const { onPress, children, round } = this.props;
-    if (Platform.OS == 'android') {
+    if (Platform.OS == 'android' && Platform.Version > 19) {
       return (
-        <TouchableNativeFeedback onPress={onPress} background={round ? Touchable.SelectableBackgroundBorderless() : Touchable.SelectableBackground()}>
+        <TouchableNativeFeedback onPress={onPress} background={round ? TouchableNativeFeedback.SelectableBackgroundBorderless() : TouchableNativeFeedback.SelectableBackground()}>
           {children}
         </TouchableNativeFeedback>
       )

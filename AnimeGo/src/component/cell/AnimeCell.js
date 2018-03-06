@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image } from 'react-native';
 import { SmartTouchable } from '../../component';
-import { deviceWidth } from '../../helper/DeviceDimensions';
+import { deviceWidth, isPortrait, deviceHeight } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
 import { Actions } from 'react-native-router-flux';
 
 class AnimeCell extends PureComponent {
-
   constructor(props) {
     super();
     const { data, column } = props;
@@ -22,7 +21,7 @@ class AnimeCell extends PureComponent {
       <SmartTouchable onPress={this.buttonPressed}>
         <View style={[viewStyle, {flex: this.flex}]}>
           { this.renderImage() }
-          <Text numberOfLines={3} style={[titleStyle, {width: this.width}]}>{this.data.name}</Text> 
+          <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
           <Text style={episodeStyle}>{this.title}</Text>
         </View>
       </SmartTouchable>
