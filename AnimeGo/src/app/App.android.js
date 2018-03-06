@@ -5,10 +5,11 @@
 */
 
 import React, { Component } from 'react';
-import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid } from 'react-native';
+import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid, ToastAndroid } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
+import { AdMobInterstitial } from 'react-native-admob';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
@@ -66,7 +67,8 @@ export default class App extends Component {
         <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
         <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>        
+        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>    
+        <DrawerCell text='Support this app (Ad)' onPress={() => this.showAd()}/>             
       </ScrollView>
     )
   }
@@ -86,11 +88,20 @@ export default class App extends Component {
     this.refs['Drawer'].openDrawer();
   }
 
+  showAd() {
+    // Showing an ad here
+    AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/8615100584');
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.requestAd().then(() => {
+      AdMobInterstitial.showAd();
+      if (Platform.OS == 'android') ToastAndroid.show('Thank you for your support', ToastAndroid.SHORT);
+    });
+  }
+
   onBackPress = () => {
     // Close the drawer as well
     this.refs['Drawer'].closeDrawer();
     if (Actions.state.index == 0) return false;
-    else if (Actions.state.index > 4) Actions.reset('NewRelease', {headerTintColor='white'});
     else Actions.pop(); return true;
   }
 

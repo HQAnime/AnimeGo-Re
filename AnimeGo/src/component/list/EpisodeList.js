@@ -47,7 +47,7 @@ class EpisodeList extends React.PureComponent {
     const { mainViewStyle, titleStyle, basicTextStyle, plotStyle} = styles;
     return (
       <View style={mainViewStyle}>
-        <Text style={titleStyle}>{name}</Text>
+        <Text numberOfLines={3} style={titleStyle}>{name}</Text>
         { this.renderInfo() }
         <Text style={plotStyle}>{plot}</Text>
         <Button title='Google it' color={BlueColour} onPress={this.searchGoogle}/>
@@ -100,7 +100,13 @@ class EpisodeList extends React.PureComponent {
   }
 
   goSubCategory = () => {
-    Actions.SubCategory({title: this.state.type, link: this.state.typeLink + '?page='});
+    const { type, typeLink } = this.state; 
+    // To prevent infinite loop
+    if (type == global.currSubCategory) Actions.pop();
+    else {
+      global.currSubCategory = type;
+      Actions.SubCategory({title: type, link: typeLink + '?page='});
+    }
   }
 
   updateColumn = () => {

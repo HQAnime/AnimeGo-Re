@@ -3,7 +3,7 @@ import { BlueColour } from '../../value';
 
 export const styles = StyleSheet.create({
   viewStyle: {
-    borderRadius: 4,
+    borderRadius: 4, flex: 1,
     margin: 4, padding: 2,
     elevation: 2,
     alignItems: 'center',
@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
   episodeStyle: {
     textAlign: 'center', 
     justifyContent: 'center',
+    color: 'white', backgroundColor: BlueColour,
     padding: 2, margin: 2,
     fontSize: 12,
     height: 24, width: '50%',

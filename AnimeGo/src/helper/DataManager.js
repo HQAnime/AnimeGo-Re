@@ -9,14 +9,14 @@ class DataManager {
         // First launch
         await AsyncStorage.setItem('@FIRST', 'false');
         await AsyncStorage.setItem('@dataSaver', 'false');
-        await AsyncStorage.setItem('@DUB', 'true');
+        await AsyncStorage.setItem('@DUB', 'false');
         global.dataSaver = false;
       } else {
-        // Retrieve dataSaver
+        // Retrieve DATA
         const dataSaver = await AsyncStorage.getItem('@dataSaver'); 
         const DUB = await AsyncStorage.getItem('@DUB'); 
         global.dataSaver = JSON.parse(dataSaver);
-        global.hasDub = JSON.parse(DUB);
+        global.hideDub = JSON.parse(DUB);
       }
     } catch (error) {
       console.error(error);

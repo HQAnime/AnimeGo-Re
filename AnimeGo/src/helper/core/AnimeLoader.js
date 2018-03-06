@@ -38,6 +38,7 @@ export default class AnimeLoader {
           var animeImage = anime.querySelector('.img');
           var animeLink = MajorLink.MainURL + animeImage.childNodes[1].attributes.href;
           var animeName = anime.querySelector('.name').text;
+          if (global.hideDub && animeName.includes('(Dub)')) continue;
           // Only for NewRelease, it is displaying episode.
           var extraInformation = this.url == MajorLink.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
           if (extraInformation == '') extraInformation = '??';
@@ -49,7 +50,8 @@ export default class AnimeLoader {
       })
       .catch((error) => {
         // console.error(error);
-        Alert.alert('Error', 'Anime not found');
+        if (global.hideDub) Alert.alert('End', 'Anime not found');
+        else Alert.alert('Error', 'Anime not found');
         failure(error);
       });
     })

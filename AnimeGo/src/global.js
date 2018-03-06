@@ -1,2 +1,3 @@
 global.dataSaver = false;
-global.hasDub = true;
+global.hideDub = false;
+global.currSubCategory = '';

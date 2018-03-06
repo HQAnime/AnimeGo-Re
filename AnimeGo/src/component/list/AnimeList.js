@@ -85,7 +85,7 @@ class AnimeList extends PureComponent {
           hasMorePage: false,
           isRefreshing: false,
         })
-      } else if (animeData.length < 20) {
+      } else if (animeData.length < 20 && !global.hideDub) {
         // Append data
         this.setState({
           data: data.concat(animeData),
