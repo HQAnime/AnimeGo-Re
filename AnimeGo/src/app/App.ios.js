@@ -7,9 +7,8 @@
 import React, { Component } from 'react';
 import { View, StatusBar } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
-import { Setting, GenreInfo, WatchAnime, AnimeDetail, SubCategory } from '../screen';
+import { Setting, GenreInfo, WatchAnime, AnimeDetail, SubCategory, NewRelease } from '../screen';
 import { styles } from './AppStyle';
-import MainTab from './MainTab';
 import { StatusBarColour } from '../value';
 import { DataManager } from '../helper';
 
@@ -23,7 +22,7 @@ export default class App extends Component {
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
         <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle}>
-          <Scene key='MainScreen' component={MainTab} title='Anime Go' initial/>
+          <Scene key='New Release' component={NewRelease}/>
           <Scene key='WatchAnime' component={WatchAnime}/>
           <Scene key='AnimeDetail' component={AnimeDetail}/>
 
