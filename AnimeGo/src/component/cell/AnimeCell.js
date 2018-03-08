@@ -8,28 +8,30 @@ import { Actions } from 'react-native-router-flux';
 class AnimeCell extends PureComponent {
   constructor(props) {
     super();
-    const { data, column } = props;
+    const { data, column, width } = props;
     this.data = data;
     this.flex = 1 / column;    
     this.title = data.info.replace('Released: ', '');
-    this.width = deviceWidth / 2 - 16;
+    this.width = isPortrait() ? width / 2 - 16 : width / 4 - 16;
+    console.log(column, this.width);
   }
 
   render() {
     const { viewStyle, textStyle, titleStyle, episodeStyle } = styles;
     return (
-      <SmartTouchable onPress={this.buttonPressed}>
-        <View style={[viewStyle, {flex: this.flex}]}>
-          { this.renderImage() }
-          <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
-          <Text style={episodeStyle}>{this.title}</Text>
-        </View>
-      </SmartTouchable>
+      <View style={{flex: this.flex}}>
+        <SmartTouchable onPress={this.buttonPressed}>
+          <View style={viewStyle}>
+            { this.renderImage() }
+            <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
+            <Text style={episodeStyle}>{this.title}</Text>
+          </View>
+        </SmartTouchable>
+      </View>
     )
   }
 
   renderImage() {
-    console.log(global.dataSaver);
     if (global.dataSaver) return null;
     else {
       return (
