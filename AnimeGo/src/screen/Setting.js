@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid } from 'react-native';
 import { SmartTouchable, DrawerCell } from '../component';
-import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION } from '../value';
+import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore } from '../value';
 import { styles } from './SettingStyles';
 
 class Setting extends Component {
@@ -48,8 +48,8 @@ class Setting extends Component {
 
   writeReview() {
     switch (Platform.OS) {
-      case 'android': 
-        this.openLink(GooglePlay); 
+      case 'android': this.openLink(GooglePlay);
+      case 'windows': this.openLink(MicrosoftStore);
       // Add more system later, HENRY!!
     }
   }
