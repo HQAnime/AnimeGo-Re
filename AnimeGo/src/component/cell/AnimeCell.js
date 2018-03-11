@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import { SmartTouchable } from '../../component';
 import { deviceWidth, isPortrait, deviceHeight } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
@@ -8,18 +8,16 @@ import { Actions } from 'react-native-router-flux';
 class AnimeCell extends PureComponent {
   constructor(props) {
     super();
-    const { data, column, width } = props;
-    this.data = data;
-    this.flex = 1 / column;    
+    const { data, width } = props;
+    this.data = data; 
     this.title = data.info.replace('Released: ', '');
-    this.width = isPortrait() ? width / 2 - 16 : width / 4 - 16;
-    console.log(column, this.width);
+    this.width = width;
   }
 
   render() {
     const { viewStyle, textStyle, titleStyle, episodeStyle } = styles;
     return (
-      <View style={{flex: this.flex}}>
+      <View style={{flex: 1}}>
         <SmartTouchable onPress={this.buttonPressed}>
           <View style={viewStyle}>
             { this.renderImage() }
@@ -46,7 +44,7 @@ class AnimeCell extends PureComponent {
       Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false, headerTintColor: 'white'});
     } else if (this.data.link == 'Error') {
       // No anime found go back
-      Actions.pop();
+      Linking.openURL('https://www.google.com/search?q=' + this.data.name + ' gogoanime');
     } else {
       // AnimeDetail will be shown here
       Actions.AnimeDetail({title: 'Loading...', link: this.data.link, headerTintColor: 'white'})

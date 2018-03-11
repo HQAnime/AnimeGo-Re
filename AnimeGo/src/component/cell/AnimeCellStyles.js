@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   viewStyle: {
     borderRadius: 4, flex: 1,
     margin: 4, padding: 2,
-    elevation: 2,
+    elevation: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
