@@ -40,7 +40,7 @@ class Setting extends Component {
     if (Platform.OS == 'android') {
       switch(link) {
         case Email: ToastAndroid.show('Thank you for your feedback', ToastAndroid.SHORT); break;
-        case GoGoAnime: ToastAndroid.show('This app is powered by GoGoAnime', ToastAndroid.SHORT); break;
+        case GoGoAnime: ToastAndroid.show('AnimeGo is powered by GoGoAnime', ToastAndroid.SHORT); break;
       }      
     }
     Linking.openURL(link);
