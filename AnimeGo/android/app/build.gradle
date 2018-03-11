@@ -94,15 +94,15 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.yihengquan.gogoanime"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.0.666"
+        versionCode 6
+        versionName "1.0.66666"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
