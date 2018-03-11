@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid } from 'react-native';
+import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid, Share } from 'react-native';
 import { SmartTouchable, DrawerCell } from '../component';
 import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore } from '../value';
 import { styles } from './SettingStyles';
@@ -46,12 +46,18 @@ class Setting extends Component {
     Linking.openURL(link);
   }
 
-  writeReview() {
+  getStoreLink = () => {
+    var link = '';    
     switch (Platform.OS) {
-      case 'android': this.openLink(GooglePlay);
-      case 'windows': this.openLink(MicrosoftStore);
+      case 'android': link = GooglePlay; break;
+      case 'windows': link = MicrosoftStore; break;
       // Add more system later, HENRY!!
     }
+    return link;
+  }
+
+  writeReview() {
+    this.openLink(this.getStoreLink());
   }
 
   updateSaver = () => {

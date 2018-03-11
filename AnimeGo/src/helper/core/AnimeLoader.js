@@ -21,7 +21,7 @@ export default class AnimeLoader {
         var items = root.childNodes;
         // For search when no reult has been found
         if (items["0"].rawText.includes('Sorry')) {
-          success([{name: 'Anime not found\n>_<', info: 'Back', link: 'Error', thumbnail: 'https://ww4.gogoanime.io/img/icon/logo.png'}]);
+          success([{name: this.url.replace(MajorLink.Search, '').replace('&page=', ''), info: 'Google', link: 'Error'}]);
         }
 
         var animeData = [];
@@ -50,8 +50,6 @@ export default class AnimeLoader {
       })
       .catch((error) => {
         // console.error(error);
-        if (global.hideDub) Alert.alert('End', 'Anime not found');
-        else Alert.alert('Error', 'Anime not found');
         failure(error);
       });
     })

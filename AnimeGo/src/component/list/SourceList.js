@@ -41,12 +41,15 @@ class SourceList extends Component {
     else {
       return (
         <View>
-          <FlatList keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader}
+          <FlatList keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader} ListFooterComponent={this.renderFooter}
             data={data} renderItem={({item}) => <SourceCell data={item}/>} />
-          <Text style={styles.adStyle}>{'Ads are from website itself.\nThis app does not have any controls over it.'}</Text>
         </View>
       )
     }
+  }
+
+  renderFooter = () => {
+    return <Text style={styles.adStyle}>{'Ads are from websites themself.\nThis app does not have any controls over it.'}</Text>
   }
 
   renderHeader = () => {

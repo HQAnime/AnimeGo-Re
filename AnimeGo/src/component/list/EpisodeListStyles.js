@@ -3,8 +3,7 @@ import { deviceWidth } from '../../helper/DeviceDimensions';
 
 export const styles = StyleSheet.create({
   mainViewStyle: {
-    borderRadius: 20,
-    elevation: 2,
+    elevation: 1,
     flex: 1,
     margin: 4,
     padding: 4

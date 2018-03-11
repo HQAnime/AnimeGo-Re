@@ -22,7 +22,7 @@ class SearchAnime extends Component {
 
   renderHeader() {
     const { inputStyle } = styles;
-    return <TextInput autoFocus style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} onChangeText={(text) => {this.name = text}} onEndEditing={this.searchAnime}/>;
+    return <TextInput style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} onChangeText={(text) => {this.name = text}} onEndEditing={this.searchAnime}/>;
   }
 
   searchAnime = () => {
