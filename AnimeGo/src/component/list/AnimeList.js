@@ -83,14 +83,15 @@ class AnimeList extends PureComponent {
     const { hasMorePage, isRefreshing, url, page, data } = this.state;
     if (!hasMorePage && !isRefreshing) return;
     let loader = new AnimeLoader(url, page);
-    loader.loadAnime().then((animeData) => {
-      if (animeData.length == 0) {
+    loader.loadAnime().then(([animeData, count]) => {
+      console.log(count);
+      if (count == 0) {
         // No more pages
         this.setState({
           hasMorePage: false,
           isRefreshing: false,
         })
-      } else if (animeData.length < 20 && !global.hideDub) {
+      } else if (count < 20) {
         // Append data
         this.setState({
           data: data.concat(animeData),

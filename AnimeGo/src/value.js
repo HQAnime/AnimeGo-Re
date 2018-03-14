@@ -28,13 +28,14 @@ export const ScreenIndex = {
   Movie: 2,
   Popular: 3,
   Genre: 4,
-  Setting: 5
+  Setting: 5,
+  ToWatch: 6
 }
 
 export const MajorLink = {
   MainURL: 'https://ww5.gogoanime.io',
   NewRelease: 'https://ww5.gogoanime.io/page-recent-release.html?page=',
-  NewSeason: 'https://ww5.gogoanime.io/new-season.html?page=',
+  NewSeason: 'https://ww5.gogoanime.io/sub-category/',
   Movie: 'https://ww5.gogoanime.io/anime-movies.html?page=',
   Genre: 'https://ww5.gogoanime.io/genre/',
   Search: 'https://ww5.gogoanime.io/search.html?keyword=',

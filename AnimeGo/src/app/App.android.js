@@ -10,7 +10,7 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
 import { AdMobInterstitial } from 'react-native-admob';
-import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory } from '../screen';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
@@ -46,6 +46,7 @@ export default class App extends Component {
             <Scene key='SearchAnime' component={SearchAnime}/>
             <Scene key='SubCategory' component={SubCategory}/>
 
+            <Scene key='ToWatch' component={ToWatch} title='ToWatch'/>            
             <Scene key='Setting' component={Setting} title='Settings'/>
           </Scene>
         </Router>
@@ -67,6 +68,7 @@ export default class App extends Component {
         <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
         <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
+        <DrawerCell text='ToWatch list' onPress={() => this.onChangingScreen(ScreenIndex.ToWatch)}/>            
         <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>    
         <DrawerCell text='Support this app (Ad)' onPress={() => this.showAd()}/>             
       </ScrollView>
@@ -119,6 +121,8 @@ export default class App extends Component {
         Actions.Genre(); break;   
       case ScreenIndex.Setting:
         Actions.Setting(); break;      
+      case ScreenIndex.ToWatch:
+        Actions.ToWatch(); break;
     }
     this.refs['Drawer'].closeDrawer();
   }
