@@ -21,10 +21,11 @@ export default class AnimeLoader {
         var items = root.childNodes;
         // For search when no reult has been found
         if (items["0"].rawText.includes('Sorry')) {
-          success([{name: this.url.replace(MajorLink.Search, '').replace('&page=', ''), info: 'Google', link: 'Error'}]);
+          success([{name: this.url.replace(MajorLink.Search, '').replace('&page=', ''), info: 'Google', link: 'Error'}, 1]);
         }
 
         var animeData = [];
+        var entryCount = 0;        
         var length = items.length;
         // This is only for new release
         if (length == 0) success([]);
@@ -38,6 +39,8 @@ export default class AnimeLoader {
           var animeImage = anime.querySelector('.img');
           var animeLink = MajorLink.MainURL + animeImage.childNodes[1].attributes.href;
           var animeName = anime.querySelector('.name').text;
+          // To keep original entry numbers
+          entryCount++;
           if (global.hideDub && animeName.includes('(Dub)')) continue;
           // Only for NewRelease, it is displaying episode.
           var extraInformation = this.url == MajorLink.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
@@ -45,8 +48,8 @@ export default class AnimeLoader {
           var animeThumbnail = animeImage.childNodes[1].childNodes[1].attributes.src;
           animeData.push({name: animeName, info: extraInformation, link: animeLink, thumbnail: animeThumbnail});
         }
-        // console.log(animeData);
-        success(animeData);
+        // console.log(entryCount);
+        success([animeData, entryCount]);
       })
       .catch((error) => {
         // console.error(error);

@@ -21,7 +21,7 @@ class AnimeDetail extends Component {
     if (data == '') {
       return <LoadingIndicator />
     } else {
-      return <EpisodeList data={data}/>
+      return <EpisodeList data={data} link={this.link}/>
     }
   }
 

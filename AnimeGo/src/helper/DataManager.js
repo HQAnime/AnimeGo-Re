@@ -5,13 +5,13 @@ class DataManager {
   static async setupData() {
     // Setup data here when app is launched
     try {
-      const value = await AsyncStorage.getItem('@FIRST'); 
+      const value = await AsyncStorage.getItem('@FIRST');
       if (value != 'false') {
         // First launch
         await AsyncStorage.setItem('@FIRST', 'false');
         await AsyncStorage.setItem('@dataSaver', 'false');
         await AsyncStorage.setItem('@DUB', 'false');
-        await AsyncStorage.setItem('@Favourite', JSON.stringify({}));
+        await AsyncStorage.setItem('@Favourite', JSON.stringify([]));
         await AsyncStorage.setItem('@Version', VERSION);
         global.dataSaver = false;
       } else {
@@ -25,7 +25,9 @@ class DataManager {
         }
         const dataSaver = await AsyncStorage.getItem('@dataSaver'); 
         const DUB = await AsyncStorage.getItem('@DUB');
-        const favList = await AsyncStorage.getItem('@Favourite');  
+        const favList = await AsyncStorage.getItem('@Favourite');
+        global.favList = JSON.parse(favList);
+        console.log(global.favList);
         global.dataSaver = JSON.parse(dataSaver);
         global.hideDub = JSON.parse(DUB);
       }
@@ -35,7 +37,8 @@ class DataManager {
   }
 
   static async addMoreEntry() {
-    await AsyncStorage.setItem('@Favourite', JSON.stringify({}));
+    if (await AsyncStorage.getItem('@Favourite') == null)
+      await AsyncStorage.setItem('@Favourite', JSON.stringify([]));
   }
 }
 
