@@ -9,3 +9,4 @@ export * from './AnimeDetail';
 export * from './WatchAnime';
 export * from './SearchAnime';
 export * from './SubCategory';
+export * from './ToWatch';

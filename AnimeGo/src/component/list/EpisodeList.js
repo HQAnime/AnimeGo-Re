@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Image, Linking, Button } from 'react-native';
+import { View, Text, FlatList, Image, Linking, Button, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
 import EpisodeLoader from '../../helper/core/EpisodeLoader';
 import EpisodeCell from '../cell/EpisodeCell';
 import { LoadingIndicator } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { isPortrait } from '../../helper/DeviceDimensions';
 import { styles } from './EpisodeListStyles'
-import { BlueColour, GreenColour } from '../../value';
+import { BlueColour, GreenColour, RedColour } from '../../value';
 
 class EpisodeList extends React.PureComponent {
   constructor(props) {
@@ -44,7 +44,7 @@ class EpisodeList extends React.PureComponent {
 
   renderHeader = () => {
     const { name, image, plot } = this.state;
-    const { mainViewStyle, titleStyle, basicTextStyle, plotStyle} = styles;
+    const { mainViewStyle, titleStyle, basicTextStyle, plotStyle } = styles;
     return (
       <View style={mainViewStyle}>
         <Text numberOfLines={3} style={titleStyle}>{name}</Text>
@@ -52,15 +52,44 @@ class EpisodeList extends React.PureComponent {
         <Text style={plotStyle}>{plot}</Text>
         <Button title='Google it' color={BlueColour} onPress={this.searchGoogle}/>
         <Text style={basicTextStyle}>* Please consider buying its DVD</Text>
+        <Button title='To-Watch' color={RedColour} onPress={this.addToList}/>
       </View>
     )
   }
 
+  /**
+   * Add this name to To-Watch list. No duplicate
+   */
+  addToList = () => {
+    const { data, link } = this.props;    
+    let animeInfo = {link: link, name: data.name};
+    if (global.favList.length == 0) global.favList = [animeInfo];
+    else {
+      var hasAnime = false;
+      for (var i = 0; i < global.favList.length; i++) {
+        let anime = global.favList[i];
+        if (anime.name == animeInfo.name) {
+          if (Platform.OS == 'android') ToastAndroid.show('Anime has already been added', ToastAndroid.SHORT);
+          else Alert.alert('Warning', 'Anime has already been added');
+          hasAnime = true; break;
+        }
+      }
+      if (!hasAnime) global.favList = global.favList.concat([animeInfo]);
+    }
+    AsyncStorage.setItem('@Favourite', JSON.stringify(global.favList));
+  }
+
+  /**
+   * Google this anime name
+   */
   searchGoogle = () => {
     let google = 'https://www.google.com/search?q=' + this.state.name.split(' ').join('%20');
     Linking.openURL(google).catch(err => console.error('An error occurred', err));
   }
 
+  /**
+   * Render anime information depending on DataSaver mode
+   */
   renderInfo = () => {
     const { genre, release, episode, type, image } = this.state;    
     const { imageViewStyle, imageStyle, infoViewStyle, basicTextStyle } = styles;    
@@ -94,11 +123,17 @@ class EpisodeList extends React.PureComponent {
     }
   }
 
+  /**
+   * Render footer for EpisodeList. It is either an indicator or nothing
+   */
   renderFooter = () => {
     if (this.state.hasMorePage) return <LoadingIndicator />
     else return null;
   }
 
+  /**
+   * Visit this anime's category
+   */
   goSubCategory = () => {
     const { type, typeLink } = this.state; 
     // To prevent infinite loop
@@ -109,10 +144,16 @@ class EpisodeList extends React.PureComponent {
     }
   }
 
+  /**
+   * Update column number depending on orientation
+   */
   updateColumn = () => {
     this.setState({column: isPortrait() ? 4 : 8});
   }
 
+  /**
+   * Loading anime first 99 episodes
+   */
   loadEpisode = () => {
     const { ep_start, ep_end, id, episode, data, hasMorePage } = this.state;
     if (!hasMorePage) return;
@@ -131,6 +172,9 @@ class EpisodeList extends React.PureComponent {
     });
   }
 
+  /**
+   * Loading next 99 episodes
+   */
   loadMoreEpisode = () => {
     const { episode, ep_start, ep_end } = this.state;
     var new_start = ep_start + 100;
