@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 import { VERSION } from '../value';
 
 class DataManager {
@@ -25,9 +25,11 @@ class DataManager {
         }
         const dataSaver = await AsyncStorage.getItem('@dataSaver'); 
         const DUB = await AsyncStorage.getItem('@DUB');
-        const favList = await AsyncStorage.getItem('@Favourite');
-        global.favList = JSON.parse(favList);
-        console.log(global.favList);
+        var favList = await AsyncStorage.getItem('@Favourite');
+        // To fix the mistake I made before
+        if (favList == '{}') global.favList = [];
+        else global.favList = JSON.parse(favList);
+        // console.log(global.favList);
         global.dataSaver = JSON.parse(dataSaver);
         global.hideDub = JSON.parse(DUB);
       }
