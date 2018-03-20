@@ -26,7 +26,9 @@ export default class GithubUpdate {
               {text: 'OK', onPress: () => Linking.openURL(link)},
             ],
           )
-        } else {
+        } else if (code < VERSION){
+          Alert.alert('はわわです', 'How could you get version ' + VERSION + '\nHave you hacked the version number?');
+        } else{
           Alert.alert(code, 'AnimeGo is up to date');
         }
       })
