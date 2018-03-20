@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Button, FlatList, Dimensions } from 'react-native';
+import { View, Text, Button, FlatList, Dimensions, Alert } from 'react-native';
 import AnimeSourceLoader from '../../helper/core/AnimeSourceLoader';
 import SourceCell from '../cell/SourceCell';
 import { LoadingIndicator } from '../../component';
 import { Actions } from 'react-native-router-flux';
-import { SecondaryColour, RedColour, GreenColour } from '../../value';
+import { SecondaryColour, RedColour, GreenColour, AnimeGoColour } from '../../value';
 import { styles } from './SourceListStyles';
 
 class SourceList extends Component {
@@ -16,18 +16,19 @@ class SourceList extends Component {
     this.state = {
       data: [],
       name: '', link: '',
+      prev: '', next: ''
     }
   }
 
   componentWillMount() {
     let source = new AnimeSourceLoader(this.props.link);
-    source.loadSource().then((animeSource) => {
-      // console.log(animeSource);
+    source.loadSource().then(([animeSource, prev, next]) => {
       if (animeSource.length == 0) return;
       this.setState({
         data: animeSource,
         name: animeSource[1].animeName,
         link: animeSource[1].infoLink,
+        prev: prev, next: next
       })  
     })
     .catch((error) => {
@@ -42,7 +43,7 @@ class SourceList extends Component {
       return (
         <View>
           <FlatList keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader} ListFooterComponent={this.renderFooter}
-            data={data} renderItem={({item}) => <SourceCell data={item}/>} />
+            data={data} renderItem={({item}) => <SourceCell data={item}/>}/>
         </View>
       )
     }
@@ -53,13 +54,39 @@ class SourceList extends Component {
   }
 
   renderHeader = () => {
-    const { headerViewStyle, textStyle } = styles;
+    const { headerViewStyle, textStyle, buttonGroupStyle, buttonStyle } = styles;
     return (
       <View style={headerViewStyle}>
         <Text style={textStyle}>Anime Detail</Text>
         <Button title={this.state.name} onPress={this.infoBtnPressed} color={GreenColour}/>
+        <View style={buttonGroupStyle}>
+          <View style={buttonStyle}>
+            <Button title='<<  Previous' onPress={this.prevEpisode} color={AnimeGoColour}/>
+          </View>
+          <View style={buttonStyle}>
+            <Button title='Next  >>' onPress={this.nextEpisode} color={AnimeGoColour}/>               
+          </View>
+        </View>
       </View>
     )
+  }
+  
+  prevEpisode = () => {
+    const { prev } = this.state;
+    if (prev == '') Alert.alert('First Episode', 'this is the first episode of this anime');
+    else {
+      Actions.pop();
+      Actions.WatchAnime({title: 'Episode ' + prev.split('-').pop(), link: prev, fromInfo: false});      
+    }
+  }
+
+  nextEpisode = () => {
+    const { next } = this.state;
+    if (next == '') Alert.alert('Last Episode', 'this is currently the last episode of this anime');    
+    else {
+      Actions.pop();
+      Actions.WatchAnime({title: 'Episode ' + next.split('-').pop(), link: next, fromInfo: false});  
+    }    
   }
 
   infoBtnPressed = () => {

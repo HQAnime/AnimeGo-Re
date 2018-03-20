@@ -34,12 +34,12 @@ export const ScreenIndex = {
 }
 
 export const MajorLink = {
-  MainURL: 'https://ww5.gogoanime.io',
-  NewRelease: 'https://ww5.gogoanime.io/page-recent-release.html?page=',
-  NewSeason: 'https://ww5.gogoanime.io/sub-category/',
-  Movie: 'https://ww5.gogoanime.io/anime-movies.html?page=',
-  Genre: 'https://ww5.gogoanime.io/genre/',
-  Search: 'https://ww5.gogoanime.io/search.html?keyword=',
-  Episode: 'https://ww5.gogoanime.io/load-list-episode?ep_start=',
-  Popular: 'https://ww5.gogoanime.io/popular.html?page=',
+  MainURL: 'https://gogoanime.se',
+  NewRelease: 'https://gogoanime.se/page-recent-release.html?page=',
+  NewSeason: 'https://gogoanime.se/sub-category/',
+  Movie: 'https://gogoanime.se/anime-movies.html?page=',
+  Genre: 'https://gogoanime.se/genre/',
+  Search: 'https://gogoanime.se/search.html?keyword=',
+  Episode: 'https://gogoanime.se/load-list-episode?ep_start=',
+  Popular: 'https://gogoanime.se/popular.html?page=',
 }
