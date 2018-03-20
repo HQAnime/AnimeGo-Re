@@ -1,5 +1,5 @@
-import { MajorLink } from '../../value';
 import { Alert } from 'react-native';
+import { MajorLink } from '../../value';
 
 export default class AnimeSourceLoader {
 
@@ -15,18 +15,20 @@ export default class AnimeSourceLoader {
       .then((html) => html.text())
       .then((htmlText) => {
         var HTMLParser = require('fast-html-parser');
+        var prev = ''; var next = '';        
         
         var root = HTMLParser.parse(htmlText);
         var animeSources = root.querySelector('.anime_muti_link');
         // Somwhow it does not exist
-        if (animeSources == null) success([]);
+        if (animeSources == null) success([[], prev, next]);
 
         var items = animeSources.childNodes[0].childNodes;
         // console.log(items);
         var animeData = [];
         var length = items.length;
+
         // Somwhow it does not have any sources
-        if (length == 0) success([]);
+        if (length == 0) success([[], prev, next]);
 
         // Getting anime information
         animeInfoLink = '';
@@ -55,7 +57,19 @@ export default class AnimeSourceLoader {
           animeData.push({source: animeSource, name: sourceName, animeName: animeName, infoLink: animeInfoLink});
         }
         // console.log(animeData);
-        success(animeData);
+
+        // Getting next and prev info
+        var nextPrev = root.querySelector('.anime_video_body_episodes'); 
+        if (nextPrev != null) {       
+          prev = nextPrev.childNodes[0].childNodes[1];
+          next = nextPrev.childNodes[2].childNodes[1];
+          if (prev != null) prev = MajorLink.MainURL + prev.attributes.href;
+          else prev = '';
+          if (next != null) next = MajorLink.MainURL + next.attributes.href;
+          else next = '';
+        }
+
+        success([animeData, prev, next]);
       })
       .catch((error) => {
         // console.error(error);
