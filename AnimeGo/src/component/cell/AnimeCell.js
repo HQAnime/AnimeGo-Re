@@ -45,13 +45,13 @@ class AnimeCell extends PureComponent {
   buttonPressed = () => {
     if (this.data.link.includes('-episode-')) {
       // Only NewRelease redirects you to that new episode
-      Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false, headerTintColor: 'white'});
+      Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false});
     } else if (this.data.link == 'Error') {
       // No anime found go back
       Linking.openURL('https://www.google.com/search?q=' + this.data.name + ' gogoanime');
     } else {
       // AnimeDetail will be shown here
-      Actions.AnimeDetail({title: 'Loading...', link: this.data.link, headerTintColor: 'white'})
+      Actions.AnimeDetail({title: 'Loading...', link: this.data.link})
     }
   }
 }
