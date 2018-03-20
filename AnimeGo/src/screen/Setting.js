@@ -27,7 +27,6 @@ class Setting extends Component {
             <Switch style={switchStyle} value={hideDub} onTintColor={AnimeGoColour} thumbTintColor='white' onValueChange={this.updateDub}/>
           </View>
         </SmartTouchable>
-        <DrawerCell text='Write a review' onPress={() => this.writeReview()}/>
         <DrawerCell text='Email feedback' onPress={() => this.openLink(Email)}/>
         <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                              
         <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>                
@@ -44,20 +43,6 @@ class Setting extends Component {
       }      
     }
     Linking.openURL(link);
-  }
-
-  getStoreLink = () => {
-    var link = '';    
-    switch (Platform.OS) {
-      case 'android': link = GooglePlay; break;
-      case 'windows': link = MicrosoftStore; break;
-      // Add more system later, HENRY!!
-    }
-    return link;
-  }
-
-  writeReview() {
-    this.openLink(this.getStoreLink());
   }
 
   updateSaver = () => {
