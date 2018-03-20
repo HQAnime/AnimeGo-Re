@@ -2,12 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainViewStyle: {
-    paddingTop: 6, 
     flex: 1
   },
   listStyle: {
-    margin: 4, 
-    marginTop: 8
+    marginLeft: 8, 
+    marginRight: 8, 
   },
   btnViewStyle: {
     marginTop: 4, 

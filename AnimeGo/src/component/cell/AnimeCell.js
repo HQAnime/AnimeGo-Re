@@ -18,7 +18,7 @@ class AnimeCell extends PureComponent {
     const { viewStyle, textStyle, titleStyle, episodeStyle } = styles;
     return (
       <View style={{flex: 1}}>
-        <SmartTouchable onPress={this.buttonPressed}>
+        <SmartTouchable onPress={this.buttonPressed} onLongPress={this.showWebpage}>
           <View style={viewStyle}>
             { this.renderImage() }
             <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
@@ -36,6 +36,10 @@ class AnimeCell extends PureComponent {
         <Image source={{uri: this.data.thumbnail}} style={{width: this.width, height: this.width, borderRadius: 4}} resizeMode='cover'/>          
       )
     }
+  }
+
+  showWebpage = () => {
+    Linking.openURL(this.data.link);
   }
 
   buttonPressed = () => {
