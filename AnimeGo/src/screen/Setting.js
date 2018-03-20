@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid, Share } from 'react-native';
+import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid, Alert } from 'react-native';
 import { SmartTouchable, DrawerCell } from '../component';
-import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore } from '../value';
+import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease } from '../value';
 import { styles } from './SettingStyles';
+import GithubUpdate from '../helper/core/GithubUpdate';
 
 class Setting extends Component {
   state = {
@@ -29,7 +30,8 @@ class Setting extends Component {
         </SmartTouchable>
         <DrawerCell text='Email feedback' onPress={() => this.openLink(Email)}/>
         <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                              
-        <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>                
+        <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>  
+        <DrawerCell text='Check for update' onPress={this.checkUpdate}/>              
         <Text style={versionStyle}>{VERSION}</Text>
       </View>
     )
@@ -43,6 +45,16 @@ class Setting extends Component {
       }      
     }
     Linking.openURL(link);
+  }
+
+  checkUpdate = () => {
+    if (Platform.OS == 'windows') {
+      Linking.openURL(MicrosoftStore);
+    } else {
+      // Github
+      let updater = new GithubUpdate(LastestRelease);
+      updater.checkUpdate();
+    }
   }
 
   updateSaver = () => {
