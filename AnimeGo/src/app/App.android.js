@@ -9,7 +9,6 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid, ToastAnd
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { AdMobInterstitial } from 'react-native-admob';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
@@ -69,8 +68,7 @@ export default class App extends Component {
         <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
         <DrawerCell text='ToWatch list' onPress={() => this.onChangingScreen(ScreenIndex.ToWatch)}/>            
-        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>    
-        <DrawerCell text='Support this app (Ad)' onPress={() => this.showAd()}/>             
+        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>                
       </ScrollView>
     )
   }
@@ -88,16 +86,6 @@ export default class App extends Component {
 
   onLeftBtnPressed = () => {
     this.refs['Drawer'].openDrawer();
-  }
-
-  showAd() {
-    // Showing an ad here
-    AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/8615100584');
-    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
-    AdMobInterstitial.requestAd().then(() => {
-      AdMobInterstitial.showAd();
-      if (Platform.OS == 'android') ToastAndroid.show('Thank you for your support', ToastAndroid.SHORT);
-    });
   }
 
   onBackPress = () => {
