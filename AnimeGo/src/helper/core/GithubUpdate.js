@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 import { VERSION } from '../../value';
 
 export default class GithubUpdate {
