@@ -64,9 +64,7 @@ export default class AnimeSourceLoader {
           prev = nextPrev.childNodes[0].childNodes[1];
           next = nextPrev.childNodes[2].childNodes[1];
           if (prev != null) prev = MajorLink.MainURL + prev.attributes.href;
-          else prev = '';
           if (next != null) next = MajorLink.MainURL + next.attributes.href;
-          else next = '';
         }
 
         success([animeData, prev, next]);
