@@ -26,7 +26,7 @@ class ToWatch extends Component {
               </View>
             </SmartTouchable>
           )
-        }} automaticallyAdjustContentInsets={false}/>
+        }} automaticallyAdjustContentInsets={false} showsVerticalScrollIndicator={false}/>
         <Button title='Remove all anime' color={RedColour} onPress={this.removeAllAnime}/>        
       </View>
     );

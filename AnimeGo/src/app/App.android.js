@@ -9,7 +9,7 @@ import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid, ToastAnd
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { DrawerCell, SmartTouchable } from '../component';
 import { Divider, Button, Icon } from 'react-native-elements';
-import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch } from '../screen';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
@@ -33,6 +33,8 @@ export default class App extends Component {
           <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle} backTitle='Back' renderLeftButton={this.renderLeftBtn}>
             <Scene key='NewRelease' component={NewRelease} title='New Release' initial/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
+            <Scene key='Schedule' component={Schedule} title='Schedule'/>
+
             <Scene key='Movie' component={Movie} title='Movie'/>
             <Scene key='Popular' component={Popular} title='Popular'/>
 
@@ -62,7 +64,7 @@ export default class App extends Component {
         </View>       
         <DrawerCell text='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
         <DrawerCell text='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
-        <DrawerCell text='Schedule'/>
+        <DrawerCell text='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>
         <Divider style={dividerStyle}/>
         <DrawerCell text='Movie' onPress={() => this.onChangingScreen(ScreenIndex.Movie)}/>
         <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
@@ -112,6 +114,8 @@ export default class App extends Component {
         Actions.Setting(); break;      
       case ScreenIndex.ToWatch:
         Actions.ToWatch(); break;
+      case ScreenIndex.Schedule:
+        Actions.Schedule(); break;
     }
     this.refs['Drawer'].closeDrawer();
   }
