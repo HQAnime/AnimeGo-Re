@@ -25,7 +25,7 @@ export default class AnimeSchedule {
           if (linkPath[1].isWhitespace) link = linkPath[0].childNodes[1].attributes.href;
           else link = linkPath[1].childNodes[1].attributes.href;
           let time = this.cleanText(curr[6].childNodes[1].text).split(' -')[1];
-          let rating = '⭐️ ' + this.cleanText(curr[6].childNodes[3].childNodes[3].text);
+          let rating = '⭐️' + this.cleanText(curr[6].childNodes[3].childNodes[3].text);
           animeSchedule.push({name: name, link: link, time: time, rating: rating});
         }
          console.log(animeSchedule);
