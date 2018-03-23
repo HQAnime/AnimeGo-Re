@@ -2,6 +2,7 @@
 export * from './common/SmartTouchable';
 export * from './common/LoadingIndicator';
 export * from './common/FabButton';
+export * from './common/AnimeButton';
 
 // Cell
 export * from './cell/DrawerCell';
