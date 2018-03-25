@@ -96,7 +96,7 @@ Carthage/Checkouts
 Carthage/Build
 
 GoGoAnime.mp4
-*.framework
 *.bundle
-android/app/src/main/assets/index.android.bundle
-android/app/src/main/assets/index.android.bundle.meta
+AnimeGo/android/app/src/main/assets/index.android.bundle
+AnimeGo/android/app/src/main/assets/index.android.bundle.meta
+AnimeGo/ios/GoogleMobileAds.framework
