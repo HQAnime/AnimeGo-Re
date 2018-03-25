@@ -5,11 +5,11 @@
 */
 
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from '../screen';
-import { StatusBarColour } from '../value';
+import { StatusBarColour, GoGoAnime, Github } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
 import UWPEntry from './UWPEntry';
@@ -24,7 +24,8 @@ export default class App extends Component {
     // The width for the drawer should be 61.8% of the device width
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
-        <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle} renderLeftButton={this.renderLeftBtn}>
+        <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle}
+          renderLeftButton={this.renderLeftBtn} renderRightButton={this.homeButton}>
           <Scene key='MainEntry' component={UWPEntry} title='Anime Go' initial/>
           <Scene key='NewRelease' component={NewRelease} title='New Release'/>
           <Scene key='NewSeason' component={NewSeason} title='New Season'/>
@@ -49,10 +50,21 @@ export default class App extends Component {
     )
   }
 
-  renderLeftBtn = () => {
-    if (Actions.currentScene == 'MainEntry') return null;
+  homeButton = () => {
+    if (Actions.currentScene == 'MainEntry') return (
+      <Icon name="web" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Linking.openURL(GoGoAnime)}/>
+    ) 
     return (
-      <Icon name="arrow-back" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.pop()} />
+      <Icon name="home" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.popTo('MainEntry')}/>
+    )
+  }
+
+  renderLeftBtn = () => {
+    if (Actions.currentScene == 'MainEntry') return (
+      <Icon name='logo-github' type='ionicon' iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Linking.openURL(Github)}/>
+    )
+    return (
+      <Icon name="arrow-back" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.pop()}/>
     )
   }
 }
