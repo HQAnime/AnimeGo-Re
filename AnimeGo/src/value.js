@@ -21,7 +21,7 @@ export const MicrosoftStore = 'https://www.microsoft.com/store/p/anime-go/9mx3qr
 export const Email = 'mailto:development.henryquan@gmail.com';
 
 export const AD_IS_OPTIONAL = 'This is completely optional.'
-export const VERSION = '1.0.7777777';
+export const VERSION = '1.0.778';
 
 export const ScreenIndex = {
   NewRelease: 0,

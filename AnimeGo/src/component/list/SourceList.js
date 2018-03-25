@@ -73,7 +73,7 @@ class SourceList extends Component {
   
   prevEpisode = () => {
     const { prev } = this.state;
-    if (prev == '') Alert.alert('First Episode', 'this is the first episode of this anime');
+    if (prev == undefined) Alert.alert('First Episode', 'this is the first episode of this anime');
     else {
       Actions.pop();
       Actions.WatchAnime({title: 'Episode ' + prev.split('-').pop(), link: prev, fromInfo: false});      
@@ -82,7 +82,7 @@ class SourceList extends Component {
 
   nextEpisode = () => {
     const { next } = this.state;
-    if (next == '') Alert.alert('Last Episode', 'this is currently the last episode of this anime');    
+    if (next == undefined) Alert.alert('Last Episode', 'this is currently the last episode of this anime');    
     else {
       Actions.pop();
       Actions.WatchAnime({title: 'Episode ' + next.split('-').pop(), link: next, fromInfo: false});  
