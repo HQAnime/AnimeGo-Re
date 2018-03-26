@@ -19,7 +19,7 @@
     <PackageCertificateKeyFile>AnimeGo_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>4A5E9A7A208CA9FCE68C6E6E96CA265BD55A013C</PackageCertificateThumbprint>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
