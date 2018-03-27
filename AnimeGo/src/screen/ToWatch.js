@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, AsyncStorage, Button, ToastAndroid, Platform, Alert } from 'react-native';
-import { SmartTouchable } from '../component';
+import { View, FlatList, Text, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
+import { SmartTouchable, AnimeButton } from '../component';
 import { styles } from './ToWatchStyles';
 import { Actions } from 'react-native-router-flux';
 import { RedColour } from '../value';
@@ -27,7 +27,7 @@ class ToWatch extends Component {
             </SmartTouchable>
           )
         }} automaticallyAdjustContentInsets={false} showsVerticalScrollIndicator={false}/>
-        <Button title='Remove all anime' color={RedColour} onPress={this.removeAllAnime}/>        
+        <AnimeButton title='Remove all anime' color={RedColour} onPress={this.removeAllAnime}/>        
       </View>
     );
   }

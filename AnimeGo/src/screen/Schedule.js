@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, Linking } from 'react-native';
+import { View, FlatList, Text, Linking, Image } from 'react-native';
 import { styles } from './ScheduleStyles';
 import AnimeSchedule from '../helper/core/AnimeSchedule';
 import { LoadingIndicator, SmartTouchable } from '../component';
@@ -26,7 +26,7 @@ class Schedule extends Component {
   scheduleKey = (data) => data.name;
   render() {
     const { data, isReady, noAnime } = this.state;
-    const { mainViewStyle, noAnimeStyle, textStyle, cellViewStyle, titleStyle, infoStyle, timeStyle } = styles;
+    const { mainViewStyle, noAnimeStyle, textStyle, cellViewStyle, titleStyle, infoStyle, timeStyle, imageStyle } = styles;
     if (isReady == false) return <LoadingIndicator />
     else if (noAnime) {
       return (
@@ -41,6 +41,7 @@ class Schedule extends Component {
             <View style={cellViewStyle}>
               <SmartTouchable onPress={() => Linking.openURL(item.link)}>
                 <View>
+                  { global.dataSaver == true ? null : <Image source={{uri: item.image}} style={imageStyle} resizeMode='cover'/> }
                   <Text style={titleStyle}>{item.name}</Text>
                   <Text style={timeStyle}>{item.time + ' ' + item.rating }</Text>
                 </View>

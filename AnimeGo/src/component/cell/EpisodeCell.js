@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
+import { AnimeButton } from '../../component';
 import { Actions } from 'react-native-router-flux'; 
 import { styles } from './EpisodeCellStyles';
 import { RedColour, SecondaryColour }  from '../../value';
@@ -24,7 +25,7 @@ class EpisodeCell extends React.PureComponent {
     const { viewStyle } = styles;
     return (
       <View style={viewStyle}>
-        <Button title={this.episode} color={this.isLastest ? RedColour : SecondaryColour} onPress={this.WatchAnime}/>
+        <AnimeButton title={this.episode} color={this.isLastest ? RedColour : SecondaryColour} onPress={this.WatchAnime}/>
       </View>
     )
   }
