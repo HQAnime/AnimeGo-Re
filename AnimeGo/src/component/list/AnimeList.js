@@ -15,7 +15,7 @@ class AnimeList extends PureComponent {
       hasMorePage: true,
       isRefreshing: false,
       url: props.AnimeUrl,
-      width: deviceWidth,
+      width: isPortrait() ? deviceWidth / 2 - 16 : deviceWidth / 4 - 16,
       column: 0
     };
   }
@@ -38,7 +38,7 @@ class AnimeList extends PureComponent {
       return (
         <View style={{flex: 1}} onLayout={this.updateColumn}>
           <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item} width={width}/>} 
-            key={(isPortrait() ? 'p' + column : 'l' + column)} numColumns={column} refreshing={isRefreshing}
+            key={(isPortrait() ? 'p' + width : 'l' + width)} numColumns={column} refreshing={isRefreshing}
             ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
           { this.renderFabButton() }
@@ -56,9 +56,10 @@ class AnimeList extends PureComponent {
   updateColumn = () => {
     const { width } = Dimensions.get('window');
     let cellWidth = isPortrait() ? width / 2 - 16 : width / 4 - 16;    
+    console.log(cellWidth);
     if (Platform.OS == 'windows') {
       if (this.state.column == 0) this.setState({column: isPortrait() ? 2 : 4})
-      if (Math.abs(this.currWidth - width) < 50) return;
+      if (Math.abs(this.currWidth - width) < 80) return;
       this.currWidth = width;    
       this.setState({column: isPortrait() ? 2 : 4, width: cellWidth})
     } else this.setState({column: isPortrait() ? 2 : 4, width: cellWidth});
