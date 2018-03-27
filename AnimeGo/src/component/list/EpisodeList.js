@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Image, Linking, Button, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
+import { View, Text, FlatList, Image, Linking, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
 import EpisodeLoader from '../../helper/core/EpisodeLoader';
 import EpisodeCell from '../cell/EpisodeCell';
-import { LoadingIndicator } from '../../component';
+import { LoadingIndicator, AnimeButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { isPortrait } from '../../helper/DeviceDimensions';
 import { styles } from './EpisodeListStyles'
@@ -50,9 +50,9 @@ class EpisodeList extends React.PureComponent {
         <Text numberOfLines={3} style={titleStyle}>{name}</Text>
         { this.renderInfo() }
         <Text style={plotStyle}>{plot}</Text>
-        <Button title='Google it' color={BlueColour} onPress={this.searchGoogle}/>
+        <AnimeButton title='Google it' color={BlueColour} onPress={this.searchGoogle}/>
         <Text style={basicTextStyle}>* Please consider buying its DVD</Text>
-        <Button title='To-Watch' color={RedColour} onPress={this.addToList}/>
+        <AnimeButton title='To-Watch' color={RedColour} onPress={this.addToList}/>
       </View>
     )
   }
@@ -101,7 +101,7 @@ class EpisodeList extends React.PureComponent {
           <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
           <View>
             <Text style={basicTextStyle}>Type:</Text>
-            <Button title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
+            <AnimeButton title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
           </View>
         </View>
       )
@@ -115,7 +115,7 @@ class EpisodeList extends React.PureComponent {
             <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
             <View>
               <Text style={basicTextStyle}>Type:</Text>
-              <Button title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
+              <AnimeButton title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
             </View>
           </View>
         </View>

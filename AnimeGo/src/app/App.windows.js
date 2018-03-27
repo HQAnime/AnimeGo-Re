@@ -5,10 +5,11 @@
 */
 
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
-import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory } from '../screen';
-import { StatusBarColour } from '../value';
+import { View, StatusBar, Linking } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { Router, Scene, Actions } from 'react-native-router-flux';
+import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from '../screen';
+import { StatusBarColour, GoGoAnime, Github } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
 import UWPEntry from './UWPEntry';
@@ -23,10 +24,13 @@ export default class App extends Component {
     // The width for the drawer should be 61.8% of the device width
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
-        <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle} backTitle='Back'>
-
-          <Scene key='NewRelease' component={NewRelease} title='New Release' initial/>
+        <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle}
+          renderLeftButton={this.renderLeftBtn} renderRightButton={this.homeButton}>
+          <Scene key='MainEntry' component={UWPEntry} title='Anime Go' initial/>
+          <Scene key='NewRelease' component={NewRelease} title='New Release'/>
           <Scene key='NewSeason' component={NewSeason} title='New Season'/>
+          <Scene key='Schedule' component={Schedule} title='Schedule'/>
+
           <Scene key='Movie' component={Movie} title='Movie'/>
           <Scene key='Popular' component={Popular} title='Popular'/>
 
@@ -39,9 +43,28 @@ export default class App extends Component {
           <Scene key='SearchAnime' component={SearchAnime}/>
           <Scene key='SubCategory' component={SubCategory}/>
 
+          <Scene key='ToWatch' component={ToWatch} title='ToWatch'/>            
           <Scene key='Setting' component={Setting} title='Settings'/>
         </Scene>
       </Router>
+    )
+  }
+
+  homeButton = () => {
+    if (Actions.currentScene == 'MainEntry') return (
+      <Icon name="web" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Linking.openURL(GoGoAnime)}/>
+    ) 
+    return (
+      <Icon name="home" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.popTo('MainEntry')}/>
+    )
+  }
+
+  renderLeftBtn = () => {
+    if (Actions.currentScene == 'MainEntry') return (
+      <Icon name='logo-github' type='ionicon' iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Linking.openURL(Github)}/>
+    )
+    return (
+      <Icon name="arrow-back" iconStyle={{padding: 10}} color='white' underlayColor='transparent' onPress={()=> Actions.pop()}/>
     )
   }
 }
