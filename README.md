@@ -1,8 +1,10 @@
-# GoGoAnime APP
+# AnimeGo
+<img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/sketch/Icons/AppIcon.png" width="200px" height="200px" />
+
 **This is not official**
 
 This is just a practise app made with react native and it is also my first react native app.
-This app works for **UWP** and **Android**. However, IOS might not be support by me but it will not take much time to port to IOS.
+This app works for **UWP** and **Android**. However, IOS might not be support by me but it will not take much time to port to IOS
 
 ## What could it do
 - New release
@@ -21,7 +23,7 @@ npm install
 react-native link
 react-native run-android
 ~~~~
-Please note for UWP, all vector icons need to be linked manully. Follow the description [here](https://github.com/oblador/react-native-vector-icons).
+Please note for UWP, all vector icons need to be linked manully. Follow the description [here](https://github.com/oblador/react-native-vector-icons)
 
 ## How to install it on your device
 ### **Android**
@@ -32,11 +34,11 @@ This app could be updated easily inside settings
 ~~Also, you could get it from [Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.gogoanime)
 no longer available on Google Play because it is removed by Google~~
 ### **IOS**
-Please link all libraries and change all stylings so that it fits IOS. It could run on your device for **7 days** without developer account or forever with one.
+Please link all libraries and change all stylings so that it fits IOS. It could run on your device for **7 days** without developer account or forever with one
 ### **Windows 10**
 Download from [microsoft store](https://www.microsoft.com/en-AU/store/p/anime-go/9mx3qr26zfdj?rtc=1)
 
-*UWP version is not frequently maintained, I will only update it when I feel like doing so.*
+*UWP version is not frequently maintained, I will only update it when I feel like doing so (Sorry >_<)*
 
 ## Screenshots
 <div>
@@ -47,7 +49,7 @@ Download from [microsoft store](https://www.microsoft.com/en-AU/store/p/anime-go
   <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/UWP/5.PNG" width="200px" height="300px" />
   <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/UWP/6.PNG" width="200px" height="300px" />
 </div>
-Screenshots are from UWP. 
+Screenshots are from UWP with data saver mode on
 
 ~~Android has almost identical UI with more material feel or not~~
 
