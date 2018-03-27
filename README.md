@@ -13,7 +13,7 @@ This app works for **UWP** and **Android**. However, IOS might not be support by
 - Genre list
 - Search anime
 
-There might be ads popping up when you play videos but please note that it is from the website itself. This app does not contain any ads. ~~Therefore, I earn nothing and will become poorer the more app I make.~~
+There might be ads popping up when you play videos but please note that it is from the website itself. This app does not contain any ads. ~~Therefore, I earn nothing and will become poorer the more app I make. Just kidding~~
 
 ## How to run this project
 ~~~~
@@ -47,6 +47,9 @@ Download from [microsoft store](https://www.microsoft.com/en-AU/store/p/anime-go
   <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/UWP/5.PNG" width="200px" height="300px" />
   <img src="https://raw.githubusercontent.com/HenryQuan/React-Native-GoGoAnime/master/screenshots/UWP/6.PNG" width="200px" height="300px" />
 </div>
+Screenshots are from UWP. 
+
+~~Android has almost identical UI with more material feel or not~~
 
 ## Dependencies
 * [fast-html-parser](https://github.com/ashi009/node-fast-html-parser)
@@ -60,4 +63,3 @@ Download from [microsoft store](https://www.microsoft.com/en-AU/store/p/anime-go
 
 ## Support
 Maybe star this repo?
-
