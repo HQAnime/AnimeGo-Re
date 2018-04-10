@@ -21,7 +21,7 @@ export const MicrosoftStore = 'https://www.microsoft.com/store/p/anime-go/9mx3qr
 export const Email = 'mailto:development.henryquan@gmail.com';
 
 export const AD_IS_OPTIONAL = 'This is completely optional.'
-export const VERSION = '1.0.778';
+export const VERSION = '1.0.8';
 
 export const ScreenIndex = {
   NewRelease: 0,
@@ -35,13 +35,12 @@ export const ScreenIndex = {
 }
 
 export const MajorLink = {
-  MainURL: 'https://gogoanime.se',
-  NewRelease: 'https://gogoanime.se/page-recent-release.html?page=',
-  NewSeason: 'https://gogoanime.se/sub-category/',
-  Movie: 'https://gogoanime.se/anime-movies.html?page=',
-  Genre: 'https://gogoanime.se/genre/',
-  Search: 'https://gogoanime.se/search.html?keyword=',
-  Episode: 'https://gogoanime.se/load-list-episode?ep_start=',
-  Popular: 'https://gogoanime.se/popular.html?page=',
+  NewRelease: '/page-recent-release.html?page=',
+  NewSeason: '/sub-category/',
+  Movie: '/anime-movies.html?page=',
+  Genre: '/genre/',
+  Search: '/search.html?keyword=',
+  Episode: '/load-list-episode?ep_start=',
+  Popular: '/popular.html?page=',
   Schedule: 'https://myanimelist.net/anime/season/schedule'
 }

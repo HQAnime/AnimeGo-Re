@@ -5,7 +5,7 @@ import { MajorLink } from '../value';
 class Popular extends Component {
   render() {
     return (
-      <AnimeList AnimeUrl={MajorLink.Popular}/>
+      <AnimeList AnimeUrl={global.domain + MajorLink.Popular}/>
     )
   }
 }
