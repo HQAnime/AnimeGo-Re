@@ -59,6 +59,7 @@ Screenshots are from UWP with data saver mode on
 * [react-native](https://github.com/facebook/react-native)
 * [react-native-elements](https://github.com/react-native-training/react-native-elements)
 * [react-native-router-flux](https://github.com/aksonov/react-native-router-flux)
+* [react-native-super-grid](https://github.com/saleel/react-native-super-grid)
 * [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
 * [react-native-action-button](https://github.com/mastermoo/react-native-action-button)
 * [react-native-windows](https://github.com/Microsoft/react-native-windows)
