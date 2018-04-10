@@ -17,6 +17,8 @@ import UWPEntry from './UWPEntry';
 export default class App extends Component {
   async componentWillMount() {
     await DataManager.setupData();
+    var response = await fetch(global.domain);
+    global.domain = response.headers.map.location["0"];
   }
 
   render() {
