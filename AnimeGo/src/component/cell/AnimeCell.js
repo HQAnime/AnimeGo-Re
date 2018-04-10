@@ -8,10 +8,9 @@ import { Actions } from 'react-native-router-flux';
 class AnimeCell extends PureComponent {
   constructor(props) {
     super();
-    const { data, width } = props;
+    const { data } = props;
     this.data = data; 
     this.title = data.info.replace('Released: ', '');
-    this.width = width;
   }
 
   render() {
@@ -33,7 +32,7 @@ class AnimeCell extends PureComponent {
     if (global.dataSaver) return null;
     else {
       return (
-        <Image source={{uri: this.data.thumbnail}} style={{width: this.width, height: this.width, borderRadius: 4}} resizeMode='cover'/>          
+        <Image source={{uri: this.data.thumbnail}} style={{width: 100, height: 141, borderRadius: 8}} resizeMode='cover'/>          
       )
     }
   }

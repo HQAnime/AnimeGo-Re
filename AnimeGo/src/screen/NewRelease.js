@@ -5,7 +5,7 @@ import { AnimeList } from '../component/';
 class NewRelease extends Component {
   render() {
     return (
-      <AnimeList AnimeUrl={MajorLink.NewRelease}/>
+      <AnimeList AnimeUrl={global.domain + MajorLink.NewRelease}/>
     )
   }
 }

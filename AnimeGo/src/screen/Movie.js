@@ -5,7 +5,7 @@ import { MajorLink } from '../value';
 class Movie extends Component {
   render() {
     return (
-      <AnimeList AnimeUrl={MajorLink.Movie}/>
+      <AnimeList AnimeUrl={global.domain + MajorLink.Movie}/>
     )
   }
 }
