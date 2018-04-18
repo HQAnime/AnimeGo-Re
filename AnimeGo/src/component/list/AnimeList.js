@@ -4,6 +4,7 @@ import GridView from 'react-native-super-grid';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
 import { LoadingIndicator, FabButton } from '../../component';
+import { moderateScale } from 'react-native-size-matters';
 
 class AnimeList extends PureComponent {
   constructor(props) {
@@ -28,7 +29,7 @@ class AnimeList extends PureComponent {
     else {
       return (
         <View style={{flex: 1}}>
-          <GridView items={data} itemDimension={128} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
+          <GridView items={data} itemDimension={moderateScale(128, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
             refreshing={isRefreshing} ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
           { this.renderFabButton() }
