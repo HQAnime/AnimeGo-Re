@@ -4,6 +4,7 @@ import { SmartTouchable } from '../../component';
 import { deviceWidth, isPortrait, deviceHeight } from '../../helper/DeviceDimensions';
 import { styles } from './AnimeCellStyles';
 import { Actions } from 'react-native-router-flux';
+import { moderateScale } from 'react-native-size-matters';
 
 class AnimeCell extends PureComponent {
   constructor(props) {
@@ -32,7 +33,7 @@ class AnimeCell extends PureComponent {
     if (global.dataSaver) return null;
     else {
       return (
-        <Image source={{uri: this.data.thumbnail}} style={{width: 100, height: 141, borderRadius: 8}} resizeMode='cover'/>          
+        <Image source={{uri: this.data.thumbnail}} style={{width: moderateScale(100, 0.2), height: moderateScale(141, 0.2), borderRadius: 8}} resizeMode='cover'/>          
       )
     }
   }
