@@ -5,7 +5,7 @@
 */
 
 import React, { Component } from 'react';
-import { View, StatusBar, Linking } from 'react-native';
+import { View, StatusBar, Linking, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from '../screen';
@@ -16,9 +16,10 @@ import UWPEntry from './UWPEntry';
 
 export default class App extends Component {
   async componentWillMount() {
-    await DataManager.setupData();
     var response = await fetch(global.domain);
-    global.domain = response.headers.map.location["0"];
+    let newUrl = await response.headers.map.location["0"];
+    if (newUrl != '' || newUrl != undefined || newUrl != null) global.domain = newUrl;
+    await DataManager.setupData();
   }
 
   render() {
