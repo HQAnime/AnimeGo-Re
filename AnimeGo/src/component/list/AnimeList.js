@@ -5,6 +5,7 @@ import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
 import { LoadingIndicator, FabButton } from '../../component';
 import { moderateScale } from 'react-native-size-matters';
+import { Actions } from 'react-native-router-flux';
 
 class AnimeList extends PureComponent {
   constructor(props) {
@@ -64,27 +65,30 @@ class AnimeList extends PureComponent {
     if (!hasMorePage && !isRefreshing) return;
     let loader = new AnimeLoader(url, page);
     loader.loadAnime().then(([animeData, count]) => {
-      console.log(count);
-      if (count == 0) {
-        // No more pages
-        this.setState({
-          hasMorePage: false,
-          isRefreshing: false,
-        })
-      } else if (count < 20) {
-        // Append data
-        this.setState({
-          data: data.concat(animeData),
-          isRefreshing: false,
-          hasMorePage: false,
-        })
+      if (animeData == undefined || count == undefined) {
+        Actions.pop();
       } else {
-        // Append data
-        this.setState({
-          data: data.concat(animeData),
-          page: page + 1,
-          isRefreshing: false,
-        })
+        if (count == 0) {
+          // No more pages
+          this.setState({
+            hasMorePage: false,
+            isRefreshing: false,
+          })
+        } else if (count < 20) {
+          // Append data
+          this.setState({
+            data: data.concat(animeData),
+            isRefreshing: false,
+            hasMorePage: false,
+          })
+        } else {
+          // Append data
+          this.setState({
+            data: data.concat(animeData),
+            page: page + 1,
+            isRefreshing: false,
+          })
+        }
       }
     })
     .catch((error) => {
