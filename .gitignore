@@ -100,3 +100,5 @@ GoGoAnime.mp4
 AnimeGo/android/app/src/main/assets/index.android.bundle
 AnimeGo/android/app/src/main/assets/index.android.bundle.meta
 AnimeGo/ios/GoogleMobileAds.framework
+AnimeGo/ios/main.jsbundle
+*.meta

@@ -36,7 +36,7 @@ export default class AnimeSourceLoader {
         var animeInfo = root.querySelector('.anime-info');      
         if (animeInfo != null) {
           // Getting info link
-          animeInfoLink = MajorLink.MainURL + animeInfo.childNodes[3].attributes.href;
+          animeInfoLink = global.domain + animeInfo.childNodes[3].attributes.href;
           animeName = animeInfo.childNodes[3].attributes.title;
           // console.log(animeInfoLink, animeName);
         }
@@ -63,8 +63,8 @@ export default class AnimeSourceLoader {
         if (nextPrev != null) {       
           prev = nextPrev.childNodes[0].childNodes[1];
           next = nextPrev.childNodes[2].childNodes[1];
-          if (prev != null) prev = MajorLink.MainURL + prev.attributes.href;
-          if (next != null) next = MajorLink.MainURL + next.attributes.href;
+          if (prev != null) prev = global.domain + prev.attributes.href;
+          if (next != null) next = global.domain + next.attributes.href;
         }
 
         success([animeData, prev, next]);
