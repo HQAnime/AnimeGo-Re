@@ -1,45 +1,37 @@
 import React, { PureComponent } from 'react';
-import { ActivityIndicator, Text, FlatList, Platform, View, Dimensions } from 'react-native';
-import { isPortrait, deviceHeight, deviceWidth } from '../../helper/DeviceDimensions';
+import { ActivityIndicator, Text, Platform, View, Dimensions } from 'react-native';
+import GridView from 'react-native-super-grid';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
 import { LoadingIndicator, FabButton } from '../../component';
+import { moderateScale } from 'react-native-size-matters';
+import { Actions } from 'react-native-router-flux';
 
 class AnimeList extends PureComponent {
   constructor(props) {
     super(props);
-    this.currWidth = deviceWidth;
     this.state = {
       data: [],
       page: 1,
       hasMorePage: true,
       isRefreshing: false,
       url: props.AnimeUrl,
-      width: isPortrait() ? deviceWidth / 2 - 16 : deviceWidth / 4 - 16,
-      column: 0
     };
   }
 
   componentWillMount() {
     // Loading anime
     this.loadAnime();
-    this.updateColumn();
-    console.log(isPortrait(), deviceHeight, deviceWidth);
-  }
-
-  animeKey = (item, index) => {
-    return item.link;
   }
 
   render() {
-    const { data, isRefreshing, column, width } = this.state;
+    const { data, isRefreshing } = this.state;
     if (data.length == 0) return <LoadingIndicator />
     else {
       return (
-        <View style={{flex: 1}} onLayout={this.updateColumn}>
-          <FlatList data={data} keyExtractor={this.animeKey} renderItem={({item}) => <AnimeCell data={item} width={width}/>} 
-            key={(isPortrait() ? 'p' + width : 'l' + width)} numColumns={column} refreshing={isRefreshing}
-            ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
+        <View style={{flex: 1}}>
+          <GridView items={data} itemDimension={moderateScale(128, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
+            refreshing={isRefreshing} ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
           { this.renderFabButton() }
         </View>
@@ -51,18 +43,6 @@ class AnimeList extends PureComponent {
   renderFabButton = () => {
     if (this.props.showFab != false && Platform.OS == 'android') return <FabButton />
     else return null;
-  }
-
-  updateColumn = () => {
-    const { width } = Dimensions.get('window');
-    let cellWidth = isPortrait() ? width / 2 - 16 : width / 4 - 16;    
-    console.log(cellWidth);
-    if (Platform.OS == 'windows') {
-      if (this.state.column == 0) this.setState({column: isPortrait() ? 2 : 4})
-      if (Math.abs(this.currWidth - width) < 80) return;
-      this.currWidth = width;    
-      this.setState({column: isPortrait() ? 2 : 4, width: cellWidth})
-    } else this.setState({column: isPortrait() ? 2 : 4, width: cellWidth});
   }
 
   refreshAnime = () => {
@@ -85,27 +65,30 @@ class AnimeList extends PureComponent {
     if (!hasMorePage && !isRefreshing) return;
     let loader = new AnimeLoader(url, page);
     loader.loadAnime().then(([animeData, count]) => {
-      console.log(count);
-      if (count == 0) {
-        // No more pages
-        this.setState({
-          hasMorePage: false,
-          isRefreshing: false,
-        })
-      } else if (count < 20) {
-        // Append data
-        this.setState({
-          data: data.concat(animeData),
-          isRefreshing: false,
-          hasMorePage: false,
-        })
+      if (animeData == undefined || count == undefined) {
+        Actions.pop();
       } else {
-        // Append data
-        this.setState({
-          data: data.concat(animeData),
-          page: page + 1,
-          isRefreshing: false,
-        })
+        if (count == 0) {
+          // No more pages
+          this.setState({
+            hasMorePage: false,
+            isRefreshing: false,
+          })
+        } else if (count < 20) {
+          // Append data
+          this.setState({
+            data: data.concat(animeData),
+            isRefreshing: false,
+            hasMorePage: false,
+          })
+        } else {
+          // Append data
+          this.setState({
+            data: data.concat(animeData),
+            page: page + 1,
+            isRefreshing: false,
+          })
+        }
       }
     })
     .catch((error) => {

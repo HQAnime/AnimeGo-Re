@@ -22,7 +22,7 @@ export default class App extends Component {
     return (
       <Router sceneStyle={{backgroundColor: 'white'}}>
         <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle}>
-          <Scene key='New Release' component={NewRelease}/>
+          <Scene key='New Release' component={NewRelease} title="AnimeGo"/>
           <Scene key='WatchAnime' component={WatchAnime}/>
           <Scene key='AnimeDetail' component={AnimeDetail}/>
 

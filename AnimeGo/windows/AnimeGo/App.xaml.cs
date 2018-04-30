@@ -3,7 +3,9 @@ using ReactNative.Modules.Launch;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -39,6 +41,15 @@ namespace AnimeGo
         {
             base.OnLaunched(e);
             OnCreate(e.Arguments);
+
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+            // Set active window colors
+            var AnimeGo = Color.FromArgb(1, 255, 152, 0);
+            titleBar.ButtonForegroundColor = Colors.White;
+            titleBar.ButtonBackgroundColor = AnimeGo;
+            titleBar.ForegroundColor = Colors.White;
+            titleBar.BackgroundColor = AnimeGo;
         }
 
         /// <summary>

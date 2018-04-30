@@ -30,7 +30,7 @@ class NewSeason extends Component {
       case 11:
       case 12: season = 'fall'; break;
     }
-    let url = MajorLink.NewSeason + season + '-' + now.getFullYear() + '-anime&page=';
+    let url = global.domain + MajorLink.NewSeason + season + '-' + now.getFullYear() + '-anime&page=';
     console.log(url);
     return url;
   }

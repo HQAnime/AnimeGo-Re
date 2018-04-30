@@ -16,7 +16,7 @@ class SearchAnime extends Component {
     const { keyword } = this.state;
     if (keyword.length < 3) return null;
     else {
-      return <AnimeList AnimeUrl={MajorLink.Search + keyword + '&page='} showFab={false}/>
+      return <AnimeList AnimeUrl={global.domain + MajorLink.Search + keyword + '&page='} showFab={false}/>
     }
   }
 
