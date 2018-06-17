@@ -12,6 +12,7 @@
     "react-native": "^0.55.4",
     "react-native-action-button": "^2.8.4",
     "react-native-elements": "^0.19.1",
+    "react-native-material-color": "^1.0.15",
     "react-native-router-flux": "^4.0.0-beta.31",
     "react-native-size-matters": "^0.1.1",
     "react-native-super-grid": "^2.4.0",
