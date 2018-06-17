@@ -13,8 +13,9 @@ import Setting from './Setting';
 import SubCategory from './SubCategory';
 import ToWatch from './ToWatch';
 import WatchAnime from './WatchAnime';
+import Drawer from './Drawer';
 
-export function SetupScreen() {
+export function setupScreen() {
   Navigation.registerComponent('go.anime.detail', () => AnimeDetail);
   Navigation.registerComponent('go.genre', () => Genre);
   Navigation.registerComponent('go.genre.info', () => GenreInfo);
@@ -28,4 +29,6 @@ export function SetupScreen() {
   Navigation.registerComponent('go.sub.category', () => SubCategory);
   Navigation.registerComponent('go.towatch', () => ToWatch);
   Navigation.registerComponent('go.watch.anime', () => WatchAnime);
+
+  Navigation.registerComponent('go.drawer', () => Drawer);
 }

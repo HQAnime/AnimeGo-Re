@@ -5,22 +5,32 @@
 */
 
 import { Navigation } from 'react-native-navigation';
-import { SetupScreen } from '../screen';
+import { setupScreen } from '../screen';
+import { iconsLoaded } from '../icon';
 
-SetupScreen();
-
+iconsLoaded.then();
+setupScreen();
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
-      stack: {
-        children: [{
+      sideMenu: {
+        left: {
           component: {
-            name: 'go.new.release'
+            name: 'go.drawer',
           }
-        }],
-        options: {
-          topBar: {
-            title: {text: 'AnimeGo'}
+        },
+        center: {
+          stack: {
+            children: [{
+              component: {
+                name: 'go.new.release'
+              }
+            }],
+            options: {
+              topBar: {
+                title: {text: 'AnimeGo'}
+              }
+            }
           }
         }
       }
