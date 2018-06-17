@@ -11,7 +11,6 @@ const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const color = GREY[600];
 const icons = {
   'home': [24, color, MaterialIcons],
-  'new-releases': [24, color, MaterialIcons],
   'date-range': [24, color, MaterialIcons],
   'schedule': [24, color, MaterialIcons],
   'movie': [24, color, MaterialIcons],

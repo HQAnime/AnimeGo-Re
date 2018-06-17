@@ -21,7 +21,7 @@ export const MicrosoftStore = 'https://www.microsoft.com/store/p/anime-go/9mx3qr
 export const Email = 'mailto:development.henryquan@gmail.com';
 
 export const AD_IS_OPTIONAL = 'This is completely optional.'
-export const VERSION = '1.0.8.1';
+export const VERSION = '1.1.0';
 
 export const ScreenIndex = {
   NewRelease: 0,
@@ -43,4 +43,7 @@ export const MajorLink = {
   Episode: '/load-list-episode?ep_start=',
   Popular: '/popular.html?page=',
   Schedule: 'https://myanimelist.net/anime/season/schedule'
+}
+
+export const layoutStyle = {
 }

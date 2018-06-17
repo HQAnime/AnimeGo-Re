@@ -23,6 +23,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           stack: {
             children: [{
               component: {
+                id: 'NewRelease',
                 name: 'go.new.release'
               }
             }],
