@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AnimeList } from '../component';
 
-class SubCategory extends Component {
+export default class SubCategory extends Component {
   componentWillUnmount() {
     // Reset thi value in case user wants to check it again
     global.currSubCategory = '';
@@ -13,5 +13,3 @@ class SubCategory extends Component {
     )
   }
 }
-
-export {SubCategory};

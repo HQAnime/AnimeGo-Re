@@ -4,7 +4,7 @@ import { styles } from './ScheduleStyles';
 import AnimeSchedule from '../helper/core/AnimeSchedule';
 import { LoadingIndicator, SmartTouchable } from '../component';
 
-class Schedule extends Component {
+export default class Schedule extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,5 +54,3 @@ class Schedule extends Component {
     )
   }
 }
-
-export {Schedule};

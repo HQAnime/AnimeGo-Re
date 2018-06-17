@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SourceList } from '../component/';
 
-class WatchAnime extends PureComponent {
+export default class WatchAnime extends PureComponent {
   render() {
     const { link, fromInfo } = this.props;
     return (
@@ -9,5 +9,3 @@ class WatchAnime extends PureComponent {
     );
   }
 }
-
-export { WatchAnime };

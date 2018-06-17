@@ -5,7 +5,7 @@ import { styles } from './SearchAnimeStyles';
 import { AnimeList } from '../component';
 import { MajorLink } from '../value';
 
-class SearchAnime extends Component {
+export default class SearchAnime extends Component {
   constructor() {
     super()
     this.state = {keyword: ''}
@@ -37,5 +37,3 @@ class SearchAnime extends Component {
     }, 1000)
   }
 }
-
-export {SearchAnime};

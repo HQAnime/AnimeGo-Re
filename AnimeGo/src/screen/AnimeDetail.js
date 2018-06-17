@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { LoadingIndicator, EpisodeList } from '../component';
 import AnimeDetailLoader from '../helper/core/AnimeDetailLoader';
 
-class AnimeDetail extends Component {
+export default class AnimeDetail extends Component {
   constructor(props) {
     super(props);
     this.link = props.link;
@@ -40,5 +40,3 @@ class AnimeDetail extends Component {
     });
   }
 }
-
-export { AnimeDetail };

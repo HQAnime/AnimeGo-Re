@@ -2,6 +2,8 @@ package com.yihengquan.gogoanime;
 
 import android.app.Application;
 import com.reactnativenavigation.NavigationApplication;
+import com.facebook.react.ReactPackage;
+
 import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;

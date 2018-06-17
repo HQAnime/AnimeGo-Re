@@ -5,7 +5,7 @@ import { styles } from './ToWatchStyles';
 import { Actions } from 'react-native-router-flux';
 import { RedColour } from '../value';
 
-class ToWatch extends Component {
+export default class ToWatch extends Component {
   constructor() {
     super()
     this.state = {
@@ -90,5 +90,3 @@ class ToWatch extends Component {
   }
 
 }
-
-export {ToWatch};

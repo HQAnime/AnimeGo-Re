@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AnimeList } from '../component/';
 import { MajorLink } from '../value'; 
 
-class NewSeason extends Component {
+export default class NewSeason extends Component {
   render() {
     return (
       <AnimeList AnimeUrl={this.getNewSeason()}/>
@@ -35,5 +35,3 @@ class NewSeason extends Component {
     return url;
   }
 }
-
-export {NewSeason};

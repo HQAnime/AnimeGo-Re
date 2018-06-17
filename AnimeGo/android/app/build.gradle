@@ -94,14 +94,14 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.yihengquan.gogoanime"
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 11
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 12
         versionName "1.1.0"
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative55"
         ndk {

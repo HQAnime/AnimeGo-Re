@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { getTheme } from '../../constant/colour';
+import { AnimeGoColour } from '../../value';
 
 class SettingView extends Component {
   render() {
@@ -11,7 +11,7 @@ class SettingView extends Component {
       // Header and divider
       return (
         <View>
-          { header ? <Text style={[headerAndroid, {color: getTheme()}]}>{header}</Text> : null }
+          { header ? <Text style={headerAndroid}>{header}</Text> : null }
           { children }
           <Divider />
         </View>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   headerAndroid: {
     margin: 8, paddingTop: 8, paddingLeft: 4,
-    fontSize: 13, fontWeight: '500'
+    fontSize: 13, fontWeight: '500', color: AnimeGoColour
   }
 })
 

@@ -5,7 +5,7 @@ import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, Microsoft
 import { styles } from './SettingStyles';
 import GithubUpdate from '../helper/core/GithubUpdate';
 
-class Setting extends Component {
+export default class Setting extends Component {
   state = {
     dataSaver: global.dataSaver,
     hideDub: global.hideDub
@@ -71,5 +71,3 @@ class Setting extends Component {
     AsyncStorage.setItem('@DUB', JSON.stringify(newValue));
   }
 }
-
-export {Setting};
