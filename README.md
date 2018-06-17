@@ -4,7 +4,7 @@
 **This is not official**
 
 This is just a practise app made with react native and it is also my first react native app.
-This app works for **UWP** and **Android**. However, IOS might not be support by me but it will not take much time to port to IOS
+This app works for **UWP** and **Android**. IOS is partially supported but more styling will be needed.
 
 ## What could it do
 - New release
