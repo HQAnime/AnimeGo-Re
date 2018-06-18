@@ -15,10 +15,21 @@ public class MainApplication extends NavigationApplication {
         return BuildConfig.DEBUG;
     }
 
-    @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
+    protected List<ReactPackage> getPackages() {
+        // Add additional packages you require here
+        // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
             new VectorIconsPackage()
         );
+    }
+    
+    @Override
+     public List<ReactPackage> createAdditionalReactPackages() {
+         return getPackages();
+     }
+
+    @Override
+    public String getJSMainModuleName() {
+        return "index";
     }
 }

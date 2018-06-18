@@ -4,13 +4,13 @@ import { DrawerCell } from '../component';
 import { Divider } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import { iconsMap } from '../icon';
-import { AnimeGoColour, VERSION } from '../value';
+import { AnimeGoColour, VERSION, navStyle } from '../value';
 
 export default class Drawer extends Component {
   render() {
     const { imageView, image } = styles;
     return (
-      <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView style={{backgroundColor: 'white', width: '90%'}}>
         <View style={imageView}><Image source={require('../img/IconWhite.png')} style={image}/></View>
         <DrawerCell onPress={() => this.popToHome()} icon={iconsMap['home']} title='Home'/>
         <Divider />
@@ -28,32 +28,20 @@ export default class Drawer extends Component {
   }
 
   popToHome() {
-    Navigation.popToRoot(this.props.componentId);
-    Navigation.mergeOptions(this.props.componentId, {
-      sideMenu: {
-        left: {visible: false}
-      }
-    })
+    this.props.navigator.popToRoot({animated: false});
+    this.props.navigator.toggleDrawer({
+      side: 'left', animated: true, to: 'closed'
+    });
   }
 
   pushToScreen(id, title) {
-    Navigation.push('NewRelease', {
-      component: {
-        name: id,
-        options: {
-          topBar: {
-            title: {
-              text: title
-            },
-          },
-          animations: {push: {enable: false}}
-        }
-      }
-    })
-    Navigation.mergeOptions(this.props.componentId, {
-      sideMenu: {
-        left: {visible: false}
-      }
+    this.props.navigator.push({
+      screen: id,
+      title: title,
+      navigatorStyle: navStyle()
+    });
+    this.props.navigator.toggleDrawer({
+      side: 'left', animated: true, to: 'closed'
     });
   }
 }

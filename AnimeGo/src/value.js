@@ -45,5 +45,13 @@ export const MajorLink = {
   Schedule: 'https://myanimelist.net/anime/season/schedule'
 }
 
-export const layoutStyle = {
+export function navStyle() {
+  return {
+    navBarTextColor: 'white',
+    navBarBackgroundColor: AnimeGoColour,
+    statusBarTextColorScheme: 'light',
+    navBarButtonColor: 'white',
+    statusBarColor: StatusBarColour,
+    screenBackgroundColor: '#FEFEFE'
+  }
 }
