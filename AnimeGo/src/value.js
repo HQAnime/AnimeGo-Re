@@ -16,12 +16,9 @@ export const GreenColour = '#4CAF50';
 export const Github = 'https://github.com/HenryQuan/AnimeGo';
 export const LastestRelease = 'https://github.com/HenryQuan/AnimeGo/releases/latest';
 export const GoGoAnime = 'http://gogoanime.se';
-export const GooglePlay = 'https://play.google.com/store/apps/details?id=com.yihengquan.gogoanime';
-export const MicrosoftStore = 'https://www.microsoft.com/store/p/anime-go/9mx3qr26zfdj?rtc=1';
 export const Email = 'mailto:development.henryquan@gmail.com';
 
-export const AD_IS_OPTIONAL = 'This is completely optional.'
-export const VERSION = '1.0.8.1';
+export const VERSION = '1.1.0';
 
 export const ScreenIndex = {
   NewRelease: 0,

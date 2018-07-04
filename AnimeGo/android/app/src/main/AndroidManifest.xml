@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yihengquan.gogoanime"
     android:versionCode="9"
-    android:versionName="1.0.77777">
+    android:versionName="1.1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />

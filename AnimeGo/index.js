@@ -1,5 +1,27 @@
+import React from 'react';
 import { AppRegistry } from 'react-native';
-import './src/global';
-import App from './src/app/App';
+import { DefaultTheme, Provider } from 'react-native-paper';
+import App from './src/App';
+import './src/Global';
 
-AppRegistry.registerComponent('AnimeGo', () => App);
+// Theme for AnimeGo
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#FF9800',
+    accent: '#448AFF',
+  },
+};
+
+console.log(theme)
+
+export default function AnimeGo() {
+  return (
+    <Provider theme={theme}>
+      <App />
+    </Provider>
+  );
+}
+
+AppRegistry.registerComponent('AnimeGo', () => AnimeGo);
