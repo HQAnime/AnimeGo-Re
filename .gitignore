@@ -102,3 +102,5 @@ AnimeGo/android/app/src/main/assets/index.android.bundle.meta
 AnimeGo/ios/GoogleMobileAds.framework
 AnimeGo/ios/main.jsbundle
 *.meta
+AnimeGo/android/.*
+AnimeGo/android/app/.*
