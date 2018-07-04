@@ -12,9 +12,7 @@ const theme = {
     primary: '#FF9800',
     accent: '#448AFF',
   },
-};
-
-console.log(theme)
+}
 
 export default function AnimeGo() {
   return (
