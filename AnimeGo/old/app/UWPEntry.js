@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { styles } from './UWPEntryStyles';
-import { SmartTouchable } from '../component/index';
+import { SmartTouchable } from '../components/index';
 import { Actions } from 'react-native-router-flux';
 import { VERSION } from '../value';
 

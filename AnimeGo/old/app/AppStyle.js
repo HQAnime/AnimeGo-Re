@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { AnimeGoColour } from '../value';
-import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
+import { deviceWidth, deviceHeight } from '../core/DeviceDimensions';
 
 export const styles = StyleSheet.create({
   dividerStyle: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, Platform } from 'react-native';
-import { AnimeGoColour } from '../../value';
+import { AnimeGoColour } from '../value';
 
 const LoadingIndicator = () => {
   return (
