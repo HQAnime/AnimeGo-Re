@@ -5,17 +5,16 @@
   USED TO STORE CONSTANTS
 */
 
-export const AnimeGoColour = '#FF9800';
-export const StatusBarColour = '#F57C00';
-export const SecondaryColour = '#FFB74D';
+export const PRIMARY_COLOUR = '#FF9800';
+export const ACCENT_COLOUR = '#448AFF';
 export const GreyColour = '#607D8B';
 export const BlueColour = '#2196F3';
 export const RedColour = '#F44336';
 export const GreenColour = '#4CAF50';
 
 export const Github = 'https://github.com/HenryQuan/AnimeGo';
-export const LastestRelease = 'https://github.com/HenryQuan/AnimeGo/releases/latest';
-export const GoGoAnime = 'http://gogoanime.se';
+export const Release = 'https://github.com/HenryQuan/AnimeGo/releases/latest';
+export const GoGoAnime = 'https://www3.gogoanime.se';
 export const Email = 'mailto:development.henryquan@gmail.com';
 
 export const VERSION = '1.1.0';

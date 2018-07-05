@@ -5,7 +5,7 @@ export * from './common/FabButton';
 export * from './common/AnimeButton';
 
 // Cell
-export * from './cell/DrawerCell';
+export * from './cells/DrawerCell';
 
 // List
 export * from './list/AnimeList';

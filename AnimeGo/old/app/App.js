@@ -7,13 +7,13 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Image, Text, StatusBar, DrawerLayoutAndroid, ToastAndroid } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
-import { DrawerCell, SmartTouchable } from '../component';
+import { DrawerCell, SmartTouchable } from '../components';
 import { Divider, Button, Icon } from 'react-native-elements';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from '../screen';
 import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
-import { DataManager } from '../helper/';
-import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
+import { DataManager } from '../core/';
+import { deviceWidth, deviceHeight } from '../core/DeviceDimensions';
 
 export default class App extends Component {
   async componentWillMount() {
