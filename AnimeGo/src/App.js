@@ -3,7 +3,7 @@ import { ScrollView, View, Text, StatusBar, StyleSheet, DrawerLayoutAndroid } fr
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, 
   AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from './screens';
-import { AnimeGoColour, StatusBarColour, ScreenIndex } from './value';
+import { AnimeGoColour, StatusBarColour, ScreenIndex, PRIMARY_COLOUR } from './value';
 import { DrawerSection, DrawerItem, Divider, ToolbarAction } from 'react-native-paper';
 import { DataManager } from './core';
 import { deviceWidth, deviceHeight } from './core/DeviceDimensions';
@@ -17,14 +17,13 @@ export default class App extends Component {
     const { naviBarStyle, naviTitleStyle } = styles;
     // The width for the drawer should be 61.8% of the device width
     return (
-      <DrawerLayoutAndroid ref='Drawer'
+      <DrawerLayoutAndroid ref='drawer'
         drawerWidth={deviceWidth * 0.75}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={this.renderNavigation}>
-        <StatusBar backgroundColor={StatusBarColour} barStyle='light-content'/>
-        <Router sceneStyle={{backgroundColor: 'white'}} backAndroidHandler={this.onBackPress}>
-          <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='white' navigationBarStyle={naviBarStyle} backTitle='Back' renderLeftButton={this.renderLeftBtn}>
-            <Scene key='NewRelease' component={NewRelease} title='New Release' initial hideNavBar/>
+        renderNavigationView={this.renderDrawer}>
+        <Router backAndroidHandler={this.onBackPress}>
+          <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='black' navigationBarStyle={naviBarStyle} backTitle='Back'>
+            <Scene key='NewRelease' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
             <Scene key='Schedule' component={Schedule} title='Schedule'/>
 
@@ -48,14 +47,14 @@ export default class App extends Component {
     )
   }
 
-  renderNavigation = () => {
+  renderDrawer = () => {
     const { dividerStyle, navigationStyle, iconViewStyle, drawerTitleStyle } = styles;    
     return (
       <ScrollView style={navigationStyle}>
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
-        <DrawerItem icon='home' label='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
+        <DrawerItem icon='home' label='Home' onPress={() => Actions.popTo('NewRelease')}/>
         <Divider/>
         <DrawerItem icon='new-releases' label='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
         <DrawerItem icon='timeline' label='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>
@@ -70,17 +69,13 @@ export default class App extends Component {
     )
   }
 
-  renderLeftBtn = () => {
-    return <ToolbarAction icon='menu' onPress={this.onLeftBtnPressed}/>
-  }
-
   onLeftBtnPressed = () => {
-    this.refs['Drawer'].openDrawer();
+    this.refs['drawer'].openDrawer();
   }
 
   onBackPress = () => {
     // Close the drawer as well
-    this.refs['Drawer'].closeDrawer();
+    this.refs['drawer'].closeDrawer();
     if (Actions.state.index == 0) return false;
     else Actions.pop(); return true;
   }
@@ -104,7 +99,7 @@ export default class App extends Component {
       case ScreenIndex.Schedule:
         Actions.Schedule(); break;
     }
-    this.refs['Drawer'].closeDrawer();
+    this.refs['drawer'].closeDrawer();
   }
 }
 
@@ -116,7 +111,7 @@ const styles = StyleSheet.create({
   },
   navigationStyle: {
     flex: 1, 
-    backgroundColor: 'white'
+    backgroundColor: '#FEFEFE'
   },
   drawerTitleStyle: {
     fontSize: 24,
@@ -124,7 +119,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     width: '90%',
     marginBottom: 8,
-    color: 'white'
+    color: 'black'
   },
   iconViewStyle: {
     backgroundColor: AnimeGoColour,
@@ -135,7 +130,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   naviBarStyle: {
-    backgroundColor: AnimeGoColour,
+    backgroundColor: PRIMARY_COLOUR,
   },
   naviTitleStyle: {
     width: '90%',

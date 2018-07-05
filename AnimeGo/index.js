@@ -12,6 +12,7 @@ const theme = {
     ...DefaultTheme.colors,
     primary: PRIMARY_COLOUR,
     accent: ACCENT_COLOUR,
+    background: '#EEEEEE',
   },
 }
 

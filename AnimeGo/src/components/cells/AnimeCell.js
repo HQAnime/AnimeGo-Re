@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image, Linking, StyleSheet } from 'react-native';
-import { SmartTouchable } from '../../components';
-import { TouchableRipple, Paper } from 'react-native-paper';
+import { TouchableRipple, Paper, Card, Divider } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { moderateScale } from 'react-native-size-matters';
-import { BlueColour } from '../../value';
+import { BlueColour, ACCENT_COLOUR, PRIMARY_COLOUR } from '../../value';
 
 class AnimeCell extends PureComponent {
   constructor(props) {
@@ -17,30 +16,25 @@ class AnimeCell extends PureComponent {
   render() {
     const { viewStyle, textStyle, titleStyle, episodeStyle } = styles;
     return (
-        <Paper onPress={this.buttonPressed} onLongPress={this.showWebpage}>
-          <View style={viewStyle}>
-            { this.renderImage() }
-            <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
-            <Text style={episodeStyle}>{this.title}</Text>
+      <Card >
+        <TouchableRipple useForeground onPress={this.onCardPressed}>
+          <View style={{flexDirection: 'row'}}>
+            <Image source={{uri: this.data.thumbnail}} style={{width: moderateScale(100, 0.2), height: moderateScale(140, 0.2)}} resizeMode='cover'/>
+            <View style={{flex: 1, justifyContent: 'space-around'}}>
+              <Text numberOfLines={2} style={titleStyle}>{this.data.name}</Text> 
+              <Divider />
+              <Text style={episodeStyle}>{this.title}</Text>
+            </View>
           </View>
-        </Paper>
+        </TouchableRipple>
+      </Card> 
     )
   }
 
-  renderImage() {
-    if (global.dataSaver) return null;
-    else {
-      return (
-        <Image source={{uri: this.data.thumbnail}} style={{width: moderateScale(100, 0.2), height: moderateScale(141, 0.2), borderRadius: 8}} resizeMode='cover'/>          
-      )
-    }
-  }
-
-  showWebpage = () => {
-    Linking.openURL(this.data.link);
-  }
-
-  buttonPressed = () => {
+  /**
+   * Push to WatchAnime or AnimeDetail
+   */
+  onCardPressed = () => {
     if (this.data.link.includes('-episode-')) {
       // Only NewRelease redirects you to that new episode
       Actions.WatchAnime({title: this.title, link: this.data.link, fromInfo: false});
@@ -63,18 +57,14 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     textAlign: 'center', 
-    fontWeight: 'bold',
-    fontSize: 11,
-    color: 'black'
+    fontSize: 20,
+    padding: 8
   },
   episodeStyle: {
-    textAlign: 'center', 
+    textAlign: 'center',
     justifyContent: 'center',
-    color: 'white', backgroundColor: BlueColour,
-    padding: 2, margin: 2,
-    fontSize: 12,
-    height: 24, width: '70%',
-    borderRadius: 12, elevation: 1
+    color: ACCENT_COLOUR,
+    fontSize: 17
   }
 })
 
