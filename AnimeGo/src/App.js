@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StatusBar, StyleSheet, DrawerLayoutAndroid } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, 
-  AnimeDetail, SearchAnime, SubCategory, ToWatch, Schedule } from './screens';
+  AnimeDetail, SubCategory, ToWatch, Schedule } from './screens';
 import { AnimeGoColour, StatusBarColour, ScreenIndex, PRIMARY_COLOUR } from './value';
 import { DrawerSection, DrawerItem, Divider, ToolbarAction } from 'react-native-paper';
 import { DataManager } from './core';
@@ -35,8 +35,6 @@ export default class App extends Component {
 
             <Scene key='Genre' component={Genre} title='Genre'/>
             <Scene key='GenreInfo' component={GenreInfo}/>
-
-            <Scene key='SearchAnime' component={SearchAnime}/>
             <Scene key='SubCategory' component={SubCategory}/>
 
             <Scene key='ToWatch' component={ToWatch} title='ToWatch'/>            
