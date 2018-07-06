@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { SearchBar } from 'react-native-paper';
-import { MajorLink, GoGoAnime, PRIMARY_COLOR } from '../value';
+import { MajorLink, GoGoAnime, PRIMARY_COLOUR } from '../value';
 import { AnimeList } from '../components/';
 
 class NewRelease extends Component {
+  state = { search: 'conan' }
+
   render() {
-    console.log(this.props)
+    const { search } = this.state;
     return (
       <View style={{flex: 1}}>
-        <AnimeList AnimeUrl={GoGoAnime + MajorLink.NewRelease} space/>
-        <View style={{elevation: 4, opacity: 0.9, padding: 4, top: 0, position: 'absolute', backgroundColor: '#FF9800', width: '100%'}}>
-          <SearchBar onIconPress={this.props.drawer()} style={{flex: 1}}
-          icon='menu' placeholder='Search AnimeGo'/>
+        <View style={{elevation: 4, padding: 4, backgroundColor: PRIMARY_COLOUR, width: '100%'}}>
+          <SearchBar onIconPress={this.props.drawer()} onChangeText={input => {this.setState({search: input}); this.forceUpdate()}}
+            value={search} icon='menu' placeholder='Search AnimeGo'/>
         </View>
+        {
+          (search.length < 3) ? <AnimeList AnimeUrl={GoGoAnime + MajorLink.NewRelease}/>
+          : <AnimeList AnimeUrl={GoGoAnime + MajorLink.Search + search + '&page='}/>
+        }
       </View>
     )
   }

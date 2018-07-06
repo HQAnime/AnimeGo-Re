@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { ActivityIndicator, Text, Platform, View, Dimensions } from 'react-native';
 import GridView from 'react-native-super-grid';
 import AnimeLoader from '../../core/AnimeLoader';
@@ -6,11 +6,11 @@ import AnimeCell from '../cells/AnimeCell';
 import { moderateScale } from 'react-native-size-matters';
 import { Actions } from 'react-native-router-flux';
 import { ProgressBar } from '../../components';
-import { PRIMARY_COLOUR } from '../../value';
 
-class AnimeList extends PureComponent {
+class AnimeList extends Component {
   constructor(props) {
     super(props);
+    console.log(props.AnimeUrl)
     this.state = {
       data: [],
       page: 1,
@@ -25,15 +25,21 @@ class AnimeList extends PureComponent {
     this.loadAnime();
   }
 
+  componentWillReceiveProps() {
+    this.setState({url: this.props.AnimeUrl})
+    this.loadAnime();
+    this.forceUpdate();
+  }
+
   render() {
     const { data, isRefreshing } = this.state;
+    console.log(data)
     if (data.length == 0) return <ProgressBar />
     else {
       return (
         <View style={{flex: 1}}>
           <GridView items={data} itemDimension={moderateScale(256, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
-            ListFooterComponent={this.renderFooter} ListHeaderComponent={this.props.space ? <View style={{height: 64}}/> : null}
-            onEndReached={this.loadAnime} onEndReachedThreshold={0.5} />
+            ListFooterComponent={this.renderFooter} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} />
         </View>
       )
     }
@@ -49,8 +55,7 @@ class AnimeList extends PureComponent {
   }
 
   loadAnime = () => {
-    console.log('Loading anime');
-    const { hasMorePage, isRefreshing, url, page, data } = this.state;
+    const { hasMorePage, isRefreshing, url, page, data } = this.state; 
     if (!hasMorePage && !isRefreshing) return;
     let loader = new AnimeLoader(url, page);
     loader.loadAnime().then(([animeData, count]) => {

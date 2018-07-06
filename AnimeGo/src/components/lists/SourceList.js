@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Dimensions, Alert } from 'react-native';
 import AnimeSourceLoader from '../../core/AnimeSourceLoader';
-import SourceCell from '../cells/SourceCell';
-import { AnimeButton } from '../../components';
 import { Actions } from 'react-native-router-flux';
 import { GreenColour, AnimeGoColour } from '../../value';
 import { styles } from './SourceListStyles';
 import { ProgressBar } from '../common/ProgressBar';
+import { SourceCell } from '../cells/SourceCell';
+import { Button } from 'react-native-paper';
 
 class SourceList extends Component {
-
-  keyExtractor = (data) => data.source;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +34,7 @@ class SourceList extends Component {
     });
   }
 
+  keyExtractor = (data) => data.source;
   render() {
     const { data } = this.state;
     if (data.length == 0) return <ProgressBar />
@@ -59,13 +57,13 @@ class SourceList extends Component {
     return (
       <View style={headerViewStyle}>
         <Text style={textStyle}>Anime Detail</Text>
-        <AnimeButton title={this.state.name} onPress={this.infoBtnPressed} color={GreenColour}/>
+        <Button onPress={this.infoBtnPressed}>{this.state.name}</Button>
         <View style={buttonGroupStyle}>
           <View style={buttonStyle}>
-            <AnimeButton title='<<  Previous' onPress={this.prevEpisode} color={AnimeGoColour}/>
+            <Button onPress={this.prevEpisode}>{'<<  Previous'}</Button>
           </View>
           <View style={buttonStyle}>
-            <AnimeButton title='Next  >>' onPress={this.nextEpisode} color={AnimeGoColour}/>               
+            <Button onPress={this.nextEpisode}>{'Next  >>'}</Button>           
           </View>
         </View>
       </View>

@@ -23,7 +23,7 @@ export default class App extends Component {
         renderNavigationView={this.renderDrawer}>
         <Router backAndroidHandler={this.onBackPress}>
           <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='black' navigationBarStyle={naviBarStyle} backTitle='Back'>
-            <Scene key='NewRelease' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
+            <Scene key='Home' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
             <Scene key='Schedule' component={Schedule} title='Schedule'/>
 
@@ -54,7 +54,7 @@ export default class App extends Component {
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
-        <DrawerItem icon='home' label='Home' onPress={() => Actions.popTo('NewRelease')}/>
+        <DrawerItem icon='home' label='Home' onPress={() => Actions.popTo('Home')}/>
         <Divider/>
         <DrawerItem icon='new-releases' label='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
         <DrawerItem icon='timeline' label='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>

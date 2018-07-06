@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Linking, StyleSheet } from 'react-native';
-import { AnimeButton } from '../../components';
 import { Actions } from 'react-native-router-flux';
 import { GreyColour, BlueColour, RedColour } from '../../value';
+import { Button } from 'react-native-paper';
 
 class SourceCell extends React.PureComponent {
   constructor(props) {
@@ -21,14 +21,14 @@ class SourceCell extends React.PureComponent {
     if (this.source.includes('Download')) {
       return (
         <View style={viewStyle}>
-          <AnimeButton title={this.source} onPress={this.WatchAnime} color={RedColour}/>
+          <Button onPress={this.WatchAnime}>{this.source}</Button>
           <Text style={textStyle}>Server list</Text>
         </View>
       )
     } else {
       return (
         <View style={viewStyle}>
-          <AnimeButton title={this.source} onPress={this.WatchAnime} color={BlueColour}/>
+          <Button onPress={this.WatchAnime}>{this.source}</Button>
         </View>
       )
     }
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SourceCell;
+export { SourceCell };
