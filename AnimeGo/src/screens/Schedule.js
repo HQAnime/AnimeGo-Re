@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, Linking, Image } from 'react-native';
-import { styles } from './ScheduleStyles';
+import { View, FlatList, Text, Linking, Image, StyleSheet } from 'react-native';
 import AnimeSchedule from '../core/AnimeSchedule';
-import { SmartTouchable, ProgressBar } from '../components';
+import { ProgressBar } from '../components';
+import { ACCENT_COLOUR } from '../value';
+import { TouchableRipple, Card, CardContent, Title, Paragraph } from 'react-native-paper';
 
 class Schedule extends Component {
   constructor() {
@@ -38,15 +39,17 @@ class Schedule extends Component {
       <View style={mainViewStyle}>
         <FlatList data={data} keyExtractor={this.scheduleKey} renderItem={({item}) => {
           return (
-            <View style={cellViewStyle}>
-              <SmartTouchable onPress={() => Linking.openURL(item.link)}>
-                <View>
-                  { global.dataSaver == true ? null : <Image source={{uri: item.image}} style={imageStyle} resizeMode='cover'/> }
-                  <Text style={titleStyle}>{item.name}</Text>
-                  <Text style={timeStyle}>{item.time + ' ' + item.rating }</Text>
+            <Card>
+               <TouchableRipple onPress={() => Linking.openURL(item.link)}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image source={{uri: item.image}} style={imageStyle}/>
+                  <CardContent>
+                    <Title>{item.name}</Title>
+                    <Paragraph>{item.time + ' ' + item.rating}</Paragraph>
+                  </CardContent>
                 </View>
-              </SmartTouchable>
-            </View>
+              </TouchableRipple>
+            </Card>
           )
         }} automaticallyAdjustContentInsets={false} showsVerticalScrollIndicator={false}
         ListHeaderComponent={<Text style={textStyle}>Data are from MyAnimeList</Text>} />
@@ -54,5 +57,40 @@ class Schedule extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  noAnimeStyle: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  mainViewStyle: {
+    flex: 1
+  },
+  textStyle: {
+    textAlign: 'center',
+    color: ACCENT_COLOUR,
+    fontSize: 16
+  },
+  cellViewStyle: {
+    flex: 1,
+    padding: 8
+  },
+  titleStyle: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 20
+  },
+  infoStyle: {
+    textAlign: 'center'
+  },
+  timeStyle: {
+    textAlign: 'center'
+  },
+  imageStyle: {
+    width: 100,
+    height: 145,
+    alignSelf: 'center'
+  }
+})
 
 export {Schedule};
