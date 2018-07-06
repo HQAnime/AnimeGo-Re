@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, FlatList, Text, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
-import { SmartTouchable, AnimeButton } from '../components';
 import { styles } from './ToWatchStyles';
 import { Actions } from 'react-native-router-flux';
 import { RedColour } from '../value';
+import { Button, TouchableRipple, Card } from 'react-native-paper';
 
 class ToWatch extends Component {
   constructor() {
@@ -20,14 +20,14 @@ class ToWatch extends Component {
       <View style={mainViewStyle}>
         <FlatList style={listStyle} data={this.state.data} keyExtractor={this.listKey} renderItem={({item}) => {
           return (
-            <SmartTouchable onPress={() => this.showAnimeDetail(item.link)} onLongPress={() => this.removeFromList(item)}>
-              <View style={btnViewStyle}>
+            <TouchableRipple onPress={() => this.showAnimeDetail(item.link)} onLongPress={() => this.removeFromList(item)}>
+              <Card>
                 <Text style={textStyle} numberOfLines={2}>{item.name}</Text>
-              </View>
-            </SmartTouchable>
+              </Card>
+            </TouchableRipple>
           )
-        }} automaticallyAdjustContentInsets={false} showsVerticalScrollIndicator={false}/>
-        <AnimeButton title='Remove all anime' color={RedColour} onPress={this.removeAllAnime}/>        
+        }}/>
+        <Button raised color={RedColour} onPress={this.removeAllAnime}>Remove all anime</Button>     
       </View>
     );
   }

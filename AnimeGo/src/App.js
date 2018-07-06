@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StatusBar, StyleSheet, DrawerLayoutAndroid } from 'react-native';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Router, Scene, Actions, Stack } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, 
   AnimeDetail, SubCategory, ToWatch, Schedule } from './screens';
 import { AnimeGoColour, StatusBarColour, ScreenIndex, PRIMARY_COLOUR } from './value';
@@ -18,12 +18,12 @@ export default class App extends Component {
     // The width for the drawer should be 61.8% of the device width
     return (
       <DrawerLayoutAndroid ref='drawer'
-        drawerWidth={deviceWidth * 0.75}
+        drawerWidth={deviceWidth * 0.68}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={this.renderDrawer}>
         <Router backAndroidHandler={this.onBackPress}>
-          <Scene key='root' titleStyle={naviTitleStyle} headerTintColor='black' navigationBarStyle={naviBarStyle} backTitle='Back'>
-            <Scene key='Home' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
+          <Stack key='root' titleStyle={naviTitleStyle} navigationBarStyle={naviBarStyle}>
+            <Stack key='Home' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
             <Scene key='Schedule' component={Schedule} title='Schedule'/>
 
@@ -39,7 +39,7 @@ export default class App extends Component {
 
             <Scene key='ToWatch' component={ToWatch} title='ToWatch'/>            
             <Scene key='Setting' component={Setting} title='Settings'/>
-          </Scene>
+          </Stack>
         </Router>
       </DrawerLayoutAndroid>
     )

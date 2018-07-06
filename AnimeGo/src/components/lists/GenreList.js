@@ -13,7 +13,7 @@ const genreList = ['Action', 'Adventure', 'Cars', 'Comedy', 'Dementia', 'Demons'
 class GenreList extends Component {
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
         <SuperGrid renderItem={item => <GenreCell title={item}/>} 
           items={genreList} itemDimension={128}/>
       </View>

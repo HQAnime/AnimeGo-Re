@@ -51,8 +51,7 @@ class Schedule extends Component {
               </TouchableRipple>
             </Card>
           )
-        }} automaticallyAdjustContentInsets={false} showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<Text style={textStyle}>Data are from MyAnimeList</Text>} />
+        }} ListHeaderComponent={<Text style={textStyle}>Data are from MyAnimeList</Text>} />
       </View>
     )
   }
