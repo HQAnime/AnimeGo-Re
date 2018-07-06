@@ -5,7 +5,7 @@ import { MajorLink, GoGoAnime } from '../value';
 class GenreInfo extends Component {
   render() {
     return (
-      <AnimeList AnimeUrl={GoGoAnime + MajorLink.Genre + this.props.genre} showFab={false}/>
+      <AnimeList AnimeUrl={GoGoAnime + MajorLink.Genre + this.props.genre}/>
     );
   }
 }

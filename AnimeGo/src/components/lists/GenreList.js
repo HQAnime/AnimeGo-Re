@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
-import { FlatList, SafeAreaView } from 'react-native';
-import { isPortrait } from '../../core/DeviceDimensions';
-import GenreCell from '../cells/GenreCell';
+import { View } from 'react-native';
+import SuperGrid from 'react-native-super-grid';
+import { GenreCell } from '../cells/GenreCell';
 
 // All genres
 const genreList = ['Action', 'Adventure', 'Cars', 'Comedy', 'Dementia', 'Demons', 'Drama', 'Ecchi', 'Fantasy', 
-'Game', 'Harem', 'Historical', 'Horror', 'Josei', 'Kids', 'Magic', 'Martial Arts', 'Mecha', 'Military', 
-'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 
-'Seinen', 'Shoujo', 'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Space', 'Sports', 'Super Power', 
-'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];
+  'Game', 'Harem', 'Historical', 'Horror', 'Josei', 'Kids', 'Magic', 'Martial Arts', 'Mecha', 'Military', 
+  'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 
+  'Seinen', 'Shoujo', 'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Space', 'Sports', 'Super Power', 
+  'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];
 
-class GenreList extends React.PureComponent {
-  componentWillMount() {
-    this.updateColumn();
-  }
-
+class GenreList extends Component {
   render() {
-    const { column } = this.state;
     return (
-      <SafeAreaView style={{flex: 1}} onLayout={this.updateColumn}>
-        <FlatList data={genreList} keyExtractor={(genre) => genre} key={isPortrait ? 'p' + column : 'h' + column}
-          renderItem={({item}) => <GenreCell data={item} column={column}/> } numColumns={column} automaticallyAdjustContentInsets={false}/>
-      </SafeAreaView>
+      <View style={{flex: 1}}>
+        <SuperGrid renderItem={item => <GenreCell title={item}/>} 
+          items={genreList} itemDimension={128}/>
+      </View>
     )
   }
-
-  updateColumn = () => this.setState({column: isPortrait() ? 2 : 5});
 }
 
-export {GenreList};
+export { GenreList };

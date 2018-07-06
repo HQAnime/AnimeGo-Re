@@ -22,7 +22,6 @@ class AnimeList extends PureComponent {
 
     // Loading anime
     this.loadAnime();
-    this.scrollToTop = this.scrollToTop.bind(this);
   }
 
   componentDidUpdate() {

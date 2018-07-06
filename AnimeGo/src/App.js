@@ -52,7 +52,7 @@ export default class App extends Component {
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
-        <DrawerItem icon='home' label='Home' onPress={() => Actions.popTo('Home')}/>
+        <DrawerItem icon='home' label='Home' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
         <Divider/>
         <DrawerItem icon='new-releases' label='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
         <DrawerItem icon='timeline' label='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>
@@ -71,6 +71,9 @@ export default class App extends Component {
     this.refs['drawer'].openDrawer();
   }
 
+  /**
+   * Handle android back button
+   */
   onBackPress = () => {
     // Close the drawer as well
     this.refs['drawer'].closeDrawer();
@@ -81,7 +84,7 @@ export default class App extends Component {
   onChangingScreen(index) {
     switch (index) {
       case ScreenIndex.NewRelease:
-        Actions.NewRelease(); break;
+        Actions.popTo('Home'); break;
       case ScreenIndex.NewSeason:
         Actions.NewSeason(); break;
       case ScreenIndex.Movie:

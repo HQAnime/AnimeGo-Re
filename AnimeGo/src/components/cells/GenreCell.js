@@ -1,51 +1,26 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SmartTouchable } from '../../components';
-import { SecondaryColour } from '../../value';
+import { View, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-paper';
+import { ACCENT_COLOUR } from '../../value';
 
 class GenreCell extends PureComponent {
-  constructor(props) {
-    super();
-    this.flex = 1 / props.column;
-    this.title = props.data;
-  }
-
   render() {
-    const { viewStyle, textStyle } = styles;  
+    const { title } = this.props;
     return (
-      <View style={{flex: this.flex}}>
-        <SmartTouchable onPress={this.showGenreInfo} round>
-          <View style={viewStyle}>
-            <Text style={textStyle}>{this.title}</Text>
-          </View>
-        </SmartTouchable>
-      </View>
+      <Button color={ACCENT_COLOUR} onPress={this.showGenreInfo}>{title}</Button>
     )
   }
 
+  /**
+   * Go to genre category
+   */
   showGenreInfo = () => {
-    let genre = this.title.split(' ').join('-') + '?page=';
+    const { title } = this.props;
+    let genre = title.split(' ').join('-') + '?page=';
     // console.log(title, genre);
-    Actions.GenreInfo({title: this.title, genre: genre, headerTintColor: 'white'});
+    Actions.GenreInfo({title: title, genre: genre});
   }
 }
-
-const styles = StyleSheet.create({
-  viewStyle: {
-    justifyContent: 'center',
-    margin: 4, 
-    padding: 4,
-    height: 44,    
-    flex: 1,
-    backgroundColor: SecondaryColour,
-    borderRadius: 22,        
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
-})
 
 export { GenreCell };

@@ -9,7 +9,7 @@ class SubCategory extends Component {
 
   render() {
     return (
-      <AnimeList AnimeUrl={this.props.link} showFab={false}/>
+      <AnimeList AnimeUrl={this.props.link}/>
     )
   }
 }
