@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ActivityIndicator, Text, Platform, View, Dimensions } from 'react-native';
 import GridView from 'react-native-super-grid';
 import AnimeLoader from '../../core/AnimeLoader';
@@ -7,7 +7,7 @@ import { moderateScale } from 'react-native-size-matters';
 import { Actions } from 'react-native-router-flux';
 import { ProgressBar } from '../../components';
 
-class AnimeList extends Component {
+class AnimeList extends PureComponent {
   constructor(props) {
     super(props);
     console.log(props.AnimeUrl)
@@ -18,17 +18,13 @@ class AnimeList extends Component {
       isRefreshing: false,
       url: props.AnimeUrl,
     };
-  }
-
-  componentWillMount() {
     // Loading anime
     this.loadAnime();
   }
 
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     this.setState({url: this.props.AnimeUrl})
     this.loadAnime();
-    this.forceUpdate();
   }
 
   render() {
@@ -39,7 +35,7 @@ class AnimeList extends Component {
       return (
         <View style={{flex: 1}}>
           <GridView items={data} itemDimension={moderateScale(256, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
-            ListFooterComponent={this.renderFooter} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} />
+            ListFooterComponent={this.renderFooter} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} extraData={this.state.url}/>
         </View>
       )
     }

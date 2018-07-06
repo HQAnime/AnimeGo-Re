@@ -11,9 +11,18 @@ class NewRelease extends Component {
     const { search } = this.state;
     return (
       <View style={{flex: 1}}>
-        <View style={{elevation: 4, padding: 4, backgroundColor: PRIMARY_COLOUR, width: '100%'}}>
-          <SearchBar onIconPress={this.props.drawer()} onChangeText={input => {this.setState({search: input}); this.forceUpdate()}}
-            value={search} icon='menu' placeholder='Search AnimeGo'/>
+        <View style={{elevation: 4, padding: 4, backgroundColor: PRIMARY_COLOUR}}>
+          <SearchBar onIconPress={this.props.drawer()} onChangeText={input => this.setState({search: input})}
+            onEndEditing={() => {
+              this.setState({keyword: ''});
+              // Clear old result
+              setTimeout(() => {
+                if (search == null || search.length < 3) return;
+                else {
+                  this.setState({search: search});
+                }
+              }, 1000)
+            }} value={search} icon='menu' placeholder='Search AnimeGo'/>
         </View>
         {
           (search.length < 3) ? <AnimeList AnimeUrl={GoGoAnime + MajorLink.NewRelease}/>
