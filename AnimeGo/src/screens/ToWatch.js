@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
-import { styles } from './ToWatchStyles';
+import { View, FlatList, Text, AsyncStorage, ToastAndroid, Platform, Alert, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { RedColour } from '../value';
-import { Button, TouchableRipple, Card } from 'react-native-paper';
+import { Button, TouchableRipple, Card, Paragraph } from 'react-native-paper';
 
 class ToWatch extends Component {
   constructor() {
@@ -15,16 +14,16 @@ class ToWatch extends Component {
 
   listKey = (item) => item.name; 
   render() {
-    const { btnViewStyle, mainViewStyle, listStyle, textStyle } = styles;
+    const { btnViewStyle, mainViewStyle, textStyle } = styles;
     return (
       <View style={mainViewStyle}>
-        <FlatList style={listStyle} data={this.state.data} keyExtractor={this.listKey} renderItem={({item}) => {
+        <FlatList data={this.state.data} keyExtractor={this.listKey} renderItem={({item}) => {
           return (
-            <TouchableRipple onPress={() => this.showAnimeDetail(item.link)} onLongPress={() => this.removeFromList(item)}>
-              <Card>
-                <Text style={textStyle} numberOfLines={2}>{item.name}</Text>
-              </Card>
-            </TouchableRipple>
+            <Card>
+              <TouchableRipple onPress={() => this.showAnimeDetail(item.link)} onLongPress={() => this.removeFromList(item)}>
+                <View style={{flex: 1, padding: 8}}><Paragraph>{item.name}</Paragraph></View>
+              </TouchableRipple>
+            </Card>
           )
         }}/>
         <Button raised color={RedColour} onPress={this.removeAllAnime}>Remove all anime</Button>     
@@ -88,7 +87,21 @@ class ToWatch extends Component {
   showAnimeDetail(link) {
     Actions.AnimeDetail({title: 'Loading...', link: link});
   }
-
 }
 
-export {ToWatch};
+const styles = StyleSheet.create({
+  mainViewStyle: {
+    flex: 1
+  },
+  btnViewStyle: {
+    marginTop: 4, 
+    height: 44,
+    justifyContent: 'center'
+  },
+  textStyle: {
+    fontWeight: 'bold',
+    color: 'black'
+  }
+})
+
+export { ToWatch };

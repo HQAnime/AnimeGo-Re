@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { BlueColour, RedColour, GreenColour, SecondaryColour } from '../value';
+import { ACCENT_COLOUR, RedColour, GreenColour, SecondaryColour } from '../value';
 
 export const styles = StyleSheet.create({
   blueButton: {
-    backgroundColor: BlueColour,
+    backgroundColor: ACCENT_COLOUR,
   },
   redButton: {
     backgroundColor: RedColour

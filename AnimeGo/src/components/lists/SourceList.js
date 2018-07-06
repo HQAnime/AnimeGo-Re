@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, Dimensions, Alert } from 'react-native';
 import AnimeSourceLoader from '../../core/AnimeSourceLoader';
 import { Actions } from 'react-native-router-flux';
-import { GreenColour, AnimeGoColour } from '../../value';
+import { GreenColour, AnimeGoColour, ACCENT_COLOUR } from '../../value';
 import { styles } from './SourceListStyles';
 import { ProgressBar } from '../common/ProgressBar';
 import { SourceCell } from '../cells/SourceCell';
@@ -57,13 +57,13 @@ class SourceList extends Component {
     return (
       <View style={headerViewStyle}>
         <Text style={textStyle}>Anime Detail</Text>
-        <Button onPress={this.infoBtnPressed}>{this.state.name}</Button>
+        <Button raised primary onPress={this.infoBtnPressed}>{this.state.name}</Button>
         <View style={buttonGroupStyle}>
           <View style={buttonStyle}>
-            <Button onPress={this.prevEpisode}>{'<<  Previous'}</Button>
+            <Button raised dark color={ACCENT_COLOUR} onPress={this.prevEpisode}>{'<<  Previous'}</Button>
           </View>
           <View style={buttonStyle}>
-            <Button onPress={this.nextEpisode}>{'Next  >>'}</Button>           
+            <Button raised dark color={ACCENT_COLOUR} onPress={this.nextEpisode}>{'Next  >>'}</Button>           
           </View>
         </View>
       </View>

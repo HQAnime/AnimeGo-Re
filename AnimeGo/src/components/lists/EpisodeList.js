@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Image, Linking, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
 import EpisodeLoader from '../../core/EpisodeLoader';
-import EpisodeCell from '../cells/EpisodeCell';
-import { ProgressBar, AnimeButton } from '../../components';
+import { ProgressBar } from '../../components';
 import { Actions } from 'react-native-router-flux';
 import { isPortrait } from '../../core/DeviceDimensions';
 import { styles } from './EpisodeListStyles'
-import { BlueColour, GreenColour, RedColour } from '../../value';
+import { ACCENT_COLOUR, GreenColour, RedColour } from '../../value';
+import { Button, Card, Divider } from 'react-native-paper';
+import { EpisodeCell } from '../cells/EpisodeCell';
 
 class EpisodeList extends React.PureComponent {
   constructor(props) {
@@ -35,7 +36,7 @@ class EpisodeList extends React.PureComponent {
         <View style={{flex: 1}} onLayout={this.updateColumn}>
           <FlatList data={data} keyExtractor={this.keyExtractor} numColumns={column} key={isPortrait() ? 'p' + column : 'h' + column}
             renderItem={({item}) => <EpisodeCell data={item} isLastest={item.number == episode ? true : false}/>}  
-            ListFooterComponent={this.renderFooter} ListHeaderComponent={this.renderHeader} automaticallyAdjustContentInsets={false}
+            ListFooterComponent={this.renderFooter} ListHeaderComponent={this.renderHeader} 
             onEndReached={this.loadMoreEpisode} onEndReachedThreshold={0.5}/>
         </View>
       )
@@ -46,14 +47,17 @@ class EpisodeList extends React.PureComponent {
     const { name, image, plot } = this.state;
     const { mainViewStyle, titleStyle, basicTextStyle, plotStyle } = styles;
     return (
-      <View style={mainViewStyle}>
-        <Text numberOfLines={3} style={titleStyle}>{name}</Text>
-        { this.renderInfo() }
-        <Text style={plotStyle}>{plot}</Text>
-        <AnimeButton title='Google it' color={BlueColour} onPress={this.searchGoogle}/>
-        <Text style={basicTextStyle}>* Please consider buying its DVD</Text>
-        <AnimeButton title='To-Watch' color={RedColour} onPress={this.addToList}/>
-      </View>
+      <Card>
+        <View style={mainViewStyle}>
+          <Text numberOfLines={3} style={titleStyle}>{name}</Text>
+          <Divider />
+          { this.renderInfo() }
+          <Text style={plotStyle}>{plot}</Text>
+          <Button raised color={ACCENT_COLOUR} onPress={this.searchGoogle}>Google it</Button>
+          <Text style={basicTextStyle}>* Please consider buying its DVD</Text>
+          <Button raised color={RedColour} onPress={this.addToList}>To-Watch</Button>
+        </View>
+      </Card>
     )
   }
 
@@ -93,34 +97,20 @@ class EpisodeList extends React.PureComponent {
   renderInfo = () => {
     const { genre, release, episode, type, image } = this.state;    
     const { imageViewStyle, imageStyle, infoViewStyle, basicTextStyle } = styles;    
-    if (global.dataSaver) {
-      return (
+    return (
+      <View style={imageViewStyle}>
+        <Image source={{uri: image}} style={imageStyle} resizeMode='cover'/>
         <View style={infoViewStyle}>
           <Text style={basicTextStyle}>{'Genre\n' + genre}</Text>
           <Text style={basicTextStyle}>{'Release\n' + release}</Text>
           <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
           <View>
             <Text style={basicTextStyle}>Type:</Text>
-            <AnimeButton title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
+            <Button color={GreenColour} onPress={this.goSubCategory}>{type.replace(' Anime', '')}</Button>
           </View>
         </View>
-      )
-    } else {
-      return (
-        <View style={imageViewStyle}>
-          <Image source={{uri: image}} style={imageStyle} resizeMode='cover'/>
-          <View style={infoViewStyle}>
-            <Text style={basicTextStyle}>{'Genre\n' + genre}</Text>
-            <Text style={basicTextStyle}>{'Release\n' + release}</Text>
-            <Text style={basicTextStyle}>{'Episode\n' + episode}</Text>
-            <View>
-              <Text style={basicTextStyle}>Type:</Text>
-              <AnimeButton title={type.replace(' Anime', '')} color={GreenColour} onPress={this.goSubCategory}/>
-            </View>
-          </View>
-        </View>
-      )
-    }
+      </View>
+    )
   }
 
   /**

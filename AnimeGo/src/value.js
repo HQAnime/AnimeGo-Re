@@ -8,7 +8,6 @@
 export const PRIMARY_COLOUR = '#FF9800';
 export const ACCENT_COLOUR = '#448AFF';
 export const GreyColour = '#607D8B';
-export const BlueColour = '#2196F3';
 export const RedColour = '#F44336';
 export const GreenColour = '#4CAF50';
 

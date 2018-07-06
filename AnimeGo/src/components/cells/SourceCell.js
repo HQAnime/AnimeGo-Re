@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Linking, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { GreyColour, BlueColour, RedColour } from '../../value';
+import { GreyColour, ACCENT_COLOUR, RedColour } from '../../value';
 import { Button } from 'react-native-paper';
 
 class SourceCell extends React.PureComponent {
@@ -21,14 +21,14 @@ class SourceCell extends React.PureComponent {
     if (this.source.includes('Download')) {
       return (
         <View style={viewStyle}>
-          <Button onPress={this.WatchAnime}>{this.source}</Button>
+          <Button raised color={RedColour} onPress={this.WatchAnime}>{this.source}</Button>
           <Text style={textStyle}>Server list</Text>
         </View>
       )
     } else {
       return (
         <View style={viewStyle}>
-          <Button onPress={this.WatchAnime}>{this.source}</Button>
+          <Button raised onPress={this.WatchAnime}>{this.source}</Button>
         </View>
       )
     }

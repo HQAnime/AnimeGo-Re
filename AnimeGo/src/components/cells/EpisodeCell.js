@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
-import { AnimeButton } from '../../components';
 import { Actions } from 'react-native-router-flux'; 
-import { RedColour, SecondaryColour }  from '../../value';
+import { RedColour, SecondaryColour, PRIMARY_COLOUR }  from '../../value';
+import { Button } from 'react-native-paper';
 
 class EpisodeCell extends Component {
   
@@ -24,7 +24,7 @@ class EpisodeCell extends Component {
     const { viewStyle } = styles;
     return (
       <View style={viewStyle}>
-        <AnimeButton title={this.episode} color={this.isLastest ? RedColour : SecondaryColour} onPress={this.WatchAnime}/>
+        <Button raised color={this.isLastest ? RedColour : PRIMARY_COLOUR} onPress={this.WatchAnime}>{this.episode}</Button>
       </View>
     )
   }

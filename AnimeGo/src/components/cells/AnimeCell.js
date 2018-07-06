@@ -3,7 +3,7 @@ import { View, Text, Image, Linking, StyleSheet } from 'react-native';
 import { TouchableRipple, Paper, Card, Divider } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { moderateScale } from 'react-native-size-matters';
-import { BlueColour, ACCENT_COLOUR, PRIMARY_COLOUR } from '../../value';
+import { ACCENT_COLOUR, PRIMARY_COLOUR } from '../../value';
 
 class AnimeCell extends PureComponent {
   constructor(props) {
