@@ -5,15 +5,20 @@ import { MajorLink, GoGoAnime, PRIMARY_COLOUR } from '../value';
 import { AnimeList } from '../components/';
 
 class NewRelease extends Component {
-  state = { search: 'conan' }
+  state = { search: '' }
 
   render() {
     const { search } = this.state;
     return (
       <View style={{flex: 1}}>
-        <View style={{elevation: 4, padding: 4, backgroundColor: PRIMARY_COLOUR, width: '100%'}}>
-          <SearchBar onIconPress={this.props.drawer()} onChangeText={input => {this.setState({search: input}); this.forceUpdate()}}
-            value={search} icon='menu' placeholder='Search AnimeGo'/>
+        <View style={{elevation: 4, padding: 4, backgroundColor: PRIMARY_COLOUR}}>
+          <SearchBar onIconPress={this.props.drawer()} onChangeText={input => this.input = input}
+            onEndEditing={() => {
+              if (this.input == null || this.input.length < 3) return;
+              else {
+                this.setState({search: this.input});
+              }
+            }} icon='menu' placeholder='Search AnimeGo'/>
         </View>
         {
           (search.length < 3) ? <AnimeList AnimeUrl={GoGoAnime + MajorLink.NewRelease}/>

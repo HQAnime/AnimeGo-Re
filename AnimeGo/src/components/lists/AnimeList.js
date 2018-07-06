@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ActivityIndicator, Text, Platform, View, Dimensions } from 'react-native';
 import GridView from 'react-native-super-grid';
 import AnimeLoader from '../../core/AnimeLoader';
@@ -6,8 +6,9 @@ import AnimeCell from '../cells/AnimeCell';
 import { moderateScale } from 'react-native-size-matters';
 import { Actions } from 'react-native-router-flux';
 import { ProgressBar } from '../../components';
+import { Button } from 'react-native-paper';
 
-class AnimeList extends Component {
+class AnimeList extends PureComponent {
   constructor(props) {
     super(props);
     console.log(props.AnimeUrl)
@@ -18,17 +19,21 @@ class AnimeList extends Component {
       isRefreshing: false,
       url: props.AnimeUrl,
     };
-  }
 
-  componentWillMount() {
     // Loading anime
     this.loadAnime();
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setState({url: this.props.AnimeUrl})
-    this.loadAnime();
-    this.forceUpdate();
+  componentDidUpdate() {
+    const { url } = this.state;
+    const { AnimeUrl } = this.props;
+    if (url != AnimeUrl) {
+      // If the url changes, reset and load data again
+      this.setState({
+        data: [], page: 1, hasMorePage: true, isRefreshing: false, url: AnimeUrl
+      }, () => this.loadAnime())
+    }
   }
 
   render() {
@@ -38,22 +43,26 @@ class AnimeList extends Component {
     else {
       return (
         <View style={{flex: 1}}>
-          <GridView items={data} itemDimension={moderateScale(256, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
-            ListFooterComponent={this.renderFooter} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} />
+          <GridView ref={(list) => this.anime = list} items={data} itemDimension={moderateScale(256, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
+            ListFooterComponent={this.renderFooter} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} extraData={this.state.url}/>
         </View>
       )
     }
   }
 
-  renderHeader = () => {
-    return <ProgressBar />
-  }
-
+  /**
+   * Render footer. 
+   * A progress bar when there are more data,
+   * A There is the last page when there are no more data
+   */
   renderFooter = () => {
     if (!this.state.hasMorePage) return null;
     else return <ProgressBar />
   }
 
+  /**
+   * Load anime from url
+   */
   loadAnime = () => {
     const { hasMorePage, isRefreshing, url, page, data } = this.state; 
     if (!hasMorePage && !isRefreshing) return;
@@ -84,8 +93,7 @@ class AnimeList extends Component {
           })
         }
       }
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.error(error);
       this.setState({isRefreshing: false, hasMorePage: false})
     })
