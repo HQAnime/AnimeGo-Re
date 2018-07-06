@@ -56,18 +56,8 @@ class AnimeList extends PureComponent {
    * A There is the last page when there are no more data
    */
   renderFooter = () => {
-    if (!this.state.hasMorePage) {
-      return (
-        <Button primary raised onPress={this.scrollToTop}>Back to top</Button>
-    )} else return <ProgressBar />
-  }
-
-  /**
-   * Scroll the list to top
-   */
-  scrollToTop = () => {
-    console.log(this.anime)
-    this.anime.scrollToOffset({offset: 0});
+    if (!this.state.hasMorePage) return null;
+    else return <ProgressBar />
   }
 
   /**
