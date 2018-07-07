@@ -11,9 +11,11 @@ export default class GithubUpdate {
       fetch(this.url).then((html) => html.text()).then((htmlText) => {
         let HTMLParser = require('fast-html-parser');
         let root = HTMLParser.parse(htmlText);
+
+        // When it does not work, check here
         let newVersion = root.querySelector('span.css-truncate-target');
         let download = root.querySelector('li.d-block.py-2');
-        console.log(newVersion, download);
+
         // When Github is down or Henry being stupid
         if (newVersion == null || download == null) return;
         // A new version

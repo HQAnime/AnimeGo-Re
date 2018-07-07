@@ -8,7 +8,7 @@ class ToWatch extends Component {
   constructor() {
     super()
     this.state = {
-      data: Object.assign(global.favList)
+      data: Object.assign(global.watch_list)
     }
   }
 
@@ -35,7 +35,7 @@ class ToWatch extends Component {
    * Remove all anime from ToWatch list
    */
   removeAllAnime = () => {
-    if (global.favList.length < 1) {
+    if (global.watch_list.length < 1) {
       Alert.alert('No anime', 'Please add some anime before removing any -_-')
     } else {
       Alert.alert('Warning', 'Do you want to remove all anime?',
@@ -43,7 +43,7 @@ class ToWatch extends Component {
           {text: 'Cancel', onPress: () => console.log('No anime has been removed'), style: 'cancel'},
           {text: 'OK', onPress: () => {
             this.setState({data: []});
-            global.favList = [];
+            global.watch_list = [];
             if (Platform.OS == 'android') ToastAndroid.show('All anime has been removed', ToastAndroid.SHORT);
             AsyncStorage.setItem('@Favourite', JSON.stringify([]));
           }},
@@ -60,22 +60,22 @@ class ToWatch extends Component {
       [
         {text: 'Cancel', onPress: () => console.log('No anime has been removed'), style: 'cancel'},
         {text: 'OK', onPress: () => {
-          if (global.favList.length == 1) {
+          if (global.watch_list.length == 1) {
             this.setState({data: []});
-            global.favList = [];
+            global.watch_list = [];
           } else {
-            for (var i = 0; i < global.favList.length; i++) {
-              let curr = global.favList[i];
+            for (var i = 0; i < global.watch_list.length; i++) {
+              let curr = global.watch_list[i];
               if (curr.name == item.name && curr.link == item.link) {
                 // Remove this item
-                global.favList.splice(i, 1);
-                this.setState({data: global.favList});              
+                global.watch_list.splice(i, 1);
+                this.setState({data: global.watch_list});              
                 break;
               }
             }
           }
           if (Platform.OS == 'android') ToastAndroid.show('Anime has been removed', ToastAndroid.SHORT);          
-          AsyncStorage.setItem('@Favourite', JSON.stringify(global.favList));
+          AsyncStorage.setItem('@Favourite', JSON.stringify(global.watch_list));
         }},
       ]
     )

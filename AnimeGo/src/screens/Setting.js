@@ -8,7 +8,7 @@ import GithubUpdate from '../core/GithubUpdate';
 class Setting extends Component {
   state = {
     dataSaver: global.dataSaver,
-    hideDub: global.hideDub
+    hideDub: global.hide_dub
   }
 
   render() {
@@ -66,7 +66,7 @@ class Setting extends Component {
 
   updateDub = () => {
     let newValue = !this.state.hideDub;
-    global.hideDub = newValue;
+    global.hide_dub = newValue;
     this.setState({hideDub: newValue});
     AsyncStorage.setItem('@DUB', JSON.stringify(newValue));
   }

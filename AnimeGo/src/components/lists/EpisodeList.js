@@ -67,20 +67,20 @@ class EpisodeList extends React.PureComponent {
   addToList = () => {
     const { data, link } = this.props;    
     let animeInfo = {link: link, name: data.name};
-    if (global.favList.length == 0) global.favList = [animeInfo];
+    if (global.watch_list.length == 0) global.watch_list = [animeInfo];
     else {
       var hasAnime = false;
-      for (var i = 0; i < global.favList.length; i++) {
-        let anime = global.favList[i];
+      for (var i = 0; i < global.watch_list.length; i++) {
+        let anime = global.watch_list[i];
         if (anime.name == animeInfo.name) {
           if (Platform.OS == 'android') ToastAndroid.show('Anime has already been added', ToastAndroid.SHORT);
           else Alert.alert('Warning', 'Anime has already been added');
           hasAnime = true; break;
         }
       }
-      if (!hasAnime) global.favList = global.favList.concat([animeInfo]);
+      if (!hasAnime) global.watch_list = global.watch_list.concat([animeInfo]);
     }
-    AsyncStorage.setItem('@Favourite', JSON.stringify(global.favList));
+    AsyncStorage.setItem('@Favourite', JSON.stringify(global.watch_list));
   }
 
   /**

@@ -40,7 +40,7 @@ export default class AnimeLoader {
           var animeName = anime.querySelector('.name').text;
           // To keep original entry numbers
           entryCount++;
-          if (global.hideDub && animeName.includes('(Dub)')) continue;
+          if (global.hide_dub && animeName.includes('(Dub)')) continue;
           // Only for NewRelease, it is displaying episode.
           var extraInformation = this.url == GoGoAnime + MajorLink.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
           if (extraInformation == '') extraInformation = '??';
