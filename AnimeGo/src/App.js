@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, StatusBar, StyleSheet, DrawerLayoutAndroid } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, DrawerLayoutAndroid } from 'react-native';
 import { Router, Scene, Actions, Stack } from 'react-native-router-flux';
 import { NewRelease, NewSeason, Movie, Popular, Genre, Setting, GenreInfo, WatchAnime, 
   AnimeDetail, SubCategory, ToWatch, Schedule } from './screens';
-import { AnimeGoColour, StatusBarColour, ScreenIndex, PRIMARY_COLOUR } from './value';
+import { AnimeGoColour, StatusBarColour, ScreenIndex, PRIMARY_COLOUR, Release } from './value';
 import { DrawerSection, DrawerItem, Divider, ToolbarAction } from 'react-native-paper';
 import { DataManager } from './core';
 import { deviceWidth, deviceHeight } from './core/DeviceDimensions';
+import QuickStore from './core/QuickStore';
+import GithubUpdate from './core/GithubUpdate';
 
 export default class App extends Component {
   async componentWillMount() {
+    // Check for update
+    new GithubUpdate(Release).checkUpdate();
     await DataManager.setupData();
   }
 

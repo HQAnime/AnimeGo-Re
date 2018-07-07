@@ -1,9 +1,9 @@
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { VERSION } from '../value';
 
 class DataManager {
   static async setupData() {
-    // Setup data here when app is launched
+    // Get data from storage
     try {
       const value = await AsyncStorage.getItem('@FIRST');
       if (value != 'false') {
