@@ -16,7 +16,7 @@ export const Release = 'https://github.com/HenryQuan/AnimeGo/releases/latest';
 export const GoGoAnime = 'https://www3.gogoanime.se';
 export const Email = 'mailto:development.henryquan@gmail.com';
 
-export const VERSION = '1.0.6';
+export const VERSION = '1.1.0';
 
 /**
  * Screen index for quick screen pushing
