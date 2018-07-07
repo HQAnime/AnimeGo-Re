@@ -11,4 +11,4 @@ class DataManager {
   }
 }
 
-export {DataManager};
+export { DataManager };

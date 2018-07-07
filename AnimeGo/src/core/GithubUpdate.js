@@ -6,7 +6,7 @@ export default class GithubUpdate {
     this.url = url;
   }
 
-  checkUpdate() {
+  checkUpdate(settings) {
     return new Promise((success, failure) => {
       fetch(this.url).then((html) => html.text()).then((htmlText) => {
         let HTMLParser = require('fast-html-parser');
@@ -28,8 +28,9 @@ export default class GithubUpdate {
               {text: 'SURE', onPress: () => Linking.openURL(link)},
             ],
           )
+        } else if (settings) {
+          Alert.alert('AnimeGo', 'Version ' + VERSION + ' is up to date');
         }
-        // Show nothing when there is no update
       })
       .catch((error) => {
         Alert.alert('Fatal', 'Error Unknown');        

@@ -4,6 +4,7 @@ import { SmartTouchable, DrawerCell } from '../components';
 import { AnimeGoColour, Github, GoGoAnime, Email, VERSION, MicrosoftStore, Release } from '../value';
 import { styles } from './SettingStyles';
 import GithubUpdate from '../core/GithubUpdate';
+import { TouchableRipple, DrawerItem } from '../../node_modules/react-native-paper';
 
 class Setting extends Component {
   state = {
@@ -16,22 +17,16 @@ class Setting extends Component {
     const { switchViewStyle, switchStyle, textStyle, versionStyle, dividerStyle } = styles;
     return (
       <View>
-        <SmartTouchable onPress={this.updateSaver}>
-          <View style={switchViewStyle}>
-            <Text style={textStyle}>Data saver</Text>
-            <Switch style={switchStyle} value={dataSaver} onTintColor={AnimeGoColour} thumbTintColor='white' onValueChange={this.updateSaver}/>
-          </View>
-        </SmartTouchable>
-        <SmartTouchable onPress={this.updateDub}>
+        <TouchableRipple onPress={this.updateDub}>
           <View style={switchViewStyle}>
             <Text style={textStyle}>Hide DUB</Text>
             <Switch style={switchStyle} value={hideDub} onTintColor={AnimeGoColour} thumbTintColor='white' onValueChange={this.updateDub}/>
           </View>
-        </SmartTouchable>
-        <DrawerCell text='Email feedback' onPress={() => this.openLink(Email)}/>
-        <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                              
-        <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>  
-        <DrawerCell text='Check for update' onPress={this.checkUpdate}/>              
+        </TouchableRipple>
+        <DrawerItem label='Email feedback' onPress={() => this.openLink(Email)}/>
+        <DrawerItem label='Source code' onPress={() => this.openLink(Github)}/>                              
+        <DrawerItem label='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>  
+        <DrawerItem label='Check for update' onPress={this.checkUpdate}/>              
         <Text style={versionStyle}>{VERSION}</Text>
       </View>
     )
@@ -53,15 +48,8 @@ class Setting extends Component {
     } else {
       // Github
       let updater = new GithubUpdate(Release);
-      updater.checkUpdate();
+      updater.checkUpdate(true);
     }
-  }
-
-  updateSaver = () => {
-    let newValue = !this.state.dataSaver;
-    global.dataSaver = newValue;
-    this.setState({dataSaver: newValue});
-    AsyncStorage.setItem('@dataSaver', JSON.stringify(newValue));
   }
 
   updateDub = () => {
