@@ -60,4 +60,4 @@ class Setting extends Component {
   }
 }
 
-export {Setting};
+export { Setting };

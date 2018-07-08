@@ -26,7 +26,7 @@ export default class App extends Component {
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={this.renderDrawer}>
         <Router backAndroidHandler={this.onBackPress}>
-          <Stack key='root' titleStyle={naviTitleStyle} navigationBarStyle={naviBarStyle}>
+          <Stack key='root' titleStyle={naviTitleStyle} cardStyle={{backgroundColor: '#fafafa'}} navigationBarStyle={naviBarStyle}>
             <Stack key='Home' component={NewRelease} drawer={() => this.onLeftBtnPressed} initial hideNavBar/>
             <Scene key='NewSeason' component={NewSeason} title='New Season'/>
             <Scene key='Schedule' component={Schedule} title='Schedule'/>
