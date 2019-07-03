@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "fast-html-parser": "^1.0.1",
-    "react": "16.2.0",
+    "react": "16.8.3",
     "react-native": "^0.59.10",
     "react-native-action-button": "^2.8.4",
     "react-native-elements": "^0.19.0",
@@ -16,13 +16,16 @@
     "react-native-size-matters": "^0.1.0",
     "react-native-super-grid": "^2.1.0",
     "react-native-vector-icons": "^4.5.0",
-    "react-native-windows": "^0.53.0-rc.1"
+    "react-native-windows": "^1.0.0"
   },
   "devDependencies": {
-    "babel-jest": "22.2.2",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.3.0",
-    "react-test-renderer": "16.2.0",
+    "@babel/core": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "@react-native-community/async-storage": "^1.5.0",
+    "babel-jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.53.0",
+    "react-test-renderer": "16.8.3",
+    "jest": "^24.8.0",
     "rnpm-plugin-windows": "^0.2.11"
   },
   "jest": {
