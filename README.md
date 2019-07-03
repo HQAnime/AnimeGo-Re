@@ -15,7 +15,7 @@ This app works for **UWP** and **Android**. IOS is partially supported but more 
 - Genre list
 - Search anime
 
-There might be ads popping up when you play videos but please note that it is from the website itself. This app does not contain any ads. ~~Therefore, I earn nothing and will become poorer the more app I make. Just kidding~~
+There might be ads popping up when you play videos but please note that it is from the website itself. This app does not contain any ads. ~~Therefore, I earn nothing and will become poorer the more app I make. Just kidding (but it is so real)~~
 
 ## How to run this project
 ~~~~
@@ -63,6 +63,8 @@ Screenshots are from UWP with data saver mode on
 * [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
 * [react-native-action-button](https://github.com/mastermoo/react-native-action-button)
 * [react-native-windows](https://github.com/Microsoft/react-native-windows)
+
+This will be moved to about screeen
 
 ## Support
 Maybe star this repo?
