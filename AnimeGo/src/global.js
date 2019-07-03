@@ -3,4 +3,4 @@ global.hideDub = false;
 global.currSubCategory = '';
 global.favList = [];
 
-global.domain = "https://gogoanime.se";
+global.domain = "https://www20.gogoanimes.tv";
