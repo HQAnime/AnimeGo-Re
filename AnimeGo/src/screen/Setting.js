@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Switch, AsyncStorage, Linking, Platform, ToastAndroid, Alert } from 'react-native';
+import { View, Text, Switch, Linking, Platform, ToastAndroid, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { SmartTouchable, DrawerCell } from '../component';
 import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease } from '../value';
 import { styles } from './SettingStyles';

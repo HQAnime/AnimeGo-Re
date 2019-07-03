@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Image, Linking, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
+import { View, Text, FlatList, Image, Linking, ToastAndroid, Platform, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import EpisodeLoader from '../../helper/core/EpisodeLoader';
 import EpisodeCell from '../cell/EpisodeCell';
 import { LoadingIndicator, AnimeButton } from '../../component';

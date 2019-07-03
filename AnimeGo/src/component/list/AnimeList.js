@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, Text, Platform, View, Dimensions } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { FlatGrid  } from 'react-native-super-grid';
 import AnimeLoader from '../../helper/core/AnimeLoader';
 import AnimeCell from '../cell/AnimeCell';
 import { LoadingIndicator, FabButton } from '../../component';
@@ -30,7 +30,7 @@ class AnimeList extends PureComponent {
     else {
       return (
         <View style={{flex: 1}}>
-          <GridView items={data} itemDimension={moderateScale(128, 0.15)} spacing={2} renderItem={item => <AnimeCell data={item}/>} 
+          <FlatGrid items={data} itemDimension={moderateScale(128, 0.15)} spacing={2} renderItem={({item}) => <AnimeCell data={item}/>} 
             refreshing={isRefreshing} ListFooterComponent={this.renderFooterComponent} automaticallyAdjustContentInsets={false}
             onRefresh={this.refreshAnime} onEndReached={this.loadAnime} onEndReachedThreshold={0.5} showsVerticalScrollIndicator={false} />
           { this.renderFabButton() }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, AsyncStorage, ToastAndroid, Platform, Alert } from 'react-native';
+import { View, FlatList, Text, ToastAndroid, Platform, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { SmartTouchable, AnimeButton } from '../component';
 import { styles } from './ToWatchStyles';
 import { Actions } from 'react-native-router-flux';
