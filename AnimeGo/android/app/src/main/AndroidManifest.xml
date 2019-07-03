@@ -1,24 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.yihengquan.gogoanime"
-    android:versionCode="9"
-    android:versionName="1.0.77777">
+  package="com.yihengquan.gogoanime">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove"/>
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
 
     <application
       android:name=".MainApplication"
-      android:allowBackup="true"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
