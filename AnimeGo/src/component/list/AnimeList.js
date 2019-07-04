@@ -26,6 +26,7 @@ class AnimeList extends PureComponent {
 
   render() {
     const { data, isRefreshing } = this.state;
+    console.log(moderateScale(128, 0.15));
     if (data.length == 0) return <LoadingIndicator />
     else {
       return (
