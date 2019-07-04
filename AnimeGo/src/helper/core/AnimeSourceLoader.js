@@ -22,14 +22,13 @@ export default class AnimeSourceLoader {
         // Somwhow it does not exist
         if (animeSources == null) success([[], prev, next]);
 
-        var items = animeSources.childNodes[0].childNodes;
-        // console.log(items);
+        var items = animeSources.childNodes[1].childNodes;
         var animeData = [];
         var length = items.length;
-
+        
         // Somwhow it does not have any sources
         if (length == 0) success([[], prev, next]);
-
+        
         // Getting anime information
         animeInfoLink = '';
         animeName = '';
@@ -41,10 +40,9 @@ export default class AnimeSourceLoader {
           // console.log(animeInfoLink, animeName);
         }
 
-        // Get download link
-        var download = root.querySelector('.download-anime').childNodes[1].attributes.href;
-        animeData.push({source: download, name: 'Download'});
-
+        // Get download link (no longer available)
+        animeData.push({source: '', name: 'Download'});
+        
         for (var i = 0; i < length; i++) {
           var source = items[i];
           // Somehow, next line is parsed as well
@@ -60,9 +58,10 @@ export default class AnimeSourceLoader {
 
         // Getting next and prev info
         var nextPrev = root.querySelector('.anime_video_body_episodes'); 
-        if (nextPrev != null) {       
-          prev = nextPrev.childNodes[0].childNodes[1];
-          next = nextPrev.childNodes[2].childNodes[1];
+        if (nextPrev != null) {
+          console.log(nextPrev);
+          prev = nextPrev.childNodes[1].childNodes[1];
+          next = nextPrev.childNodes[3].childNodes[1];
           if (prev != null) prev = global.domain + prev.attributes.href;
           if (next != null) next = global.domain + next.attributes.href;
         }
