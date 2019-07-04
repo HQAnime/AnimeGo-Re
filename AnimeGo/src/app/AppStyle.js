@@ -13,9 +13,9 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   drawerTitleStyle: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginLeft: 12,
+    marginLeft: 16,
     width: '90%',
     marginBottom: 8,
     color: 'white'

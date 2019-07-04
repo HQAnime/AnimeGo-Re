@@ -14,6 +14,7 @@ import { AnimeGoColour, StatusBarColour, ScreenIndex } from '../value';
 import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
+import { Drawer } from 'react-native-paper';
 
 export default class App extends Component {
   async componentWillMount() {
@@ -62,16 +63,16 @@ export default class App extends Component {
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
         </View>       
-        <DrawerCell text='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
-        <DrawerCell text='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
-        <DrawerCell text='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>
+        <Drawer.Item label='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
+        <Drawer.Item label='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
+        <Drawer.Item label='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='Movie' onPress={() => this.onChangingScreen(ScreenIndex.Movie)}/>
-        <DrawerCell text='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
-        <DrawerCell text='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
+        <Drawer.Item label='Movie' onPress={() => this.onChangingScreen(ScreenIndex.Movie)}/>
+        <Drawer.Item label='Popular' onPress={() => this.onChangingScreen(ScreenIndex.Popular)}/>
+        <Drawer.Item label='Genre' onPress={() => this.onChangingScreen(ScreenIndex.Genre)}/>
         <Divider style={dividerStyle}/>
-        <DrawerCell text='ToWatch list' onPress={() => this.onChangingScreen(ScreenIndex.ToWatch)}/>            
-        <DrawerCell text='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>                
+        <Drawer.Item label='ToWatch list' onPress={() => this.onChangingScreen(ScreenIndex.ToWatch)}/>            
+        <Drawer.Item label='Settings' onPress={() => this.onChangingScreen(ScreenIndex.Setting)}/>                
       </ScrollView>
     )
   }
