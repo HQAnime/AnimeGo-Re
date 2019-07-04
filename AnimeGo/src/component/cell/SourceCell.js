@@ -4,32 +4,49 @@ import { AnimeButton } from '../../component';
 import { styles } from './SourceCellStyles'
 import { Actions } from 'react-native-router-flux';
 import { GreyColour, BlueColour, RedColour } from '../../value';
+import { scrapers } from 'source-scraper';
+import { Button } from 'react-native-paper';
 
 class SourceCell extends React.PureComponent {
   constructor(props) {
     super();
     const { name, source } = props.data;
     this.source = name;
-    this.link = source;
+    this.state = {name, source: ''};
+
+    const scraper = scrapers.all.getFirstApplicable(source);
+    scraper.scrap(url).then(scrap => {
+      if (scrap.success) {
+        console.log(scrap.data);
+        this.setState({source: scrap.data});
+      } else {
+        this.setState({source: source});
+      }
+    })
   }
 
   render() {
-    return this.renderButton()
+    return this.renderButton();
   }
 
   renderButton = () => {
     const { viewStyle, textStyle } = styles;
+    const { name, source } = this.state;
     if (this.source.includes('Download')) {
       return (
         <View style={viewStyle}>
-          <AnimeButton title={this.source} onPress={this.WatchAnime} color={RedColour}/>
+          <Button mode='contained' disabled={source === ''} onPress={this.WatchAnime} color={RedColour}>
+            {name}
+          </Button>
           <Text style={textStyle}>Server list</Text>
         </View>
       )
     } else {
       return (
         <View style={viewStyle}>
-          <AnimeButton title={this.source} onPress={this.WatchAnime} color={BlueColour}/>
+          <Button mode='contained' disabled={source === ''} onPress={this.WatchAnime}>
+            {name}
+          </Button>
         </View>
       )
     }
