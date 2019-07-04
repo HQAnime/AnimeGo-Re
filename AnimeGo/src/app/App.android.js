@@ -45,7 +45,7 @@ export default class App extends Component {
             <Scene key='Genre' component={Genre} title='Genre'/>
             <Scene key='GenreInfo' component={GenreInfo}/>
 
-            <Scene key='SearchAnime' component={SearchAnime}/>
+            <Scene key='SearchAnime' component={SearchAnime} hideNavBar/>
             <Scene key='SubCategory' component={SubCategory}/>
 
             <Scene key='ToWatch' component={ToWatch} title='ToWatch'/>            

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Switch, Linking, Platform, ToastAndroid, Alert } from 'react-native';
+import { View, Text, Linking, Platform, ToastAndroid, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { SmartTouchable, DrawerCell } from '../component';
+import { Switch } from 'react-native-paper';
 import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease } from '../value';
 import { styles } from './SettingStyles';
 import GithubUpdate from '../helper/core/GithubUpdate';
@@ -19,9 +20,9 @@ class Setting extends Component {
     return (
       <View>
         <List.Item title='Data Saver' description='Hide all images from loading' onPress={this.updateSaver}
-          right={() => <Switch style={switchStyle} value={dataSaver} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateSaver}/>} />
+          right={() => <Switch value={dataSaver} onValueChange={this.updateSaver}/>} />
         <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={this.updateDub}
-          right={() => <Switch style={switchStyle} value={hideDub} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateDub}/>} />
+          right={() => <Switch value={hideDub} onValueChange={this.updateDub}/>} />
         <List.Item title='Feedback' description='Send an email to developer' onPress={() => this.openLink(Email)}/>
         <List.Item title='Source code' description={Github} onPress={() => this.openLink(Github)}/>                              
         <List.Item title='GoGoAnime website' description={GoGoAnime} onPress={() => this.openLink(GoGoAnime)}/>  
