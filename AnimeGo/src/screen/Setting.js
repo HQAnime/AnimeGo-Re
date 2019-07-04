@@ -22,7 +22,7 @@ class Setting extends Component {
           right={() => <Switch style={switchStyle} value={dataSaver} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateSaver}/>} />
         <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={this.updateDub}
           right={() => <Switch style={switchStyle} value={hideDub} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateDub}/>} />
-        <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={() => this.openLink(Email)}/>
+        <List.Item title='Feedback' description='Send an email to developer' onPress={() => this.openLink(Email)}/>
         <List.Item title='Source code' description={Github} onPress={() => this.openLink(Github)}/>                              
         <List.Item title='GoGoAnime website' description={GoGoAnime} onPress={() => this.openLink(GoGoAnime)}/>  
         <List.Item title='Check for update' description={VERSION} onPress={this.checkUpdate}/>
