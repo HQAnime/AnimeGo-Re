@@ -62,7 +62,7 @@ export default class App extends Component {
       <ScrollView style={navigationStyle}>
         <View style={iconViewStyle}>
           <Text style={drawerTitleStyle}>Anime Go</Text>
-        </View>       
+        </View>
         <Drawer.Item label='New Release' onPress={() => this.onChangingScreen(ScreenIndex.NewRelease)}/>
         <Drawer.Item label='New Season' onPress={() => this.onChangingScreen(ScreenIndex.NewSeason)}/>
         <Drawer.Item label='Schedule' onPress={() => this.onChangingScreen(ScreenIndex.Schedule)}/>

@@ -5,6 +5,7 @@ import { SmartTouchable, DrawerCell } from '../component';
 import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease } from '../value';
 import { styles } from './SettingStyles';
 import GithubUpdate from '../helper/core/GithubUpdate';
+import { List, Checkbox } from 'react-native-paper';
 
 class Setting extends Component {
   state = {
@@ -17,23 +18,14 @@ class Setting extends Component {
     const { switchViewStyle, switchStyle, textStyle, versionStyle, dividerStyle } = styles;
     return (
       <View>
-        <SmartTouchable onPress={this.updateSaver}>
-          <View style={switchViewStyle}>
-            <Text style={textStyle}>Data saver</Text>
-            <Switch style={switchStyle} value={dataSaver} onTintColor={AnimeGoColour} thumbTintColor='white' onValueChange={this.updateSaver}/>
-          </View>
-        </SmartTouchable>
-        <SmartTouchable onPress={this.updateDub}>
-          <View style={switchViewStyle}>
-            <Text style={textStyle}>Hide DUB</Text>
-            <Switch style={switchStyle} value={hideDub} onTintColor={AnimeGoColour} thumbTintColor='white' onValueChange={this.updateDub}/>
-          </View>
-        </SmartTouchable>
-        <DrawerCell text='Email feedback' onPress={() => this.openLink(Email)}/>
-        <DrawerCell text='Source code' onPress={() => this.openLink(Github)}/>                              
-        <DrawerCell text='GoGoAnime website' onPress={() => this.openLink(GoGoAnime)}/>  
-        <DrawerCell text='Check for update' onPress={this.checkUpdate}/>              
-        <Text style={versionStyle}>{VERSION}</Text>
+        <List.Item title='Data Saver' description='Hide all images from loading' onPress={this.updateSaver}
+          right={() => <Switch style={switchStyle} value={dataSaver} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateSaver}/>} />
+        <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={this.updateDub}
+          right={() => <Switch style={switchStyle} value={hideDub} trackColor={{true: AnimeGoColour}} thumbColor='white' onValueChange={this.updateDub}/>} />
+        <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={() => this.openLink(Email)}/>
+        <List.Item title='Source code' description={Github} onPress={() => this.openLink(Github)}/>                              
+        <List.Item title='GoGoAnime website' description={GoGoAnime} onPress={() => this.openLink(GoGoAnime)}/>  
+        <List.Item title='Check for update' description={VERSION} onPress={this.checkUpdate}/>
       </View>
     )
   }
