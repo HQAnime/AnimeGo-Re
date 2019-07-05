@@ -3,7 +3,7 @@ import { View, Text, Linking, Platform, ToastAndroid, Alert } from 'react-native
 import AsyncStorage from '@react-native-community/async-storage';
 import { SmartTouchable, DrawerCell } from '../component';
 import { Switch } from 'react-native-paper';
-import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease } from '../value';
+import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease, API } from '../value';
 import { styles } from './SettingStyles';
 import GithubUpdate from '../helper/core/GithubUpdate';
 import { List, Checkbox } from 'react-native-paper';
@@ -46,7 +46,7 @@ class Setting extends Component {
       Linking.openURL(MicrosoftStore);
     } else {
       // Github
-      let updater = new GithubUpdate(LastestRelease);
+      let updater = new GithubUpdate(API);
       updater.checkUpdate();
     }
   }

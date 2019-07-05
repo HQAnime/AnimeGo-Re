@@ -14,7 +14,7 @@ export const RedColour = '#F44336';
 export const GreenColour = '#4CAF50';
 
 export const Github = 'https://github.com/HenryQuan/AnimeGo';
-export const API = 'https://github.com/HenryQuan/AnimeGo/blob/api/version.json';
+export const API = 'https://raw.githubusercontent.com/HenryQuan/AnimeGo/api/version.json';
 export const LastestRelease = 'https://github.com/HenryQuan/AnimeGo/releases/latest';
 export const GoGoAnime = 'http://gogoanime.se';
 export const GooglePlay = 'https://play.google.com/store/apps/details?id=com.yihengquan.gogoanime';
