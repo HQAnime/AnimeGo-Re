@@ -43,7 +43,7 @@ export default class AnimeLoader {
           entryCount++;
           if (global.hideDub && animeName.includes('(Dub)')) continue;
           // Only for NewRelease, it is displaying episode.
-          var extraInformation = this.url == global.domain + MajorLink.NewRelease ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
+          var extraInformation = this.url.includes('recent-release') ? anime.querySelector('.episode').text : anime.querySelector('.released').removeWhitespace().text;
           if (extraInformation == '') extraInformation = '??';
           var animeThumbnail = animeImage.childNodes[1].childNodes[1].attributes.src;
           animeData.push({name: animeName, info: extraInformation, link: animeLink, thumbnail: animeThumbnail});

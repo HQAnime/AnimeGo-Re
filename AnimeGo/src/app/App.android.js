@@ -15,10 +15,15 @@ import { styles } from './AppStyle';
 import { DataManager } from '../helper/';
 import { deviceWidth, deviceHeight } from '../helper/DeviceDimensions';
 import { Drawer } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class App extends Component {
   async componentWillMount() {
     await DataManager.setupData();
+    let url = await AsyncStorage.getItem('main_link');
+    if (url != null) {
+      global.domain = url;
+    }
   }
 
   render() {
