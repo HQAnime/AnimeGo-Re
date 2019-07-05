@@ -4,7 +4,6 @@ import { AnimeButton } from '../../component';
 import { styles } from './SourceCellStyles'
 import { Actions } from 'react-native-router-flux';
 import { GreyColour, BlueColour, RedColour } from '../../value';
-import { scrapers } from 'source-scraper';
 import { Button } from 'react-native-paper';
 
 class SourceCell extends React.PureComponent {
@@ -12,17 +11,17 @@ class SourceCell extends React.PureComponent {
     super();
     const { name, source } = props.data;
     this.source = name;
-    this.state = {name, source: ''};
+    this.state = {name, source};
 
-    const scraper = scrapers.all.getFirstApplicable(source);
-    scraper.scrap(url).then(scrap => {
-      if (scrap.success) {
-        console.log(scrap.data);
-        this.setState({source: scrap.data});
-      } else {
-        this.setState({source: source});
-      }
-    })
+    // const scraper = scrapers.all.getFirstApplicable(source);
+    // scraper.scrap(url).then(scrap => {
+    //   if (scrap.success) {
+    //     console.log(scrap.data);
+    //     this.setState({source: scrap.data});
+    //   } else {
+    //     this.setState({source: source});
+    //   }
+    // })
   }
 
   render() {
