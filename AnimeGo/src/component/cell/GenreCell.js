@@ -4,6 +4,7 @@ import { SmartTouchable } from '../../component';
 import { styles } from './GenreCellStyles';
 import { SecondaryColour } from '../../value';
 import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-paper';
 
 class GenreCell extends PureComponent {
   constructor(props) {
@@ -16,11 +17,7 @@ class GenreCell extends PureComponent {
     const { viewStyle, textStyle } = styles;  
     return (
       <View style={{flex: this.flex}}>
-        <SmartTouchable onPress={this.showGenreInfo} round>
-          <View style={viewStyle}>
-            <Text style={textStyle}>{this.title}</Text>
-          </View>
-        </SmartTouchable>
+        <Button onPress={this.showGenreInfo}>{this.title}</Button>
       </View>
     )
   }
