@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Linking, Platform, ToastAndroid, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { SmartTouchable, DrawerCell } from '../component';
-import { Switch } from 'react-native-paper';
+import { Switch, TextInput } from 'react-native-paper';
 import { AnimeGoColour, Github, GoGoAnime, GooglePlay, Email, VERSION, MicrosoftStore, LastestRelease, API } from '../value';
 import { styles } from './SettingStyles';
 import GithubUpdate from '../helper/core/GithubUpdate';
@@ -11,14 +11,16 @@ import { List, Checkbox } from 'react-native-paper';
 class Setting extends Component {
   state = {
     dataSaver: global.dataSaver,
-    hideDub: global.hideDub
+    hideDub: global.hideDub,
+    link: global.domain
   }
 
   render() {
-    const { dataSaver, hideDub } = this.state;
+    const { dataSaver, hideDub, link } = this.state;
     const { switchViewStyle, switchStyle, textStyle, versionStyle, dividerStyle } = styles;
     return (
       <View>
+        <TextInput value={link} onChangeText={(t) => this.setState({link: t})} onEndEditing={this.updateAnimeGoLink}/>
         <List.Item title='Data Saver' description='Hide all images from loading' onPress={this.updateSaver}
           right={() => <Switch value={dataSaver} onValueChange={this.updateSaver}/>} />
         <List.Item title='No DUB' description='Hide all dubbed anime if you perfer sub' onPress={this.updateDub}
@@ -29,6 +31,16 @@ class Setting extends Component {
         <List.Item title='Check for update' description={VERSION} onPress={this.checkUpdate}/>
       </View>
     )
+  }
+
+  updateAnimeGoLink = () => {
+    const { link } = this.state;
+    let regex = RegExp('http[s]?:\/\/.*\..*');
+    if (regex.test(link)) {
+      // Update link
+      global.domain = link;
+      AsyncStorage.setItem('main_link', link);
+    }
   }
 
   openLink(link) {
