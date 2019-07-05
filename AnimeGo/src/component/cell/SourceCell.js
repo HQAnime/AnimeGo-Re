@@ -43,7 +43,7 @@ class SourceCell extends React.PureComponent {
     } else {
       return (
         <View style={viewStyle}>
-          <Button mode='contained' disabled={source === ''} onPress={this.WatchAnime}>
+          <Button color={BlueColour} disabled={source === ''} onPress={this.WatchAnime}>
             {name}
           </Button>
         </View>
@@ -53,7 +53,7 @@ class SourceCell extends React.PureComponent {
 
   WatchAnime = () => {
     // console.log(this.link);    
-    Linking.openURL(this.link).catch(error => {console.error(error)});
+    Linking.openURL(this.state.source).catch(error => {console.error(error)});
   }
 }
 

@@ -21,7 +21,7 @@ class AnimeCell extends PureComponent {
         <SmartTouchable onPress={this.buttonPressed} onLongPress={this.showWebpage}>
           <View style={viewStyle}>
             { this.renderImage() }
-            <Text numberOfLines={3} style={[titleStyle, {width: '95%'}]}>{this.data.name}</Text> 
+            <Text numberOfLines={2} style={[titleStyle, {width: '100%'}]}>{this.data.name}</Text> 
             <Text style={episodeStyle}>{this.title}</Text>
           </View>
         </SmartTouchable>
