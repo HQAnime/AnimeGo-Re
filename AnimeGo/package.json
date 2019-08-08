@@ -14,21 +14,21 @@
     "react-native-paper": "^2.16.0",
     "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-size-matters": "^0.2.1",
-    "react-native-super-grid": "^3.0.7",
+    "react-native-super-grid": "^3.0.8",
     "react-native-vector-icons": "^6.6.0",
     "react-native-windows": "^1.0.0"
   },
   "devDependencies": {
-    "fast-html-parser": "^1.0.1",
-    "util": "^0.12.0",
-    "@babel/core": "^7.4.5",
-    "@babel/runtime": "^7.4.5",
-    "@react-native-community/async-storage": "^1.5.0",
+    "@babel/core": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "@react-native-community/async-storage": "^1.6.1",
     "babel-jest": "^24.8.0",
+    "fast-html-parser": "^1.0.1",
+    "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.53.0",
     "react-test-renderer": "16.8.3",
-    "jest": "^24.8.0",
-    "rnpm-plugin-windows": "^0.2.11"
+    "rnpm-plugin-windows": "^0.2.11",
+    "util": "^0.12.1"
   },
   "jest": {
     "preset": "react-native"
