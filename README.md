@@ -6,6 +6,8 @@
 This is just a practise app made with react native and it is also my first react native app.
 This app works for **UWP** and **Android**. IOS is partially supported but more styling will be needed.
 
+如果你喜歡中文字幕的話，可以嘗試[AnimeOne](https://github.com/HenryQuan/AnimeOne)。
+
 ## What could it do
 - New release
 - New season
