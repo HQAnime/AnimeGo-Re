@@ -1,34 +1,39 @@
 {
   "name": "AnimeGo",
-  "version": "1.0.8",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "pn": "^1.1.0",
-    "react": "16.8.3",
-    "react-native": "^0.59.10",
-    "react-native-elements": "^0.19.0",
-    "react-native-paper": "^2.16.0",
-    "react-native-router-flux": "^4.0.0-beta.28",
-    "react-native-size-matters": "^0.2.1",
-    "react-native-super-grid": "^3.0.8",
-    "react-native-vector-icons": "^6.6.0",
-    "react-native-windows": "^1.0.0"
+    "react": "16.9.0",
+    "react-native": "0.61.5",
+    "react-native-elements": "^1.2.7",
+    "react-native-paper": "^3.6.0",
+    "react-native-router-flux": "^4.2.0",
+    "react-native-size-matters": "^0.3.0",
+    "react-native-super-grid": "^3.1.2",
+    "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
-    "@react-native-community/async-storage": "^1.6.1",
-    "babel-jest": "^24.8.0",
+    "@babel/core": "^7.8.7",
+    "@babel/runtime": "^7.8.7",
+    "@react-native-community/async-storage": "^1.8.1",
+    "@react-native-community/eslint-config": "^0.0.7",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
     "fast-html-parser": "^1.0.1",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.53.0",
-    "react-test-renderer": "16.8.3",
-    "rnpm-plugin-windows": "^0.2.11",
-    "util": "^0.12.1"
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-native-gesture-handler": "^1.6.0",
+    "react-native-reanimated": "^1.7.0",
+    "react-native-screens": "^2.3.0",
+    "react-test-renderer": "16.9.0",
+    "util": "^0.12.2"
   },
   "jest": {
     "preset": "react-native"
