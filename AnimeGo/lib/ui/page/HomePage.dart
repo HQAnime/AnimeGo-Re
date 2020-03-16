@@ -1,7 +1,8 @@
+import 'package:AnimeGo/ui/page/AnimeMenu.dart';
 import 'package:flutter/material.dart';
 
 import 'LastestAnime.dart';
-import 'SearchAnime.dart';
+import 'AnimeMenu.dart';
 import 'SeasonalAnime.dart';
 
 /// HomePage class, it has a bottom navigation and handles tab changes
@@ -16,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   /// Current selected index, used to switch tabs
   int selectedIndex = 0;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +24,8 @@ class _HomePageState extends State<HomePage> {
         index: selectedIndex,
         children: <Widget>[
           LastestAnime(),
-          SearchAnime(),
           SeasonalAnime(),
+          AnimeMenu(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -41,12 +41,12 @@ class _HomePageState extends State<HomePage> {
             title: Text('Latest'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text('Search'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
             title: Text('Seasonal'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            title: Text('Menu'),
           ),
         ],
       ),
