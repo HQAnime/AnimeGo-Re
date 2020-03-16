@@ -8,13 +8,12 @@ class SeasonalAnime extends StatefulWidget {
   _SeasonalAnimeState createState() => _SeasonalAnimeState();
 }
 
-
 class _SeasonalAnimeState extends State<SeasonalAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SeasonalAnime')
+        title: Text('New Season')
       ),
       body: Container(),
     );

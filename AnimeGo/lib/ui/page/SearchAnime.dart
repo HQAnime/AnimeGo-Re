@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// SearchAnime class
+/// SearchAnime class, it has a search bar and also displays lots of chips to select genres
 class SearchAnime extends StatefulWidget {
   SearchAnime({Key key}) : super(key: key);
 
@@ -8,13 +8,12 @@ class SearchAnime extends StatefulWidget {
   _SearchAnimeState createState() => _SearchAnimeState();
 }
 
-
 class _SearchAnimeState extends State<SearchAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SearchAnime')
+        title: Text('Search')
       ),
       body: Container(),
     );
