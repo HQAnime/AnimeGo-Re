@@ -1,3 +1,5 @@
+import 'package:AnimeGo/ui/page/GenrePage.dart';
+import 'package:AnimeGo/ui/page/Settings.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeGoDrawer class
@@ -29,14 +31,9 @@ class AnimeGoDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text('Latest'),
-                leading: Icon(Icons.new_releases),
-              ),
-              ListTile(
                 title: Text('Seasonal'),
                 leading: Icon(Icons.fiber_new),
               ),
-              Divider(),
               ListTile(
                 title: Text('Movie'),
                 leading: Icon(Icons.movie),
@@ -48,6 +45,7 @@ class AnimeGoDrawer extends StatelessWidget {
               ListTile(
                 title: Text('Genre'),
                 leading: Icon(Icons.list),
+                onTap: () => this.push(context, GenrePage())
               ),
               Divider(),
               ListTile(
@@ -62,11 +60,19 @@ class AnimeGoDrawer extends StatelessWidget {
               ListTile(
                 title: Text('Settings'),
                 leading: Icon(Icons.settings),
+                onTap: () => this.push(context, Settings())
               ),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void push(BuildContext context, Widget screen) {
+    // Pop the drawer
+    Navigator.pop(context);
+    // How to push to new screen?
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 }
