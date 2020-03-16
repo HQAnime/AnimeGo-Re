@@ -13,9 +13,13 @@ class GenreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: this.renderGenres(),
+    return ListView(
+      children: <Widget>[
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: this.renderGenres(),
+        ),
+      ],
     );
   }
 
