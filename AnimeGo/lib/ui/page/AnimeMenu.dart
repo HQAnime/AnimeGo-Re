@@ -52,8 +52,15 @@ class _AnimeMenuState extends State<AnimeMenu> {
             subtitle: Text('Website domain, Feedback, Source code'),
             onTap: () {},
           ),
+          SizedBox(
+            height: 64,
+          ),
         ],
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () {},
+      ),
     );
   }
 }
