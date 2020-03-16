@@ -13,12 +13,18 @@ class LastestAnime extends StatefulWidget {
 class _LastestAnimeState extends State<LastestAnime> {
     @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('New Release'),
+    return Center(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('New Release'),
+        ),
+        body: AnimeGrid(url: ''),
+        drawer: AnimeGoDrawer(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.search),
+          onPressed: () {},
+        ),
       ),
-      body: AnimeGrid(url: ''),
-      drawer: AnimeGoDrawer()
     );
   }
 }
