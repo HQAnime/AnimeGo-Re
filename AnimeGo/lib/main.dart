@@ -1,5 +1,5 @@
+import 'package:AnimeGo/ui/page/LastestAnime.dart';
 import 'package:flutter/material.dart';
-import 'ui/page/HomePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'AnimeGo Re',
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: HomePage(),
+      home: LastestAnime(), // New Release is the root of everything
     );
   }
 }

@@ -31,9 +31,19 @@ class AnimeGoDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
+                title: Text('Latest'),
+                leading: Icon(Icons.new_releases),
+                onTap: () {
+                  Navigator.pop(context);
+                  // This pops until it reaches the first route which is new release
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
+              ),
+              ListTile(
                 title: Text('Seasonal'),
                 leading: Icon(Icons.fiber_new),
               ),
+              Divider(),
               ListTile(
                 title: Text('Movie'),
                 leading: Icon(Icons.movie),
@@ -69,10 +79,15 @@ class AnimeGoDrawer extends StatelessWidget {
     );
   }
 
+  /// Push to new screen and also remove all routes in the middle
   void push(BuildContext context, Widget screen) {
     // Pop the drawer
     Navigator.pop(context);
     // How to push to new screen?
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+    Navigator.pushAndRemoveUntil(
+      context, 
+      MaterialPageRoute(builder: (context) => screen), 
+      (route) => route.isFirst,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/widget/AnimeGoDrawer.dart';
 import 'package:flutter/material.dart';
 
 /// LastestAnime class, it loads anime from the new release page
@@ -9,13 +10,14 @@ class LastestAnime extends StatefulWidget {
 }
 
 class _LastestAnimeState extends State<LastestAnime> {
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Release')
+        title: Text('New Release'),
       ),
       body: Container(),
+      drawer: AnimeGoDrawer()
     );
   }
 }
