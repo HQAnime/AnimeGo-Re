@@ -13,7 +13,6 @@ class GenrePage extends StatelessWidget {
         title: Text('Genre')
       ),
       body: GenreList(),
-      drawer: AnimeGoDrawer(),
     );
   }
 }

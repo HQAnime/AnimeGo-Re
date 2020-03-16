@@ -31,20 +31,9 @@ class AnimeGoDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text('Latest'),
-                leading: Icon(Icons.new_releases),
-                onTap: () {
-                  Navigator.pop(context);
-                  // This pops until it reaches the first route which is new release
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                  // TODO: this doesn't really work on IOS
-                },
-              ),
-              ListTile(
                 title: Text('Seasonal'),
                 leading: Icon(Icons.fiber_new),
               ),
-              Divider(),
               ListTile(
                 title: Text('Movie'),
                 leading: Icon(Icons.movie),
