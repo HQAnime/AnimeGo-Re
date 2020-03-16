@@ -13,7 +13,7 @@ class AnimeGoDrawer extends StatelessWidget {
         children: <Widget>[
           // This size box fills the white statur bar
           SizedBox(
-            height: 32,
+            height: 64,
             child: Container(color: Colors.deepOrange),
           ),
           ListView(
@@ -37,6 +37,7 @@ class AnimeGoDrawer extends StatelessWidget {
                   Navigator.pop(context);
                   // This pops until it reaches the first route which is new release
                   Navigator.popUntil(context, (route) => route.isFirst);
+                  // TODO: this doesn't really work on IOS
                 },
               ),
               ListTile(
