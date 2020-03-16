@@ -16,7 +16,34 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: Text('Settings')
       ),
-      body: Container(),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            title: Text('Website link (mostly automatic)'),
+            subtitle: SizedBox(
+              height: 36,
+              child: TextField(
+
+              ),
+            ),
+          ),
+          ListTile(
+            title: Text('Feedback'),
+            subtitle: Text('Send an email to the developer'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Source code'),
+            subtitle: Text('Send an email to the developer'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('AnimeGo Re'),
+            subtitle: Text('Send an email to the developer'),
+            onTap: () {},
+          )
+        ],
+      ),
     );
   }
 }
