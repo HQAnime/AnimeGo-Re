@@ -1,3 +1,8 @@
+import 'package:AnimeGo/ui/page/Favourite.dart';
+import 'package:AnimeGo/ui/page/History.dart';
+import 'package:AnimeGo/ui/page/Movie.dart';
+import 'package:AnimeGo/ui/page/PopularAnime.dart';
+import 'package:AnimeGo/ui/page/SeasonalAnime.dart';
 import 'package:AnimeGo/ui/page/Settings.dart';
 import 'package:AnimeGo/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
@@ -32,14 +37,17 @@ class AnimeDrawer extends StatelessWidget {
                   ListTile(
                     title: Text('Seasonal'),
                     leading: Icon(Icons.fiber_new),
+                    onTap: () => this.push(context, SeasonalAnime())
                   ),
                   ListTile(
                     title: Text('Movie'),
                     leading: Icon(Icons.movie),
+                    onTap: () => this.push(context, Movie())
                   ),
                   ListTile(
                     title: Text('Popular'),
                     leading: Icon(Icons.label),
+                    onTap: () => this.push(context, PopularAnime())
                   ),
                   ExpansionTile(
                     title: Text('Genre'),
@@ -52,10 +60,12 @@ class AnimeDrawer extends StatelessWidget {
                   ListTile(
                     title: Text('History'),
                     leading: Icon(Icons.history),
+                    onTap: () => this.push(context, History())
                   ),
                   ListTile(
                     title: Text('Favourite'),
                     leading: Icon(Icons.favorite),
+                    onTap: () => this.push(context, Favourite())
                   ),
                   Divider(),
                   ListTile(
