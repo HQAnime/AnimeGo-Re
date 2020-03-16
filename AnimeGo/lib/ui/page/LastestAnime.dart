@@ -1,4 +1,5 @@
 import 'package:AnimeGo/ui/widget/AnimeGoDrawer.dart';
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// LastestAnime class, it loads anime from the new release page
@@ -16,7 +17,7 @@ class _LastestAnimeState extends State<LastestAnime> {
       appBar: AppBar(
         title: Text('New Release'),
       ),
-      body: Container(),
+      body: AnimeGrid(url: ''),
       drawer: AnimeGoDrawer()
     );
   }
