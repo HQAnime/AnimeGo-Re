@@ -1,4 +1,5 @@
 import 'package:AnimeGo/ui/page/AnimeMenu.dart';
+import 'package:AnimeGo/ui/widget/AnimeGoDrawer.dart';
 import 'package:flutter/material.dart';
 
 import 'LastestAnime.dart';
@@ -20,36 +21,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: <Widget>[
-          LastestAnime(),
-          SeasonalAnime(),
-          AnimeMenu(),
-        ],
+      appBar: AppBar(
+        title: Text('New Release'),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.new_releases),
-            title: Text('Latest'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text('Seasonal'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            title: Text('Menu'),
-          ),
-        ],
-      ),
+      body: Container(),
+      drawer: AnimeGoDrawer()
     );
   }
 }
