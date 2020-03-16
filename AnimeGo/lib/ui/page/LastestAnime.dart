@@ -1,4 +1,4 @@
-import 'package:AnimeGo/ui/widget/AnimeGoDrawer.dart';
+import 'package:AnimeGo/ui/widget/AnimeDrawer.dart';
 import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _LastestAnimeState extends State<LastestAnime> {
           title: Text('New Release'),
         ),
         body: AnimeGrid(url: ''),
-        drawer: AnimeGoDrawer(),
+        drawer: AnimeDrawer(),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.search),
           onPressed: () {},

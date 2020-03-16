@@ -13,22 +13,20 @@ class GenreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Wrap(
-          alignment: WrapAlignment.center,
-          children: this.renderGenres(),
-        ),
-      ],
+    return Wrap(
+      alignment: WrapAlignment.spaceEvenly,
+      children: this.renderGenres(context),
     );
   }
 
   /// Render all genres as chips
-  List<Widget> renderGenres() {
+  List<Widget> renderGenres(BuildContext context) {
     // Return a fixed length array (growable to be false)
     return this.genreList.map((item) => FlatButton(
         child: Text(item), 
-        onPressed: () {}, 
+        onPressed: () {
+          Navigator.pop(context);
+        }, 
       ),
     ).toList(growable: false);
   }

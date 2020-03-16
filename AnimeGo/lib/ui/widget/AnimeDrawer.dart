@@ -1,10 +1,10 @@
-import 'package:AnimeGo/ui/page/GenrePage.dart';
 import 'package:AnimeGo/ui/page/Settings.dart';
+import 'package:AnimeGo/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
 
-/// AnimeGoDrawer class
-class AnimeGoDrawer extends StatelessWidget {
-  AnimeGoDrawer({Key key}) : super(key: key);
+/// AnimeDrawer class
+class AnimeDrawer extends StatelessWidget {
+  AnimeDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,14 @@ class AnimeGoDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text('Popular'),
-                    leading: Icon(Icons.people),
+                    leading: Icon(Icons.label),
                   ),
-                  ListTile(
+                  ExpansionTile(
                     title: Text('Genre'),
                     leading: Icon(Icons.list),
-                    onTap: () => this.push(context, GenrePage())
+                    children: <Widget>[
+                      GenreList()
+                    ],
                   ),
                   Divider(),
                   ListTile(
