@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:AnimeGo/ui/widget/GenreList.dart';
+
 /// SearchAnime class, it has a search bar and also displays lots of chips to select genres
 class SearchAnime extends StatefulWidget {
   SearchAnime({Key key}) : super(key: key);
@@ -9,13 +11,14 @@ class SearchAnime extends StatefulWidget {
 }
 
 class _SearchAnimeState extends State<SearchAnime> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search')
       ),
-      body: Container(),
+      body: GenreList()
     );
   }
 }
