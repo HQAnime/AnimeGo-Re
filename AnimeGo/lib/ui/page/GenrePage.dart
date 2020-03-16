@@ -1,4 +1,3 @@
-import 'package:AnimeGo/ui/widget/AnimeGoDrawer.dart';
 import 'package:AnimeGo/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
 
