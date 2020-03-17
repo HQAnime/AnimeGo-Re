@@ -13,7 +13,7 @@ class LastestAnime extends StatelessWidget {
       child: Scaffold(
         body: AnimeGrid(
           title: 'New Release',
-          url: '',
+          url: '/page-recent-release.html',
         ),
         drawer: AnimeDrawer(),
         floatingActionButton: FloatingActionButton(

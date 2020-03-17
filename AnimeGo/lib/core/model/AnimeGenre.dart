@@ -1,10 +1,10 @@
-class Genre {
+class AnimeGenre {
   String _name;
-  getGenreName() => _name;
+  getAnimeGenreName() => _name;
   /// Merge domain name and formatted name
   getFullLink() {
     return _name;
   }
 
-  Genre(this._name);
+  AnimeGenre(this._name);
 }

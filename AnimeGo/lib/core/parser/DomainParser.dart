@@ -15,8 +15,10 @@ class DomainParser {
   /// Request to the domain currently saved and see if there is a new one
   Future<String> getNewDomain() async {
     String finalDomain = _gogoanime;
+    
     try {
       String newDomain = _replaceHttp(this._gogoanime);
+      // WHen it is null, it means that there is no more redirect and it is the latest domain
       while (newDomain != null) {
         // Request but don't follow redirects
         final request = Request('GET', Uri.parse(newDomain))..followRedirects = false;

@@ -10,11 +10,19 @@ class AnimeGrid extends StatefulWidget {
   _AnimeGridState createState() => _AnimeGridState();
 }
 
-
 class _AnimeGridState extends State<AnimeGrid> {
   bool loading = true;
   /// Current page, starting from 1
   int page = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load some data here
+
+  }
+
+  
   
   @override
   Widget build(BuildContext context) {

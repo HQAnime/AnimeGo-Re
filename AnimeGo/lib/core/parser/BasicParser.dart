@@ -36,5 +36,4 @@ abstract class BasicParser {
 
   /// All subclasses have different implementations
   parseHTML(Document body);
-
 }

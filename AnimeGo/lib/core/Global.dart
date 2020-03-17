@@ -40,10 +40,13 @@ class Global {
 
       // Get currently saved domain, use default if it is null
       String currDomain = prefs.getString(websiteDomain) ?? Global.defaultDomain;
+      print('Saved domain is $currDomain');
+
       // Get the latest domain
       String latestDomain = await DomainParser(currDomain).getNewDomain();
       updateDomain(latestDomain);
       print('The latest domain is $latestDomain');
+      
       // Set the flag to true
       _hasInit = true;
     }

@@ -7,6 +7,6 @@ class AnimeParser extends BasicParser {
 
   @override
   parseHTML(Document body) {
-    throw UnimplementedError();
+    print(body);
   }
 }

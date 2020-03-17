@@ -1,4 +1,4 @@
-import 'package:AnimeGo/core/model/Genre.dart';
+import 'package:AnimeGo/core/model/AnimeGenre.dart';
 import 'package:AnimeGo/ui/page/GenrePage.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class GenreList extends StatelessWidget {
         child: Text(item), 
         onPressed: () {
           Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: Genre(item))));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: AnimeGenre(item))));
         }, 
       ),
     ).toList(growable: false);
