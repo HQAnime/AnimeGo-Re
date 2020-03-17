@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// SearchAnime class
@@ -10,6 +11,9 @@ class SearchAnime extends StatefulWidget {
 
 
 class _SearchAnimeState extends State<SearchAnime> {
+  String search = '';
+  String formattedSearch = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +27,30 @@ class _SearchAnimeState extends State<SearchAnime> {
           cursorColor: Colors.white70,
           autocorrect: false,
           autofocus: true,
-          onChanged: (t) {},
+          onChanged: (t) {
+            setState(() {
+              this.search = t;
+              this.formattedSearch = '';
+            });
+          },
+          onEditingComplete: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+            setState(() {
+              // Replcae space with %20
+              formattedSearch = search.split(' ').join('%20');
+            });
+          },
         )
       ),
-      body: Container(),
+      body: renderGrid(),
     );
+  }
+
+  Widget renderGrid() {
+    if (formattedSearch.length < 3) {
+      return SizedBox.shrink();
+    } else {
+      return AnimeGrid(url: '/search.html?keyword=$formattedSearch');
+    }
   }
 }

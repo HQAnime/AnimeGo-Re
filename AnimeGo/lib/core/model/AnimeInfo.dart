@@ -7,26 +7,21 @@ class AnimeInfo {
   String link;
 
   // Either episode or release
-  String episode;
-  String release;
+  String episode = '???';
   
   AnimeInfo(Element e) {
     // Image class has image and also name, link but I will use name class instead
     final imageClass = e.getElementsByClassName('img')?.first;
     this.coverImage = imageClass?.nodes[1]?.nodes[1]?.attributes['src'];
 
-    try {      
-      final episodeClass = e.getElementsByClassName('episode')?.first;
-      this.episode = episodeClass?.nodes[0].text;
-    } catch (e) { 
-      print(e); 
+    final episodeClass = e.getElementsByClassName('episode');
+    if (episodeClass.length > 0) {
+      this.episode = episodeClass?.first?.nodes[0].text;
     }
 
-    try {
-      final releaseClass = e.getElementsByClassName('released')?.first;
-      this.episode = releaseClass?.nodes[0].text.trim();
-    } catch (e) { 
-      print(e); 
+    final releaseClass = e.getElementsByClassName('released');
+    if (releaseClass.length > 0) {
+      this.episode = releaseClass?.first?.nodes[0].text.trim();
     }
 
     final nameClass = e.getElementsByClassName('name')?.first;
