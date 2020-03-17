@@ -9,4 +9,7 @@ class Global {
     return _instance;
   }
 
+  Future init() async {
+    return;
+  }
 }

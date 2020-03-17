@@ -1,7 +1,15 @@
+import 'package:AnimeGo/core/Global.dart';
+import 'package:AnimeGo/core/parser/DomainParser.dart';
 import 'package:AnimeGo/ui/page/LastestAnime.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  Global().init().then((_) {
+    DomainParser('http://gogoanimes.ai/').getNewDomain().then((value) {
+      runApp(MyApp());
+    });
+  });
+}
 
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
