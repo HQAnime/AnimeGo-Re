@@ -8,7 +8,7 @@ class PopularAnime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PopularAnime')
+        title: Text('Popular')
       ),
       body: Container(),
     );

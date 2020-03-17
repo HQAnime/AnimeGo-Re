@@ -3,7 +3,8 @@ class AnimeGenre {
   getAnimeGenreName() => _name;
   /// Merge domain name and formatted name
   getFullLink() {
-    return _name;
+    final formattedName = _name.split(' ').join('-');
+    return '/genre/$formattedName';
   }
 
   AnimeGenre(this._name);
