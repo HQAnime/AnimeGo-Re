@@ -13,7 +13,7 @@ class Global {
   bool _hasInit = false;
   /// The domain that will be used globally
   String _domain;
-  getDomain() => _domain;
+  String getDomain() => _domain;
   updateDomain(String domain) {
     this._domain = domain;
     prefs.setString(websiteDomain, domain);
@@ -46,7 +46,7 @@ class Global {
       String latestDomain = await DomainParser(currDomain).getNewDomain();
       updateDomain(latestDomain);
       print('The latest domain is $latestDomain');
-      
+
       // Set the flag to true
       _hasInit = true;
     }
