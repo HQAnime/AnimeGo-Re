@@ -1,3 +1,4 @@
+import 'package:AnimeGo/core/Global.dart';
 import 'package:flutter/material.dart';
 
 /// Settings class
@@ -10,6 +11,9 @@ class Settings extends StatefulWidget {
 
 
 class _SettingsState extends State<Settings> {
+  final global = Global();
+  String input;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +23,36 @@ class _SettingsState extends State<Settings> {
       body: ListView(
         children: <Widget>[
           ListTile(
-            title: Text('Website link (mostly automatic)'),
-            subtitle: SizedBox(
-              height: 36,
-              child: TextField(
+            title: Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text('Website link'),
+            ),
+            subtitle: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                  child: TextField(
+                    controller: TextEditingController(text: global.getDomain()),
+                    onChanged: (t) => this.input = t,
+                    onEditingComplete: () {
+                      if (this.input.endsWith('/')) {
+                        // Remove last '?'
+                        this.input = this.input.substring(0, this.input.length - 1);
+                      }
 
-              ),
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      global.updateDomain(this.input);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    "Domain will be updated automatically but you can still update yourself but make sure it is the right link",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+              ],
             ),
           ),
           ListTile(
