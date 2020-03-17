@@ -14,7 +14,18 @@ class _SearchAnimeState extends State<SearchAnime> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SearchAnime')
+        title: Expanded(
+          child: TextField(
+            style: TextStyle(color: Colors.white, fontSize: 20),
+            decoration: InputDecoration.collapsed(
+              hintText: 'Search anime',
+              hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
+            ),
+            autocorrect: false,
+            autofocus: true,
+            onChanged: (t) {},
+          ),
+        )
       ),
       body: Container(),
     );
