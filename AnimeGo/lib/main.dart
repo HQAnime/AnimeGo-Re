@@ -6,8 +6,11 @@ void main() => runApp(MyApp());
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
   final darkTheme = ThemeData.dark().copyWith(
-    accentColor: Colors.deepOrange,
-    indicatorColor: Colors.deepOrange,
+    accentColor: Colors.orange,
+    indicatorColor: Colors.orange,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Colors.orange,
+    )
   );
 
   final lightTheme = ThemeData(

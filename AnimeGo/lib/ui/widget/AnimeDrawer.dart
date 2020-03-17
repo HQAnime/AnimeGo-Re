@@ -1,3 +1,4 @@
+import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/ui/page/Favourite.dart';
 import 'package:AnimeGo/ui/page/History.dart';
 import 'package:AnimeGo/ui/page/Movie.dart';
@@ -13,6 +14,8 @@ class AnimeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Util(context).isDarkMode();
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -21,11 +24,17 @@ class AnimeDrawer extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: Text(
                 'AnimeGo Re',
-                style: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontSize: 32, 
+                  // Different colour for dark mode
+                  color: darkMode ? Colors.orange : Colors.white, 
+                  fontWeight: FontWeight.w700
+                ),
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.deepOrange,
+              // Use black instead orange to not hurt users' eyes at night
+              color: darkMode ? Colors.black38 : Colors.deepOrange,
             ),
           ),
           Expanded(

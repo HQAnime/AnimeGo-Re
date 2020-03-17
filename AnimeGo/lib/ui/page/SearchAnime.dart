@@ -21,6 +21,7 @@ class _SearchAnimeState extends State<SearchAnime> {
               hintText: 'Search anime',
               hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
             ),
+            cursorColor: Colors.white70,
             autocorrect: false,
             autofocus: true,
             onChanged: (t) {},
