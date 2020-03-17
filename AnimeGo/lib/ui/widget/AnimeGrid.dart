@@ -77,7 +77,11 @@ class _AnimeGridState extends State<AnimeGrid> {
               (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: AnimeCard(info: this.list[index]),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    child: AnimeCard(info: this.list[index]),
+                    onTap: () {},
+                  )
                 );
               },
               childCount: this.list.length,

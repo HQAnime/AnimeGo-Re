@@ -15,7 +15,6 @@ class AnimeCard extends StatelessWidget {
           child: FittedBox(
             child: Image.network(
               info.coverImage,
-              fit: BoxFit.cover,
             ),
           ),
         ),
