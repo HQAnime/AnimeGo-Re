@@ -70,8 +70,8 @@ class _AnimeGridState extends State<AnimeGrid> {
           ),
           SliverGrid(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.56,
+              crossAxisCount: 3,
+              childAspectRatio: 0.5,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
