@@ -52,22 +52,24 @@ class _AnimeGridState extends State<AnimeGrid> {
     } else {
       // After parsing is done, show the anime grid
       return SafeArea(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 0.5,
-          ), 
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(12),
-                child: AnimeCard(info: this.list[index]),
-                onTap: () {},
-              )
-            );
-          },
-          itemCount: this.list.length,
+        child: Scrollbar(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.5,
+            ), 
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  child: AnimeCard(info: this.list[index]),
+                  onTap: () {},
+                )
+              );
+            },
+            itemCount: this.list.length,
+          ),
         ),
       );
     }
