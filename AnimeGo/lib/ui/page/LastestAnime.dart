@@ -9,17 +9,15 @@ class LastestAnime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Scaffold(
-        body: AnimeGrid(
-          title: 'New Release',
-          url: '/page-recent-release.html',
-        ),
-        drawer: AnimeDrawer(),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.search),
-          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Release'),
+      ),
+      body: AnimeGrid(url: '/page-recent-release.html',),
+      drawer: AnimeDrawer(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
       ),
     );
   }

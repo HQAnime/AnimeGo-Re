@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 /// AnimeGrid class
 class AnimeGrid extends StatefulWidget {
   final String url;
-  final String title;
-  AnimeGrid({Key key, @required this.title, @required this.url}) : super(key: key);
+  AnimeGrid({Key key, @required this.url}) : super(key: key);
 
   @override
   _AnimeGridState createState() => _AnimeGridState();
@@ -47,47 +46,29 @@ class _AnimeGridState extends State<AnimeGrid> {
   Widget build(BuildContext context) {
     if (loading) {
       // While loading, show a loading indicator and a normal app bar
-      return Column(
-        children: <Widget>[
-          AppBar(
-            title: Text(widget.title)
-          ),
-          Expanded(
-            child: Center(
-              child: CircularProgressIndicator()
-            ),
-          )
-        ],
+      return Center(
+        child: CircularProgressIndicator(),
       );
     } else {
       // After parsing is done, show the anime grid
-      return CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text(widget.title),
-            floating: true,
-            forceElevated: true,
-          ),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 0.5,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    child: AnimeCard(info: this.list[index]),
-                    onTap: () {},
-                  )
-                );
-              },
-              childCount: this.list.length,
-            ),
-          )
-        ],
+      return SafeArea(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 0.5,
+          ), 
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                child: AnimeCard(info: this.list[index]),
+                onTap: () {},
+              )
+            );
+          },
+          itemCount: this.list.length,
+        ),
       );
     }
   }

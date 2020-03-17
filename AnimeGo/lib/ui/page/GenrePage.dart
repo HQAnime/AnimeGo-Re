@@ -10,10 +10,10 @@ class GenrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimeGrid(
-        title: genre.getAnimeGenreName(), 
-        url: genre.getFullLink(),
+      appBar: AppBar(
+        title: Text(genre.getAnimeGenreName()),
       ),
+      body: AnimeGrid(url: genre.getFullLink()),
     );
   }
 }

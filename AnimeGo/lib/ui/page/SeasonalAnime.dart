@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// SeasonalAnime class
@@ -10,7 +11,7 @@ class SeasonalAnime extends StatelessWidget {
       appBar: AppBar(
         title: Text('New Season')
       ),
-      body: Container(),
+      body: AnimeGrid(url: '/new-season.html'),
     );
   }
 

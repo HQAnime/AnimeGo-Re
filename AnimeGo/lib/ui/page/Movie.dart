@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// Movie class
@@ -10,7 +11,7 @@ class Movie extends StatelessWidget {
       appBar: AppBar(
         title: Text('Movie')
       ),
-      body: Container(),
+      body: AnimeGrid(url: '/anime-movies.html'),
     );
   }
 }

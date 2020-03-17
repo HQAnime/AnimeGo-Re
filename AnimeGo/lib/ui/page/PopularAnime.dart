@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// PopularAnime class
@@ -10,7 +11,7 @@ class PopularAnime extends StatelessWidget {
       appBar: AppBar(
         title: Text('Popular')
       ),
-      body: Container(),
+      body: AnimeGrid(url: '/popular.html'),
     );
   }
 }
