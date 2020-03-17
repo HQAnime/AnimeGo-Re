@@ -13,7 +13,7 @@ class DomainParser {
   }
 
   /// Request to the domain currently saved and see if there is a new one
-  Future<String> getNewDomain() async {
+  Future getNewDomain() async {
     String finalDomain = _gogoanime;
     try {
       String newDomain = _replaceHttp(this._gogoanime);
@@ -31,10 +31,8 @@ class DomainParser {
       }
 
       // TODO: save the new domain in `Global`
-      return finalDomain;
     } catch (e) {
       print(e);
-      return finalDomain;
     }
   }
 }

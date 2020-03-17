@@ -1,14 +1,10 @@
+
 import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/core/parser/DomainParser.dart';
 import 'package:AnimeGo/ui/page/LastestAnime.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  Global().init().then((_) {
-    DomainParser('http://gogoanimes.ai/').getNewDomain().then((value) {
-      runApp(MyApp());
-    });
-  });
+  runApp(MyApp());
 }
 
 // This widget is the root of the application.
@@ -31,7 +27,24 @@ class MyApp extends StatelessWidget {
       title: 'AnimeGo Re',
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: LastestAnime(), // New Release is the root of everything
+      home: FutureBuilder(
+        future: Global().init(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          // The data is simply a `true`
+          if (snapshot.hasData) {
+            return LastestAnime();
+          } else {
+            // A simple loading screen so that it is not that boring
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Loading...'),
+              ),
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+      }),
     );
   }
 }
