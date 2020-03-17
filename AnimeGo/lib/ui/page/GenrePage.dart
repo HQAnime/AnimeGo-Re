@@ -1,4 +1,5 @@
 import 'package:AnimeGo/core/model/Genre.dart';
+import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// GenrePage class
@@ -9,10 +10,10 @@ class GenrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(genre.getGenreName())
+      body: AnimeGrid(
+        title: genre.getGenreName(), 
+        url: genre.getFullLink()
       ),
-      body: Container(),
     );
   }
 }

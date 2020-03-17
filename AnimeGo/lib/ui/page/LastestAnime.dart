@@ -1,3 +1,4 @@
+import 'package:AnimeGo/ui/page/SearchAnime.dart';
 import 'package:AnimeGo/ui/widget/AnimeDrawer.dart';
 import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,14 @@ class LastestAnime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('New Release'),
+        body: AnimeGrid(
+          title: 'New Release',
+          url: '',
         ),
-        body: AnimeGrid(url: ''),
         drawer: AnimeDrawer(),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.search),
-          onPressed: () {},
+          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
         ),
       ),
     );
