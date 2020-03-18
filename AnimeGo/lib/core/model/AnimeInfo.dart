@@ -21,7 +21,7 @@ class AnimeInfo {
 
     final releaseClass = e.getElementsByClassName('released');
     if (releaseClass.length > 0) {
-      this.episode = releaseClass?.first?.nodes[0].text.trim();
+      this.episode = releaseClass?.first?.nodes[0].text.trim().replaceAll('Released: ', '');
     }
 
     final nameClass = e.getElementsByClassName('name')?.first;

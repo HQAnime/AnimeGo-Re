@@ -49,12 +49,12 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
-            onTap: () {},
+            onTap: () => launch(Global.email),
           ),
           ListTile(
             title: Text('Source code'),
             subtitle: Text(Global.github),
-            onTap: () {},
+            onTap: () => launch(Global.github),
           ),
           ListTile(
             title: Text('Check for update'),

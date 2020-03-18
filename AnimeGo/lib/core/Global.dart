@@ -8,6 +8,7 @@ class Global {
   static final defaultDomain = 'https://gogoanimee.net';
   static final appVersion = '1.2.0';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
+  static final email = 'mailto:development.henryquan@gmail.com?subject=[AnimeGo] ';
 
 
   /// Whether the app has been init

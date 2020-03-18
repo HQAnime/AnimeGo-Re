@@ -105,10 +105,12 @@ class _AnimeGridState extends State<AnimeGrid> {
                 itemCount: this.list.length,
               ),
             ),
-            showIndicator ? Align(
+            showIndicator ? 
+            Align(
               alignment: Alignment.bottomCenter,
               child: LinearProgressIndicator(),
-            ) : SizedBox.shrink(),
+            ) : 
+            SizedBox.shrink(),
           ],
         ),
       );
