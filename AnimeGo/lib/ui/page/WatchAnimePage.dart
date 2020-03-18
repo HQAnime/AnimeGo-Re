@@ -56,24 +56,47 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebView(
-        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-        gestureNavigationEnabled: true,
-        initialUrl: widget.video.link,
-        javascriptMode: JavascriptMode.unrestricted,
-        navigationDelegate: (NavigationRequest request) {
-          if (!request.url.startsWith(widget.video.link)) {
-            print('block $request');
-            return NavigationDecision.prevent;
-          }
+      body: Stack(
+        children: <Widget>[
+          WebView(
+            initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+            gestureNavigationEnabled: true,
+            initialUrl: widget.video.link,
+            javascriptMode: JavascriptMode.unrestricted,
+            navigationDelegate: (NavigationRequest request) {
+              if (!request.url.startsWith(widget.video.link)) {
+                print('block $request');
+                return NavigationDecision.prevent;
+              }
 
-          return NavigationDecision.navigate;
-        },
+              return NavigationDecision.navigate;
+            },
+          ),
+          GestureDetector(
+            onHorizontalDragEnd: (d) {
+              final offset = d.velocity.pixelsPerSecond;
+              // Only swipe to the right
+              if (offset.dx > 0) {
+                setState(() {
+                  this.renderFAB = !renderFAB;
+                  if (renderFAB) {
+                    // auto hide after 2 seconds
+                    Future.delayed(Duration(milliseconds: 2300)).then((value) {
+                      setState(() {
+                        this.renderFAB = false;
+                      });
+                    });
+                  }
+                });
+              }
+            },
+          ),
+        ],
       ),
       floatingActionButton: renderFAB ? 
       FloatingActionButton(
-          onPressed: () => Navigator.pop(context),
-          child: Icon(Icons.close),
+        onPressed: () => Navigator.pop(context),
+        child: Icon(Icons.close),
       ) : 
       null
     );
