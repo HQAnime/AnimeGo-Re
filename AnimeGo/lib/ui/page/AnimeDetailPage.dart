@@ -1,17 +1,17 @@
 import 'package:AnimeGo/core/model/AnimeInfo.dart';
 import 'package:flutter/material.dart';
 
-/// EpisodePage class
-class EpisodePage extends StatefulWidget {
+/// AnimeDetailPage class
+class AnimeDetailPage extends StatefulWidget {
   final AnimeInfo info;
-  EpisodePage({Key key, @required this.info}) : super(key: key);
+  AnimeDetailPage({Key key, @required this.info}) : super(key: key);
 
   @override
-  _EpisodePageState createState() => _EpisodePageState();
+  _AnimeDetailPageState createState() => _AnimeDetailPageState();
 }
 
 
-class _EpisodePageState extends State<EpisodePage> {
+class _AnimeDetailPageState extends State<AnimeDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _EpisodePageState extends State<EpisodePage> {
         title: Text(widget.info.getTitle())
       ),
       body: Center(
-        child: Text('Episode'),
+        child: Text('Anime Detail'),
       ),
     );
   }

@@ -30,9 +30,12 @@ class AnimeInfo {
     this.link = nameLink?.attributes['href'];
   }
 
+  /// Category contains all available episodes
+  isCategory() => link.contains('category');
+
   /// Returns either episode or the name of name
   getTitle() {
-    if (link.contains('category')) return this.name;
+    if (isCategory()) return this.name;
     return this.episode;
   }
 }

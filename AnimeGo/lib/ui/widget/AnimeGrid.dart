@@ -1,6 +1,7 @@
 import 'package:AnimeGo/core/Global.dart';
 import 'package:AnimeGo/core/model/AnimeInfo.dart';
 import 'package:AnimeGo/core/parser/AnimeParser.dart';
+import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/EpisodePage.dart';
 import 'package:AnimeGo/ui/widget/AnimeCard.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,15 @@ class _AnimeGridState extends State<AnimeGrid> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
                       child: AnimeCard(info: info),
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EpisodePage(info: info))),
+                      onTap: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) {
+                            if (info.isCategory()) return AnimeDetailPage(info: info);
+                            return EpisodePage(info: info);
+                          })
+                        );
+                      } 
                     )
                   );
                 },
