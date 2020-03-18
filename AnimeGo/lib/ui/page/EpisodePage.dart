@@ -4,6 +4,7 @@ import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/parser/OneEpisodeParser.dart';
 import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
+import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
 import 'package:flutter/material.dart';
 
 /// EpisodePage class
@@ -83,7 +84,10 @@ class _EpisodePageState extends State<EpisodePage> {
         padding: const EdgeInsets.only(right: 8),
         child: ActionChip(
           onPressed: () {
-
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => WatchAnimePage(video: e)),
+            );
           }, 
           label: Text(e.title),
         ),
