@@ -1,5 +1,6 @@
 import 'package:AnimeGo/core/Global.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
 class Settings extends StatefulWidget {
@@ -28,32 +29,22 @@ class _SettingsState extends State<Settings> {
               child: Text('Website link'),
             ),
             subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  height: 30,
-                  child: TextField(
-                    controller: TextEditingController(text: global.getDomain()),
-                    onChanged: (t) => this.input = t,
-                    onEditingComplete: () {
-                      if (this.input.endsWith('/')) {
-                        // Remove last '?'
-                        this.input = this.input.substring(0, this.input.length - 1);
-                      }
-
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      global.updateDomain(this.input);
-                    },
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(global.getDomain()),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    "Domain will be updated automatically but you can still update yourself but make sure it is the right link",
-                    style: TextStyle(fontSize: 12),
+                    "The link will be updated automatically\nIn certain regions, this website doesn't work\nPlease tap me and check if it works for you",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
                   ),
                 ),
               ],
             ),
+            onTap: () => launch(global.getDomain()),
           ),
           ListTile(
             title: Text('Feedback'),
@@ -62,12 +53,12 @@ class _SettingsState extends State<Settings> {
           ),
           ListTile(
             title: Text('Source code'),
-            subtitle: Text('Send an email to the developer'),
+            subtitle: Text(Global.github),
             onTap: () {},
           ),
           ListTile(
-            title: Text('AnimeGo Re'),
-            subtitle: Text('Send an email to the developer'),
+            title: Text('Check for update'),
+            subtitle: Text(Global.appVersion),
             onTap: () {},
           )
         ],

@@ -20,7 +20,7 @@ abstract class BasicParser {
     try {
       final response = await http.get(
         this._link,
-      ).timeout(Duration(seconds: 8)); // Timeout in 8s
+      ).timeout(Duration(seconds: 4)); // Timeout in 8s
 
       if (response.statusCode == 200) {
         return parse(response.body);

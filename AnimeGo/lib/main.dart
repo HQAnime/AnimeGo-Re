@@ -31,21 +31,18 @@ class MyApp extends StatelessWidget {
         future: Global().init(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           // The data is simply a `true`
-          if (!snapshot.hasData) {
+          if (snapshot.hasData) {
+            return LastestAnime();
+          } else  {
             // A simple loading screen so that it is not that boring
             return Scaffold(
               appBar: AppBar(
                 title: Text('Loading...'),
               ),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                ],
+              body: Center(
+                child: CircularProgressIndicator(),
               ),
             );
-          } else  {
-            return LastestAnime();
           }
       }),
     );
