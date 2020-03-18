@@ -13,8 +13,8 @@ class WatchAnimePage extends StatefulWidget {
 }
 
 
-class _WatchAnimePageState extends State<WatchAnimePage> {
-  double closeOpacity = 0;
+class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProviderStateMixin {
+  bool renderFAB = false;
 
   @override
   void initState() {
@@ -35,6 +35,9 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
     // Reset orientation
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -44,11 +47,33 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
   }
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          WebView(
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            renderFAB = !renderFAB;
+            if (renderFAB) {
+              Future.delayed(Duration(seconds: 2)).then((value) {
+                setState(() {
+                  renderFAB = false;
+                });
+              });
+            }
+          });
+        },
+        child: FractionallySizedBox(
+          heightFactor: 1.0,
+          child: WebView(
+            initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+            gestureNavigationEnabled: true,
             initialUrl: widget.video.link,
             javascriptMode: JavascriptMode.unrestricted,
             navigationDelegate: (NavigationRequest request) {
@@ -60,23 +85,14 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
               return NavigationDecision.navigate;
             },
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                closeOpacity = closeOpacity == 0 ? 1 : 0;
-              });
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: AnimatedOpacity(
-        opacity: closeOpacity, 
-        duration: Duration(microseconds: 1000),
-        child: FloatingActionButton(
-          onPressed: () => Navigator.pop(context),
-          child: Icon(Icons.close),
         ),
       ),
+      floatingActionButton: renderFAB ? 
+      FloatingActionButton(
+          onPressed: () => Navigator.pop(context),
+          child: Icon(Icons.close),
+      ) : 
+      null
     );
   }
 }
