@@ -49,8 +49,6 @@ class _AnimeGridState extends State<AnimeGrid> {
     super.dispose();
   }
 
-  
-
   /// Increase page and load more data
   void loadData() {
     setState(() {

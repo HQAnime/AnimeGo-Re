@@ -1,5 +1,6 @@
 import 'package:AnimeGo/ui/page/Favourite.dart';
 import 'package:AnimeGo/ui/page/History.dart';
+import 'package:AnimeGo/ui/page/SearchAnime.dart';
 import 'package:AnimeGo/ui/page/Settings.dart';
 import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
 import 'package:AnimeGo/ui/widget/GenreList.dart';
@@ -47,6 +48,10 @@ class _TabletHomePageState extends State<TabletHomePage> {
             child: renderPage(),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
       ),
     );
   }
