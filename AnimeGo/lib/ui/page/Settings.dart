@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 /// Settings class
 class Settings extends StatefulWidget {
   final bool showAppBar;
-  Settings({Key key, this.showAppBar}) : super(key: key);
+  Settings({Key key, this.showAppBar = true}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();

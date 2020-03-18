@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Favourite class
 class Favourite extends StatelessWidget {
   final bool showAppBar;
-  Favourite({Key key, this.showAppBar}) : super(key: key);
+  Favourite({Key key, this.showAppBar = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// History class
 class History extends StatelessWidget {
   final bool showAppBar;
-  History({Key key, this.showAppBar}) : super(key: key);
+  History({Key key, this.showAppBar = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
