@@ -28,7 +28,7 @@ enum PageCode {
 class _TabletHomePageState extends State<TabletHomePage> {
   // By default, new release
   PageCode code = PageCode.latest;
-  String genre;
+  String genre = 'nothing';
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +54,19 @@ class _TabletHomePageState extends State<TabletHomePage> {
   Widget renderPage() {
     switch (code) {
       case PageCode.latest:
-        return AnimeGrid(url: '/page-recent-release.html');
+        return AnimeGrid(url: '/page-recent-release.html', key: Key(code.toString()));
         break;
       case PageCode.seasonal:
-        return AnimeGrid(url: '/new-season.html');
+        return AnimeGrid(url: '/new-season.html', key: Key(code.toString()));
         break;
       case PageCode.movie:
-        return AnimeGrid(url: '/anime-movies.html');
+        return AnimeGrid(url: '/anime-movies.html', key: Key(code.toString()));
         break;
       case PageCode.popular:
-        return AnimeGrid(url: '/popular.html');
+        return AnimeGrid(url: '/popular.html', key: Key(code.toString()));
         break;
       case PageCode.genre:
-        return AnimeGrid(url: this.genre);
+        return AnimeGrid(url: this.genre, key: Key(genre));
         break;
       case PageCode.history:
         return History(showAppBar: false);
@@ -139,28 +139,8 @@ class _TabletHomePageState extends State<TabletHomePage> {
 
   /// Update state to change pages
   void setCode(PageCode code) {
-    switch (code) {
-      case PageCode.seasonal:
-      case PageCode.latest:
-      case PageCode.movie:
-      case PageCode.popular:
-      case PageCode.genre:
-        this.setState(() {
-          this.code = PageCode.empty;
-          // TODO: This is a hack (force rerender)
-          Future.delayed(Duration(milliseconds: 10)).then((_) {
-            setState(() {
-              this.code = code;
-            });
-          });
-        });
-        
-      break;
-      default:
-        setState(() {
-          this.code = code;
-        });
-      break;
-    }
+    setState(() {
+      this.code = code;
+    });
   }
 }
