@@ -92,7 +92,6 @@ class _AnimeGridState extends State<AnimeGrid> {
             Scrollbar(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  print(constraints.maxWidth);
                   final count = max(min((constraints.maxWidth / 200).floor(), 5), 2);
                   final imageWidth = constraints.maxWidth / count.toDouble();
                   // Calculat ratio, adjust the offset (70)

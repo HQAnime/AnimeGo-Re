@@ -1,4 +1,5 @@
 import 'package:AnimeGo/core/Global.dart';
+import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/core/model/AnimeInfo.dart';
 import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/parser/OneEpisodeParser.dart';
@@ -6,6 +7,7 @@ import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// EpisodePage class
 class EpisodePage extends StatefulWidget {
@@ -84,10 +86,14 @@ class _EpisodePageState extends State<EpisodePage> {
         padding: const EdgeInsets.only(right: 8),
         child: ActionChip(
           onPressed: () {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
-            );
+            if (Util.isMobile()) {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
+              );
+            } else {
+              launch(e.link);
+            }
           }, 
           label: Text(e.title),
         ),
