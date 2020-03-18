@@ -10,7 +10,9 @@ class Favourite extends StatelessWidget {
       appBar: AppBar(
         title: Text('Favourite')
       ),
-      body: Container(),
+      body: Center(
+        child: Text('Coming soon...'),
+      ),
     );
   }
 }

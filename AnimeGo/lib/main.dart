@@ -1,6 +1,8 @@
 
 import 'package:AnimeGo/core/Global.dart';
+import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/ui/page/LastestAnime.dart';
+import 'package:AnimeGo/ui/page/TabletHomePage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           // The data is simply a `true`
           if (snapshot.hasData) {
+            // Use another view for tablets (or devices with a large screen)
+            if (Util(context).isTablet()) return TabletHomePage();
             return LastestAnime();
           } else  {
             // A simple loading screen so that it is not that boring
