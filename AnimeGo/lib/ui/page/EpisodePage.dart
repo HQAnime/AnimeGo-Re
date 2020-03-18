@@ -86,7 +86,7 @@ class _EpisodePageState extends State<EpisodePage> {
           onPressed: () {
             Navigator.push(
               context, 
-              MaterialPageRoute(builder: (context) => WatchAnimePage(video: e)),
+              MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
             );
           }, 
           label: Text(e.title),

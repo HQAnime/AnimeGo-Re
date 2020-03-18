@@ -1,5 +1,6 @@
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// WatchAnimePage class
@@ -13,24 +14,68 @@ class WatchAnimePage extends StatefulWidget {
 
 
 class _WatchAnimePageState extends State<WatchAnimePage> {
-  bool showAppBar = true;
+  double closeOpacity = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Fullscreen mode
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    // Landscape only
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  @override
+  void dispose() {
+    // Reset UI overlay
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    // Reset orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: <Widget>[
-          AnimatedOpacity(
-            duration: Duration(microseconds: 300),
-            opacity: showAppBar ? 1 : 0,
-            child: AppBar(
-              title: Text(widget.video.title)
-            ),
-          ),
           WebView(
             initialUrl: widget.video.link,
+            javascriptMode: JavascriptMode.unrestricted,
+            navigationDelegate: (NavigationRequest request) {
+              if (!request.url.startsWith(widget.video.link)) {
+                print('block $request');
+                return NavigationDecision.prevent;
+              }
+
+              return NavigationDecision.navigate;
+            },
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                closeOpacity = closeOpacity == 0 ? 1 : 0;
+              });
+            },
           ),
         ],
+      ),
+      floatingActionButton: AnimatedOpacity(
+        opacity: closeOpacity, 
+        duration: Duration(microseconds: 1000),
+        child: FloatingActionButton(
+          onPressed: () => Navigator.pop(context),
+          child: Icon(Icons.close),
+        ),
       ),
     );
   }
