@@ -60,14 +60,13 @@ class _TabletHomePageState extends State<TabletHomePage> {
         return AnimeGrid(url: '/new-season.html');
         break;
       case PageCode.movie:
-        return AnimeGrid(url: '/anime-movies.html?');
+        return AnimeGrid(url: '/anime-movies.html');
         break;
       case PageCode.popular:
         return AnimeGrid(url: '/popular.html');
         break;
       case PageCode.genre:
-        final formatted = this.genre.split(' ').join('-');
-        return AnimeGrid(url: '/genre/$formatted');
+        return AnimeGrid(url: this.genre);
         break;
       case PageCode.history:
         return History(showAppBar: false);
@@ -112,10 +111,8 @@ class _TabletHomePageState extends State<TabletHomePage> {
           leading: Icon(Icons.list),
           children: <Widget>[
             GenreList(func: (g) {
-              setState(() {
-                code = PageCode.genre;
-                this.genre = g;
-              });
+              this.genre = g;
+              setCode(PageCode.genre);
             })
           ],
         ),

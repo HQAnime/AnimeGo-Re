@@ -29,11 +29,12 @@ class GenreList extends StatelessWidget {
     return this.genreList.map((item) => FlatButton(
         child: Text(item), 
         onPressed: () {
+          final genre = AnimeGenre(item);
           if (func == null) {
             Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: AnimeGenre(item))));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: genre)));
           } else {
-            func(item);
+            func(genre.getFullLink());
           }
         }, 
       ),
