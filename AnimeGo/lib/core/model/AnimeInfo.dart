@@ -13,6 +13,12 @@ class AnimeInfo {
     // Image class has image and also name, link but I will use name class instead
     final imageClass = e.getElementsByClassName('img')?.first;
     this.coverImage = imageClass?.nodes[1]?.nodes[1]?.attributes['src'];
+    
+    // In order to call isCategory(), link needs to be parsed first
+    final nameClass = e.getElementsByClassName('name')?.first;
+    final nameLink = nameClass?.firstChild;
+    this.name = nameLink?.attributes['title'];
+    this.link = nameLink?.attributes['href'];
 
     // Category has a released class while episode only has the episode
     if (isCategory()) {
@@ -22,11 +28,6 @@ class AnimeInfo {
       final episodeClass = e.getElementsByClassName('episode')?.first;
       this.episode = episodeClass?.nodes[0].text;
     }
-
-    final nameClass = e.getElementsByClassName('name')?.first;
-    final nameLink = nameClass?.firstChild;
-    this.name = nameLink?.attributes['title'];
-    this.link = nameLink?.attributes['href'];
   }
 
   /// Category contains all available episodes

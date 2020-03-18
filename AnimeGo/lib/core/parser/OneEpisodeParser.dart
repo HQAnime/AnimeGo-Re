@@ -1,3 +1,4 @@
+import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/parser/BasicParser.dart';
 import 'package:html/dom.dart';
 
@@ -6,7 +7,8 @@ class OneEpisodeParser extends BasicParser {
   OneEpisodeParser(String link) : super(link);
 
   @override
-  parseHTML(Document body) {
-    throw UnimplementedError();
+  OneEpisodeInfo parseHTML(Document body) {
+    final div = body.getElementsByClassName('anime_video_body_cate');
+    return OneEpisodeInfo(div.first);
   }
 }
