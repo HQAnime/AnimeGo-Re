@@ -29,4 +29,10 @@ class AnimeInfo {
     this.name = nameLink?.attributes['title'];
     this.link = nameLink?.attributes['href'];
   }
+
+  /// Returns either episode or the name of name
+  getTitle() {
+    if (link.contains('category')) return this.name;
+    return this.episode;
+  }
 }

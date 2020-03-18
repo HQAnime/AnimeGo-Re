@@ -1,6 +1,7 @@
 import 'package:AnimeGo/core/Global.dart';
 import 'package:AnimeGo/core/model/AnimeInfo.dart';
 import 'package:AnimeGo/core/parser/AnimeParser.dart';
+import 'package:AnimeGo/ui/page/EpisodePage.dart';
 import 'package:AnimeGo/ui/widget/AnimeCard.dart';
 import 'package:flutter/material.dart';
 
@@ -93,12 +94,13 @@ class _AnimeGridState extends State<AnimeGrid> {
                   childAspectRatio: 0.5,
                 ), 
                 itemBuilder: (BuildContext context, int index) {
+                  final info = this.list[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
-                      child: AnimeCard(info: this.list[index]),
-                      onTap: () {},
+                      child: AnimeCard(info: info),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EpisodePage(info: info))),
                     )
                   );
                 },
