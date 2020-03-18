@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:AnimeGo/core/Global.dart';
 import 'package:AnimeGo/core/model/AnimeInfo.dart';
 import 'package:AnimeGo/core/parser/AnimeParser.dart';
@@ -88,32 +90,42 @@ class _AnimeGridState extends State<AnimeGrid> {
         child: Stack(
           children: <Widget>[
             Scrollbar(
-              child: GridView.builder(
-                controller: this.controller,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.5,
-                ), 
-                itemBuilder: (BuildContext context, int index) {
-                  final info = this.list[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      child: AnimeCard(info: info),
-                      onTap: () {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) {
-                            if (info.isCategory()) return AnimeDetailPage(info: info);
-                            return EpisodePage(info: info);
-                          })
-                        );
-                      } 
-                    )
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  print(constraints.maxWidth);
+                  final count = max(min((constraints.maxWidth / 200).floor(), 5), 2);
+                  final imageWidth = constraints.maxWidth / count.toDouble();
+                  // Calculat ratio, adjust the offset (70)
+                  final ratio = imageWidth / (imageWidth / 0.7 + 70);
+
+                  return GridView.builder(
+                    controller: this.controller,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: count,
+                      childAspectRatio: ratio,
+                    ), 
+                    itemBuilder: (BuildContext context, int index) {
+                      final info = this.list[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          child: AnimeCard(info: info),
+                          onTap: () {
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) {
+                                if (info.isCategory()) return AnimeDetailPage(info: info);
+                                return EpisodePage(info: info);
+                              })
+                            );
+                          } 
+                        )
+                      );
+                    },
+                    itemCount: this.list.length,
                   );
                 },
-                itemCount: this.list.length,
               ),
             ),
             showIndicator ? 
