@@ -147,14 +147,14 @@ class _TabletHomePageState extends State<TabletHomePage> {
       case PageCode.genre:
         this.setState(() {
           this.code = PageCode.empty;
-        });
-        
-        // TODO: This is a hack (force rerender)
-        Future.delayed(Duration(milliseconds: 10)).then((_) {
-          setState(() {
-            this.code = code;
+          // TODO: This is a hack (force rerender)
+          Future.delayed(Duration(milliseconds: 10)).then((_) {
+            setState(() {
+              this.code = code;
+            });
           });
         });
+        
       break;
       default:
         setState(() {
