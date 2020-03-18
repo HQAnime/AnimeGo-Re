@@ -1,6 +1,6 @@
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 /// WatchAnimePage class
 class WatchAnimePage extends StatefulWidget {
@@ -14,7 +14,6 @@ class WatchAnimePage extends StatefulWidget {
 
 class _WatchAnimePageState extends State<WatchAnimePage> {
   bool showAppBar = true;
-  final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
               title: Text(widget.video.title)
             ),
           ),
-          WebviewScaffold(
-            url: widget.video.link
+          WebView(
+            initialUrl: widget.video.link,
           ),
         ],
       ),
