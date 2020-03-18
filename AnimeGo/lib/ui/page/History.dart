@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 /// History class
 class History extends StatelessWidget {
-  History({Key key}) : super(key: key);
+  final bool showAppBar;
+  History({Key key, this.showAppBar}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('History')
-      ),
+      appBar: showAppBar ? AppBar(
+        title: Text('Settings')
+      ) : null,
       body: Center(
         child: Text('Coming soon...'),
       ),

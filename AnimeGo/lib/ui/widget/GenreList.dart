@@ -10,8 +10,10 @@ class GenreList extends StatelessWidget {
                     'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 
                     'Seinen', 'Shoujo', 'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Space', 'Sports', 'Super Power', 
                     'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri'];
-
-  GenreList({Key key}) : super(key: key);
+  
+  /// This is only used by TabletHomePage
+  final Function func;
+  GenreList({Key key, this.func}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,12 @@ class GenreList extends StatelessWidget {
     return this.genreList.map((item) => FlatButton(
         child: Text(item), 
         onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: AnimeGenre(item))));
+          if (func == null) {
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => GenrePage(genre: AnimeGenre(item))));
+          } else {
+            func(item);
+          }
         }, 
       ),
     ).toList(growable: false);

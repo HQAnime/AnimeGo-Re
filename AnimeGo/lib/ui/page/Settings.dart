@@ -4,7 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
 class Settings extends StatefulWidget {
-  Settings({Key key}) : super(key: key);
+  final bool showAppBar;
+  Settings({Key key, this.showAppBar}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -18,9 +19,9 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.showAppBar ? AppBar(
         title: Text('Settings')
-      ),
+      ) : null,
       body: ListView(
         children: <Widget>[
           ListTile(
