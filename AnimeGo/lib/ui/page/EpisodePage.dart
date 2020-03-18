@@ -22,6 +22,7 @@ class EpisodePage extends StatefulWidget {
 class _EpisodePageState extends State<EpisodePage> {
   OneEpisodeInfo info;
   final global = Global();
+  String fomattedName;
   
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _EpisodePageState extends State<EpisodePage> {
     parser.downloadHTML().then((body) {
       setState(() {
         this.info = parser.parseHTML(body);
+        this.fomattedName = info.name.split(RegExp(r"[^a-zA-Z]")).join('+');
       });
     });
   }
@@ -76,6 +78,37 @@ class _EpisodePageState extends State<EpisodePage> {
             ),
           )
         ],
+      ),
+      bottomNavigationBar: AnimatedOpacity(
+        duration: Duration(milliseconds: 300),
+        opacity: this.info != null ? 1 : 0,
+        child: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: this.info != null ? <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_back),
+              ),
+              FlatButton(
+                onPressed: () {
+                  launch('https://www.google.com/search?q=$fomattedName');
+                }, 
+                child: Text('Google')
+              ),
+              FlatButton(
+                onPressed: () {
+                  launch('https://duckduckgo.com/?q=$fomattedName');
+                }, 
+                child: Text('DuckDuckGo')
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_forward),
+              ),
+            ] : [SizedBox.shrink()],
+          ),
+        ),
       ),
     );
   }
