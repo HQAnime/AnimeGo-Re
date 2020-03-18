@@ -56,36 +56,19 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          setState(() {
-            renderFAB = !renderFAB;
-            if (renderFAB) {
-              Future.delayed(Duration(seconds: 2)).then((value) {
-                setState(() {
-                  renderFAB = false;
-                });
-              });
-            }
-          });
-        },
-        child: FractionallySizedBox(
-          heightFactor: 1.0,
-          child: WebView(
-            initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-            gestureNavigationEnabled: true,
-            initialUrl: widget.video.link,
-            javascriptMode: JavascriptMode.unrestricted,
-            navigationDelegate: (NavigationRequest request) {
-              if (!request.url.startsWith(widget.video.link)) {
-                print('block $request');
-                return NavigationDecision.prevent;
-              }
+      body: WebView(
+        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+        gestureNavigationEnabled: true,
+        initialUrl: widget.video.link,
+        javascriptMode: JavascriptMode.unrestricted,
+        navigationDelegate: (NavigationRequest request) {
+          if (!request.url.startsWith(widget.video.link)) {
+            print('block $request');
+            return NavigationDecision.prevent;
+          }
 
-              return NavigationDecision.navigate;
-            },
-          ),
-        ),
+          return NavigationDecision.navigate;
+        },
       ),
       floatingActionButton: renderFAB ? 
       FloatingActionButton(
