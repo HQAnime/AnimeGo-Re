@@ -39,11 +39,11 @@ class _TabletHomePageState extends State<TabletHomePage> {
       body: Row(
         children: <Widget>[
           Flexible(
-            flex: 1,
+            flex: 3,
             child: renderMenu(),
           ),
           Flexible(
-            flex: 3,
+            flex: 7,
             child: renderPage(),
           ),
         ],
@@ -66,7 +66,8 @@ class _TabletHomePageState extends State<TabletHomePage> {
         return AnimeGrid(url: '/popular.html');
         break;
       case PageCode.genre:
-        return AnimeGrid(url: '/page-recent-release.html');
+        final formatted = this.genre.split(' ').join('-');
+        return AnimeGrid(url: '/genre/$formatted');
         break;
       case PageCode.history:
         return History(showAppBar: false);
