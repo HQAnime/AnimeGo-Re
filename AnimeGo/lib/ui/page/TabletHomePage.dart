@@ -23,13 +23,13 @@ enum PageCode {
   history,
   favourite,
   setting,
-  empty
 }
 
 class _TabletHomePageState extends State<TabletHomePage> {
   // By default, new release
   PageCode code = PageCode.latest;
   String genre = 'nothing';
+  bool showFab = true;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,10 @@ class _TabletHomePageState extends State<TabletHomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: showFab ? FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
-      ),
+      ) : null,
     );
   }
 
@@ -147,5 +147,20 @@ class _TabletHomePageState extends State<TabletHomePage> {
     setState(() {
       this.code = code;
     });
+
+    switch (code) {
+      case PageCode.history:
+      case PageCode.favourite:
+      case PageCode.setting:
+        setState(() {
+          this.showFab = false;
+        });
+      break;
+      default:
+        setState(() {
+          this.showFab = true;
+        });
+      break;
+    }
   }
 }

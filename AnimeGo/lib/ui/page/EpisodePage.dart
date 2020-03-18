@@ -37,7 +37,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
     parser.downloadHTML().then((body) {
       setState(() {
         this.info = parser.parseHTML(body);
-        this.fomattedName = info.name.split(RegExp(r"[^a-zA-Z]")).join('+');
+        this.fomattedName = info.name.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
         this.controller.forward();
       });
     });
