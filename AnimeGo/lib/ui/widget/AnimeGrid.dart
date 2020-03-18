@@ -38,10 +38,18 @@ class _AnimeGridState extends State<AnimeGrid> {
   }
 
   @override
+  void didChangeDependencies() {
+    print(widget.url);
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     this.controller.dispose();
     super.dispose();
   }
+
+  
 
   /// Increase page and load more data
   void loadData() {

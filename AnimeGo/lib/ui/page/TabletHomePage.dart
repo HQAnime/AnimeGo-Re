@@ -22,6 +22,7 @@ enum PageCode {
   history,
   favourite,
   setting,
+  empty
 }
 
 class _TabletHomePageState extends State<TabletHomePage> {
@@ -77,7 +78,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
         return Settings(showAppBar: false);
         break;
       default:
-        return null;
+        return SizedBox.shrink();
     }
   }
 
@@ -138,9 +139,30 @@ class _TabletHomePageState extends State<TabletHomePage> {
     );
   }
 
+  /// Update state to change pages
   void setCode(PageCode code) {
-    setState(() {
-      this.code = code;
-    });
+    switch (code) {
+      case PageCode.seasonal:
+      case PageCode.latest:
+      case PageCode.movie:
+      case PageCode.popular:
+      case PageCode.genre:
+        this.setState(() {
+          this.code = PageCode.empty;
+        });
+        
+        // TODO: This is a hack (force rerender)
+        Future.delayed(Duration(milliseconds: 10)).then((_) {
+          setState(() {
+            this.code = code;
+          });
+        });
+      break;
+      default:
+        setState(() {
+          this.code = code;
+        });
+      break;
+    }
   }
 }
