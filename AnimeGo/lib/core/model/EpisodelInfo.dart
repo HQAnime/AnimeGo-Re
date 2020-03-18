@@ -4,8 +4,4 @@ import 'package:html/dom.dart';
 class EpisodeInfo {
   String episode;
   String episodeLink;
-
-  EpisodeInfo(Element e) {
-
-  }
 }

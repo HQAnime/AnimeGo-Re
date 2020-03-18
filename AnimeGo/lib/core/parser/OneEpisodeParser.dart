@@ -8,7 +8,7 @@ class OneEpisodeParser extends BasicParser {
 
   @override
   OneEpisodeInfo parseHTML(Document body) {
-    final div = body.getElementsByClassName('anime_video_body_cate');
+    final div = body.getElementsByClassName('anime_video_body');
     return OneEpisodeInfo(div.first);
   }
 }
