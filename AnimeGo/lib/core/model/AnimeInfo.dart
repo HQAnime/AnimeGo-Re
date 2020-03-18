@@ -1,6 +1,6 @@
 import 'package:html/dom.dart';
 
-/// It has the info needed by AnimeGrid
+/// It has the info needed by AnimeGrid, it can either be `latest episode` or `an anime`
 class AnimeInfo {
   String coverImage;
   String name;
@@ -14,14 +14,13 @@ class AnimeInfo {
     final imageClass = e.getElementsByClassName('img')?.first;
     this.coverImage = imageClass?.nodes[1]?.nodes[1]?.attributes['src'];
 
-    final episodeClass = e.getElementsByClassName('episode');
-    if (episodeClass.length > 0) {
-      this.episode = episodeClass?.first?.nodes[0].text;
-    }
-
-    final releaseClass = e.getElementsByClassName('released');
-    if (releaseClass.length > 0) {
-      this.episode = releaseClass?.first?.nodes[0].text.trim().replaceAll('Released: ', '');
+    // Category has a released class while episode only has the episode
+    if (isCategory()) {
+      final releaseClass = e.getElementsByClassName('released')?.first;
+      this.episode = releaseClass?.nodes[0].text.trim().replaceAll('Released: ', '');
+    } else {
+      final episodeClass = e.getElementsByClassName('episode')?.first;
+      this.episode = episodeClass?.nodes[0].text;
     }
 
     final nameClass = e.getElementsByClassName('name')?.first;
