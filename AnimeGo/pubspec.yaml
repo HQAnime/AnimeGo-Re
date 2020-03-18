@@ -30,6 +30,8 @@ dependencies:
   url_launcher: ^5.4.2
   # webview
   webview_flutter: ^0.3.19+9
+  # use different widget for IOS and Android
+  flutter_platform_widgets: ^0.32.4
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
