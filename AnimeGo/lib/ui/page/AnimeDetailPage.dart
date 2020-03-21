@@ -195,21 +195,24 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 8,
-        children: this.episodes.map((e) {
-          return RaisedButton(
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-            onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                return EpisodePage(info: e);
-              }));
-            }, 
-            child: Text(e.name),
-          );
-        }).toList(growable: false),
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          children: this.episodes.map((e) {
+            return RaisedButton(
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                  return EpisodePage(info: e);
+                }));
+              }, 
+              child: Text(e.name),
+            );
+          }).toList(growable: false),
+        ),
       );
     }
   }
