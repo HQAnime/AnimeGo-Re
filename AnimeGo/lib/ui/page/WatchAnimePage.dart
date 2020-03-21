@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,8 +16,6 @@ class WatchAnimePage extends StatefulWidget {
 
 
 class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProviderStateMixin {
-  bool renderFAB = false;
-
   @override
   void initState() {
     super.initState();
@@ -47,58 +47,24 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
   }
 
   @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          WebView(
-            initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-            gestureNavigationEnabled: true,
-            initialUrl: widget.video.link,
-            javascriptMode: JavascriptMode.unrestricted,
-            navigationDelegate: (NavigationRequest request) {
-              if (!request.url.startsWith(widget.video.link)) {
-                print('block $request');
-                return NavigationDecision.prevent;
-              }
+      appBar: Platform.isIOS ? AppBar(title: Text(widget.video.title)) : null,
+      body: WebView(
+        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+        gestureNavigationEnabled: true,
+        initialUrl: widget.video.link,
+        javascriptMode: JavascriptMode.unrestricted,
+        navigationDelegate: (NavigationRequest request) {
+          if (!request.url.startsWith(widget.video.link)) {
+            print('block $request');
+            return NavigationDecision.prevent;
+          }
 
-              return NavigationDecision.navigate;
-            },
-          ),
-          GestureDetector(
-            onHorizontalDragEnd: (d) {
-              final offset = d.velocity.pixelsPerSecond;
-              // Only swipe to the right
-              if (offset.dx > 0 && offset.dy < 0) {
-                setState(() {
-                  this.renderFAB = !renderFAB;
-                  if (renderFAB) {
-                    // auto hide after 2 seconds
-                    Future.delayed(Duration(milliseconds: 2300)).then((value) {
-                      setState(() {
-                        this.renderFAB = false;
-                      });
-                    });
-                  }
-                });
               }
-            },
-          ),
-        ],
+          return NavigationDecision.navigate;
+        },
       ),
-      floatingActionButton: renderFAB ? 
-      FloatingActionButton(
-        onPressed: () => Navigator.pop(context),
-        child: Icon(Icons.close),
-      ) : 
-      null
     );
   }
 }

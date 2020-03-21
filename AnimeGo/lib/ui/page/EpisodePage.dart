@@ -70,8 +70,8 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
           child: ListView(
             children: <Widget>[
               ListTile(
-                title: Text('Category'),
-                subtitle: Text(info.category),
+                title: Text('Category', textAlign: TextAlign.center),
+                subtitle: Text(info.category, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
                     context, 
@@ -83,8 +83,8 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                 },
               ),
               ListTile(
-                title: Text('Anime Info'),
-                subtitle: Text(info.name),
+                title: Text('Anime Info', textAlign: TextAlign.center),
+                subtitle: Text(info.name, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
                     context, 
@@ -93,9 +93,12 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                 },
               ),
               ListTile(
-                title: Text('Server List'),
-                subtitle: Wrap(
-                  children: renderServerList(),
+                title: Text('Server List', textAlign: TextAlign.center),
+                subtitle: Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: renderServerList(),
+                  ),
                 ),
               )
             ],
