@@ -173,6 +173,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   }
 
   void loadEpisode(EpisodeSection e) {
+    // Don't update if the selection is the same
+    if (e.episodeStart == this.currEpisode) return;
+
     setState(() {
       this.currEpisode = e.episodeStart;
       this.loadingEpisode = true;
