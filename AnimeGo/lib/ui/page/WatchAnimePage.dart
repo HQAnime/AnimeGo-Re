@@ -61,7 +61,6 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
             return NavigationDecision.prevent;
           }
 
-              }
           return NavigationDecision.navigate;
         },
       ),
