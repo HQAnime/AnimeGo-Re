@@ -6,6 +6,7 @@ import 'package:AnimeGo/core/parser/OneEpisodeParser.dart';
 import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
+import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,15 +25,10 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
   OneEpisodeInfo info;
   final global = Global();
   String fomattedName;
-
-  AnimationController controller;
-  Animation<double> listScale;
   
   @override
   void initState() {
     super.initState();
-    this.controller = AnimationController(duration: const Duration(milliseconds: 600), vsync: this, value: 0.0);
-    this.listScale = CurvedAnimation(parent: this.controller, curve: Curves.linearToEaseOut);
     this.loadEpisodeInfo(widget.info.link);
   }
 
@@ -41,13 +37,11 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
       info = null;
     });
 
-    this.controller.reset();
     final parser = OneEpisodeParser(global.getDomain() + link);
     parser.downloadHTML().then((body) {
       setState(() {
         this.info = parser.parseHTML(body);
         this.fomattedName = info.name.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
-        this.controller.forward();
       });
     });
   }
@@ -60,50 +54,9 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
           info == null ? 'Loading...' : 'Episode ${info.currentEpisode}',
         )
       ),
-      body: info == null ?
-      Center(
-        child: CircularProgressIndicator(),
-      ) :
-      ScaleTransition(
-        scale: this.listScale,
-        child: Center(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                title: Text('Category', textAlign: TextAlign.center),
-                subtitle: Text(info.category, textAlign: TextAlign.center),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context, 
-                    MaterialPageRoute(builder: (context) => CategoryPage(
-                      url: info.categoryLink, 
-                      title: info.category)
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('Anime Info', textAlign: TextAlign.center),
-                subtitle: Text(info.name, textAlign: TextAlign.center),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context, 
-                    MaterialPageRoute(builder: (context) => AnimeDetailPage(info: info)),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('Server List', textAlign: TextAlign.center),
-                subtitle: Center(
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    children: renderServerList(),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+      body: LoadingSwitcher(
+        loading: this.info == null, 
+        child: this.renderBody(),
       ),
       bottomNavigationBar: AnimatedOpacity(
         duration: Duration(milliseconds: 300),
@@ -147,6 +100,53 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
         ),
       ),
     );
+  }
+
+  Widget renderBody() {
+    if (this.info == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return Center(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text('Category', textAlign: TextAlign.center),
+              subtitle: Text(info.category, textAlign: TextAlign.center),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(builder: (context) => CategoryPage(
+                    url: info.categoryLink, 
+                    title: info.category)
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Anime Info', textAlign: TextAlign.center),
+              subtitle: Text(info.name, textAlign: TextAlign.center),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(builder: (context) => AnimeDetailPage(info: info)),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Server List', textAlign: TextAlign.center),
+              subtitle: Center(
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  children: renderServerList(),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   List<Widget> renderServerList() {
