@@ -57,6 +57,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
       body: LoadingSwitcher(
         loading: this.info == null, 
         child: this.renderBody(),
+        repeat: true,
       ),
       bottomNavigationBar: AnimatedOpacity(
         duration: Duration(milliseconds: 300),
