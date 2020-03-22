@@ -10,6 +10,7 @@ import 'package:AnimeGo/core/parser/EpisodeListParser.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/EpisodePage.dart';
 import 'package:AnimeGo/ui/page/GenrePage.dart';
+import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDetailPage class
@@ -53,7 +54,12 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       appBar: AppBar(
         title: Text(loading ? 'Loading...' : info.status),
       ),
-      body: SafeArea(child: this.renderBody()),
+      body: SafeArea(
+        child: LoadingSwitcher(
+          child: this.renderBody(), 
+          loading: this.loading,
+        )
+      ),
     );
   }
 

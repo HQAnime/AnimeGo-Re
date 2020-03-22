@@ -25,7 +25,6 @@ class OneEpisodeInfo extends BasicAnime{
     this.currentEpisode = json['currentEpisode'],
     super.fromJson(json);
 
-
   OneEpisodeInfo(Element e) : super.fromJson(null) {
     // Get name and category
     final body = e.getElementsByClassName('anime_video_body_cate').first;

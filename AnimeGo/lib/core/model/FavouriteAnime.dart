@@ -9,12 +9,12 @@ class FavouriteAnime {
     final list = json['favourite'] as List;
     print(list);
     list.forEach((element) {
-      favourite.add(AnimeDetailedInfo.fromJson(element));
+      //favourite.add(AnimeDetailedInfo.fromJson(element));
     });
   }
 
   Map<String, dynamic> toJson() =>
   {
-    'favourite': favourite.map((element) => element.toJson()).toList(),
+    //'favourite': favourite.map((element) => element.toJson()).toList(),
   };
 }
