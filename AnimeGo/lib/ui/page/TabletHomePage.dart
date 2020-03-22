@@ -96,21 +96,25 @@ class _TabletHomePageState extends State<TabletHomePage> {
           title: Text('Latest'),
           leading: Icon(Icons.new_releases),
           onTap: () => setCode(PageCode.latest),
+          selected: code == PageCode.latest,
         ),
         ListTile(
           title: Text('Seasonal'),
           leading: Icon(Icons.fiber_new),
           onTap: () => setCode(PageCode.seasonal),
+          selected: code == PageCode.seasonal,
         ),
         ListTile(
           title: Text('Movie'),
           leading: Icon(Icons.movie),
           onTap: () => setCode(PageCode.movie),
+          selected: code == PageCode.movie,
         ),
         ListTile(
           title: Text('Popular'),
           leading: Icon(Icons.label),
           onTap: () => setCode(PageCode.popular),
+          selected: code == PageCode.popular,
         ),
         ExpansionTile(
           title: Text('Genre'),
@@ -127,17 +131,20 @@ class _TabletHomePageState extends State<TabletHomePage> {
           title: Text('History'),
           leading: Icon(Icons.history),
           onTap: () => setCode(PageCode.history),
+          selected: code == PageCode.history,
         ),
         ListTile(
           title: Text('Favourite'),
           leading: Icon(Icons.favorite),
           onTap: () => setCode(PageCode.favourite),
+          selected: code == PageCode.favourite,
         ),
         Divider(),
         ListTile(
           title: Text('Settings'),
           leading: Icon(Icons.settings),
           onTap: () => setCode(PageCode.setting),
+          selected: code == PageCode.setting,
         ),
       ],
     );
