@@ -8,7 +8,7 @@ class AnimeInfo extends BasicAnime {
   // Either episode or release
   String episode = '???';
   
-  AnimeInfo(Element e) {
+  AnimeInfo(Element e) : super.fromJson(null) {
     // Image class has image and also name, link but I will use name class instead
     final imageClass = e.getElementsByClassName('img')?.first;
     this.coverImage = imageClass?.nodes[1]?.nodes[1]?.attributes['src'];

@@ -1,10 +1,19 @@
-import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 
-/// The combination of `BasicAnime` and `OneEpisodeInfo`
+/// It is basically `OneEpisodeInfo`
 class WatchHistory {
-  BasicAnime anime;
-  OneEpisodeInfo episode;
+  List<OneEpisodeInfo> history;
 
-  WatchHistory(this.anime, this.episode);
+  WatchHistory.fromJson(Map<String, dynamic> json) {
+    final list = json['history'] as List;
+    print(list);
+    list.forEach((element) {
+      this.history.add(OneEpisodeInfo.fromJson(element));
+    });
+  }
+
+  Map<String, dynamic> toJson() =>
+  {
+    'history': history.map((element) => element.toJson()).toList(),
+  };
 }

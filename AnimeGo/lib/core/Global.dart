@@ -1,4 +1,6 @@
 
+import 'package:AnimeGo/core/model/FavouriteAnime.dart';
+import 'package:AnimeGo/core/model/WatchHistory.dart';
 import 'package:AnimeGo/core/parser/DomainParser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,9 +23,17 @@ class Global {
     prefs.setString(websiteDomain, domain);
   }
 
+  /// History list
+  WatchHistory history;
+
+  /// Favourite list
+  FavouriteAnime favourite;
+
   // Relating to local data
   SharedPreferences prefs;
   final websiteDomain = 'AnimeGo:Domain';
+  final watchHistory = 'AnimeGo:WatchHistory';
+  final favouriteAnime = 'AnimeGo:FavouriteAnime';
 
   // Singleton pattern 
   Global._init();
