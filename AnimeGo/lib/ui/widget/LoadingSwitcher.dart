@@ -23,11 +23,17 @@ class _LoadingSwitcherState extends State<LoadingSwitcher> with SingleTickerProv
   }
 
   @override
+  void setState(fn) {
+    this.controller.reset();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (widget.loading) {
       return widget.child;
     } else {
       // Show the animation
+      controller.reset();
       controller.forward();
       return ScaleTransition(
         scale: this.scale,

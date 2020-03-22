@@ -6,6 +6,7 @@ import 'package:AnimeGo/core/parser/AnimeParser.dart';
 import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/EpisodePage.dart';
 import 'package:AnimeGo/ui/widget/AnimeCard.dart';
+import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeGrid class
@@ -85,6 +86,13 @@ class _AnimeGridState extends State<AnimeGrid> {
   
   @override
   Widget build(BuildContext context) {
+    return LoadingSwitcher(
+      loading: this.loading, 
+      child: this.renderBody(),
+    );
+  }
+
+  Widget renderBody() {
     if (loading) {
       // While loading, show a loading indicator and a normal app bar
       return Center(
