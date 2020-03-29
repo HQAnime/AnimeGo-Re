@@ -2,3 +2,4 @@
 .DS_Store
 ._*
 **/app/release/
+.vscode/settings.json
