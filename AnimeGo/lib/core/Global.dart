@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// It handles global data
 class Global {
   // Constants
-  static final defaultDomain = 'https://gogoanimee.net';
+  static final defaultDomain = 'https://gogoanimee.io';
   static final appVersion = '1.2.0';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
   static final email = 'mailto:development.henryquan@gmail.com?subject=[AnimeGo] ';
