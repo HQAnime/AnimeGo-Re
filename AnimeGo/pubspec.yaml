@@ -11,7 +11,7 @@ description: An unofficial app for gogoanime
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.0+2
+version: 1.2.1+2
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -21,15 +21,15 @@ dependencies:
     sdk: flutter
 
   # easy request
-  http: ^0.12.0+4
+  http: ^0.12.1
   # parse html
   html: ^0.14.0+3
   # persist data locally
-  shared_preferences: ^0.5.6+3
+  shared_preferences: ^0.5.7+3
   # open links in browser
-  url_launcher: ^5.4.2
+  url_launcher: ^5.4.10
   # webview
-  webview_flutter: ^0.3.19+9
+  webview_flutter: ^0.3.22+1
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
