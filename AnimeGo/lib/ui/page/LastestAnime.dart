@@ -17,7 +17,7 @@ class LastestAnime extends StatelessWidget {
       drawer: AnimeDrawer(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime(), fullscreenDialog: true)),
       ),
     );
   }

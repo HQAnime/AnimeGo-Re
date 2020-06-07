@@ -52,7 +52,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
       floatingActionButton: showFab ? FloatingActionButton(
         child: Icon(Icons.search),
         tooltip: 'Search anime',
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime())),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime(), fullscreenDialog: true)),
       ) : null,
     );
   }

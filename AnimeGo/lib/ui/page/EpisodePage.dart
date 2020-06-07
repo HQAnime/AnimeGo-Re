@@ -96,7 +96,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                   icon: Icon(Icons.arrow_forward),
                 ),
               ),
-            ] : [SizedBox.shrink()],
+            ] : [],
           ),
         ),
       ),
@@ -110,41 +110,43 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
       );
     } else {
       return Center(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text('Category', textAlign: TextAlign.center),
-              subtitle: Text(info.category, textAlign: TextAlign.center),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context, 
-                  MaterialPageRoute(builder: (context) => CategoryPage(
-                    url: info.categoryLink, 
-                    title: info.category)
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Anime Info', textAlign: TextAlign.center),
-              subtitle: Text(info.name, textAlign: TextAlign.center),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context, 
-                  MaterialPageRoute(builder: (context) => AnimeDetailPage(info: info)),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Server List', textAlign: TextAlign.center),
-              subtitle: Center(
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: renderServerList(),
-                ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text('Category', textAlign: TextAlign.center),
+                subtitle: Text(info.category, textAlign: TextAlign.center),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context, 
+                    MaterialPageRoute(builder: (context) => CategoryPage(
+                      url: info.categoryLink, 
+                      title: info.category)
+                    ),
+                  );
+                },
               ),
-            )
-          ],
+              ListTile(
+                title: Text('Anime Info', textAlign: TextAlign.center),
+                subtitle: Text(info.name, textAlign: TextAlign.center),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context, 
+                    MaterialPageRoute(builder: (context) => AnimeDetailPage(info: info)),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Server List', textAlign: TextAlign.center),
+                subtitle: Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: renderServerList(),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       );
     }
