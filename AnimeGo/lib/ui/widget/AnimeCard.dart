@@ -14,11 +14,13 @@ class AnimeCard extends StatelessWidget {
         children: <Widget>[
           AspectRatio(
             aspectRatio: 0.7,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: FittedBox(
-                child: Image.network(info.coverImage),
-                fit: BoxFit.cover,
+            child: Ink(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(info.coverImage),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
