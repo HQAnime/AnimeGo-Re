@@ -7,6 +7,7 @@ class AnimeInfo extends BasicAnime {
 
   // Either episode or release
   String episode = '???';
+  bool isDUB = false;
   
   AnimeInfo(Element e) : super.fromJson(null) {
     // Image class has image and also name, link but I will use name class instead
@@ -17,6 +18,7 @@ class AnimeInfo extends BasicAnime {
     final nameClass = e.getElementsByClassName('name')?.first;
     final nameLink = nameClass?.firstChild;
     this.name = nameLink?.attributes['title'].trim();
+    _formatAnimeName(name);
     this.link = nameLink?.attributes['href'];
 
     // Category has a released class while episode only has the episode
@@ -36,5 +38,16 @@ class AnimeInfo extends BasicAnime {
   getTitle() {
     if (isCategory()) return this.name;
     return this.episode;
+  }
+
+  /// Some anime are DUB and I will put the name in the front
+  _formatAnimeName(String name) {
+    if (name.toLowerCase().contains("(dub)")) {
+      // It is 100% that dub will be at the end
+      isDUB = true;
+      final component = name.split(' ')..removeLast();
+      // remove extra spaces and append it to DUB
+      this.name = '[Dub] ' + component.join(' ').trimRight();
+    }
   }
 }
