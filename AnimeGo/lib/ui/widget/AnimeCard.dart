@@ -14,8 +14,12 @@ class AnimeCard extends StatelessWidget {
         children: <Widget>[
           AspectRatio(
             aspectRatio: 0.7,
-            child: FittedBox(
-              child: Image.network(info.coverImage),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: FittedBox(
+                child: Image.network(info.coverImage),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
