@@ -4,9 +4,8 @@
 
 **This is not the official app**
 
-It has been rewritten with `Flutter` to support IOS, tablets and web.
+It has been rewritten with `Flutter` to have bettter iOS and tablets support
 
-如果你喜歡中文字幕的話，可以嘗試[AnimeOne](https://github.com/HenryQuan/AnimeOne)。
 </div>
 
 # Features
@@ -21,7 +20,7 @@ It has been rewritten with `Flutter` to support IOS, tablets and web.
 - Auto update (wip)
 - No popups while watching anime (IOS and Android only)
 
-I have abondoned this project for about 2 years but it is finally back. A complete rework is undergoing because `AnimeOne` doesn't have some old animes. Flutter is now used instead of React Native. Some features are still under development but it is now stable enough to use. You could try [the web version](https://henryquan.github.io/AnimeGo-Re) now.
+I have abondoned this project for about 2 years but it is finally back. A complete rework is undergoing because `AnimeOne` doesn't have some old animes. Flutter is now used instead of React Native. Some features are still under development but it is now stable enough to use.
 
 # Downloads
 Only android build is available and you can download the apk from [release](https://github.com/HenryQuan/AnimeGo-Re/releases/tag/1.2.0) (currently still in preview). However, IOS version is being tested and it works fine. You could [compile](https://github.com/HenryQuan/AnimeGo-Re/tree/master/AnimeGo/README.md) it yourself.
