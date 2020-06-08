@@ -6,17 +6,18 @@ abstract class BasicAnimeList {
   bool contains(BasicAnime anime) => list.any((e) => e.link == anime.link);
   void add(BasicAnime anime) {
     if (contains(anime)) return;
-    list.add(anime);
+    list.insert(0, anime);
   }
 
+  BasicAnimeList();
   BasicAnimeList.fromJson(Map<String, dynamic> json) {
     final temp = json[getName()] as List;
-    list = temp.map((e) => BasicAnime.fromJson(e)).toList(growable: false);
+    list = temp.map((e) => BasicAnime.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() =>
   {
-    getName(): list.map((e) => e.toJson()),
+    getName(): list.map((e) => e.toJson()).toList(growable: false),
   };
 
   String getName();

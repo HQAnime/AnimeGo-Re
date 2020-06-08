@@ -161,7 +161,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
           child: ActionChip(
             onPressed: () {
               // Save this to watch history
-              Global().addToHistory(BasicAnime(info.episodeName, info.link));
+              Global().addToHistory(BasicAnime(info.episodeName, widget.info.link));
 
               if (Util.isMobile()) {
                 Navigator.push(

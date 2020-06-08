@@ -27,23 +27,21 @@ class Global {
   }
 
   /// History list
-  WatchHistory _history;
-  List<BasicAnime> get historyList => _history?.list ?? [];
+  WatchHistory _history = WatchHistory();
+  List<BasicAnime> get historyList => _history.list;
   bool hasWatched(BasicAnime anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime anime) {
-    if (_history == null) return;
     _history.add(anime);
     // Save
     prefs.setString(watchHistory, jsonEncode(_history.toJson()));
   }
 
   /// Favourite list
-  FavouriteAnime _favourite;
-  List<BasicAnime> get favouriteList => _favourite?.list ?? [];
+  FavouriteAnime _favourite = FavouriteAnime();
+  List<BasicAnime> get favouriteList => _favourite.list;
   bool isFavourite(BasicAnime anime) => _favourite.contains(anime);
   void addToFavourite(BasicAnime anime) {
-    if (_favourite == null) return;
     _favourite.add(anime);
     // Save
     prefs.setString(favouriteAnime, jsonEncode(_favourite.toJson()));

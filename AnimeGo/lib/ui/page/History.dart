@@ -12,7 +12,7 @@ class History extends StatelessWidget {
     final list = Global().historyList;
     return Scaffold(
       appBar: showAppBar ? AppBar(
-        title: Text('Watch History')
+        title: Text('Watch History'),
       ) : null,
       body: ListView.builder(
         itemCount: list.length,
