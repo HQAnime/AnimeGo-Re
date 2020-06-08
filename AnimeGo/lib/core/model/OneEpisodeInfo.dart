@@ -10,6 +10,7 @@ class OneEpisodeInfo extends BasicAnime{
   String currentEpisode;
   String prevEpisode;
   String nextEpisode;
+  String get episodeName => '$name $currentEpisode';
 
   List<VideoServer> servers = [];
 

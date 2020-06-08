@@ -3,6 +3,8 @@ class BasicAnime {
   String name;
   String link;
 
+  BasicAnime(this.name, this.link);
+
   BasicAnime.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     this.name = json['name'];

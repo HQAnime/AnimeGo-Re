@@ -1,3 +1,5 @@
+import 'package:AnimeGo/core/Global.dart';
+import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:flutter/material.dart';
 
 /// Favourite class
@@ -7,12 +9,22 @@ class Favourite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final list = Global().favouriteList;
     return Scaffold(
       appBar: showAppBar ? AppBar(
-        title: Text('Settings')
+        title: Text('Favourite Anime')
       ) : null,
-      body: Center(
-        child: Text('Coming soon...'),
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (c, i) {
+          final curr = list[i];
+          return ListTile(
+            title: Text(curr.name),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (c) => AnimeDetailPage(info: curr)));
+            },
+          );
+        },
       ),
     );
   }

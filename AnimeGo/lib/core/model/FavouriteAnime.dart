@@ -1,17 +1,8 @@
+import 'package:AnimeGo/core/model/BasicAnimeList.dart';
 
-import 'package:AnimeGo/core/model/BasicAnime.dart';
+class FavouriteAnime extends BasicAnimeList {
+  FavouriteAnime.fromJson(Map<String, dynamic> json) : super.fromJson(json);
 
-/// It is basically `BasicAnime`
-class FavouriteAnime {
-  List<BasicAnime> favourite = [];
-
-  FavouriteAnime.fromJson(Map<String, dynamic> json) {
-    final list = json['favourite'] as List;
-    favourite = list.map((e) => BasicAnime.fromJson(e)).toList(growable: false);
-  }
-
-  Map<String, dynamic> toJson() =>
-  {
-    'favourite': favourite.map((e) => e.toJson()),
-  };
+  @override
+  String getName() => 'favourite';
 }
