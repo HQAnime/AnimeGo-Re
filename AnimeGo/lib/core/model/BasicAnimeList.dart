@@ -8,6 +8,9 @@ abstract class BasicAnimeList {
     if (contains(anime)) return;
     list.insert(0, anime);
   }
+  void remove(BasicAnime anime) {
+    list.removeWhere((e) => e.link == anime.link);
+  }
 
   BasicAnimeList();
   BasicAnimeList.fromJson(Map<String, dynamic> json) {

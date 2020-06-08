@@ -41,6 +41,10 @@ class Global {
   FavouriteAnime _favourite = FavouriteAnime();
   List<BasicAnime> get favouriteList => _favourite.list;
   bool isFavourite(BasicAnime anime) => _favourite.contains(anime);
+  void removeFromFavourite(BasicAnime anime) {
+    _favourite.remove(anime);
+    prefs.setString(favouriteAnime, jsonEncode(_favourite.toJson()));
+  }
   void addToFavourite(BasicAnime anime) {
     _favourite.add(anime);
     // Save

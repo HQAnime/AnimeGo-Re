@@ -11,6 +11,7 @@ import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/EpisodePage.dart';
 import 'package:AnimeGo/ui/page/GenrePage.dart';
 import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
+import 'package:AnimeGo/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDetailPage class
@@ -30,6 +31,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   List<EpisodeInfo> episodes;
   final global = Global();
 
+  bool isFavourite = false;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +42,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       setState(() {
         this.loading = false;
         this.info = parser.parseHTML(body);
+        this.isFavourite = global.isFavourite(widget.info);
 
         // Auto load if there is only one section
         if (info.episodes.length == 1) {
@@ -53,6 +57,19 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(loading ? 'Loading...' : info.status),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_border),
+            onPressed: () {
+              if (isFavourite) global.removeFromFavourite(widget.info);
+              else global.addToFavourite(widget.info);
+
+              setState(() {
+                isFavourite = !isFavourite;
+              });
+            }
+          ),
+        ],
       ),
       body: SafeArea(
         child: LoadingSwitcher(
@@ -109,7 +126,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           }, 
                           child: Text(info.category, textAlign: TextAlign.center)
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -124,6 +141,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               ],
             ),
           ),
+          SearchAnimeButton(name: widget.info.name),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: ListTile(

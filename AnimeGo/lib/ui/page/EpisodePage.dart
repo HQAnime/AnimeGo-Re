@@ -7,6 +7,7 @@ import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
 import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
+import 'package:AnimeGo/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -75,18 +76,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                   icon: Icon(Icons.arrow_back),
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  launch('https://www.google.com/search?q=$fomattedName');
-                }, 
-                child: Text('Google')
-              ),
-              FlatButton(
-                onPressed: () {
-                  launch('https://duckduckgo.com/?q=$fomattedName');
-                }, 
-                child: Text('DuckDuckGo')
-              ),
+              SearchAnimeButton(name: fomattedName),
               Tooltip(
                 message: 'Next episode',
                 child: IconButton(
