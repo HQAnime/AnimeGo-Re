@@ -8,4 +8,11 @@ class BasicAnime {
     this.name = json['name'];
     this.link = json['link'];
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': this.name,
+      'link': this.link,
+    };
+  }
 }

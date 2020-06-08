@@ -1,20 +1,17 @@
 
-import 'package:AnimeGo/core/model/AnimeDetailedInfo.dart';
+import 'package:AnimeGo/core/model/BasicAnime.dart';
 
-/// It is basically `OneEpisodeInfo`
+/// It is basically `BasicAnime`
 class FavouriteAnime {
-  List<AnimeDetailedInfo> favourite;
+  List<BasicAnime> favourite = [];
 
   FavouriteAnime.fromJson(Map<String, dynamic> json) {
     final list = json['favourite'] as List;
-    print(list);
-    list.forEach((element) {
-      //favourite.add(AnimeDetailedInfo.fromJson(element));
-    });
+    favourite = list.map((e) => BasicAnime.fromJson(e)).toList(growable: false);
   }
 
   Map<String, dynamic> toJson() =>
   {
-    //'favourite': favourite.map((element) => element.toJson()).toList(),
+    'favourite': favourite.map((e) => e.toJson()),
   };
 }
