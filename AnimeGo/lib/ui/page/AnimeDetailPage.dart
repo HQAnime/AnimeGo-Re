@@ -101,7 +101,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           onPressed: () {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                               return CategoryPage(
-                                url: global.getDomain() + info.categoryLink, 
+                                // The domain will be added later so DON'T ADD IT HERE
+                                url: info.categoryLink, 
                                 title: info.category
                               );
                             }));
