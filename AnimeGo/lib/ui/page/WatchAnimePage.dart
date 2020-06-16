@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,7 +50,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Platform.isIOS ? AppBar(title: Text(widget.video.title)) : null,
+      appBar: Util.isIOS() ? AppBar(title: Text(widget.video.title)) : null,
       body: WebView(
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
         gestureNavigationEnabled: true,

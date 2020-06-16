@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:AnimeGo/core/Util.dart';
 import 'package:flutter/material.dart';
 
 /// LoadingSwitcher class
@@ -17,7 +18,7 @@ class LoadingSwitcher extends StatefulWidget {
 class _LoadingSwitcherState extends State<LoadingSwitcher> with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> scale;
-  final bool showAnimation = Platform.isIOS || Platform.isAndroid;
+  final bool showAnimation = Util.isMobile();
 
   @override
   void initState() {

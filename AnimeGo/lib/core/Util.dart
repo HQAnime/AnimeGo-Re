@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Util {
@@ -12,8 +13,13 @@ class Util {
   }
 
   static bool isMobile() {
-    if (identical(0, 0.0)) return false;
+    if (kIsWeb) return false;
     return Platform.isIOS || Platform.isAndroid;
+  }
+
+  static bool isIOS() {
+    if (kIsWeb) return false;
+    return Platform.isIOS;
   }
 
   /// From https://stackoverflow.com/a/53912090
