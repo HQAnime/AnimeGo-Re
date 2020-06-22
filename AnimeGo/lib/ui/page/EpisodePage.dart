@@ -21,13 +21,13 @@ class EpisodePage extends StatefulWidget {
   _EpisodePageState createState() => _EpisodePageState();
 }
 
-
-class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStateMixin {
+class _EpisodePageState extends State<EpisodePage>
+    with SingleTickerProviderStateMixin {
   String link;
   OneEpisodeInfo info;
   final global = Global();
   String fomattedName;
-  
+
   @override
   void initState() {
     super.initState();
@@ -52,12 +52,11 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          info == null ? 'Loading...' : 'Episode ${info.currentEpisode}',
-        )
-      ),
+          title: Text(
+        info == null ? 'Loading...' : 'Episode ${info.currentEpisode}',
+      )),
       body: LoadingSwitcher(
-        loading: this.info == null, 
+        loading: this.info == null,
         child: this.renderBody(),
         repeat: true,
       ),
@@ -67,27 +66,33 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
         child: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: this.info != null ? <Widget>[
-              Tooltip(
-                message: 'Previous episode',
-                child: IconButton(
-                  onPressed: this.info.prevEpisode != null ? () {
-                    this.loadEpisodeInfo(this.info.prevEpisode);
-                  } : null,
-                  icon: Icon(Icons.arrow_back),
-                ),
-              ),
-              SearchAnimeButton(name: fomattedName),
-              Tooltip(
-                message: 'Next episode',
-                child: IconButton(
-                  onPressed: this.info.nextEpisode != null ? () {
-                    this.loadEpisodeInfo(this.info.nextEpisode);
-                  } : null,
-                  icon: Icon(Icons.arrow_forward),
-                ),
-              ),
-            ] : [],
+            children: this.info != null
+                ? <Widget>[
+                    Tooltip(
+                      message: 'Previous episode',
+                      child: IconButton(
+                        onPressed: this.info.prevEpisode != null
+                            ? () {
+                                this.loadEpisodeInfo(this.info.prevEpisode);
+                              }
+                            : null,
+                        icon: Icon(Icons.arrow_back),
+                      ),
+                    ),
+                    SearchAnimeButton(name: fomattedName),
+                    Tooltip(
+                      message: 'Next episode',
+                      child: IconButton(
+                        onPressed: this.info.nextEpisode != null
+                            ? () {
+                                this.loadEpisodeInfo(this.info.nextEpisode);
+                              }
+                            : null,
+                        icon: Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  ]
+                : [],
           ),
         ),
       ),
@@ -109,11 +114,10 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                 subtitle: Text(info.category, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
-                    context, 
-                    MaterialPageRoute(builder: (context) => CategoryPage(
-                      url: info.categoryLink, 
-                      title: info.category)
-                    ),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryPage(
+                            url: info.categoryLink, title: info.category)),
                   );
                 },
               ),
@@ -122,8 +126,9 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                 subtitle: Text(info.name, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
-                    context, 
-                    MaterialPageRoute(builder: (context) => AnimeDetailPage(info: info)),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AnimeDetailPage(info: info)),
                   );
                 },
               ),
@@ -135,6 +140,10 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
                     children: renderServerList(),
                   ),
                 ),
+              ),
+              Text(
+                'Please note that this app does not\nhave any controls over these sources',
+                textAlign: TextAlign.center,
               )
             ],
           ),
@@ -152,13 +161,16 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
           child: ActionChip(
             onPressed: () {
               // Save this to watch history
-              Global().addToHistory(BasicAnime(info.episodeName, widget.info.link));
+              Global()
+                  .addToHistory(BasicAnime(info.episodeName, widget.info.link));
 
               if (Util.isMobile()) {
                 if (Util.isIOS()) {
                   Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WatchAnimePage(video: e),
+                        fullscreenDialog: true),
                   );
                 } else {
                   // Show a dialog to ask whether users want to watch in app or not
@@ -170,7 +182,7 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
               } else {
                 launch(e.link);
               }
-            }, 
+            },
             label: Text(e.title),
           ),
         ),
