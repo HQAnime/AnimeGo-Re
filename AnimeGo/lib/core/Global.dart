@@ -26,6 +26,7 @@ class Global {
   }
 
   /// Whwther dub anime should be hidden
+  bool _hasUpdated = false;
   bool _hideDUB;
   bool get hideDUB => _hideDUB;
   set hideDUB(bool value) {
@@ -64,6 +65,7 @@ class Global {
   final watchHistory = 'AnimeGo:WatchHistory';
   final favouriteAnime = 'AnimeGo:FavouriteAnime';
   final hideDubAnime = 'AnimeGo:HideDUB';
+  final lastUpdateDate = 'AnimeGo:LastUpdateDate';
 
   // Singleton pattern 
   Global._init();
@@ -79,6 +81,13 @@ class Global {
     if (!_hasInit) {
       // Setup shared preference
       prefs = await SharedPreferences.getInstance();
+
+      // Check if it needs to check for update
+      String lastUpdate = prefs.getString(lastUpdateDate) ?? DateTime.now().toString();
+      final date = DateTime.parse(lastUpdate);
+      if (date.difference(DateTime.now()).inDays > 30) {
+
+      }
 
       // Get currently saved domain, use default if it is null
       String currDomain = prefs.getString(websiteDomain) ?? Global.defaultDomain;
@@ -109,4 +118,6 @@ class Global {
     
     return true;
   }
+
+  
 }
