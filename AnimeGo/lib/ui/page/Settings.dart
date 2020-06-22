@@ -80,6 +80,7 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+  /// Hides dub
   Future<void> updateHideDUB(bool value) async {
     if (value == hideDUB) return;
     global.hideDUB = value;
