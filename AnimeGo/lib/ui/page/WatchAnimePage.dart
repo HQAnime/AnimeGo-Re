@@ -13,8 +13,8 @@ class WatchAnimePage extends StatefulWidget {
   _WatchAnimePageState createState() => _WatchAnimePageState();
 }
 
-
-class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProviderStateMixin {
+class _WatchAnimePageState extends State<WatchAnimePage>
+    with SingleTickerProviderStateMixin {
   final webview = FlutterWebviewPlugin();
 
   @override
@@ -28,8 +28,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
       DeviceOrientation.landscapeRight,
     ]);
 
-    webview.onUrlChanged.listen((event) {
-      webview.stopLoading();
+    webview.onStateChanged.listen((event) {
+      if (!event.url.contains(widget.video.link)) webview.stopLoading();
     });
   }
 
@@ -56,7 +56,6 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
     return WebviewScaffold(
       appBar: Util.isIOS() ? AppBar(title: Text(widget.video.title)) : null,
       url: widget.video.link,
-      resizeToAvoidBottomInset: true,
     );
   }
 }

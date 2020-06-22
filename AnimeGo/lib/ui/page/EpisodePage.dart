@@ -110,6 +110,17 @@ class _EpisodePageState extends State<EpisodePage>
           child: Column(
             children: <Widget>[
               ListTile(
+                title: Text('Anime Info', textAlign: TextAlign.center),
+                subtitle: Text(info.name, textAlign: TextAlign.center),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AnimeDetailPage(info: info)),
+                  );
+                },
+              ),
+              ListTile(
                 title: Text('Category', textAlign: TextAlign.center),
                 subtitle: Text(info.category, textAlign: TextAlign.center),
                 onTap: () {
@@ -118,17 +129,6 @@ class _EpisodePageState extends State<EpisodePage>
                     MaterialPageRoute(
                         builder: (context) => CategoryPage(
                             url: info.categoryLink, title: info.category)),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('Anime Info', textAlign: TextAlign.center),
-                subtitle: Text(info.name, textAlign: TextAlign.center),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AnimeDetailPage(info: info)),
                   );
                 },
               ),
@@ -165,7 +165,7 @@ class _EpisodePageState extends State<EpisodePage>
                   .addToHistory(BasicAnime(info.episodeName, widget.info.link));
 
               if (Util.isMobile()) {
-                if (Util.isAndroid()) {
+                if (Util.isIOS()) {
                   // Show a dialog to ask whether users want to watch in app or not
                   AndroidIntent(
                     action: 'action_view',
