@@ -2,6 +2,7 @@ import 'package:AnimeGo/core/Global.dart';
 import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
+import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:AnimeGo/core/parser/OneEpisodeParser.dart';
 import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
 import 'package:AnimeGo/ui/page/CategoryPage.dart';
@@ -160,24 +161,38 @@ class _EpisodePageState extends State<EpisodePage>
           message: 'Watch on ${e.title} server',
           child: ActionChip(
             onPressed: () {
-              // Save this to watch history
-              Global()
-                  .addToHistory(BasicAnime(info.episodeName, widget.info.link));
-
               if (Util.isMobile()) {
-                if (Util.isIOS()) {
+                if (Util.isAndroid()) {
                   // Show a dialog to ask whether users want to watch in app or not
-                  AndroidIntent(
-                    action: 'action_view',
-                    data: e.link,
-                  ).launch();
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WatchAnimePage(video: e),
-                        fullscreenDialog: true),
+                  showDialog(
+                    context: context,
+                    builder: (c) => AlertDialog(
+                      title:
+                          Text('Video playback', textAlign: TextAlign.center),
+                      content: Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        spacing: 2,
+                        children: [
+                          RaisedButton(
+                              onPressed: () => openWithOtherApps(e),
+                              child: Text('Use other apps')),
+                          RaisedButton(
+                              onPressed: () => openInAppPlayer(e),
+                              child: Text('Use in-app player')),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Text(
+                              'In-app player is simple and blocks all pop-ups while other apps might have more advanced features',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
+                } else {
+                  openInAppPlayer(e);
                 }
               } else {
                 launch(e.link);
@@ -189,4 +204,32 @@ class _EpisodePageState extends State<EpisodePage>
       );
     }).toList();
   }
+
+  /// Watch with in app player
+  openInAppPlayer(VideoServer e) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => WatchAnimePage(video: e),
+          fullscreenDialog: true),
+    );
+
+    _addToHistory();
+  }
+
+  /// Watch with in app player
+  openWithOtherApps(VideoServer e) {
+    Navigator.pop(context);
+    AndroidIntent(
+      action: 'action_view',
+      data: e.link,
+    ).launch();
+
+    _addToHistory();
+  }
+
+  /// Save this to watch history
+  _addToHistory() =>
+      Global().addToHistory(BasicAnime(info.episodeName, widget.info.link));
 }
