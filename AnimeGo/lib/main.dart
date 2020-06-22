@@ -43,9 +43,11 @@ class MyApp extends StatelessWidget {
               systemNavigationBarIconBrightness: useDark ? Brightness.light : Brightness.dark
             ));
           };
-          
+
           // The data is simply a `true`
           if (snapshot.hasData) {
+            // Check for update after init has been done
+            Global().checkForUpdate(context);
             // Use another view for tablets (or devices with a large screen)
             if (Util(context).isTablet()) return TabletHomePage();
             return LastestAnime();

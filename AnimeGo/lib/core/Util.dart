@@ -22,6 +22,13 @@ class Util {
     return Platform.isIOS;
   }
 
+  static bool isAndroid() {
+    if (kIsWeb) return false;
+    return Platform.isAndroid;
+  }
+
+  static bool isWeb() => kIsWeb;
+
   /// From https://stackoverflow.com/a/53912090
   bool isTablet() {
     var size = MediaQuery.of(context).size;

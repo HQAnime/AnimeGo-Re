@@ -73,7 +73,7 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Check for update'),
             subtitle: Text(Global.appVersion),
-            onTap: () {},
+            onTap: () => global.checkForUpdate(context, force: true),
           )
         ],
       ),

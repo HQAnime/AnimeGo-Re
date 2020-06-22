@@ -165,19 +165,19 @@ class _EpisodePageState extends State<EpisodePage>
                   .addToHistory(BasicAnime(info.episodeName, widget.info.link));
 
               if (Util.isMobile()) {
-                if (Util.isIOS()) {
+                if (Util.isAndroid()) {
+                  // Show a dialog to ask whether users want to watch in app or not
+                  AndroidIntent(
+                    action: 'action_view',
+                    data: e.link,
+                  ).launch();
+                } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => WatchAnimePage(video: e),
                         fullscreenDialog: true),
                   );
-                } else {
-                  // Show a dialog to ask whether users want to watch in app or not
-                  AndroidIntent(
-                    action: 'action_view',
-                    data: e.link,
-                  ).launch();
                 }
               } else {
                 launch(e.link);

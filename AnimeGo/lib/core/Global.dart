@@ -1,11 +1,14 @@
-
 import 'dart:convert';
 
 import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/FavouriteAnime.dart';
 import 'package:AnimeGo/core/model/WatchHistory.dart';
 import 'package:AnimeGo/core/parser/DomainParser.dart';
+import 'package:AnimeGo/core/parser/UpdateParser.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// It handles global data
 class Global {
@@ -13,10 +16,12 @@ class Global {
   static final defaultDomain = 'https://gogoanimes.tv/';
   static final appVersion = '1.2.1';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
-  static final email = 'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
+  static final email =
+      'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
 
   /// Whether the app has been init
   bool _hasInit = false;
+
   /// The domain that will be used globally
   String _domain;
   String getDomain() => _domain;
@@ -25,8 +30,11 @@ class Global {
     prefs.setString(websiteDomain, domain);
   }
 
+  /// Relating to app update
+  bool _hasChecked = false;
+  DateTime _lastDate;
+
   /// Whwther dub anime should be hidden
-  bool _hasUpdated = false;
   bool _hideDUB;
   bool get hideDUB => _hideDUB;
   set hideDUB(bool value) {
@@ -53,6 +61,7 @@ class Global {
     _favourite.remove(anime);
     prefs.setString(favouriteAnime, jsonEncode(_favourite.toJson()));
   }
+
   void addToFavourite(BasicAnime anime) {
     _favourite.add(anime);
     // Save
@@ -67,7 +76,7 @@ class Global {
   final hideDubAnime = 'AnimeGo:HideDUB';
   final lastUpdateDate = 'AnimeGo:LastUpdateDate';
 
-  // Singleton pattern 
+  // Singleton pattern
   Global._init();
   static final Global _instance = new Global._init();
 
@@ -83,14 +92,16 @@ class Global {
       prefs = await SharedPreferences.getInstance();
 
       // Check if it needs to check for update
-      String lastUpdate = prefs.getString(lastUpdateDate) ?? DateTime.now().toString();
-      final date = DateTime.parse(lastUpdate);
-      if (date.difference(DateTime.now()).inDays > 30) {
-
+      String dateString = prefs.getString(lastUpdateDate);
+      if (dateString == null) {
+        dateString = DateTime.now().toString();
+        prefs.setString(lastUpdateDate, dateString);
       }
+      this._lastDate = DateTime.parse(dateString);
 
       // Get currently saved domain, use default if it is null
-      String currDomain = prefs.getString(websiteDomain) ?? Global.defaultDomain;
+      String currDomain =
+          prefs.getString(websiteDomain) ?? Global.defaultDomain;
       print('Saved domain is $currDomain');
 
       // Load history and favourite anime
@@ -115,9 +126,59 @@ class Global {
       // Set the flag to true
       _hasInit = true;
     }
-    
+
     return true;
   }
 
-  
+  /// Check for update from github
+  Future<void> checkForUpdate(BuildContext context,
+      {bool force = false}) async {
+    if (_hasChecked) return;
+    // Check if the difference is at least 30 days
+    if (!force && _lastDate.difference(DateTime.now()).inDays < 30) {
+      print('No need to check for update');
+      return;
+    }
+
+    _hasChecked = true;
+    final parser = UpdateParser();
+    final info = parser.parseHTML(await parser.downloadHTML());
+    if (info.version != appVersion) {
+      print('There is an update');
+      // Update the date
+      prefs.setString(lastUpdateDate, _lastDate.toString());
+      // Show update dialog
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (c) => AlertDialog(
+                title: Text('Version ${info.version}'),
+                content: Text(info.newFeatures),
+                actions: [
+                  FlatButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('Close')),
+                  FlatButton(
+                      onPressed: () => launch(info.downloadLink),
+                      child: Text('Update now (Android only)')),
+                ],
+              ));
+    } else {
+      print('Up to date');
+      // Only show this in force mode
+      if (force) {
+        showDialog(
+          context: context,
+          builder: (c) => AlertDialog(
+                title: Text('Update to date'),
+                content: Text('You are using the latest version.'),
+                actions: [
+                  FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('Close')),
+                ],
+              ));
+      }
+    }
+  }
 }
