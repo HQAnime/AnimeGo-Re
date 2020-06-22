@@ -13,11 +13,16 @@ class LastestAnime extends StatelessWidget {
       appBar: AppBar(
         title: Text('New Release'),
       ),
-      body: AnimeGrid(url: '/page-recent-release.html',),
+      body: AnimeGrid(
+        url: '/page-recent-release.html',
+      ),
       drawer: AnimeDrawer(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime(), fullscreenDialog: true)),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchAnime(), fullscreenDialog: true)),
       ),
     );
   }
