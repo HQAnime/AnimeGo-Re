@@ -23,6 +23,7 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   bool loading = true;
   List<AnimeInfo> list = [];
+
   /// Current page, starting from 1
   int page = 1;
   bool canLoadMore = true;
@@ -35,7 +36,8 @@ class _AnimeGridState extends State<AnimeGrid> {
     super.initState();
     // Load some data here
     loadData();
-    this.controller = ScrollController()..addListener(() => this.loadMoreData());
+    this.controller = ScrollController()
+      ..addListener(() => this.loadMoreData());
   }
 
   @override
@@ -62,17 +64,24 @@ class _AnimeGridState extends State<AnimeGrid> {
 
     bool isSearch = widget.url.startsWith('/search');
     // For search, you need to use &
-    final link = global.getDomain() + widget.url + (isSearch ? '&' : '?') + 'page=$page';
+    final link =
+        global.getDomain() + widget.url + (isSearch ? '&' : '?') + 'page=$page';
     print('Current link is $link');
     final parser = AnimeParser(link);
     parser.downloadHTML().then((body) {
       final moreData = parser.parseHTML(body);
+
+      // Filter out dub
+      if (global.hideDUB) moreData.removeWhere((e) => e.isDUB);
+
       // Append more data
       setState(() {
         this.loading = false;
         // If refresh, just reset the list to more data
-        if (refresh) this.list = moreData;
-        else this.list += moreData;
+        if (refresh)
+          this.list = moreData;
+        else
+          this.list += moreData;
         // If more data is emptp, we have reached the end
         this.canLoadMore = moreData.length > 0;
         this.showIndicator = false;
@@ -88,11 +97,11 @@ class _AnimeGridState extends State<AnimeGrid> {
       this.loadData();
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return LoadingSwitcher(
-      loading: this.loading, 
+      loading: this.loading,
       child: this.renderBody(),
     );
   }
@@ -115,7 +124,8 @@ class _AnimeGridState extends State<AnimeGrid> {
               child: Scrollbar(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final count = max(min((constraints.maxWidth / 200).floor(), 5), 2);
+                    final count =
+                        max(min((constraints.maxWidth / 200).floor(), 5), 2);
                     final imageWidth = constraints.maxWidth / count.toDouble();
                     // Calculat ratio, adjust the offset (70)
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
@@ -125,25 +135,22 @@ class _AnimeGridState extends State<AnimeGrid> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: count,
                         childAspectRatio: ratio,
-                      ), 
+                      ),
                       itemBuilder: (BuildContext context, int index) {
                         final info = this.list[index];
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            child: AnimeCard(info: info),
-                            onTap: () {
-                              Navigator.push(
-                                context, 
-                                MaterialPageRoute(builder: (context) {
-                                  if (info.isCategory()) return AnimeDetailPage(info: info);
-                                  return EpisodePage(info: info);
-                                })
-                              );
-                            } 
-                          )
-                        );
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                                borderRadius: BorderRadius.circular(12),
+                                child: AnimeCard(info: info),
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    if (info.isCategory())
+                                      return AnimeDetailPage(info: info);
+                                    return EpisodePage(info: info);
+                                  }));
+                                }));
                       },
                       itemCount: this.list.length,
                     );
@@ -151,12 +158,12 @@ class _AnimeGridState extends State<AnimeGrid> {
                 ),
               ),
             ),
-            showIndicator ? 
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: LinearProgressIndicator(),
-            ) : 
-            SizedBox.shrink(),
+            showIndicator
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: LinearProgressIndicator(),
+                  )
+                : SizedBox.shrink(),
           ],
         ),
       );

@@ -14,12 +14,13 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final global = Global();
-  bool hideDUB = false;
+  bool hideDUB;
   String input;
 
   @override
   void initState() {
     super.initState();
+    hideDUB = global.hideDUB;
   }
 
   @override
@@ -80,6 +81,8 @@ class _SettingsState extends State<Settings> {
   }
 
   Future<void> updateHideDUB(bool value) async {
+    if (value == hideDUB) return;
+    global.hideDUB = value;
     setState(() {
       hideDUB = value;
     });

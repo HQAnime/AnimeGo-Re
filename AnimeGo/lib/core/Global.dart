@@ -25,6 +25,14 @@ class Global {
     prefs.setString(websiteDomain, domain);
   }
 
+  /// Whwther dub anime should be hidden
+  bool _hideDUB;
+  bool get hideDUB => _hideDUB;
+  set hideDUB(bool value) {
+    this._hideDUB = value;
+    prefs.setBool(hideDubAnime, _hideDUB);
+  }
+
   /// History list
   WatchHistory _history = WatchHistory();
   List<BasicAnime> get historyList => _history.list;
@@ -55,6 +63,7 @@ class Global {
   final websiteDomain = 'AnimeGo:Domain';
   final watchHistory = 'AnimeGo:WatchHistory';
   final favouriteAnime = 'AnimeGo:FavouriteAnime';
+  final hideDubAnime = 'AnimeGo:HideDUB';
 
   // Singleton pattern 
   Global._init();
@@ -85,6 +94,9 @@ class Global {
       if (favouriteString != null) {
         this._favourite = FavouriteAnime.fromJson(jsonDecode(favouriteString));
       }
+
+      // Set to false by default
+      this._hideDUB = prefs.getBool(hideDubAnime) ?? false;
 
       // Get the latest domain
       String latestDomain = await DomainParser(currDomain).getNewDomain();
