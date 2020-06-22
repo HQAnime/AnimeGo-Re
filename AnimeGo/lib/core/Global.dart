@@ -138,7 +138,7 @@ class Global {
   Future<void> checkForUpdate(BuildContext context,
       {bool force = false}) async {
     // Check if the difference is at least 30 days
-    if (!force && _lastDate.difference(DateTime.now()).inDays < 14) {
+    if (!force && _lastDate.difference(DateTime.now()).inDays < 15) {
       print('No need to check for update');
       return;
     }
