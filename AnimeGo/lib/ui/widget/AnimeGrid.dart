@@ -51,7 +51,10 @@ class _AnimeGridState extends State<AnimeGrid> {
   }
 
   /// Increase page and load more data
-  void loadData() {
+  void loadData({bool refresh = false}) {
+    // Reset page to 0
+    if (refresh) page = 0;
+
     setState(() {
       canLoadMore = false;
       showIndicator = true;
@@ -67,7 +70,9 @@ class _AnimeGridState extends State<AnimeGrid> {
       // Append more data
       setState(() {
         this.loading = false;
-        this.list += moreData;
+        // If refresh, just reset the list to more data
+        if (refresh) this.list = moreData;
+        else this.list += moreData;
         // If more data is emptp, we have reached the end
         this.canLoadMore = moreData.length > 0;
         this.showIndicator = false;
@@ -103,42 +108,47 @@ class _AnimeGridState extends State<AnimeGrid> {
       return SafeArea(
         child: Stack(
           children: <Widget>[
-            Scrollbar(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final count = max(min((constraints.maxWidth / 200).floor(), 5), 2);
-                  final imageWidth = constraints.maxWidth / count.toDouble();
-                  // Calculat ratio, adjust the offset (70)
-                  final ratio = imageWidth / (imageWidth / 0.7 + 70);
+            RefreshIndicator(
+              onRefresh: () async {
+                this.loadData(refresh: true);
+              },
+              child: Scrollbar(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final count = max(min((constraints.maxWidth / 200).floor(), 5), 2);
+                    final imageWidth = constraints.maxWidth / count.toDouble();
+                    // Calculat ratio, adjust the offset (70)
+                    final ratio = imageWidth / (imageWidth / 0.7 + 70);
 
-                  return GridView.builder(
-                    controller: this.controller,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: count,
-                      childAspectRatio: ratio,
-                    ), 
-                    itemBuilder: (BuildContext context, int index) {
-                      final info = this.list[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(12),
-                          child: AnimeCard(info: info),
-                          onTap: () {
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context) {
-                                if (info.isCategory()) return AnimeDetailPage(info: info);
-                                return EpisodePage(info: info);
-                              })
-                            );
-                          } 
-                        )
-                      );
-                    },
-                    itemCount: this.list.length,
-                  );
-                },
+                    return GridView.builder(
+                      controller: this.controller,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: count,
+                        childAspectRatio: ratio,
+                      ), 
+                      itemBuilder: (BuildContext context, int index) {
+                        final info = this.list[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(12),
+                            child: AnimeCard(info: info),
+                            onTap: () {
+                              Navigator.push(
+                                context, 
+                                MaterialPageRoute(builder: (context) {
+                                  if (info.isCategory()) return AnimeDetailPage(info: info);
+                                  return EpisodePage(info: info);
+                                })
+                              );
+                            } 
+                          )
+                        );
+                      },
+                      itemCount: this.list.length,
+                    );
+                  },
+                ),
               ),
             ),
             showIndicator ? 

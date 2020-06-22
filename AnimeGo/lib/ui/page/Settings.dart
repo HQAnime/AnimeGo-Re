@@ -54,8 +54,8 @@ class _SettingsState extends State<Settings> {
             onTap: () => launch(global.getDomain()),
           ),
           CheckboxListTile(
-            title: Text('Feedback'),
-            subtitle: Text('Send an email to the developer'),
+            title: Text('Hide Dub'),
+            subtitle: Text('Hide all dub anime if you prefer sub'),
             onChanged: (bool value) => updateHideDUB(value),
             value: hideDUB,
           ),
