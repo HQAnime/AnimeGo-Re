@@ -135,7 +135,7 @@ class Global {
       {bool force = false}) async {
     if (_hasChecked) return;
     // Check if the difference is at least 30 days
-    if (!force && _lastDate.difference(DateTime.now()).inDays < 30) {
+    if (!force && _lastDate.difference(DateTime.now()).inDays < 14) {
       print('No need to check for update');
       return;
     }

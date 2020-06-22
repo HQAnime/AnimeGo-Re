@@ -27,7 +27,14 @@ class AnimeDetailedInfo {
     this.categoryLink = categoryNode.attributes['href'];
 
     // Remove the title
-    this.summary = infoClass.nodes[9].nodes[1].text.trimRight();
+    try {
+      // Can be empty
+      this.summary = infoClass.nodes[9].nodes[1].text.trimRight();
+    } catch (e, s) {
+      print(e);
+      print(s);
+      this.summary = 'No summary';
+    }
     final genreNode = infoClass.nodes[11].nodes;
     // Remove the first node, it is just genre
     genreNode.removeAt(0);
