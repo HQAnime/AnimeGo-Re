@@ -14,7 +14,13 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final global = Global();
+  bool hideDUB = false;
   String input;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,12 @@ class _SettingsState extends State<Settings> {
             ),
             onTap: () => launch(global.getDomain()),
           ),
+          CheckboxListTile(
+            title: Text('Feedback'),
+            subtitle: Text('Send an email to the developer'),
+            onChanged: (bool value) => updateHideDUB(value),
+            value: hideDUB,
+          ),
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
@@ -65,5 +77,11 @@ class _SettingsState extends State<Settings> {
         ],
       ),
     );
+  }
+
+  Future<void> updateHideDUB(bool value) async {
+    setState(() {
+      hideDUB = value;
+    });
   }
 }
