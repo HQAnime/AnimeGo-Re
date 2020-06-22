@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/FavouriteAnime.dart';
+import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/model/WatchHistory.dart';
 import 'package:AnimeGo/core/parser/DomainParser.dart';
 import 'package:AnimeGo/core/parser/UpdateParser.dart';
@@ -45,7 +46,7 @@ class Global {
   /// History list
   WatchHistory _history = WatchHistory();
   List<BasicAnime> get historyList => _history.list;
-  bool hasWatched(BasicAnime anime) => _history.contains(anime);
+  bool hasWatched(OneEpisodeInfo anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime anime) {
     _history.add(anime);

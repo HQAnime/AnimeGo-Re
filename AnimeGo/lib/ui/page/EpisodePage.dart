@@ -72,9 +72,9 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Previous episode',
                       child: IconButton(
-                        onPressed: this.info.prevEpisode != null
+                        onPressed: this.info.prevEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(this.info.prevEpisode);
+                                this.loadEpisodeInfo(this.info.prevEpisodeLink);
                               }
                             : null,
                         icon: Icon(Icons.arrow_back),
@@ -84,9 +84,9 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Next episode',
                       child: IconButton(
-                        onPressed: this.info.nextEpisode != null
+                        onPressed: this.info.nextEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(this.info.nextEpisode);
+                                this.loadEpisodeInfo(this.info.nextEpisodeLink);
                               }
                             : null,
                         icon: Icon(Icons.arrow_forward),
@@ -145,12 +145,27 @@ class _EpisodePageState extends State<EpisodePage>
               Text(
                 'Please note that this app does not\nhave any controls over these sources',
                 textAlign: TextAlign.center,
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Divider(),
+              ),
+              buildWatchStatus(),
             ],
           ),
         ),
       );
     }
+  }
+
+  Widget buildWatchStatus() {
+    final watched = global.hasWatched(info);
+    return Column(
+      children: [
+        Text(watched ? 'You have watched this episode' : 'Not yet watched'),
+        Icon(watched ? Icons.check : Icons.close)
+      ],
+    );
   }
 
   List<Widget> renderServerList() {

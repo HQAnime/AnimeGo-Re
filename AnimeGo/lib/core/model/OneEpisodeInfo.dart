@@ -8,8 +8,8 @@ class OneEpisodeInfo extends BasicAnime{
   String categoryLink;
 
   String currentEpisode;
-  String prevEpisode;
-  String nextEpisode;
+  String prevEpisodeLink;
+  String nextEpisodeLink;
   String get episodeName => '[$currentEpisode] $name';
 
   List<VideoServer> servers = [];
@@ -55,10 +55,10 @@ class OneEpisodeInfo extends BasicAnime{
     final episode = e.getElementsByClassName('anime_video_body_episodes').first;
     // TODO: make this look nicer
     try {
-      this.nextEpisode = episode.nodes[3].nodes[1].attributes['href'];
+      this.nextEpisodeLink = episode.nodes[3].nodes[1].attributes['href'];
     } catch (_) { }
     try {
-      this.prevEpisode = episode.nodes[1].nodes[1].attributes['href'];
+      this.prevEpisodeLink = episode.nodes[1].nodes[1].attributes['href'];
     } catch (_) { }
   }
 }
