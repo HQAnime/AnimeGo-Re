@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 /// WatchAnimePage class
 class WatchAnimePage extends StatefulWidget {
@@ -17,6 +15,8 @@ class WatchAnimePage extends StatefulWidget {
 
 
 class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProviderStateMixin {
+  final webview = FlutterWebviewPlugin();
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +27,10 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+
+    webview.onUrlChanged.listen((event) {
+      webview.stopLoading();
+    });
   }
 
   @override
@@ -49,22 +53,10 @@ class _WatchAnimePageState extends State<WatchAnimePage> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
       appBar: Util.isIOS() ? AppBar(title: Text(widget.video.title)) : null,
-      body: WebView(
-        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-        gestureNavigationEnabled: true,
-        initialUrl: widget.video.link,
-        javascriptMode: JavascriptMode.unrestricted,
-        navigationDelegate: (NavigationRequest request) {
-          if (!request.url.startsWith(widget.video.link)) {
-            print('block $request');
-            return NavigationDecision.prevent;
-          }
-
-          return NavigationDecision.navigate;
-        },
-      ),
+      url: widget.video.link,
+      resizeToAvoidBottomInset: true,
     );
   }
 }

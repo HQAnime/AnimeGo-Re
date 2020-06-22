@@ -8,6 +8,7 @@ import 'package:AnimeGo/ui/page/CategoryPage.dart';
 import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
 import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
 import 'package:AnimeGo/ui/widget/SearchAnimeButton.dart';
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -154,10 +155,18 @@ class _EpisodePageState extends State<EpisodePage> with SingleTickerProviderStat
               Global().addToHistory(BasicAnime(info.episodeName, widget.info.link));
 
               if (Util.isMobile()) {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
-                );
+                if (Util.isIOS()) {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => WatchAnimePage(video: e), fullscreenDialog: true),
+                  );
+                } else {
+                  // Show a dialog to ask whether users want to watch in app or not
+                  AndroidIntent(
+                    action: 'action_view',
+                    data: e.link,
+                  ).launch();
+                }
               } else {
                 launch(e.link);
               }
