@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/FavouriteAnime.dart';
+import 'package:AnimeGo/core/model/GithubUpdate.dart';
 import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/model/WatchHistory.dart';
 import 'package:AnimeGo/core/parser/DomainParser.dart';
@@ -25,7 +26,8 @@ class Global {
 
   /// The domain that will be used globally
   String _domain;
-  String getDomain() => _domain;
+  // Return default if null
+  String getDomain() => _domain ?? Global.defaultDomain;
   updateDomain(String domain) {
     this._domain = domain;
     prefs.setString(websiteDomain, domain);
@@ -34,6 +36,7 @@ class Global {
   /// Relating to app update
   bool _hasChecked = false;
   DateTime _lastDate;
+  GithubUpdate _update;
 
   /// Whwther dub anime should be hidden
   bool _hideDUB;
@@ -134,17 +137,20 @@ class Global {
   /// Check for update from github
   Future<void> checkForUpdate(BuildContext context,
       {bool force = false}) async {
-    if (_hasChecked) return;
     // Check if the difference is at least 30 days
     if (!force && _lastDate.difference(DateTime.now()).inDays < 14) {
       print('No need to check for update');
       return;
     }
 
-    _hasChecked = true;
-    final parser = UpdateParser();
-    final info = parser.parseHTML(await parser.downloadHTML());
-    if (info.version != appVersion) {
+    // Only check if not checked yet
+    if (!_hasChecked) {
+      _hasChecked = true;
+      final parser = UpdateParser();
+      this._update = parser.parseHTML(await parser.downloadHTML());
+    }
+
+    if (_update.version != appVersion) {
       print('There is an update');
       // Update the date
       prefs.setString(lastUpdateDate, _lastDate.toString());
@@ -153,14 +159,14 @@ class Global {
           context: context,
           barrierDismissible: false,
           builder: (c) => AlertDialog(
-                title: Text('Version ${info.version}'),
-                content: Text(info.newFeatures),
+                title: Text('Version ${_update.version}'),
+                content: Text(_update.newFeatures),
                 actions: [
                   FlatButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text('Close')),
                   FlatButton(
-                      onPressed: () => launch(info.downloadLink),
+                      onPressed: () => launch(_update.downloadLink),
                       child: Text('Update now (Android only)')),
                 ],
               ));
