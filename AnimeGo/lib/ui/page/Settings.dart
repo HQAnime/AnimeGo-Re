@@ -84,6 +84,7 @@ class _SettingsState extends State<Settings> {
             onChanged: (bool value) => updateHideDUB(value),
             value: hideDUB,
           ),
+          Divider(),
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
@@ -99,6 +100,7 @@ class _SettingsState extends State<Settings> {
             subtitle: Text(Global.appVersion),
             onTap: () => global.checkForUpdate(context, force: true),
           ),
+          Divider(),
           ListTile(
             isThreeLine: true,
             title: Text('Support me :)'),
