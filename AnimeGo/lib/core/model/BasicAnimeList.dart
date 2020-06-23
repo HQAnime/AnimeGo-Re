@@ -4,7 +4,7 @@ import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 /// It is basically a list of `BasicAnime`
 abstract class BasicAnimeList {
   List<BasicAnime> list = [];
-  bool contains(OneEpisodeInfo anime) => list.any((e) => e.name == anime.episodeName);
+  bool contains(BasicAnime anime) => list.any((e) => e.link == anime.link);
   void add(BasicAnime anime) {
     if (contains(anime)) return;
     list.insert(0, anime);

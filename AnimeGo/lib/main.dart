@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           final window = WidgetsBinding.instance.window;
           // This listens to platform change
-          // TODO: somehow this is not working???
           window.onPlatformBrightnessChanged = () {
             final useDark = window.platformBrightness == Brightness.dark;
             // Setup navigation bar colour 
