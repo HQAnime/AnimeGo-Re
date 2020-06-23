@@ -14,7 +14,7 @@ class Favourite extends StatelessWidget {
       appBar: showAppBar ? AppBar(
         title: Text('Favourite Anime')
       ) : null,
-      body: ListView.builder(
+      body: list.length > 0 ? ListView.builder(
         itemCount: list.length,
         itemBuilder: (c, i) {
           final curr = list[i];
@@ -25,7 +25,7 @@ class Favourite extends StatelessWidget {
             },
           );
         },
-      ),
+      ) : Center(child: Text('No anime found')),
     );
   }
 }

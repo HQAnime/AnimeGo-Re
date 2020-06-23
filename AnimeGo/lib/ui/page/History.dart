@@ -14,7 +14,7 @@ class History extends StatelessWidget {
       appBar: showAppBar ? AppBar(
         title: Text('Watch History'),
       ) : null,
-      body: ListView.builder(
+      body: list.length > 0 ? ListView.builder(
         itemCount: list.length,
         itemBuilder: (c, i) {
           final curr = list[i];
@@ -25,7 +25,7 @@ class History extends StatelessWidget {
             },
           );
         },
-      ),
+      ) : Center(child: Text('No anime found')),
     );
   }
 }
