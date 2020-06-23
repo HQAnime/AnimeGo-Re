@@ -1,4 +1,4 @@
-package com.example.AnimeGo
+package com.yihengquan.gogoanime
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

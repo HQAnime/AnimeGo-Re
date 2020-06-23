@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.AnimeGo">
+    package="com.yihengquan.gogoanime">
     <uses-permission android:name="android.permission.INTERNET"/>
     
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
