@@ -49,7 +49,7 @@ class Global {
   /// History list
   WatchHistory _history = WatchHistory();
   List<BasicAnime> get historyList => _history.list;
-  bool hasWatched(OneEpisodeInfo anime) => _history.contains(anime);
+  bool hasWatched(BasicAnime anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime anime) {
     _history.add(anime);
