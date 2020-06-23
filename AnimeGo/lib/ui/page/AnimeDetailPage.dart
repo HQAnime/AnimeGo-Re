@@ -58,7 +58,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       appBar: AppBar(
         title: Text(loading ? 'Loading...' : info.status),
         actions: <Widget>[
-          IconButton(
+          if (!loading) IconButton(
             icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_border),
             onPressed: () {
               if (isFavourite) global.removeFromFavourite(widget.info);
