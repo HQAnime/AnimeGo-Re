@@ -98,7 +98,13 @@ class _SettingsState extends State<Settings> {
             title: Text('Check for update'),
             subtitle: Text(Global.appVersion),
             onTap: () => global.checkForUpdate(context, force: true),
-          )
+          ),
+          ListTile(
+            isThreeLine: true,
+            title: Text('Support me :)'),
+            subtitle: Text('If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
+            onTap: () => launch('https://www.paypal.me/yihengquan'),
+          ),
         ],
       ),
     );
