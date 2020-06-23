@@ -129,8 +129,9 @@ class _AnimeGridState extends State<AnimeGrid> {
                     final imageWidth = constraints.maxWidth / count.toDouble();
                     // Calculat ratio, adjust the offset (70)
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
+                    final length = this.list.length;
 
-                    return GridView.builder(
+                    return length > 0 ? GridView.builder(
                       controller: this.controller,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: count,
@@ -152,8 +153,8 @@ class _AnimeGridState extends State<AnimeGrid> {
                                   }));
                                 }));
                       },
-                      itemCount: this.list.length,
-                    );
+                      itemCount: length,
+                    ) : Center(child: Text('- nothing here -'));
                   },
                 ),
               ),
