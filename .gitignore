@@ -3,3 +3,4 @@
 ._*
 **/app/release/
 .vscode/settings.json
+**/build
