@@ -16,7 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Global {
   // Constants
   static final defaultDomain = 'https://gogoanimes.tv/';
-  static final appVersion = '1.2.1';
+  static final appVersion = '1.2.2';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
   static final email =
       'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
@@ -175,16 +175,16 @@ class Global {
       // Only show this in force mode
       if (force) {
         showDialog(
-          context: context,
-          builder: (c) => AlertDialog(
-                title: Text('Update to date'),
-                content: Text('You are using the latest version.'),
-                actions: [
-                  FlatButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text('Close')),
-                ],
-              ));
+            context: context,
+            builder: (c) => AlertDialog(
+                  title: Text('Update to date'),
+                  content: Text('You are using the latest version.'),
+                  actions: [
+                    FlatButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Close')),
+                  ],
+                ));
       }
     }
   }

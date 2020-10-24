@@ -222,7 +222,9 @@ class _EpisodePageState extends State<EpisodePage>
 
   /// Watch with in app player
   openInAppPlayer(VideoServer e) {
-    Navigator.pop(context);
+    // TODO: why pop here? This makes the iOS unusable
+    // Navigator.pop(context);
+
     Navigator.push(
       context,
       MaterialPageRoute(

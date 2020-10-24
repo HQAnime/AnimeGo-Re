@@ -58,25 +58,27 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       appBar: AppBar(
         title: Text(loading ? 'Loading...' : info.status),
         actions: <Widget>[
-          if (!loading) IconButton(
-            icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_border),
-            onPressed: () {
-              if (isFavourite) global.removeFromFavourite(widget.info);
-              else global.addToFavourite(widget.info);
+          if (!loading)
+            IconButton(
+                icon:
+                    Icon(isFavourite ? Icons.favorite : Icons.favorite_border),
+                onPressed: () {
+                  if (isFavourite)
+                    global.removeFromFavourite(widget.info);
+                  else
+                    global.addToFavourite(widget.info);
 
-              setState(() {
-                isFavourite = !isFavourite;
-              });
-            }
-          ),
+                  setState(() {
+                    isFavourite = !isFavourite;
+                  });
+                }),
         ],
       ),
       body: SafeArea(
-        child: LoadingSwitcher(
-          child: this.renderBody(), 
-          loading: this.loading,
-        )
-      ),
+          child: LoadingSwitcher(
+        child: this.renderBody(),
+        loading: this.loading,
+      )),
     );
   }
 
@@ -115,29 +117,28 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       ListTile(
                         title: Text('Catagory', textAlign: TextAlign.center),
                         subtitle: FlatButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                              return CategoryPage(
-                                // The domain will be added later so DON'T ADD IT HERE
-                                url: info.categoryLink, 
-                                title: info.category
-                              );
-                            }));
-                          }, 
-                          child: Text(info.category, textAlign: TextAlign.center)
-                        ),
+                            onPressed: () {
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return CategoryPage(
+                                    // The domain will be added later so DON'T ADD IT HERE
+                                    url: info.categoryLink,
+                                    title: info.category);
+                              }));
+                            },
+                            child: Text(info.category,
+                                textAlign: TextAlign.center)),
                       ),
                     ],
                   ),
                 ),
                 Flexible(
-                  flex: 1,
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationY(pi),
-                    child: Image.network(info.image),
-                  )
-                ),
+                    flex: 1,
+                    child: Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.rotationY(pi),
+                      child: Image.network(info.image),
+                    )),
               ],
             ),
           ),
@@ -153,7 +154,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   return ActionChip(
                     label: Text(e.getAnimeGenreName()),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return GenrePage(genre: e);
                       }));
                     },
@@ -164,8 +166,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           ),
           centeredListTile('Summary', info.summary),
           Padding(
-            padding: const EdgeInsets.only(top:8),
-            child: Text('Episode List', textAlign: TextAlign.center, style: TextStyle(fontSize: 16)),
+            padding: const EdgeInsets.only(top: 8),
+            child: Text('Episode List',
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 16)),
           ),
           Wrap(
             alignment: WrapAlignment.center,
@@ -173,17 +176,19 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               return Padding(
                 padding: const EdgeInsets.all(2),
                 child: InkWell(
-                  onTap: this.loadingEpisode ? null : () {
-                    loadEpisode(e);
-                  },
+                  onTap: this.loadingEpisode
+                      ? null
+                      : () {
+                          loadEpisode(e);
+                        },
                   child: Padding(
                     padding: const EdgeInsets.all(4),
                     child: Text(
                       '${e.episodeStart} - ${e.episodeEnd}',
                       style: TextStyle(
-                        decoration: currEpisode == e.episodeStart ? 
-                          TextDecoration.underline : 
-                          TextDecoration.none,
+                        decoration: currEpisode == e.episodeStart
+                            ? TextDecoration.underline
+                            : TextDecoration.none,
                       ),
                     ),
                   ),
@@ -205,8 +210,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       this.currEpisode = e.episodeStart;
       this.loadingEpisode = true;
     });
-    
-    final parser = EpisodeListParser(global.getDomain() + '/load-list-episode', e);
+
+    final parser =
+        EpisodeListParser(global.getDomain() + '/load-list-episode', e);
     parser.downloadHTML().then((body) {
       setState(() {
         this.episodes = parser.parseHTML(body);
@@ -233,10 +239,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               color: Theme.of(context).primaryColor,
               textColor: Colors.white,
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
                   return EpisodePage(info: e);
                 }));
-              }, 
+              },
               child: Text(e.name),
             );
           }).toList(growable: false),

@@ -54,7 +54,11 @@ class _WatchAnimePageState extends State<WatchAnimePage>
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-      appBar: Util.isIOS() ? AppBar(title: Text(widget.video.title)) : null,
+      appBar: Util.isIOS()
+          ? AppBar(
+              title: Text(widget.video.title),
+            )
+          : null,
       url: widget.video.link,
     );
   }
