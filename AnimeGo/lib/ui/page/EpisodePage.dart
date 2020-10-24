@@ -222,8 +222,10 @@ class _EpisodePageState extends State<EpisodePage>
 
   /// Watch with in app player
   openInAppPlayer(VideoServer e) {
-    // TODO: why pop here? This makes the iOS unusable
-    // Navigator.pop(context);
+    // Only android has the 
+    if (Util.isAndroid()) {
+      Navigator.pop(context);
+    }
 
     Navigator.push(
       context,
