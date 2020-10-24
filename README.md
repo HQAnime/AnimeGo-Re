@@ -15,15 +15,15 @@ It has been rewritten with `Flutter` to have bettter iOS and tablets support
 - Genre list
 - Search anime
 - Side drawer design
-- Watch history (wip)
-- Favourite anime list (wip)
-- Auto update (wip)
+- Watch history
+- Favourite anime list
+- Auto update
 - No popups while watching anime (IOS and Android only)
 
-I have abondoned this project for about 2 years but it is finally back. A complete rework is undergoing because `AnimeOne` doesn't have some old animes. Flutter is now used instead of React Native. Some features are still under development but it is now stable enough to use.
+I have abondoned this project for about 2 years but it is finally back. A complete rework is undergoing because `AnimeOne` doesn't have some old animes. Flutter is now used instead of React Native. Some features are still under development but it is now stable enough to use. So far, it has been great. 
 
 # Downloads
-Only android build is available and you can download the apk from [release](https://github.com/HenryQuan/AnimeGo-Re/releases/tag/1.2.0) (currently still in preview). However, IOS version is being tested and it works fine. You could [compile](https://github.com/HenryQuan/AnimeGo-Re/tree/master/AnimeGo/README.md) it yourself.
+Only android build is available and you can download the apk from [release](https://github.com/HenryQuan/AnimeGo-Re/releases/latest). However, IOS version is also being tested and it works fine like Android. You could [compile](https://github.com/HenryQuan/AnimeGo-Re/tree/master/AnimeGo/README.md) it yourself or maybe I will provide the IPA file.
 
 # Screenshots
 <!-- <div>
