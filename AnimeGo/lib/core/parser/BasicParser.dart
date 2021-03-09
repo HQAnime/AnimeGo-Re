@@ -19,7 +19,7 @@ abstract class BasicParser {
   Future<Document> downloadHTML() async {
     try {
       final response = await http.get(
-        this._link,
+        Uri.parse(this._link),
       ).timeout(Duration(seconds: 6)); // Timeout in 8s
 
       if (response.statusCode == 200) {
