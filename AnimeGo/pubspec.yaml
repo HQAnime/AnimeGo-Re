@@ -21,15 +21,15 @@ dependencies:
     sdk: flutter
 
   # easy request
-  http: ^0.12.2
+  http: ^0.13.0
   # parse html
-  html: ^0.14.0+4
+  html: ^0.15.0
   # persist data locally
-  shared_preferences: ^0.5.12+2
+  shared_preferences: ^2.0.3
   # open links in browser
-  url_launcher: ^5.7.8
+  url_launcher: ^6.0.2
   # open in another apps for android
-  android_intent: ^0.3.7+6
+  android_intent: ^2.0.0
   # webview
   flutter_webview_plugin: ^0.3.11
   
