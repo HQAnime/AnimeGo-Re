@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 /// LastestAnime class, it loads anime from the new release page
 class LastestAnime extends StatelessWidget {
-  LastestAnime({Key key}) : super(key: key);
+  const LastestAnime({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,12 @@ class LastestAnime extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SearchAnime(), fullscreenDialog: true)),
+          context,
+          MaterialPageRoute(
+            builder: (context) => SearchAnime(),
+            fullscreenDialog: true,
+          ),
+        ),
       ),
     );
   }

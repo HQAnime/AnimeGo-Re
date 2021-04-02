@@ -15,8 +15,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// EpisodePage class
 class EpisodePage extends StatefulWidget {
+  const EpisodePage({
+    Key key,
+    @required this.info,
+  }) : super(key: key);
+
   final BasicAnime info;
-  EpisodePage({Key key, @required this.info}) : super(key: key);
 
   @override
   _EpisodePageState createState() => _EpisodePageState();
@@ -188,10 +192,10 @@ class _EpisodePageState extends State<EpisodePage>
                         alignment: WrapAlignment.spaceAround,
                         spacing: 2,
                         children: [
-                          RaisedButton(
+                          ElevatedButton(
                               onPressed: () => openWithOtherApps(e),
                               child: Text('Use other apps')),
-                          RaisedButton(
+                          ElevatedButton(
                               onPressed: () => openInAppPlayer(e),
                               child: Text('Use in-app player')),
                           Padding(
@@ -222,7 +226,7 @@ class _EpisodePageState extends State<EpisodePage>
 
   /// Watch with in app player
   openInAppPlayer(VideoServer e) {
-    // Only android has the 
+    // Only android has the
     if (Util.isAndroid()) {
       Navigator.pop(context);
     }
@@ -230,8 +234,9 @@ class _EpisodePageState extends State<EpisodePage>
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => WatchAnimePage(video: e),
-          fullscreenDialog: true),
+        builder: (context) => WatchAnimePage(video: e),
+        fullscreenDialog: true,
+      ),
     );
 
     _addToHistory();
@@ -249,6 +254,10 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Save this to watch history
-  _addToHistory() =>
-      Global().addToHistory(BasicAnime(info.episodeName, widget.info.link));
+  _addToHistory() => Global().addToHistory(
+        BasicAnime(
+          info.episodeName,
+          widget.info.link,
+        ),
+      );
 }

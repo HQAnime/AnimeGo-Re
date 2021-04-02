@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 
 /// TabletHomePage class
 class TabletHomePage extends StatefulWidget {
-  TabletHomePage({Key key}) : super(key: key);
+  const TabletHomePage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _TabletHomePageState createState() => _TabletHomePageState();
@@ -49,18 +51,29 @@ class _TabletHomePageState extends State<TabletHomePage> {
           ),
         ],
       ),
-      floatingActionButton: showFab ? FloatingActionButton(
-        child: Icon(Icons.search),
-        tooltip: 'Search anime',
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchAnime(), fullscreenDialog: true)),
-      ) : null,
+      floatingActionButton: showFab
+          ? FloatingActionButton(
+              child: Icon(Icons.search),
+              tooltip: 'Search anime',
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchAnime(),
+                  fullscreenDialog: true,
+                ),
+              ),
+            )
+          : null,
     );
   }
 
   Widget renderPage() {
     switch (code) {
       case PageCode.latest:
-        return AnimeGrid(url: '/page-recent-release.html', key: Key(code.toString()));
+        return AnimeGrid(
+          url: '/page-recent-release.html',
+          key: Key(code.toString()),
+        );
         break;
       case PageCode.seasonal:
         return AnimeGrid(url: '/new-season.html', key: Key(code.toString()));
@@ -163,12 +176,12 @@ class _TabletHomePageState extends State<TabletHomePage> {
         setState(() {
           this.showFab = false;
         });
-      break;
+        break;
       default:
         setState(() {
           this.showFab = true;
         });
-      break;
+        break;
     }
   }
 }

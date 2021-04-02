@@ -16,8 +16,12 @@ import 'package:flutter/material.dart';
 
 /// AnimeDetailPage class
 class AnimeDetailPage extends StatefulWidget {
+  const AnimeDetailPage({
+    Key key,
+    @required this.info,
+  }) : super(key: key);
+
   final BasicAnime info;
-  AnimeDetailPage({Key key, @required this.info}) : super(key: key);
 
   @override
   _AnimeDetailPageState createState() => _AnimeDetailPageState();
@@ -60,8 +64,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         actions: <Widget>[
           if (!loading)
             IconButton(
-                icon:
-                    Icon(isFavourite ? Icons.favorite : Icons.favorite_border),
+                icon: Icon(
+                  isFavourite ? Icons.favorite : Icons.favorite_border,
+                ),
                 onPressed: () {
                   if (isFavourite)
                     global.removeFromFavourite(widget.info);
@@ -117,28 +122,35 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       ListTile(
                         title: Text('Catagory', textAlign: TextAlign.center),
                         subtitle: FlatButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) {
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) {
                                 return CategoryPage(
-                                    // The domain will be added later so DON'T ADD IT HERE
-                                    url: info.categoryLink,
-                                    title: info.category);
-                              }));
-                            },
-                            child: Text(info.category,
-                                textAlign: TextAlign.center)),
+                                  // The domain will be added later so DON'T ADD IT HERE
+                                  url: info.categoryLink,
+                                  title: info.category,
+                                );
+                              }),
+                            );
+                          },
+                          child: Text(
+                            info.category,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Flexible(
-                    flex: 1,
-                    child: Transform(
-                      alignment: Alignment.center,
-                      transform: Matrix4.rotationY(pi),
-                      child: Image.network(info.image),
-                    )),
+                  flex: 1,
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(pi),
+                    child: Image.network(info.image),
+                  ),
+                ),
               ],
             ),
           ),
@@ -154,10 +166,12 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   return ActionChip(
                     label: Text(e.getAnimeGenreName()),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return GenrePage(genre: e);
-                      }));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return GenrePage(genre: e);
+                        }),
+                      );
                     },
                   );
                 }).toList(growable: false),
@@ -167,8 +181,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           centeredListTile('Summary', info.summary),
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: Text('Episode List',
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 16)),
+            child: Text(
+              'Episode List',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
           ),
           Wrap(
             alignment: WrapAlignment.center,

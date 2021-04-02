@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 /// SeasonalAnime class
 class SeasonalAnime extends StatefulWidget {
-  const SeasonalAnime({Key key}) : super(key: key);
+  const SeasonalAnime({
+    Key key,
+  }) : super(key: key);
 
   @override
   _SeasonalAnimeState createState() => _SeasonalAnimeState();
@@ -31,18 +33,20 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
     return SizedBox(
       height: 48,
       child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: pastSeasons.length,
-          itemBuilder: (context, index) {
-            // Get current filter
-            final filter = pastSeasons[index];
-            return Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
-                child: ActionChip(
-                  label: Text(_format(filter)),
-                  onPressed: () => setState(() => this.url = filter),
-                ));
-          }),
+        scrollDirection: Axis.horizontal,
+        itemCount: pastSeasons.length,
+        itemBuilder: (context, index) {
+          // Get current filter
+          final filter = pastSeasons[index];
+          return Padding(
+            padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
+            child: ActionChip(
+              label: Text(_format(filter)),
+              onPressed: () => setState(() => this.url = filter),
+            ),
+          );
+        },
+      ),
     );
   }
 

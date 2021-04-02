@@ -8,9 +8,9 @@ class AnimeParser extends BasicParser {
 
   @override
   List<AnimeInfo> parseHTML(Document body) {
-    List<AnimeInfo> list = []; 
+    List<AnimeInfo> list = [];
 
-    if (body != null) {  
+    if (body != null) {
       final div = body.getElementsByClassName('items');
       // There should only one of the list
       if (div != null && div.length == 1) {
@@ -26,7 +26,7 @@ class AnimeParser extends BasicParser {
               }
             });
           }
-        } 
+        }
       }
     }
 

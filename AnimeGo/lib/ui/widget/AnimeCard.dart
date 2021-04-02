@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 /// AnimeCard class
 class AnimeCard extends StatelessWidget {
+  const AnimeCard({
+    Key key,
+    @required this.info,
+  }) : super(key: key);
+
   final AnimeInfo info;
-  AnimeCard({Key key, @required this.info}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

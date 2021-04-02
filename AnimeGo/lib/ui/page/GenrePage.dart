@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 
 /// AnimeGenrePage class
 class GenrePage extends StatelessWidget {
+  const GenrePage({
+    Key key,
+    @required this.genre,
+  }) : super(key: key);
+
   final AnimeGenre genre;
-  GenrePage({Key key, @required this.genre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

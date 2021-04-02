@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 
 /// CategoryPage class
 class CategoryPage extends StatelessWidget {
+  const CategoryPage({
+    Key key,
+    @required this.url,
+    @required this.title,
+  }) : super(key: key);
+
   final String url;
   final String title;
-  CategoryPage({Key key, @required this.url, @required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

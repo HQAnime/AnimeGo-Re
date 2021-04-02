@@ -13,7 +13,6 @@ class WatchHistory extends BasicAnimeList {
     } else {
       return list.any((e) => e.name == anime.name);
     }
-
   }
 
   @override

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 /// AnimeDrawer class
 class AnimeDrawer extends StatelessWidget {
-  AnimeDrawer({Key key}) : super(key: key);
+  const AnimeDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class AnimeDrawer extends StatelessWidget {
               child: Text(
                 'AnimeGo Re',
                 style: TextStyle(
-                  fontSize: 32, 
+                  fontSize: 32,
                   // Different colour for dark mode
-                  color: darkMode ? Colors.orange : Colors.white, 
-                  fontWeight: FontWeight.w700
+                  color: darkMode ? Colors.orange : Colors.white,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -46,41 +46,57 @@ class AnimeDrawer extends StatelessWidget {
                   ListTile(
                     title: Text('Seasonal'),
                     leading: Icon(Icons.fiber_new),
-                    onTap: () => this.push(context, SeasonalAnime())
+                    onTap: () => this.push(
+                      context,
+                      SeasonalAnime(),
+                    ),
                   ),
                   ListTile(
                     title: Text('Movie'),
                     leading: Icon(Icons.movie),
-                    onTap: () => this.push(context, Movie())
+                    onTap: () => this.push(
+                      context,
+                      Movie(),
+                    ),
                   ),
                   ListTile(
                     title: Text('Popular'),
                     leading: Icon(Icons.label),
-                    onTap: () => this.push(context, PopularAnime())
+                    onTap: () => this.push(
+                      context,
+                      PopularAnime(),
+                    ),
                   ),
                   ExpansionTile(
                     title: Text('Genre'),
                     leading: Icon(Icons.list),
-                    children: <Widget>[
-                      GenreList()
-                    ],
+                    children: <Widget>[GenreList()],
                   ),
                   Divider(),
                   ListTile(
                     title: Text('History'),
                     leading: Icon(Icons.history),
-                    onTap: () => this.push(context, History())
+                    onTap: () => this.push(
+                      context,
+                      History(),
+                    ),
                   ),
                   ListTile(
                     title: Text('Favourite'),
                     leading: Icon(Icons.favorite),
-                    onTap: () => this.push(context, Favourite())
+                    onTap: () => this.push(
+                      context,
+                      Favourite(),
+                    ),
                   ),
                   Divider(),
                   ListTile(
                     title: Text('Settings'),
                     leading: Icon(Icons.settings),
-                    onTap: () => this.push(context, Settings())
+                    onTap: () => this.push(
+                      context,
+                      Settings(),
+                    ),
                   ),
                 ],
               ),
@@ -97,7 +113,7 @@ class AnimeDrawer extends StatelessWidget {
     Navigator.pop(context);
     // How to push to new screen?
     Navigator.push(
-      context, 
+      context,
       MaterialPageRoute(builder: (context) => screen),
     );
   }

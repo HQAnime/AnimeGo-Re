@@ -9,6 +9,7 @@ abstract class BasicAnimeList {
     if (contains(anime)) return;
     list.insert(0, anime);
   }
+
   void remove(BasicAnime anime) {
     list.removeWhere((e) => e.link == anime.link);
   }
@@ -19,10 +20,9 @@ abstract class BasicAnimeList {
     list = temp.map((e) => BasicAnime.fromJson(e)).toList();
   }
 
-  Map<String, dynamic> toJson() =>
-  {
-    getName(): list.map((e) => e.toJson()).toList(growable: false),
-  };
+  Map<String, dynamic> toJson() => {
+        getName(): list.map((e) => e.toJson()).toList(growable: false),
+      };
 
   String getName();
 }

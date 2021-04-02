@@ -1,24 +1,25 @@
-import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 /// WatchAnimePage class
 class WatchAnimePage extends StatefulWidget {
+  const WatchAnimePage({
+    Key key,
+    @required this.video,
+  }) : super(key: key);
+
   final VideoServer video;
-  WatchAnimePage({Key key, @required this.video}) : super(key: key);
 
   @override
   _WatchAnimePageState createState() => _WatchAnimePageState();
 }
 
-class _WatchAnimePageState extends State<WatchAnimePage>
-    with SingleTickerProviderStateMixin {
-  final webview = FlutterWebviewPlugin();
-
+class _WatchAnimePageState extends State<WatchAnimePage> {
   @override
   void initState() {
+    // TODO: maybe toggle the native???
     super.initState();
     // Fullscreen mode
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -27,10 +28,6 @@ class _WatchAnimePageState extends State<WatchAnimePage>
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-
-    webview.onStateChanged.listen((event) {
-      if (!event.url.contains(widget.video.link)) webview.stopLoading();
-    });
   }
 
   @override
@@ -53,13 +50,16 @@ class _WatchAnimePageState extends State<WatchAnimePage>
 
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
-      appBar: Util.isIOS()
-          ? AppBar(
-              title: Text(widget.video.title),
-            )
-          : null,
-      url: widget.video.link,
+    return Scaffold(
+      body: WebView(
+        initialUrl: widget.video.link,
+        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+        navigationDelegate: (request) async {
+          if (!request.url.contains(widget.video.link))
+            return NavigationDecision.prevent;
+          return NavigationDecision.navigate;
+        },
+      ),
     );
   }
 }

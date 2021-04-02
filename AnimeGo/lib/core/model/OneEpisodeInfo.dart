@@ -3,7 +3,7 @@ import 'package:AnimeGo/core/model/VideoServer.dart';
 import 'package:html/dom.dart';
 
 /// This only includes info for a `single` episode, like video sources and more
-class OneEpisodeInfo extends BasicAnime{
+class OneEpisodeInfo extends BasicAnime {
   String category;
   String categoryLink;
 
@@ -15,16 +15,15 @@ class OneEpisodeInfo extends BasicAnime{
   List<VideoServer> servers = [];
 
   /// Only need to save current episode
-  Map<String, dynamic> toJson() =>
-  {
-    'name': name,
-    'link': link,
-    'currentEpisode': currentEpisode,
-  };
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'link': link,
+        'currentEpisode': currentEpisode,
+      };
 
-  OneEpisodeInfo.fromJson(Map<String, dynamic> json) :
-    this.currentEpisode = json['currentEpisode'],
-    super.fromJson(json);
+  OneEpisodeInfo.fromJson(Map<String, dynamic> json)
+      : this.currentEpisode = json['currentEpisode'],
+        super.fromJson(json);
 
   OneEpisodeInfo(Element e) : super.fromJson(null) {
     // Get name and category
@@ -56,9 +55,9 @@ class OneEpisodeInfo extends BasicAnime{
     // TODO: make this look nicer
     try {
       this.nextEpisodeLink = episode.nodes[3].nodes[1].attributes['href'];
-    } catch (_) { }
+    } catch (_) {}
     try {
       this.prevEpisodeLink = episode.nodes[1].nodes[1].attributes['href'];
-    } catch (_) { }
+    } catch (_) {}
   }
 }

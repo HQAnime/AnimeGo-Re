@@ -4,8 +4,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
 class Settings extends StatefulWidget {
+  const Settings({
+    Key key,
+    this.showAppBar = true,
+  }) : super(key: key);
+
   final bool showAppBar;
-  Settings({Key key, this.showAppBar = true}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -50,21 +54,25 @@ class _SettingsState extends State<Settings> {
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(FocusNode());
                     global.updateDomain(this.input);
-                    Future.delayed(Duration(milliseconds: 400))
-                        .then((_) => showDialog(
-                            context: context,
-                            builder: (c) => AlertDialog(
-                                  title: Text('Domain has been updated'),
-                                  content: Text(
-                                      "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain."),
-                                  actions: [
-                                    FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Close'))
-                                  ],
-                                )));
+                    Future.delayed(Duration(milliseconds: 400)).then(
+                      (_) => showDialog(
+                        context: context,
+                        builder: (c) => AlertDialog(
+                          title: Text('Domain has been updated'),
+                          content: Text(
+                            "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain.",
+                          ),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('Close'),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 ),
                 Padding(
@@ -104,7 +112,8 @@ class _SettingsState extends State<Settings> {
           ListTile(
             isThreeLine: true,
             title: Text('Support me :)'),
-            subtitle: Text('If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
+            subtitle: Text(
+                'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
             onTap: () => launch('https://www.paypal.me/yihengquan'),
           ),
         ],

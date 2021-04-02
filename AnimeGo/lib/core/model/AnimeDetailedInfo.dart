@@ -12,6 +12,7 @@ class AnimeDetailedInfo {
   List<AnimeGenre> genre = [];
   String released;
   String status;
+
   /// A list of episode (1 - 100, 101 - 200 and so on)
   List<EpisodeSection> episodes = [];
   String lastEpisode;
@@ -61,5 +62,4 @@ class AnimeDetailedInfo {
     });
     lastEpisode = this.episodes.last.episodeEnd;
   }
-
 }

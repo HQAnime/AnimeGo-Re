@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:AnimeGo/core/model/BasicAnime.dart';
 import 'package:AnimeGo/core/model/FavouriteAnime.dart';
 import 'package:AnimeGo/core/model/GithubUpdate.dart';
-import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
 import 'package:AnimeGo/core/model/WatchHistory.dart';
 import 'package:AnimeGo/core/parser/DomainParser.dart';
 import 'package:AnimeGo/core/parser/UpdateParser.dart';
@@ -156,35 +155,39 @@ class Global {
       prefs.setString(lastUpdateDate, _lastDate.toString());
       // Show update dialog
       showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (c) => AlertDialog(
-                title: Text('Version ${_update.version}'),
-                content: Text(_update.newFeatures),
-                actions: [
-                  FlatButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text('Close')),
-                  FlatButton(
-                      onPressed: () => launch(_update.downloadLink),
-                      child: Text('Update now (Android only)')),
-                ],
-              ));
+        context: context,
+        barrierDismissible: false,
+        builder: (c) => AlertDialog(
+          title: Text('Version ${_update.version}'),
+          content: Text(_update.newFeatures),
+          actions: [
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+            FlatButton(
+              onPressed: () => launch(_update.downloadLink),
+              child: Text('Update now (Android only)'),
+            ),
+          ],
+        ),
+      );
     } else {
       print('Up to date');
       // Only show this in force mode
       if (force) {
         showDialog(
-            context: context,
-            builder: (c) => AlertDialog(
-                  title: Text('Update to date'),
-                  content: Text('You are using the latest version.'),
-                  actions: [
-                    FlatButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Close')),
-                  ],
-                ));
+          context: context,
+          builder: (c) => AlertDialog(
+            title: Text('Update to date'),
+            content: Text('You are using the latest version.'),
+            actions: [
+              FlatButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Close')),
+            ],
+          ),
+        );
       }
     }
   }

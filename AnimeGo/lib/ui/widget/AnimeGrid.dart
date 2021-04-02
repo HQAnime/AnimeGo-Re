@@ -11,8 +11,12 @@ import 'package:flutter/material.dart';
 
 /// AnimeGrid class
 class AnimeGrid extends StatefulWidget {
+  const AnimeGrid({
+    Key key,
+    @required this.url,
+  }) : super(key: key);
+
   final String url;
-  AnimeGrid({Key key, @required this.url}) : super(key: key);
 
   @override
   _AnimeGridState createState() => _AnimeGridState();
@@ -131,30 +135,37 @@ class _AnimeGridState extends State<AnimeGrid> {
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
                     final length = this.list.length;
 
-                    return length > 0 ? GridView.builder(
-                      controller: this.controller,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: count,
-                        childAspectRatio: ratio,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        final info = this.list[index];
-                        return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                                borderRadius: BorderRadius.circular(12),
-                                child: AnimeCard(info: info),
-                                onTap: () {
-                                  Navigator.push(context,
+                    return length > 0
+                        ? GridView.builder(
+                            controller: this.controller,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: count,
+                              childAspectRatio: ratio,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              final info = this.list[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: AnimeCard(info: info),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
                                       MaterialPageRoute(builder: (context) {
-                                    if (info.isCategory())
-                                      return AnimeDetailPage(info: info);
-                                    return EpisodePage(info: info);
-                                  }));
-                                }));
-                      },
-                      itemCount: length,
-                    ) : Center(child: Text('- nothing here -'));
+                                        if (info.isCategory())
+                                          return AnimeDetailPage(info: info);
+                                        return EpisodePage(info: info);
+                                      }),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            itemCount: length,
+                          )
+                        : Center(child: Text('- nothing here -'));
                   },
                 ),
               ),

@@ -3,8 +3,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// SearchAnimeButton class
 class SearchAnimeButton extends StatelessWidget {
+  const SearchAnimeButton({
+    Key key,
+    @required this.name,
+  }) : super(key: key);
+
   final String name;
-  const SearchAnimeButton({Key key, @required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +16,17 @@ class SearchAnimeButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         FlatButton(
-          onPressed: () {
-            launch('https://www.google.com/search?q=$name');
-          }, 
-          child: Text('Google')
-        ),
+            onPressed: () {
+              launch('https://www.google.com/search?q=$name');
+            },
+            child: Text(
+              'Google',
+            )),
         FlatButton(
           onPressed: () {
             launch('https://duckduckgo.com/?q=$name');
-          }, 
-          child: Text('DuckDuckGo')
+          },
+          child: Text('DuckDuckGo'),
         ),
       ],
     );
