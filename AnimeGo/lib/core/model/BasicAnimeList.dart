@@ -1,17 +1,17 @@
-import 'package:AnimeGo/core/model/BasicAnime.dart';
-import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
+import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/OneEpisodeInfo.dart';
 
 /// It is basically a list of `BasicAnime`
 abstract class BasicAnimeList {
-  List<BasicAnime> list = [];
-  bool contains(BasicAnime anime) => list.any((e) => e.link == anime.link);
-  void add(BasicAnime anime) {
+  List<BasicAnime?> list = [];
+  bool contains(BasicAnime? anime) => list.any((e) => e!.link == anime!.link);
+  void add(BasicAnime? anime) {
     if (contains(anime)) return;
     list.insert(0, anime);
   }
 
-  void remove(BasicAnime anime) {
-    list.removeWhere((e) => e.link == anime.link);
+  void remove(BasicAnime? anime) {
+    list.removeWhere((e) => e!.link == anime!.link);
   }
 
   BasicAnimeList();
@@ -21,7 +21,7 @@ abstract class BasicAnimeList {
   }
 
   Map<String, dynamic> toJson() => {
-        getName(): list.map((e) => e.toJson()).toList(growable: false),
+        getName(): list.map((e) => e!.toJson()).toList(growable: false),
       };
 
   String getName();

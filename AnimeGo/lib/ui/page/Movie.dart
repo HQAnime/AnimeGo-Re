@@ -1,10 +1,10 @@
-import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
+import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// Movie class
 class Movie extends StatelessWidget {
   const Movie({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

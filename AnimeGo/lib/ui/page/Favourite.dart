@@ -1,11 +1,11 @@
-import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
+import 'package:animego/core/Global.dart';
+import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:flutter/material.dart';
 
 /// Favourite class
 class Favourite extends StatelessWidget {
   const Favourite({
-    Key key,
+    Key? key,
     this.showAppBar = true,
   }) : super(key: key);
 
@@ -20,9 +20,9 @@ class Favourite extends StatelessWidget {
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {
-                final curr = list[i];
+                final curr = list[i]!;
                 return ListTile(
-                  title: Text(curr.name),
+                  title: Text(curr.name!),
                   onTap: () {
                     Navigator.push(
                       context,

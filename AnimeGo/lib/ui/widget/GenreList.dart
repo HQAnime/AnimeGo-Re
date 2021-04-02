@@ -1,5 +1,5 @@
-import 'package:AnimeGo/core/model/AnimeGenre.dart';
-import 'package:AnimeGo/ui/page/GenrePage.dart';
+import 'package:animego/core/model/AnimeGenre.dart';
+import 'package:animego/ui/page/GenrePage.dart';
 import 'package:flutter/material.dart';
 
 /// GenreList class
@@ -51,9 +51,9 @@ class GenreList extends StatelessWidget {
   ];
 
   /// This is only used by TabletHomePage
-  final Function func;
+  final Function? func;
   GenreList({
-    Key key,
+    Key? key,
     this.func,
   }) : super(key: key);
 
@@ -81,7 +81,7 @@ class GenreList extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => GenrePage(genre: genre)));
               } else {
-                func(genre.getFullLink());
+                func!(genre.getFullLink());
               }
             },
           ),

@@ -6,7 +6,7 @@ class DomainParser {
   DomainParser(this._gogoanime);
 
   /// Replace http with https if https doesn't exist
-  String _replaceHttp(String link) {
+  String? _replaceHttp(String? link) {
     if (link == null) return null;
     if (link.contains('https')) return link;
     return link.replaceAll('http', 'https');
@@ -17,7 +17,7 @@ class DomainParser {
     String finalDomain = _gogoanime;
 
     try {
-      String newDomain = _replaceHttp(this._gogoanime);
+      String? newDomain = _replaceHttp(this._gogoanime);
       // WHen it is null, it means that there is no more redirect and it is the latest domain
       while (newDomain != null) {
         // Request but don't follow redirects

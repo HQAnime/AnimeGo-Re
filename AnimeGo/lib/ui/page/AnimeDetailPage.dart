@@ -1,27 +1,27 @@
 import 'dart:math';
 
-import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/core/model/AnimeDetailedInfo.dart';
-import 'package:AnimeGo/core/model/BasicAnime.dart';
-import 'package:AnimeGo/core/model/EpisodeSection.dart';
-import 'package:AnimeGo/core/model/EpisodelInfo.dart';
-import 'package:AnimeGo/core/parser/DetailedInfoParser.dart';
-import 'package:AnimeGo/core/parser/EpisodeListParser.dart';
-import 'package:AnimeGo/ui/page/CategoryPage.dart';
-import 'package:AnimeGo/ui/page/EpisodePage.dart';
-import 'package:AnimeGo/ui/page/GenrePage.dart';
-import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
-import 'package:AnimeGo/ui/widget/SearchAnimeButton.dart';
+import 'package:animego/core/Global.dart';
+import 'package:animego/core/model/AnimeDetailedInfo.dart';
+import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/EpisodeSection.dart';
+import 'package:animego/core/model/EpisodelInfo.dart';
+import 'package:animego/core/parser/DetailedInfoParser.dart';
+import 'package:animego/core/parser/EpisodeListParser.dart';
+import 'package:animego/ui/page/CategoryPage.dart';
+import 'package:animego/ui/page/EpisodePage.dart';
+import 'package:animego/ui/page/GenrePage.dart';
+import 'package:animego/ui/widget/LoadingSwitcher.dart';
+import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDetailPage class
 class AnimeDetailPage extends StatefulWidget {
   const AnimeDetailPage({
-    Key key,
-    @required this.info,
+    Key? key,
+    required this.info,
   }) : super(key: key);
 
-  final BasicAnime info;
+  final BasicAnime? info;
 
   @override
   _AnimeDetailPageState createState() => _AnimeDetailPageState();
@@ -30,9 +30,9 @@ class AnimeDetailPage extends StatefulWidget {
 class _AnimeDetailPageState extends State<AnimeDetailPage> {
   bool loading = true;
   bool loadingEpisode = false;
-  String currEpisode;
-  AnimeDetailedInfo info;
-  List<EpisodeInfo> episodes;
+  String? currEpisode;
+  late AnimeDetailedInfo info;
+  late List<EpisodeInfo> episodes;
   final global = Global();
 
   bool isFavourite = false;
@@ -41,11 +41,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   void initState() {
     super.initState();
     // Load data here
-    final parser = DetailedInfoParser(global.getDomain() + widget.info.link);
+    final parser = DetailedInfoParser(global.getDomain() + widget.info!.link!);
     parser.downloadHTML().then((body) {
       setState(() {
         this.loading = false;
-        this.info = parser.parseHTML(body);
+        this.info = parser.parseHTML(body!);
         this.isFavourite = global.isFavourite(widget.info);
 
         // Auto load if there is only one section
@@ -60,7 +60,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(loading ? 'Loading...' : info.status),
+        title: Text(loading ? 'Loading...' : info.status!),
         actions: <Widget>[
           if (!loading)
             IconButton(
@@ -98,7 +98,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              info.name,
+              info.name!,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
             ),
@@ -110,15 +110,15 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               children: <Widget>[
                 Flexible(
                   flex: 1,
-                  child: Image.network(info.image),
+                  child: Image.network(info.image!),
                 ),
                 Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      centeredListTile('Released', info.released),
-                      centeredListTile('Episode(s)', info.lastEpisode),
+                      centeredListTile('Released', info.released!),
+                      centeredListTile('Episode(s)', info.lastEpisode!),
                       ListTile(
                         title: Text('Catagory', textAlign: TextAlign.center),
                         subtitle: FlatButton(
@@ -135,7 +135,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                             );
                           },
                           child: Text(
-                            info.category,
+                            info.category!,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -148,13 +148,13 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   child: Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationY(pi),
-                    child: Image.network(info.image),
+                    child: Image.network(info.image!),
                   ),
                 ),
               ],
             ),
           ),
-          SearchAnimeButton(name: widget.info.name),
+          SearchAnimeButton(name: widget.info!.name),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: ListTile(
@@ -178,7 +178,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               ),
             ),
           ),
-          centeredListTile('Summary', info.summary),
+          centeredListTile('Summary', info.summary ?? 'No summary'),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
@@ -232,7 +232,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         EpisodeListParser(global.getDomain() + '/load-list-episode', e);
     parser.downloadHTML().then((body) {
       setState(() {
-        this.episodes = parser.parseHTML(body);
+        this.episodes = parser.parseHTML(body!);
         this.loadingEpisode = false;
       });
     });
@@ -261,7 +261,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   return EpisodePage(info: e);
                 }));
               },
-              child: Text(e.name),
+              child: Text(e.name!),
             );
           }).toList(growable: false),
         ),

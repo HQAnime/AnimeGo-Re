@@ -1,20 +1,20 @@
 import 'dart:io';
 
-import 'package:AnimeGo/core/Util.dart';
+import 'package:animego/core/Util.dart';
 import 'package:flutter/material.dart';
 
 /// LoadingSwitcher class
 class LoadingSwitcher extends StatefulWidget {
   const LoadingSwitcher({
-    Key key,
-    @required this.loading,
-    @required this.child,
+    Key? key,
+    required this.loading,
+    required this.child,
     this.repeat,
   }) : super(key: key);
 
   final Widget child;
   final bool loading;
-  final bool repeat;
+  final bool? repeat;
 
   @override
   _LoadingSwitcherState createState() => _LoadingSwitcherState();
@@ -22,8 +22,8 @@ class LoadingSwitcher extends StatefulWidget {
 
 class _LoadingSwitcherState extends State<LoadingSwitcher>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> scale;
+  late AnimationController controller;
+  late Animation<double> scale;
   final bool showAnimation = Util.isMobile();
 
   @override

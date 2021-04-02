@@ -1,16 +1,16 @@
-import 'package:AnimeGo/core/Util.dart';
-import 'package:AnimeGo/ui/page/Favourite.dart';
-import 'package:AnimeGo/ui/page/History.dart';
-import 'package:AnimeGo/ui/page/Movie.dart';
-import 'package:AnimeGo/ui/page/PopularAnime.dart';
-import 'package:AnimeGo/ui/page/SeasonalAnime.dart';
-import 'package:AnimeGo/ui/page/Settings.dart';
-import 'package:AnimeGo/ui/widget/GenreList.dart';
+import 'package:animego/core/Util.dart';
+import 'package:animego/ui/page/Favourite.dart';
+import 'package:animego/ui/page/History.dart';
+import 'package:animego/ui/page/Movie.dart';
+import 'package:animego/ui/page/PopularAnime.dart';
+import 'package:animego/ui/page/SeasonalAnime.dart';
+import 'package:animego/ui/page/Settings.dart';
+import 'package:animego/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDrawer class
 class AnimeDrawer extends StatelessWidget {
-  const AnimeDrawer({Key key}) : super(key: key);
+  const AnimeDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

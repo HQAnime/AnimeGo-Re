@@ -1,4 +1,4 @@
-import 'package:AnimeGo/core/model/VideoServer.dart';
+import 'package:animego/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -6,8 +6,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// WatchAnimePage class
 class WatchAnimePage extends StatefulWidget {
   const WatchAnimePage({
-    Key key,
-    @required this.video,
+    Key? key,
+    required this.video,
   }) : super(key: key);
 
   final VideoServer video;
@@ -55,7 +55,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
         initialUrl: widget.video.link,
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
         navigationDelegate: (request) async {
-          if (!request.url.contains(widget.video.link))
+          if (!request.url.contains(widget.video.link!))
             return NavigationDecision.prevent;
           return NavigationDecision.navigate;
         },

@@ -1,10 +1,10 @@
-import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
+import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// SeasonalAnime class
 class SeasonalAnime extends StatefulWidget {
   const SeasonalAnime({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -1,22 +1,22 @@
 import 'dart:math';
 
-import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/core/model/AnimeInfo.dart';
-import 'package:AnimeGo/core/parser/AnimeParser.dart';
-import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
-import 'package:AnimeGo/ui/page/EpisodePage.dart';
-import 'package:AnimeGo/ui/widget/AnimeCard.dart';
-import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
+import 'package:animego/core/Global.dart';
+import 'package:animego/core/model/AnimeInfo.dart';
+import 'package:animego/core/parser/AnimeParser.dart';
+import 'package:animego/ui/page/AnimeDetailPage.dart';
+import 'package:animego/ui/page/EpisodePage.dart';
+import 'package:animego/ui/widget/AnimeCard.dart';
+import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeGrid class
 class AnimeGrid extends StatefulWidget {
   const AnimeGrid({
-    Key key,
-    @required this.url,
+    Key? key,
+    required this.url,
   }) : super(key: key);
 
-  final String url;
+  final String? url;
 
   @override
   _AnimeGridState createState() => _AnimeGridState();
@@ -32,7 +32,7 @@ class _AnimeGridState extends State<AnimeGrid> {
   int page = 1;
   bool canLoadMore = true;
 
-  ScrollController controller;
+  ScrollController? controller;
   bool showIndicator = false;
 
   @override
@@ -52,7 +52,7 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   @override
   void dispose() {
-    this.controller.dispose();
+    this.controller!.dispose();
     super.dispose();
   }
 
@@ -66,17 +66,19 @@ class _AnimeGridState extends State<AnimeGrid> {
       showIndicator = true;
     });
 
-    bool isSearch = widget.url.startsWith('/search');
+    bool isSearch = widget.url!.startsWith('/search');
     // For search, you need to use &
-    final link =
-        global.getDomain() + widget.url + (isSearch ? '&' : '?') + 'page=$page';
+    final link = global.getDomain() +
+        widget.url! +
+        (isSearch ? '&' : '?') +
+        'page=$page';
     print('Current link is $link');
     final parser = AnimeParser(link);
     parser.downloadHTML().then((body) {
       final moreData = parser.parseHTML(body);
 
       // Filter out dub
-      if (global.hideDUB) moreData.removeWhere((e) => e.isDUB);
+      if (global.hideDUB!) moreData.removeWhere((e) => e.isDUB);
 
       // Append more data
       setState(() {
@@ -95,7 +97,7 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   /// Load more data if the grid is close to the end
   void loadMoreData() {
-    if (controller.position.extentAfter < 10 && canLoadMore) {
+    if (controller!.position.extentAfter < 10 && canLoadMore) {
       print('Loading new data');
       this.page += 1;
       this.loadData();

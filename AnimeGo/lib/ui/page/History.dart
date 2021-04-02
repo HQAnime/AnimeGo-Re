@@ -1,11 +1,11 @@
-import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/ui/page/EpisodePage.dart';
+import 'package:animego/core/Global.dart';
+import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:flutter/material.dart';
 
 /// History class
 class History extends StatelessWidget {
   const History({
-    Key key,
+    Key? key,
     this.showAppBar = true,
   }) : super(key: key);
 
@@ -24,9 +24,9 @@ class History extends StatelessWidget {
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {
-                final curr = list[i];
+                final curr = list[i]!;
                 return ListTile(
-                  title: Text(curr.name),
+                  title: Text(curr.name!),
                   onTap: () {
                     Navigator.push(
                       context,

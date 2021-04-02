@@ -1,15 +1,15 @@
-import 'package:AnimeGo/ui/page/Favourite.dart';
-import 'package:AnimeGo/ui/page/History.dart';
-import 'package:AnimeGo/ui/page/SearchAnime.dart';
-import 'package:AnimeGo/ui/page/Settings.dart';
-import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
-import 'package:AnimeGo/ui/widget/GenreList.dart';
+import 'package:animego/ui/page/Favourite.dart';
+import 'package:animego/ui/page/History.dart';
+import 'package:animego/ui/page/SearchAnime.dart';
+import 'package:animego/ui/page/Settings.dart';
+import 'package:animego/ui/widget/AnimeGrid.dart';
+import 'package:animego/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
 
 /// TabletHomePage class
 class TabletHomePage extends StatefulWidget {
   const TabletHomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

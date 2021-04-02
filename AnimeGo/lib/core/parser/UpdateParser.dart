@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:AnimeGo/core/model/GithubUpdate.dart';
-import 'package:AnimeGo/core/parser/BasicParser.dart';
+import 'package:animego/core/model/GithubUpdate.dart';
+import 'package:animego/core/parser/BasicParser.dart';
 import 'package:html/dom.dart';
 
 /// This gets data from my github api branch
@@ -13,8 +13,10 @@ class UpdateParser extends BasicParser {
         );
 
   @override
-  GithubUpdate parseHTML(Document body) {
-    final json = jsonDecode(body.body.text);
+  GithubUpdate parseHTML(Document? body) {
+    final test = body?.body?.text;
+    dynamic? json;
+    if (test != null) json = jsonDecode(test);
     return GithubUpdate.fromJson(json);
   }
 }

@@ -1,11 +1,11 @@
-import 'package:AnimeGo/core/Global.dart';
+import 'package:animego/core/Global.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
 class Settings extends StatefulWidget {
   const Settings({
-    Key key,
+    Key? key,
     this.showAppBar = true,
   }) : super(key: key);
 
@@ -17,9 +17,9 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final global = Global();
-  bool hideDUB;
-  String input;
-  TextEditingController controller;
+  bool? hideDUB;
+  late String input;
+  TextEditingController? controller;
 
   @override
   void initState() {
@@ -89,7 +89,7 @@ class _SettingsState extends State<Settings> {
           CheckboxListTile(
             title: Text('Hide Dub'),
             subtitle: Text('Hide all dub anime if you prefer sub'),
-            onChanged: (bool value) => updateHideDUB(value),
+            onChanged: (bool? value) => updateHideDUB(value),
             value: hideDUB,
           ),
           Divider(),
@@ -122,7 +122,7 @@ class _SettingsState extends State<Settings> {
   }
 
   /// Hides dub
-  Future<void> updateHideDUB(bool value) async {
+  Future<void> updateHideDUB(bool? value) async {
     if (value == hideDUB) return;
     global.hideDUB = value;
     setState(() {

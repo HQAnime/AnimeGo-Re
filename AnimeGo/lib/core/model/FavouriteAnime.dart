@@ -1,4 +1,4 @@
-import 'package:AnimeGo/core/model/BasicAnimeList.dart';
+import 'package:animego/core/model/BasicAnimeList.dart';
 
 class FavouriteAnime extends BasicAnimeList {
   FavouriteAnime();

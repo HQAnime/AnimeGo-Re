@@ -2,9 +2,9 @@ import 'package:html/dom.dart';
 
 /// This contains maximum 100 episode
 class EpisodeSection {
-  String episodeStart;
-  String episodeEnd;
-  String movieID;
+  String? episodeStart;
+  String? episodeEnd;
+  String? movieID;
 
   EpisodeSection(Element e, this.movieID) {
     final episode = e.nodes[1];

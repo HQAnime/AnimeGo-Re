@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:AnimeGo/core/model/BasicAnime.dart';
-import 'package:AnimeGo/core/model/FavouriteAnime.dart';
-import 'package:AnimeGo/core/model/GithubUpdate.dart';
-import 'package:AnimeGo/core/model/WatchHistory.dart';
-import 'package:AnimeGo/core/parser/DomainParser.dart';
-import 'package:AnimeGo/core/parser/UpdateParser.dart';
+import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/FavouriteAnime.dart';
+import 'package:animego/core/model/GithubUpdate.dart';
+import 'package:animego/core/model/WatchHistory.dart';
+import 'package:animego/core/parser/DomainParser.dart';
+import 'package:animego/core/parser/UpdateParser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +24,7 @@ class Global {
   bool _hasInit = false;
 
   /// The domain that will be used globally
-  String _domain;
+  String? _domain;
   // Return default if null
   String getDomain() => _domain ?? Global.defaultDomain;
   updateDomain(String domain) {
@@ -34,21 +34,21 @@ class Global {
 
   /// Relating to app update
   bool _hasChecked = false;
-  DateTime _lastDate;
-  GithubUpdate _update;
+  late DateTime _lastDate;
+  late GithubUpdate _update;
 
   /// Whwther dub anime should be hidden
-  bool _hideDUB;
-  bool get hideDUB => _hideDUB;
-  set hideDUB(bool value) {
+  bool? _hideDUB;
+  bool? get hideDUB => _hideDUB;
+  set hideDUB(bool? value) {
     this._hideDUB = value;
-    prefs.setBool(hideDubAnime, _hideDUB);
+    prefs.setBool(hideDubAnime, _hideDUB!);
   }
 
   /// History list
   WatchHistory _history = WatchHistory();
-  List<BasicAnime> get historyList => _history.list;
-  bool hasWatched(BasicAnime anime) => _history.contains(anime);
+  List<BasicAnime?> get historyList => _history.list;
+  bool hasWatched(BasicAnime? anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime anime) {
     _history.add(anime);
@@ -58,21 +58,21 @@ class Global {
 
   /// Favourite list
   FavouriteAnime _favourite = FavouriteAnime();
-  List<BasicAnime> get favouriteList => _favourite.list;
-  bool isFavourite(BasicAnime anime) => _favourite.contains(anime);
-  void removeFromFavourite(BasicAnime anime) {
+  List<BasicAnime?> get favouriteList => _favourite.list;
+  bool isFavourite(BasicAnime? anime) => _favourite.contains(anime);
+  void removeFromFavourite(BasicAnime? anime) {
     _favourite.remove(anime);
     prefs.setString(favouriteAnime, jsonEncode(_favourite.toJson()));
   }
 
-  void addToFavourite(BasicAnime anime) {
+  void addToFavourite(BasicAnime? anime) {
     _favourite.add(anime);
     // Save
     prefs.setString(favouriteAnime, jsonEncode(_favourite.toJson()));
   }
 
   // Relating to local data
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
   final websiteDomain = 'AnimeGo:Domain';
   final watchHistory = 'AnimeGo:WatchHistory';
   final favouriteAnime = 'AnimeGo:FavouriteAnime';
@@ -95,7 +95,7 @@ class Global {
       prefs = await SharedPreferences.getInstance();
 
       // Check if it needs to check for update
-      String dateString = prefs.getString(lastUpdateDate);
+      String? dateString = prefs.getString(lastUpdateDate);
       if (dateString == null) {
         dateString = DateTime.now().toString();
         prefs.setString(lastUpdateDate, dateString);
@@ -108,12 +108,12 @@ class Global {
       print('Saved domain is $currDomain');
 
       // Load history and favourite anime
-      String historyString = prefs.getString(watchHistory);
+      String? historyString = prefs.getString(watchHistory);
       if (historyString != null) {
         this._history = WatchHistory.fromJson(jsonDecode(historyString));
       }
 
-      String favouriteString = prefs.getString(favouriteAnime);
+      String? favouriteString = prefs.getString(favouriteAnime);
       if (favouriteString != null) {
         this._favourite = FavouriteAnime.fromJson(jsonDecode(favouriteString));
       }
@@ -146,7 +146,9 @@ class Global {
     if (!_hasChecked) {
       _hasChecked = true;
       final parser = UpdateParser();
-      this._update = parser.parseHTML(await parser.downloadHTML());
+      this._update = parser.parseHTML(
+        await (parser.downloadHTML() as FutureOr<Document>),
+      );
     }
 
     if (_update.version != appVersion) {
@@ -159,14 +161,14 @@ class Global {
         barrierDismissible: false,
         builder: (c) => AlertDialog(
           title: Text('Version ${_update.version}'),
-          content: Text(_update.newFeatures),
+          content: Text(_update.newFeatures!),
           actions: [
             FlatButton(
               onPressed: () => Navigator.pop(context),
               child: Text('Close'),
             ),
             FlatButton(
-              onPressed: () => launch(_update.downloadLink),
+              onPressed: () => launch(_update.downloadLink!),
               child: Text('Update now (Android only)'),
             ),
           ],

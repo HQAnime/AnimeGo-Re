@@ -1,4 +1,4 @@
-name: AnimeGo
+name: animego
 description: An unofficial app for gogoanime
 
 # The following defines the version and build number for your application.
@@ -14,7 +14,7 @@ description: An unofficial app for gogoanime
 version: 1.3.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:

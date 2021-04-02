@@ -1,14 +1,14 @@
-import 'package:AnimeGo/core/Global.dart';
-import 'package:AnimeGo/core/Util.dart';
-import 'package:AnimeGo/core/model/BasicAnime.dart';
-import 'package:AnimeGo/core/model/OneEpisodeInfo.dart';
-import 'package:AnimeGo/core/model/VideoServer.dart';
-import 'package:AnimeGo/core/parser/OneEpisodeParser.dart';
-import 'package:AnimeGo/ui/page/AnimeDetailPage.dart';
-import 'package:AnimeGo/ui/page/CategoryPage.dart';
-import 'package:AnimeGo/ui/page/WatchAnimePage.dart';
-import 'package:AnimeGo/ui/widget/LoadingSwitcher.dart';
-import 'package:AnimeGo/ui/widget/SearchAnimeButton.dart';
+import 'package:animego/core/Global.dart';
+import 'package:animego/core/Util.dart';
+import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/OneEpisodeInfo.dart';
+import 'package:animego/core/model/VideoServer.dart';
+import 'package:animego/core/parser/OneEpisodeParser.dart';
+import 'package:animego/ui/page/AnimeDetailPage.dart';
+import 'package:animego/ui/page/CategoryPage.dart';
+import 'package:animego/ui/page/WatchAnimePage.dart';
+import 'package:animego/ui/widget/LoadingSwitcher.dart';
+import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,8 +16,8 @@ import 'package:url_launcher/url_launcher.dart';
 /// EpisodePage class
 class EpisodePage extends StatefulWidget {
   const EpisodePage({
-    Key key,
-    @required this.info,
+    Key? key,
+    required this.info,
   }) : super(key: key);
 
   final BasicAnime info;
@@ -28,15 +28,15 @@ class EpisodePage extends StatefulWidget {
 
 class _EpisodePageState extends State<EpisodePage>
     with SingleTickerProviderStateMixin {
-  String link;
-  OneEpisodeInfo info;
+  String? link;
+  OneEpisodeInfo? info;
   final global = Global();
-  String fomattedName;
+  String? fomattedName;
 
   @override
   void initState() {
     super.initState();
-    this.loadEpisodeInfo(widget.info.link);
+    this.loadEpisodeInfo(widget.info.link!);
   }
 
   loadEpisodeInfo(String link) {
@@ -47,8 +47,9 @@ class _EpisodePageState extends State<EpisodePage>
     final parser = OneEpisodeParser(global.getDomain() + link);
     parser.downloadHTML().then((body) {
       setState(() {
-        this.info = parser.parseHTML(body);
-        this.fomattedName = info.name.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
+        this.info = parser.parseHTML(body!);
+        this.fomattedName =
+            info!.name!.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
       });
     });
   }
@@ -58,7 +59,7 @@ class _EpisodePageState extends State<EpisodePage>
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        info == null ? 'Loading...' : 'Episode ${info.currentEpisode}',
+        info == null ? 'Loading...' : 'Episode ${info!.currentEpisode}',
       )),
       body: LoadingSwitcher(
         loading: this.info == null,
@@ -76,9 +77,10 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Previous episode',
                       child: IconButton(
-                        onPressed: this.info.prevEpisodeLink != null
+                        onPressed: this.info!.prevEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(this.info.prevEpisodeLink);
+                                this.loadEpisodeInfo(
+                                    this.info!.prevEpisodeLink!);
                               }
                             : null,
                         icon: Icon(Icons.arrow_back),
@@ -88,9 +90,10 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Next episode',
                       child: IconButton(
-                        onPressed: this.info.nextEpisodeLink != null
+                        onPressed: this.info!.nextEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(this.info.nextEpisodeLink);
+                                this.loadEpisodeInfo(
+                                    this.info!.nextEpisodeLink!);
                               }
                             : null,
                         icon: Icon(Icons.arrow_forward),
@@ -116,7 +119,7 @@ class _EpisodePageState extends State<EpisodePage>
             children: <Widget>[
               ListTile(
                 title: Text('Anime Info', textAlign: TextAlign.center),
-                subtitle: Text(info.name, textAlign: TextAlign.center),
+                subtitle: Text(info!.name!, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
@@ -127,13 +130,13 @@ class _EpisodePageState extends State<EpisodePage>
               ),
               ListTile(
                 title: Text('Category', textAlign: TextAlign.center),
-                subtitle: Text(info.category, textAlign: TextAlign.center),
+                subtitle: Text(info!.category!, textAlign: TextAlign.center),
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => CategoryPage(
-                            url: info.categoryLink, title: info.category)),
+                            url: info!.categoryLink, title: info!.category)),
                   );
                 },
               ),
@@ -173,7 +176,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   List<Widget> renderServerList() {
-    return this.info.servers.map((e) {
+    return this.info!.servers.map((e) {
       return Padding(
         padding: const EdgeInsets.only(right: 8),
         child: Tooltip(
@@ -214,10 +217,10 @@ class _EpisodePageState extends State<EpisodePage>
                   openInAppPlayer(e);
                 }
               } else {
-                launch(e.link);
+                launch(e.link!);
               }
             },
-            label: Text(e.title),
+            label: Text(e.title!),
           ),
         ),
       );
@@ -256,7 +259,7 @@ class _EpisodePageState extends State<EpisodePage>
   /// Save this to watch history
   _addToHistory() => Global().addToHistory(
         BasicAnime(
-          info.episodeName,
+          info!.episodeName,
           widget.info.link,
         ),
       );

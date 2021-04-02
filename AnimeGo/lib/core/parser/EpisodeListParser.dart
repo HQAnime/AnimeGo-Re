@@ -1,6 +1,6 @@
-import 'package:AnimeGo/core/model/EpisodeSection.dart';
-import 'package:AnimeGo/core/model/EpisodelInfo.dart';
-import 'package:AnimeGo/core/parser/BasicParser.dart';
+import 'package:animego/core/model/EpisodeSection.dart';
+import 'package:animego/core/model/EpisodelInfo.dart';
+import 'package:animego/core/parser/BasicParser.dart';
 import 'package:html/dom.dart';
 
 class EpisodeListParser extends BasicParser {
@@ -11,13 +11,13 @@ class EpisodeListParser extends BasicParser {
   final EpisodeSection section;
 
   @override
-  List<EpisodeInfo> parseHTML(Document body) {
+  List<EpisodeInfo> parseHTML(Document? body) {
     List<EpisodeInfo> list = [];
-    final episodeClass = body.getElementById('episode_related');
+    final episodeClass = body?.getElementById('episode_related')!;
     // It starts from the latest (reversed) but it might be a good idea
-    episodeClass.nodes.forEach((element) {
+    episodeClass?.nodes.forEach((element) {
       if (element.runtimeType == Element) {
-        list.add(EpisodeInfo(element));
+        list.add(EpisodeInfo(element as Element));
       }
     });
 

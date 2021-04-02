@@ -1,11 +1,11 @@
-import 'package:AnimeGo/core/model/AnimeInfo.dart';
+import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeCard class
 class AnimeCard extends StatelessWidget {
   const AnimeCard({
-    Key key,
-    @required this.info,
+    Key? key,
+    required this.info,
   }) : super(key: key);
 
   final AnimeInfo info;
@@ -21,7 +21,7 @@ class AnimeCard extends StatelessWidget {
             child: Ink(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(info.coverImage),
+                  image: NetworkImage(info.coverImage!),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -31,7 +31,7 @@ class AnimeCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              info.name,
+              info.name!,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w500),
               maxLines: 2,
@@ -45,7 +45,7 @@ class AnimeCard extends StatelessWidget {
               color: Colors.blue,
               child: Center(
                 child: Text(
-                  info.episode,
+                  info.episode!,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 ),

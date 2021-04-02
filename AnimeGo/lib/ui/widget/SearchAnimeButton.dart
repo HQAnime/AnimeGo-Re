@@ -4,11 +4,11 @@ import 'package:url_launcher/url_launcher.dart';
 /// SearchAnimeButton class
 class SearchAnimeButton extends StatelessWidget {
   const SearchAnimeButton({
-    Key key,
-    @required this.name,
+    Key? key,
+    required this.name,
   }) : super(key: key);
 
-  final String name;
+  final String? name;
 
   @override
   Widget build(BuildContext context) {

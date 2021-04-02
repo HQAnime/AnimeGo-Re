@@ -1,8 +1,8 @@
 import 'package:html/dom.dart';
 
 class VideoServer {
-  String title;
-  String link;
+  String? title;
+  String? link;
 
   VideoServer(Element e) {
     final node = e.nodes[1];

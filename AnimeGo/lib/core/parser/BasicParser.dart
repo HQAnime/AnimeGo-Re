@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 
 /// This is the parent of all parsers and it handles 404 not found.
 abstract class BasicParser {
-  String _link;
+  String? _link;
 
   /// Get the link for current page
-  String getLink() => this._link;
+  String? getLink() => this._link;
 
   BasicParser(String link) {
     this._link = link;
@@ -17,11 +17,11 @@ abstract class BasicParser {
   }
 
   /// Download HTML string from link
-  Future<Document> downloadHTML() async {
+  Future<Document?> downloadHTML() async {
     try {
       final response = await http
           .get(
-            Uri.parse(this._link),
+            Uri.parse(this._link!),
           )
           .timeout(Duration(seconds: 6)); // Timeout in 8s
 
@@ -38,5 +38,5 @@ abstract class BasicParser {
   }
 
   /// All subclasses have different implementations
-  parseHTML(Document body);
+  parseHTML(Document? body);
 }

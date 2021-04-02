@@ -1,12 +1,12 @@
-import 'package:AnimeGo/core/model/AnimeGenre.dart';
-import 'package:AnimeGo/ui/widget/AnimeGrid.dart';
+import 'package:animego/core/model/AnimeGenre.dart';
+import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeGenrePage class
 class GenrePage extends StatelessWidget {
   const GenrePage({
-    Key key,
-    @required this.genre,
+    Key? key,
+    required this.genre,
   }) : super(key: key);
 
   final AnimeGenre genre;
