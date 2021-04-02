@@ -59,6 +59,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
           : null,
       body: WebView(
         initialUrl: widget.video.link,
+        javascriptMode: JavascriptMode.unrestricted,
+        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
         navigationDelegate: (request) async {
           if (widget.video.link != null) {
             if (!request.url.contains(widget.video.link!))

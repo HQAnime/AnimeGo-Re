@@ -18,6 +18,8 @@ class Global {
   static final defaultDomain = 'https://gogoanimes.tv/';
   static final appVersion = '1.3.0';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
+  static final latestRelease =
+      'https://github.com/HenryQuan/AnimeGo/release/latest';
   static final email =
       'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
 
@@ -164,11 +166,11 @@ class Global {
           title: Text('Version ${_update.version ?? '??'}'),
           content: Text(_update.newFeatures ?? 'Something is very wrong...'),
           actions: [
-            AnimeFlatButton(
+            TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text('Close'),
             ),
-            AnimeFlatButton(
+            TextButton(
               onPressed: () => launch(_update.downloadLink ??
                   'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
               child: Text('Update now (Android only)'),

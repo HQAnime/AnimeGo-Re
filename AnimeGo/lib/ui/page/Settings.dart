@@ -1,6 +1,7 @@
 import 'package:animego/core/Global.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
@@ -38,6 +39,13 @@ class _SettingsState extends State<Settings> {
       appBar: widget.showAppBar ? AppBar(title: Text('Settings')) : null,
       body: ListView(
         children: <Widget>[
+          ListTile(
+            isThreeLine: true,
+            title: Text('Support me :)'),
+            subtitle: Text(
+                'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
+            onTap: () => launch('https://www.paypal.me/yihengquan'),
+          ),
           ListTile(
             title: Padding(
               padding: const EdgeInsets.only(top: 16),
@@ -100,22 +108,38 @@ class _SettingsState extends State<Settings> {
             onTap: () => launch(Global.email),
           ),
           ListTile(
+            onTap: () {
+              Share.share(Global.latestRelease);
+            },
+            title: Text('Share AnimeGo'),
+            subtitle: Text('Share to your friends if you like AnimeGo'),
+          ),
+          Divider(),
+          ListTile(
             title: Text('Source code'),
             subtitle: Text(Global.github),
             onTap: () => launch(Global.github),
           ),
           ListTile(
+            title: Text('Licenses'),
+            subtitle: Text('Check all open source licenses'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => LicensePage(
+                    applicationName: 'AnimeGo',
+                    applicationVersion: Global.appVersion,
+                    applicationLegalese: 'An unofficial app for gogoanime',
+                  ),
+                ),
+              );
+            },
+          ),
+          ListTile(
             title: Text('Check for update'),
             subtitle: Text(Global.appVersion),
             onTap: () => global.checkForUpdate(context, force: true),
-          ),
-          Divider(),
-          ListTile(
-            isThreeLine: true,
-            title: Text('Support me :)'),
-            subtitle: Text(
-                'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
-            onTap: () => launch('https://www.paypal.me/yihengquan'),
           ),
         ],
       ),
