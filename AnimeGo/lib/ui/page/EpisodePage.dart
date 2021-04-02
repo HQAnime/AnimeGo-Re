@@ -20,7 +20,7 @@ class EpisodePage extends StatefulWidget {
     required this.info,
   }) : super(key: key);
 
-  final BasicAnime info;
+  final BasicAnime? info;
 
   @override
   _EpisodePageState createState() => _EpisodePageState();
@@ -36,20 +36,20 @@ class _EpisodePageState extends State<EpisodePage>
   @override
   void initState() {
     super.initState();
-    this.loadEpisodeInfo(widget.info.link!);
+    this.loadEpisodeInfo(widget.info?.link);
   }
 
-  loadEpisodeInfo(String link) {
+  loadEpisodeInfo(String? link) {
     setState(() {
       info = null;
     });
 
-    final parser = OneEpisodeParser(global.getDomain() + link);
+    final parser = OneEpisodeParser(global.getDomain() + (link ?? ''));
     parser.downloadHTML().then((body) {
       setState(() {
-        this.info = parser.parseHTML(body!);
+        this.info = parser.parseHTML(body);
         this.fomattedName =
-            info!.name!.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
+            info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
       });
     });
   }
@@ -58,9 +58,12 @@ class _EpisodePageState extends State<EpisodePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        info == null ? 'Loading...' : 'Episode ${info!.currentEpisode}',
-      )),
+        title: Text(
+          info == null
+              ? 'Loading...'
+              : 'Episode ${info?.currentEpisode ?? '??'}',
+        ),
+      ),
       body: LoadingSwitcher(
         loading: this.info == null,
         child: this.renderBody(),
@@ -77,10 +80,11 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Previous episode',
                       child: IconButton(
-                        onPressed: this.info!.prevEpisodeLink != null
+                        onPressed: this.info?.prevEpisodeLink != null
                             ? () {
                                 this.loadEpisodeInfo(
-                                    this.info!.prevEpisodeLink!);
+                                  this.info?.prevEpisodeLink,
+                                );
                               }
                             : null,
                         icon: Icon(Icons.arrow_back),
@@ -90,10 +94,11 @@ class _EpisodePageState extends State<EpisodePage>
                     Tooltip(
                       message: 'Next episode',
                       child: IconButton(
-                        onPressed: this.info!.nextEpisodeLink != null
+                        onPressed: this.info?.nextEpisodeLink != null
                             ? () {
                                 this.loadEpisodeInfo(
-                                    this.info!.nextEpisodeLink!);
+                                  this.info?.nextEpisodeLink,
+                                );
                               }
                             : null,
                         icon: Icon(Icons.arrow_forward),
@@ -119,7 +124,10 @@ class _EpisodePageState extends State<EpisodePage>
             children: <Widget>[
               ListTile(
                 title: Text('Anime Info', textAlign: TextAlign.center),
-                subtitle: Text(info!.name!, textAlign: TextAlign.center),
+                subtitle: Text(
+                  info?.name ?? 'No information',
+                  textAlign: TextAlign.center,
+                ),
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
@@ -130,13 +138,19 @@ class _EpisodePageState extends State<EpisodePage>
               ),
               ListTile(
                 title: Text('Category', textAlign: TextAlign.center),
-                subtitle: Text(info!.category!, textAlign: TextAlign.center),
+                subtitle: Text(
+                  info?.category ?? 'Unknown',
+                  textAlign: TextAlign.center,
+                ),
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CategoryPage(
-                            url: info!.categoryLink, title: info!.category)),
+                      builder: (context) => CategoryPage(
+                        url: info?.categoryLink,
+                        title: info?.category,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -145,7 +159,7 @@ class _EpisodePageState extends State<EpisodePage>
                 subtitle: Center(
                   child: Wrap(
                     alignment: WrapAlignment.center,
-                    children: renderServerList(),
+                    children: renderServerList() ?? [],
                   ),
                 ),
               ),
@@ -175,8 +189,8 @@ class _EpisodePageState extends State<EpisodePage>
     );
   }
 
-  List<Widget> renderServerList() {
-    return this.info!.servers.map((e) {
+  List<Widget>? renderServerList() {
+    return this.info?.servers.map((e) {
       return Padding(
         padding: const EdgeInsets.only(right: 8),
         child: Tooltip(
@@ -189,18 +203,22 @@ class _EpisodePageState extends State<EpisodePage>
                   showDialog(
                     context: context,
                     builder: (c) => AlertDialog(
-                      title:
-                          Text('Video playback', textAlign: TextAlign.center),
+                      title: Text(
+                        'Video playback',
+                        textAlign: TextAlign.center,
+                      ),
                       content: Wrap(
                         alignment: WrapAlignment.spaceAround,
                         spacing: 2,
                         children: [
                           ElevatedButton(
-                              onPressed: () => openWithOtherApps(e),
-                              child: Text('Use other apps')),
+                            onPressed: () => openWithOtherApps(e),
+                            child: Text('Use other apps'),
+                          ),
                           ElevatedButton(
-                              onPressed: () => openInAppPlayer(e),
-                              child: Text('Use in-app player')),
+                            onPressed: () => openInAppPlayer(e),
+                            child: Text('Use in-app player'),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
@@ -217,10 +235,10 @@ class _EpisodePageState extends State<EpisodePage>
                   openInAppPlayer(e);
                 }
               } else {
-                launch(e.link!);
+                if (e.link != null) launch(e.link!);
               }
             },
-            label: Text(e.title!),
+            label: Text(e.title ?? 'Unknown'),
           ),
         ),
       );
@@ -259,7 +277,7 @@ class _EpisodePageState extends State<EpisodePage>
   /// Save this to watch history
   _addToHistory() => Global().addToHistory(
         BasicAnime(
-          info!.episodeName,
+          info?.episodeName,
           widget.info.link,
         ),
       );

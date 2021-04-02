@@ -4,14 +4,21 @@ import 'package:animego/core/model/OneEpisodeInfo.dart';
 /// It is basically a list of `BasicAnime`
 abstract class BasicAnimeList {
   List<BasicAnime?> list = [];
-  bool contains(BasicAnime? anime) => list.any((e) => e!.link == anime!.link);
+  bool contains(BasicAnime? anime) {
+    return list.any((e) {
+      return e?.link == anime?.link;
+    });
+  }
+
   void add(BasicAnime? anime) {
     if (contains(anime)) return;
     list.insert(0, anime);
   }
 
   void remove(BasicAnime? anime) {
-    list.removeWhere((e) => e!.link == anime!.link);
+    list.removeWhere((e) {
+      return e?.link == anime?.link;
+    });
   }
 
   BasicAnimeList();
@@ -21,7 +28,7 @@ abstract class BasicAnimeList {
   }
 
   Map<String, dynamic> toJson() => {
-        getName(): list.map((e) => e!.toJson()).toList(growable: false),
+        getName(): list.map((e) => e?.toJson()).toList(growable: false),
       };
 
   String getName();

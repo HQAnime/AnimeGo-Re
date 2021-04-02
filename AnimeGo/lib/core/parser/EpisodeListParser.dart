@@ -13,7 +13,7 @@ class EpisodeListParser extends BasicParser {
   @override
   List<EpisodeInfo> parseHTML(Document? body) {
     List<EpisodeInfo> list = [];
-    final episodeClass = body?.getElementById('episode_related')!;
+    final episodeClass = body?.getElementById('episode_related');
     // It starts from the latest (reversed) but it might be a good idea
     episodeClass?.nodes.forEach((element) {
       if (element.runtimeType == Element) {

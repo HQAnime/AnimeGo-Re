@@ -32,7 +32,7 @@ class _AnimeGridState extends State<AnimeGrid> {
   int page = 1;
   bool canLoadMore = true;
 
-  ScrollController? controller;
+  late ScrollController controller;
   bool showIndicator = false;
 
   @override
@@ -52,7 +52,7 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   @override
   void dispose() {
-    this.controller!.dispose();
+    this.controller.dispose();
     super.dispose();
   }
 
@@ -66,7 +66,7 @@ class _AnimeGridState extends State<AnimeGrid> {
       showIndicator = true;
     });
 
-    bool isSearch = widget.url!.startsWith('/search');
+    bool isSearch = widget.url?.startsWith('/search') ?? false;
     // For search, you need to use &
     final link = global.getDomain() +
         widget.url! +
@@ -78,7 +78,7 @@ class _AnimeGridState extends State<AnimeGrid> {
       final moreData = parser.parseHTML(body);
 
       // Filter out dub
-      if (global.hideDUB!) moreData.removeWhere((e) => e.isDUB);
+      if (global.hideDUB ?? false) moreData.removeWhere((e) => e.isDUB);
 
       // Append more data
       setState(() {
@@ -97,7 +97,7 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   /// Load more data if the grid is close to the end
   void loadMoreData() {
-    if (controller!.position.extentAfter < 10 && canLoadMore) {
+    if (controller.position.extentAfter < 10 && canLoadMore) {
       print('Loading new data');
       this.page += 1;
       this.loadData();
@@ -177,7 +177,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                     alignment: Alignment.bottomCenter,
                     child: LinearProgressIndicator(),
                   )
-                : SizedBox.shrink(),
+                : Container(),
           ],
         ),
       );

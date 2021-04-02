@@ -17,7 +17,7 @@ class AnimeInfo extends BasicAnime {
     // In order to call isCategory(), link needs to be parsed first
     final nameClass = e.getElementsByClassName('name').first;
     final nameLink = nameClass.firstChild;
-    this.name = nameLink?.attributes['title']!.trim();
+    this.name = nameLink?.attributes['title']?.trim();
     _formatAnimeName(name);
     this.link = nameLink?.attributes['href'];
 

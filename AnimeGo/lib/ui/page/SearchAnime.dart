@@ -49,7 +49,7 @@ class _SearchAnimeState extends State<SearchAnime> {
 
   Widget renderGrid() {
     if (formattedSearch.length < 3) {
-      return SizedBox.shrink();
+      return Container();
     } else {
       return AnimeGrid(url: '/search.html?keyword=$formattedSearch');
     }

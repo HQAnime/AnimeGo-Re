@@ -24,13 +24,13 @@ class AnimeDetailedInfo {
     this.name = infoClass?.nodes[3].text;
 
     final categoryNode = infoClass?.nodes[7].nodes[2];
-    this.category = categoryNode?.attributes['title']!.replaceAll('Anime', '');
+    this.category = categoryNode?.attributes['title']?.replaceAll('Anime', '');
     this.categoryLink = categoryNode?.attributes['href'];
 
     // Remove the title
     try {
       // Can be empty
-      this.summary = infoClass?.nodes[9].nodes[1].text!.trimRight();
+      this.summary = infoClass?.nodes[9].nodes[1].text?.trimRight();
     } catch (e, s) {
       print(e);
       print(s);
@@ -42,7 +42,7 @@ class AnimeDetailedInfo {
     genreNode?.forEach((element) {
       if (element.runtimeType == Element) {
         // Only the first item doesn't have a comma
-        this.genre.add(AnimeGenre(element.text!.split(',').last.trim()));
+        this.genre.add(AnimeGenre(element.text?.split(',').last.trim()));
       }
     });
 
@@ -50,11 +50,11 @@ class AnimeDetailedInfo {
     this.status = infoClass?.nodes[15].nodes[1].text;
 
     // Parse current anime movie id
-    final movieClass = body?.getElementById('movie_id')!;
+    final movieClass = body?.getElementById('movie_id');
     // This is necessary for episode section to return the link
     final animeID = movieClass?.attributes['value'];
 
-    final episodeClass = body?.getElementById('episode_page')!;
+    final episodeClass = body?.getElementById('episode_page');
     episodeClass?.nodes.forEach((element) {
       if (element.runtimeType == Element) {
         this.episodes.add(EpisodeSection(element as Element, animeID));

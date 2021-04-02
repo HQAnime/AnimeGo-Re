@@ -55,9 +55,12 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
         initialUrl: widget.video.link,
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
         navigationDelegate: (request) async {
-          if (!request.url.contains(widget.video.link!))
+          if (widget.video.link != null) {
+            if (!request.url.contains(widget.video.link!))
+              return NavigationDecision.prevent;
+            return NavigationDecision.navigate;
+          } else
             return NavigationDecision.prevent;
-          return NavigationDecision.navigate;
         },
       ),
     );

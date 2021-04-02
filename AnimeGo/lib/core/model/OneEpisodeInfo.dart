@@ -28,7 +28,7 @@ class OneEpisodeInfo extends BasicAnime {
   OneEpisodeInfo(Element? e) : super.fromJson(null) {
     // Get name and category
     final body = e?.getElementsByClassName('anime_video_body_cate').first;
-    final rawTitle = e?.nodes[1].text!;
+    final rawTitle = e?.nodes[1].text;
     if (rawTitle != null) {
       final regex = RegExp(r"Episode (\w.*?) ");
       final match = regex.firstMatch(rawTitle);

@@ -1,10 +1,10 @@
 class AnimeGenre {
-  String _name;
-  String getAnimeGenreName() => _name;
+  String? _name;
+  String getAnimeGenreName() => _name ?? 'Unknown';
 
   /// Merge domain name and formatted name
-  getFullLink() {
-    final formattedName = _name.split(' ').join('-').toLowerCase();
+  String getFullLink() {
+    final formattedName = _name?.split(' ').join('-').toLowerCase() ?? '';
     return '/genre/$formattedName';
   }
 

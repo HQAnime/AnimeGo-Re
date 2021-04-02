@@ -42,7 +42,7 @@ class Global {
   bool? get hideDUB => _hideDUB;
   set hideDUB(bool? value) {
     this._hideDUB = value;
-    prefs.setBool(hideDubAnime, _hideDUB!);
+    prefs.setBool(hideDubAnime, _hideDUB ?? false);
   }
 
   /// History list
@@ -147,7 +147,7 @@ class Global {
       _hasChecked = true;
       final parser = UpdateParser();
       this._update = parser.parseHTML(
-        await (parser.downloadHTML() as FutureOr<Document>),
+        await parser.downloadHTML(),
       );
     }
 
@@ -160,15 +160,16 @@ class Global {
         context: context,
         barrierDismissible: false,
         builder: (c) => AlertDialog(
-          title: Text('Version ${_update.version}'),
-          content: Text(_update.newFeatures!),
+          title: Text('Version ${_update.version ?? '??'}'),
+          content: Text(_update.newFeatures ?? 'Something is very wrong...'),
           actions: [
             FlatButton(
               onPressed: () => Navigator.pop(context),
               child: Text('Close'),
             ),
             FlatButton(
-              onPressed: () => launch(_update.downloadLink!),
+              onPressed: () => launch(_update.downloadLink ??
+                  'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
               child: Text('Update now (Android only)'),
             ),
           ],
@@ -185,8 +186,9 @@ class Global {
             content: Text('You are using the latest version.'),
             actions: [
               FlatButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Close')),
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Close'),
+              ),
             ],
           ),
         );

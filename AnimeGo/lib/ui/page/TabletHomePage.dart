@@ -97,7 +97,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
         return Settings(showAppBar: false);
         break;
       default:
-        return SizedBox.shrink();
+        return Container();
     }
   }
 
