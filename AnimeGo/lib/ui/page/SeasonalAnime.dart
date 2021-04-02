@@ -12,7 +12,7 @@ class SeasonalAnime extends StatefulWidget {
 }
 
 class _SeasonalAnimeState extends State<SeasonalAnime> {
-  static const SEASONS = ['spring', 'summer', 'fall', 'winter'];
+  static const SEASONS = ['winter', 'spring', 'summer', 'fall'];
   String url = '/new-season.html';
 
   @override
@@ -63,10 +63,10 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
     DateTime _date = DateTime.now();
 
     // Add past 9 seasons including current season so past 8
-    int offset = -3; // -3 to make it current season
+    int offset = 0; // make it 0 to show current seacon
     for (int i = 0; i < 25; i++, offset -= 3) {
       // Keep updating the date, 31 days just in case
-      var temp = this._getYearAndSeason(_date.add(Duration(days: offset * 31)));
+      var temp = this._getYearAndSeason(_date.add(Duration(days: offset * 30)));
       seasons.add('sub-category/${SEASONS[temp[1]]}-${temp[0]}-anime');
     }
 

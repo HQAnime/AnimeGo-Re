@@ -6,9 +6,9 @@ import 'package:html/dom.dart';
 class EpisodeListParser extends BasicParser {
   // a valid link, http://gogoanimee.net//load-list-episode?ep_start=0&ep_end=23&id=8634&default_ep=0
   EpisodeListParser(String link, this.section)
-      : super(link + section.getLink());
+      : super(link + (section?.getLink() ?? ''));
 
-  final EpisodeSection section;
+  final EpisodeSection? section;
 
   @override
   List<EpisodeInfo> parseHTML(Document? body) {

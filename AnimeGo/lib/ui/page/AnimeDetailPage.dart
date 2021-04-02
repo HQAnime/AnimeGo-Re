@@ -32,8 +32,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   bool loading = true;
   bool loadingEpisode = false;
   String? currEpisode;
-  late AnimeDetailedInfo info;
-  late List<EpisodeInfo> episodes;
+  AnimeDetailedInfo? info;
+  List<EpisodeInfo> episodes = [];
   final global = Global();
 
   bool isFavourite = false;
@@ -51,8 +51,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         this.isFavourite = global.isFavourite(widget.info);
 
         // Auto load if there is only one section
-        if (info.episodes.length == 1) {
-          this.loadEpisode(info.episodes.first);
+        if (info?.episodes.length == 1) {
+          this.loadEpisode(info?.episodes.first);
         }
       });
     });
@@ -62,23 +62,24 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(loading ? 'Loading...' : info.status ?? 'Error'),
+        title: Text(loading ? 'Loading...' : info?.status ?? 'Error'),
         actions: <Widget>[
-          if (!loading)
+          if (!loading && info != null)
             IconButton(
-                icon: Icon(
-                  isFavourite ? Icons.favorite : Icons.favorite_border,
-                ),
-                onPressed: () {
-                  if (isFavourite)
-                    global.removeFromFavourite(widget.info);
-                  else
-                    global.addToFavourite(widget.info);
+              icon: Icon(
+                isFavourite ? Icons.favorite : Icons.favorite_border,
+              ),
+              onPressed: () {
+                if (isFavourite)
+                  global.removeFromFavourite(widget.info);
+                else
+                  global.addToFavourite(widget.info);
 
-                  setState(() {
-                    isFavourite = !isFavourite;
-                  });
-                }),
+                setState(() {
+                  isFavourite = !isFavourite;
+                });
+              },
+            ),
         ],
       ),
       body: SafeArea(
@@ -100,7 +101,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              info.name!,
+              info?.name ?? '',
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
             ),
@@ -112,8 +113,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               children: <Widget>[
                 Flexible(
                   flex: 1,
-                  child: info.image != null
-                      ? Image.network(info.image!)
+                  child: info?.image != null
+                      ? Image.network(info!.image!)
                       : Container(),
                 ),
                 Flexible(
@@ -121,8 +122,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      centeredListTile('Released', info.released ?? '2077'),
-                      centeredListTile('Episode(s)', info.lastEpisode ?? '??'),
+                      centeredListTile('Released', info?.released ?? 'Unkown'),
+                      centeredListTile(
+                          'Episode(s)', info?.lastEpisode ?? 'Unkown'),
                       ListTile(
                         title: Text('Catagory', textAlign: TextAlign.center),
                         subtitle: AnimeFlatButton(
@@ -132,14 +134,14 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                               MaterialPageRoute(builder: (context) {
                                 return CategoryPage(
                                   // The domain will be added later so DON'T ADD IT HERE
-                                  url: info.categoryLink,
-                                  title: info.category,
+                                  url: info?.categoryLink,
+                                  title: info?.category,
                                 );
                               }),
                             );
                           },
                           child: Text(
-                            info.category!,
+                            info?.category ?? 'Unknown',
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -152,7 +154,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   child: Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationY(pi),
-                    child: Image.network(info.image!),
+                    child: info?.image != null
+                        ? Image.network(info!.image!)
+                        : Container(),
                   ),
                 ),
               ],
@@ -166,23 +170,24 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               subtitle: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 4,
-                children: info.genre.map((e) {
-                  return ActionChip(
-                    label: Text(e.getAnimeGenreName()),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return GenrePage(genre: e);
-                        }),
+                children: info?.genre.map((e) {
+                      return ActionChip(
+                        label: Text(e.getAnimeGenreName()),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return GenrePage(genre: e);
+                            }),
+                          );
+                        },
                       );
-                    },
-                  );
-                }).toList(growable: false),
+                    }).toList(growable: false) ??
+                    [],
               ),
             ),
           ),
-          centeredListTile('Summary', info.summary ?? 'No summary'),
+          centeredListTile('Summary', info?.summary ?? 'No summary'),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
@@ -193,29 +198,30 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           ),
           Wrap(
             alignment: WrapAlignment.center,
-            children: info.episodes.map((e) {
-              return Padding(
-                padding: const EdgeInsets.all(2),
-                child: InkWell(
-                  onTap: this.loadingEpisode
-                      ? null
-                      : () {
-                          loadEpisode(e);
-                        },
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      '${e.episodeStart} - ${e.episodeEnd}',
-                      style: TextStyle(
-                        decoration: currEpisode == e.episodeStart
-                            ? TextDecoration.underline
-                            : TextDecoration.none,
+            children: info?.episodes.map((e) {
+                  return Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: InkWell(
+                      onTap: this.loadingEpisode
+                          ? null
+                          : () {
+                              loadEpisode(e);
+                            },
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Text(
+                          '${e.episodeStart} - ${e.episodeEnd}',
+                          style: TextStyle(
+                            decoration: currEpisode == e.episodeStart
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              );
-            }).toList(growable: false),
+                  );
+                }).toList(growable: false) ??
+                [],
           ),
           renderEpisodeList(context),
         ],
@@ -223,12 +229,12 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
     }
   }
 
-  void loadEpisode(EpisodeSection e) {
+  void loadEpisode(EpisodeSection? e) {
     // Don't update if the selection is the same
-    if (e.episodeStart == this.currEpisode) return;
+    if (e?.episodeStart == this.currEpisode) return;
 
     setState(() {
-      this.currEpisode = e.episodeStart;
+      this.currEpisode = e?.episodeStart;
       this.loadingEpisode = true;
     });
 
