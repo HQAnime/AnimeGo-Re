@@ -6,7 +6,7 @@ class DetailedInfoParser extends BasicParser {
   DetailedInfoParser(String link) : super(link);
 
   @override
-  AnimeDetailedInfo parseHTML(Document body) {
+  AnimeDetailedInfo parseHTML(Document? body) {
     return AnimeDetailedInfo(body);
   }
 }

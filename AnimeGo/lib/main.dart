@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
 
   final lightTheme = ThemeData(
     primarySwatch: Colors.deepOrange,
+    appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
+    ),
   );
 
   @override
@@ -32,9 +35,9 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: Global().init(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          final window = WidgetsBinding.instance!.window;
+          final window = WidgetsBinding.instance?.window;
           // This listens to platform change
-          window.onPlatformBrightnessChanged = () {
+          window?.onPlatformBrightnessChanged = () {
             final useDark = window.platformBrightness == Brightness.dark;
             // Setup navigation bar colour
             SystemChrome.setSystemUIOverlayStyle(

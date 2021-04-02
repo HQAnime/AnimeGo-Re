@@ -24,9 +24,9 @@ class History extends StatelessWidget {
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {
-                final curr = list[i]!;
+                final curr = list[i];
                 return ListTile(
-                  title: Text(curr.name!),
+                  title: Text(curr?.name ?? 'Unknown'),
                   onTap: () {
                     Navigator.push(
                       context,

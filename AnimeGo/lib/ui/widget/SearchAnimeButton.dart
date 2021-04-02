@@ -1,3 +1,4 @@
+import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,14 +16,15 @@ class SearchAnimeButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        FlatButton(
-            onPressed: () {
-              launch('https://www.google.com/search?q=$name');
-            },
-            child: Text(
-              'Google',
-            )),
-        FlatButton(
+        AnimeFlatButton(
+          onPressed: () {
+            launch('https://www.google.com/search?q=$name');
+          },
+          child: Text(
+            'Google',
+          ),
+        ),
+        AnimeFlatButton(
           onPressed: () {
             launch('https://duckduckgo.com/?q=$name');
           },

@@ -1,5 +1,6 @@
 import 'package:animego/core/model/AnimeGenre.dart';
 import 'package:animego/ui/page/GenrePage.dart';
+import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 
 /// GenreList class
@@ -70,7 +71,7 @@ class GenreList extends StatelessWidget {
     // Return a fixed length array (growable to be false)
     return genreList
         .map(
-          (item) => FlatButton(
+          (item) => AnimeFlatButton(
             child: Text(item),
             onPressed: () {
               final genre = AnimeGenre(item);

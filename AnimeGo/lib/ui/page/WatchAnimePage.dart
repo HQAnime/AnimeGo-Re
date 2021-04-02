@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/VideoServer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +52,11 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Util.isIOS()
+          ? AppBar(
+              title: Text(widget.video.title ?? ''),
+            )
+          : null,
       body: WebView(
         initialUrl: widget.video.link,
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,

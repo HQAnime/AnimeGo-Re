@@ -6,6 +6,7 @@ import 'package:animego/core/model/GithubUpdate.dart';
 import 'package:animego/core/model/WatchHistory.dart';
 import 'package:animego/core/parser/DomainParser.dart';
 import 'package:animego/core/parser/UpdateParser.dart';
+import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -163,11 +164,11 @@ class Global {
           title: Text('Version ${_update.version ?? '??'}'),
           content: Text(_update.newFeatures ?? 'Something is very wrong...'),
           actions: [
-            FlatButton(
+            AnimeFlatButton(
               onPressed: () => Navigator.pop(context),
               child: Text('Close'),
             ),
-            FlatButton(
+            AnimeFlatButton(
               onPressed: () => launch(_update.downloadLink ??
                   'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
               child: Text('Update now (Android only)'),
@@ -185,7 +186,7 @@ class Global {
             title: Text('Update to date'),
             content: Text('You are using the latest version.'),
             actions: [
-              FlatButton(
+              AnimeFlatButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text('Close'),
               ),

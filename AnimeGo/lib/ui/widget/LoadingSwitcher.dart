@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:animego/core/Util.dart';
 import 'package:flutter/material.dart';
 

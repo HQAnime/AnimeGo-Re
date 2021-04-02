@@ -1,4 +1,5 @@
 import 'package:animego/core/Global.dart';
+import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -63,7 +64,7 @@ class _SettingsState extends State<Settings> {
                             "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain.",
                           ),
                           actions: [
-                            FlatButton(
+                            AnimeFlatButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },

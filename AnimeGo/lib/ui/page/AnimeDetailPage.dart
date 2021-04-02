@@ -10,6 +10,7 @@ import 'package:animego/core/parser/EpisodeListParser.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/page/GenrePage.dart';
+import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +125,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       centeredListTile('Episode(s)', info.lastEpisode ?? '??'),
                       ListTile(
                         title: Text('Catagory', textAlign: TextAlign.center),
-                        subtitle: FlatButton(
+                        subtitle: AnimeFlatButton(
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
@@ -255,14 +256,19 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           alignment: WrapAlignment.center,
           spacing: 8,
           children: this.episodes.map((e) {
-            return RaisedButton(
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
+            return ElevatedButton(
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(color: Colors.white),
+                ),
+              ),
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return EpisodePage(info: e);
-                }));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return EpisodePage(info: e);
+                  }),
+                );
               },
               child: Text(e.name ?? '??'),
             );

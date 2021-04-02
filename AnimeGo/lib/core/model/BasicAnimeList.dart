@@ -1,5 +1,4 @@
 import 'package:animego/core/model/BasicAnime.dart';
-import 'package:animego/core/model/OneEpisodeInfo.dart';
 
 /// It is basically a list of `BasicAnime`
 abstract class BasicAnimeList {

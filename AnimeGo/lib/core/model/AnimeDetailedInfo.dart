@@ -36,7 +36,7 @@ class AnimeDetailedInfo {
       print(s);
       this.summary = 'No summary';
     }
-    final genreNode = infoClass?.nodes[11].nodes;
+    final genreNode = infoClass?.nodes[13].nodes;
     // Remove the first node, it is just genre
     genreNode?.removeAt(0);
     genreNode?.forEach((element) {
@@ -46,8 +46,8 @@ class AnimeDetailedInfo {
       }
     });
 
-    this.released = infoClass?.nodes[13].nodes[1].text;
-    this.status = infoClass?.nodes[15].nodes[1].text;
+    this.released = infoClass?.nodes[15].nodes[1].text;
+    this.status = infoClass?.nodes[17].nodes[1].text;
 
     // Parse current anime movie id
     final movieClass = body?.getElementById('movie_id');

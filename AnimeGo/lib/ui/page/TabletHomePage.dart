@@ -74,28 +74,20 @@ class _TabletHomePageState extends State<TabletHomePage> {
           url: '/page-recent-release.html',
           key: Key(code.toString()),
         );
-        break;
       case PageCode.seasonal:
         return AnimeGrid(url: '/new-season.html', key: Key(code.toString()));
-        break;
       case PageCode.movie:
         return AnimeGrid(url: '/anime-movies.html', key: Key(code.toString()));
-        break;
       case PageCode.popular:
         return AnimeGrid(url: '/popular.html', key: Key(code.toString()));
-        break;
       case PageCode.genre:
         return AnimeGrid(url: this.genre, key: Key(genre));
-        break;
       case PageCode.history:
         return History(showAppBar: false);
-        break;
       case PageCode.favourite:
         return Favourite(showAppBar: false);
-        break;
       case PageCode.setting:
         return Settings(showAppBar: false);
-        break;
       default:
         return Container();
     }
