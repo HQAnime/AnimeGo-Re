@@ -10,14 +10,24 @@ import 'package:animego/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDrawer class
-class AnimeDrawer extends StatelessWidget {
+class AnimeDrawer extends StatefulWidget {
   const AnimeDrawer({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  _AnimeDrawerState createState() => _AnimeDrawerState();
+}
+
+class _AnimeDrawerState extends State<AnimeDrawer> {
+  @override
+  void initState() {
+    super.initState();
     FirebaseEventService().logFabMenu();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     bool darkMode = Util(context).isDarkMode();
 
     return Drawer(
