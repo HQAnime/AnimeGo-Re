@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class _SearchAnimeState extends State<SearchAnime> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logUseSearch();
     return Scaffold(
       appBar: AppBar(
         title: TextField(

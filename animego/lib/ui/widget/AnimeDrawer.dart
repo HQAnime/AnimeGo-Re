@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
@@ -10,10 +11,13 @@ import 'package:flutter/material.dart';
 
 /// AnimeDrawer class
 class AnimeDrawer extends StatelessWidget {
-  const AnimeDrawer({Key? key}) : super(key: key);
+  const AnimeDrawer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logFabMenu();
     bool darkMode = Util(context).isDarkMode();
 
     return Drawer(

@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class Movie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logUseMovie();
     return Scaffold(
       appBar: AppBar(title: Text('Movie')),
       body: AnimeGrid(url: '/anime-movies.html'),

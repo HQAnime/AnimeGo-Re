@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,8 @@ class _SettingsState extends State<Settings> {
     controller =
         TextEditingController.fromValue(TextEditingValue(text: currentDomain));
     input = currentDomain;
+
+    FirebaseEventService().logUseSettings();
   }
 
   @override

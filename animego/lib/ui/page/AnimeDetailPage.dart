@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/model/AnimeDetailedInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
@@ -41,6 +42,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   @override
   void initState() {
     super.initState();
+
+    FirebaseEventService().logUseAnimeInfo();
+
     // Load data here
     final parser =
         DetailedInfoParser(global.getDomain() + (widget.info?.link ?? ''));
@@ -70,6 +74,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                 isFavourite ? Icons.favorite : Icons.favorite_border,
               ),
               onPressed: () {
+                FirebaseEventService().logUseFavourite();
                 if (isFavourite)
                   global.removeFromFavourite(widget.info);
                 else
@@ -237,6 +242,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       this.currEpisode = e?.episodeStart;
       this.loadingEpisode = true;
     });
+
+    FirebaseEventService().logUseEpisodeList();
 
     final parser =
         EpisodeListParser(global.getDomain() + '/load-list-episode', e);

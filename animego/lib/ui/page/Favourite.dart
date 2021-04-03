@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class Favourite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logUseFavouriteList();
     final list = Global().favouriteList;
     return Scaffold(
       appBar: showAppBar ? AppBar(title: Text('Favourite Anime')) : null,

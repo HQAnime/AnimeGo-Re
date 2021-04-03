@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/model/AnimeGenre.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class GenrePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logUseGenre();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(genre.getAnimeGenreName()),

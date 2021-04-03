@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,12 @@ class SeasonalAnime extends StatefulWidget {
 class _SeasonalAnimeState extends State<SeasonalAnime> {
   static const SEASONS = ['winter', 'spring', 'summer', 'fall'];
   String url = '/new-season.html';
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseEventService().logUseSeasonal();
+  }
 
   @override
   Widget build(BuildContext context) {

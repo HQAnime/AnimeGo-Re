@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventService().logUseHistoryList();
     final list = Global().historyList;
     return Scaffold(
       appBar: showAppBar
