@@ -32,6 +32,8 @@ dependencies:
   android_intent: ^0.3.7+6
   # webview
   flutter_webview_plugin: ^0.3.11
+  # desktop control
+  desktop_window: ^0.4.0
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
