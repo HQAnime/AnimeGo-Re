@@ -1,12 +1,20 @@
+import 'dart:io';
 
 import 'package:AnimeGo/core/Global.dart';
 import 'package:AnimeGo/core/Util.dart';
 import 'package:AnimeGo/ui/page/LastestAnime.dart';
 import 'package:AnimeGo/ui/page/TabletHomePage.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
+    await DesktopWindow.setMinWindowSize(Size(800, 1200));
+  }
+
   runApp(MyApp());
 }
 
@@ -17,7 +25,7 @@ class MyApp extends StatelessWidget {
     indicatorColor: Colors.orange,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
-    )
+    ),
   );
 
   final lightTheme = ThemeData(
@@ -37,11 +45,15 @@ class MyApp extends StatelessWidget {
           // This listens to platform change
           window.onPlatformBrightnessChanged = () {
             final useDark = window.platformBrightness == Brightness.dark;
-            // Setup navigation bar colour 
-            SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              systemNavigationBarColor: useDark ? Colors.grey[900] : Colors.grey[50],
-              systemNavigationBarIconBrightness: useDark ? Brightness.light : Brightness.dark
-            ));
+            // Setup navigation bar colour
+            SystemChrome.setSystemUIOverlayStyle(
+              SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    useDark ? Colors.grey[900] : Colors.grey[50],
+                systemNavigationBarIconBrightness:
+                    useDark ? Brightness.light : Brightness.dark,
+              ),
+            );
           };
 
           // The data is simply a `true`
@@ -51,7 +63,7 @@ class MyApp extends StatelessWidget {
             // Use another view for tablets (or devices with a large screen)
             if (Util(context).isTablet()) return TabletHomePage();
             return LastestAnime();
-          } else  {
+          } else {
             // A simple loading screen so that it is not that boring
             return Scaffold(
               appBar: AppBar(
@@ -62,8 +74,8 @@ class MyApp extends StatelessWidget {
               ),
             );
           }
-      }),
+        },
+      ),
     );
   }
 }
-
