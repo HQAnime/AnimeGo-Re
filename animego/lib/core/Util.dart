@@ -32,8 +32,9 @@ class Util {
   /// From https://stackoverflow.com/a/53912090
   bool isTablet() {
     var size = MediaQuery.of(context).size;
-    var diagonal =
-        sqrt((size.width * size.width) + (size.height * size.height));
+    var diagonal = sqrt(
+      (size.width * size.width) + (size.height * size.height),
+    );
 
     var isTablet = diagonal > 1100.0;
     return isTablet;

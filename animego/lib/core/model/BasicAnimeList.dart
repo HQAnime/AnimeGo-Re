@@ -26,9 +26,8 @@ abstract class BasicAnimeList {
     list = temp.map((e) => BasicAnime.fromJson(e)).toList();
   }
 
-  Map<String, dynamic> toJson() => {
-        getName(): list.map((e) => e?.toJson()).toList(growable: false),
-      };
+  Map<String, dynamic> toJson() =>
+      {getName(): list.map((e) => e?.toJson()).toList(growable: false)};
 
   String getName();
 }

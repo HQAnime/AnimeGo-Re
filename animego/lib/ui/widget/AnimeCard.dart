@@ -33,7 +33,7 @@ class AnimeCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              info.name!,
+              info.name ?? 'Unknown',
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w500),
               maxLines: 2,
@@ -47,7 +47,7 @@ class AnimeCard extends StatelessWidget {
               color: Colors.blue,
               child: Center(
                 child: Text(
-                  info.episode!,
+                  info.episode ?? '??',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 ),

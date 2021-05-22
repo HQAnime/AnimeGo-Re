@@ -245,8 +245,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
     FirebaseEventService().logUseEpisodeList();
 
-    final parser =
-        EpisodeListParser(global.getDomain() + '/load-list-episode', e);
+    final parser = EpisodeListParser(
+      global.getDomain() + '/load-list-episode',
+      e,
+    );
+
     parser.downloadHTML().then((body) {
       setState(() {
         this.episodes = parser.parseHTML(body);

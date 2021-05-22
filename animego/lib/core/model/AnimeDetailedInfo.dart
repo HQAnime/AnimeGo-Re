@@ -40,9 +40,9 @@ class AnimeDetailedInfo {
     // Remove the first node, it is just genre
     genreNode?.removeAt(0);
     genreNode?.forEach((element) {
-      if (element.runtimeType == Element) {
+      if (element is Element) {
         // Only the first item doesn't have a comma
-        this.genre.add(AnimeGenre(element.text?.split(',').last.trim()));
+        this.genre.add(AnimeGenre(element.text.split(',').last.trim()));
       }
     });
 
@@ -56,8 +56,8 @@ class AnimeDetailedInfo {
 
     final episodeClass = body?.getElementById('episode_page');
     episodeClass?.nodes.forEach((element) {
-      if (element.runtimeType == Element) {
-        this.episodes.add(EpisodeSection(element as Element, animeID));
+      if (element is Element) {
+        this.episodes.add(EpisodeSection(element, animeID));
       }
     });
     lastEpisode = this.episodes.last.episodeEnd;

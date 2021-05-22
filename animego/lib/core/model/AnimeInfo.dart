@@ -6,7 +6,7 @@ class AnimeInfo extends BasicAnime {
   String? coverImage;
 
   // Either episode or release
-  String? episode = '???';
+  String? episode = '??';
   bool isDUB = false;
 
   AnimeInfo(Element e) : super.fromJson(null) {

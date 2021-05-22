@@ -51,12 +51,13 @@ class GenreList extends StatelessWidget {
     'Yuri'
   ];
 
-  /// This is only used by TabletHomePage
-  final Function? func;
   GenreList({
     Key? key,
     this.func,
   }) : super(key: key);
+
+  /// This is only used by TabletHomePage
+  final Function? func;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +79,11 @@ class GenreList extends StatelessWidget {
               if (func == null) {
                 Navigator.pop(context);
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => GenrePage(genre: genre)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GenrePage(genre: genre),
+                  ),
+                );
               } else {
                 func!(genre.getFullLink());
               }

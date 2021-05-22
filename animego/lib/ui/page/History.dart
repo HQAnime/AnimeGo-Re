@@ -17,11 +17,7 @@ class History extends StatelessWidget {
     FirebaseEventService().logUseHistoryList();
     final list = Global().historyList;
     return Scaffold(
-      appBar: showAppBar
-          ? AppBar(
-              title: Text('Watch History'),
-            )
-          : null,
+      appBar: showAppBar ? AppBar(title: Text('Watch History')) : null,
       body: list.length > 0
           ? ListView.builder(
               itemCount: list.length,
@@ -40,7 +36,9 @@ class History extends StatelessWidget {
                 );
               },
             )
-          : Center(child: Text('No anime found')),
+          : Center(
+              child: Text('No anime found'),
+            ),
     );
   }
 }

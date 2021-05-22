@@ -21,8 +21,8 @@ class AnimeParser extends BasicParser {
           if (items.hasChildNodes()) {
             items.nodes.forEach((element) {
               // Only parse elements, no Text
-              if (element.runtimeType == Element) {
-                list.add(AnimeInfo(element as Element));
+              if (element is Element) {
+                list.add(AnimeInfo(element));
               }
             });
           }

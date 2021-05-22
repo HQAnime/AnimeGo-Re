@@ -1,5 +1,3 @@
-// TODO: remove the line below when firebase is null safe
-// @dart=2.9
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/LastestAnime.dart';

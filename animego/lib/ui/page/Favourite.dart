@@ -36,7 +36,9 @@ class Favourite extends StatelessWidget {
                 );
               },
             )
-          : Center(child: Text('No anime found')),
+          : Center(
+              child: Text('No anime found'),
+            ),
     );
   }
 }
