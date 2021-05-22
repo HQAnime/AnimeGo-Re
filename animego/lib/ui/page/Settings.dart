@@ -90,7 +90,7 @@ class _SettingsState extends State<Settings> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    "The link will be updated automatically\nIn certain regions, this website doesn't work\nPlease tap me and check if it works for you\n\nDon't change it if you don't know what you are doing\nThe default domain is ${Global.defaultDomain}",
+                    "The link will be updated automatically.\nIn certain regions, this website doesn't work.\nTry using a VPN and restart the app.\nPlease tap me and check if it works for you.\n\nDon't change it if you don't know what you are doing.\nThe default domain is ${Global.defaultDomain}.\nPlease try updating to the default if current one is not working.",
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
                   ),
                 ),

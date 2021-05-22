@@ -120,6 +120,11 @@ class _EpisodePageState extends State<EpisodePage>
       return Center(
         child: CircularProgressIndicator(),
       );
+    } else if (this.info?.currentEpisode == null) {
+      // Sometimes, it doesn't load properly
+      return Center(
+        child: Text('Failed to load. Please try again.'),
+      );
     } else {
       return Center(
         child: SingleChildScrollView(
@@ -135,7 +140,8 @@ class _EpisodePageState extends State<EpisodePage>
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AnimeDetailPage(info: info)),
+                      builder: (context) => AnimeDetailPage(info: info),
+                    ),
                   );
                 },
               ),

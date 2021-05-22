@@ -23,7 +23,7 @@ abstract class BasicParser {
           .get(
             Uri.parse(this._link!),
           )
-          .timeout(Duration(seconds: 6)); // Timeout in 8s
+          .timeout(Duration(seconds: 8)); // Timeout in 8s
 
       if (response.statusCode == 200) {
         return parse(response.body);

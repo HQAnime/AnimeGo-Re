@@ -167,7 +167,12 @@ class _AnimeGridState extends State<AnimeGrid> {
                             },
                             itemCount: length,
                           )
-                        : Center(child: Text('- nothing here -'));
+                        : Center(
+                            child: Text(
+                              'Nothing was found. Try loading it again.\nDouble check the website link in Settings as well.',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
                   },
                 ),
               ),

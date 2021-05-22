@@ -55,6 +55,7 @@ class OneEpisodeInfo extends BasicAnime {
 
     final episode =
         e?.getElementsByClassName('anime_video_body_episodes').first;
+
     // TODO: make this look nicer
     try {
       this.nextEpisodeLink = episode?.nodes[3].nodes[1].attributes['href'];

@@ -14,6 +14,15 @@ class LastestAnime extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('New Release'),
+        actions: [
+          // TODO: add a refresh to AnimeGrid. now, it is fixed
+          // IconButton(
+          //   icon: Icon(Icons.refresh),
+          //   onPressed: () {
+
+          //   },
+          // ),
+        ],
       ),
       body: AnimeGrid(
         url: '/page-recent-release.html',
