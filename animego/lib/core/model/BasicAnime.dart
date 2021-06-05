@@ -1,7 +1,20 @@
+import 'package:animego/core/Global.dart';
+
 /// The parent of some models in order to share info
 class BasicAnime {
   String? name;
   String? link;
+  String? get fullLink {
+    if (link == null) {
+      return null;
+    } else {
+      if (link!.startsWith('http')) {
+        return link;
+      } else {
+        return Global().getDomain() + link!;
+      }
+    }
+  }
 
   BasicAnime(this.name, this.link);
 
@@ -16,5 +29,10 @@ class BasicAnime {
       'name': this.name,
       'link': this.link,
     };
+  }
+
+  @override
+  String toString() {
+    return 'name: $name, link: $link';
   }
 }

@@ -54,6 +54,7 @@ class Global {
   bool hasWatched(BasicAnime? anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime anime) {
+    print('Adding ${anime.toString()} to history');
     _history.add(anime);
     // Save
     prefs.setString(watchHistory, jsonEncode(_history.toJson()));

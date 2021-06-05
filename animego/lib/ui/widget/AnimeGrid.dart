@@ -169,6 +169,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                           )
                         : Center(
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   'Nothing was found. Try loading it again.\nDouble check the website link in Settings as well.',
