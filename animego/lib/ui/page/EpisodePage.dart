@@ -291,7 +291,8 @@ class _EpisodePageState extends State<EpisodePage>
   _addToHistory() => Global().addToHistory(
         BasicAnime(
           info?.episodeName,
-          widget.info?.link,
+          // Don't use widget link because it is not updated
+          info?.link,
         ),
       );
 }
