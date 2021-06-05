@@ -51,6 +51,7 @@ class _EpisodePageState extends State<EpisodePage>
     parser.downloadHTML().then((body) {
       setState(() {
         this.info = parser.parseHTML(body);
+        this.info?.currentEpisodeLink = link;
         this.fomattedName =
             info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
       });
@@ -292,7 +293,7 @@ class _EpisodePageState extends State<EpisodePage>
         BasicAnime(
           info?.episodeName,
           // TODO: the link is incorrect here need to get episode link
-          widget.info?.link,
+          info?.currentEpisodeLink,
         ),
       );
 }

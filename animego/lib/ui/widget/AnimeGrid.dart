@@ -176,7 +176,12 @@ class _AnimeGridState extends State<AnimeGrid> {
                                   textAlign: TextAlign.center,
                                 ),
                                 IconButton(
-                                  onPressed: () => this.loadData(refresh: true),
+                                  onPressed: () {
+                                    setState(() {
+                                      loading = true;
+                                    });
+                                    loadData(refresh: true);
+                                  },
                                   icon: Icon(Icons.refresh),
                                 ),
                               ],

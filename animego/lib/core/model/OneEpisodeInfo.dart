@@ -8,6 +8,7 @@ class OneEpisodeInfo extends BasicAnime {
   String? categoryLink;
 
   String? currentEpisode;
+  String? currentEpisodeLink;
   String? prevEpisodeLink;
   String? nextEpisodeLink;
   String get episodeName => '[$currentEpisode] $name';
