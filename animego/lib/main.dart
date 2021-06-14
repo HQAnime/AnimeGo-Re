@@ -14,9 +14,12 @@ void main() async {
 
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
-  final darkTheme = ThemeData.dark().copyWith(
-    accentColor: Colors.orange,
-    indicatorColor: Colors.orange,
+  final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primarySwatch: Colors.orange,
+    appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
     ),
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AnimeGo Re',
-      theme: lightTheme,
+      theme: darkTheme,
       darkTheme: darkTheme,
       home: FutureBuilder(
         future: Global().init(),
