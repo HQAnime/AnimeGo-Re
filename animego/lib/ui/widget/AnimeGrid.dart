@@ -58,8 +58,8 @@ class _AnimeGridState extends State<AnimeGrid> {
 
   /// Increase page and load more data
   void loadData({bool refresh = false}) {
-    // Reset page to 0
-    if (refresh) page = 0;
+    // Reset page to 1, start from 1 not ZERO
+    if (refresh) page = 1;
 
     setState(() {
       canLoadMore = false;

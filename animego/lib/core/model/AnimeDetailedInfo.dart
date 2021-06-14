@@ -60,6 +60,8 @@ class AnimeDetailedInfo {
         this.episodes.add(EpisodeSection(element, animeID));
       }
     });
-    lastEpisode = this.episodes.last.episodeEnd;
+
+    // Make sure it is not empty at least
+    if (this.episodes.length > 0) lastEpisode = this.episodes.last.episodeEnd;
   }
 }

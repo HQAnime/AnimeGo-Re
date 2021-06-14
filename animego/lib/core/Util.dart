@@ -9,7 +9,7 @@ class Util {
   Util(this.context);
 
   bool isDarkMode() {
-    return MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return Theme.of(context).brightness == Brightness.dark;
   }
 
   static bool isMobile() {

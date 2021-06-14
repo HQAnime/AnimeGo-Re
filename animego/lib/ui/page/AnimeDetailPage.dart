@@ -131,7 +131,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       centeredListTile(
                           'Episode(s)', info?.lastEpisode ?? 'Unkown'),
                       ListTile(
-                        title: Text('Catagory', textAlign: TextAlign.center),
+                        title: Text('Category', textAlign: TextAlign.center),
+                        // TODO: This button is very hidden so the user may not know about this
                         subtitle: AnimeFlatButton(
                           onPressed: () {
                             Navigator.pushReplacement(

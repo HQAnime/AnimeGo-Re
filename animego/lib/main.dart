@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.orange,
+    accentColor: Colors.orange,
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
     ),
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AnimeGo Re',
-      theme: darkTheme,
+      theme: lightTheme,
       darkTheme: darkTheme,
       home: FutureBuilder(
         future: Global().init(),
