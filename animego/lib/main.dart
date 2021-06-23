@@ -14,6 +14,14 @@ void main() async {
 
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
+  final lightTheme = ThemeData(
+    primarySwatch: Colors.deepOrange,
+    appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
+    ),
+  );
+
+  // TODO: find a better solution, this is too manual
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.orange,
@@ -21,15 +29,11 @@ class MyApp extends StatelessWidget {
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
     ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.all(Colors.orange),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
-    ),
-  );
-
-  final lightTheme = ThemeData(
-    primarySwatch: Colors.deepOrange,
-    appBarTheme: AppBarTheme(
-      brightness: Brightness.dark,
     ),
   );
 

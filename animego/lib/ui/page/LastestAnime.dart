@@ -15,7 +15,6 @@ class LastestAnime extends StatelessWidget {
       appBar: AppBar(
         title: Text('New Release'),
         actions: [
-          // TODO: add a refresh to AnimeGrid. now, it is fixed
           // IconButton(
           //   icon: Icon(Icons.refresh),
           //   onPressed: () {
