@@ -1,0 +1,1 @@
+{"version": "1.3.0", "new": "- Fixed incorrect link in History\n- Fixed bugs in Seasonal\n- Fixed video playback in Episode\n+ Updated Flutter to 2.0 with better null safety\n+ Added Firebase analytics\n+ Updated app logo\n- Fixed other minor issues", "link": "https://github.com/HenryQuan/AnimeGo-Re/releases/download/1.3.0/app-release.apk"}
