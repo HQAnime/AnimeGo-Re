@@ -4,7 +4,7 @@
 
    <application
         android:label="AnimeGo"
-        android:icon="@mipmap/ic_launcher">
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
