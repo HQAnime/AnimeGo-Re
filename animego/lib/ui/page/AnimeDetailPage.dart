@@ -280,7 +280,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
                     return EpisodePage(info: e);
