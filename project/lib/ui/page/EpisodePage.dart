@@ -4,6 +4,7 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
+import 'package:animego/core/parser/M3U8Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
@@ -173,6 +174,10 @@ class _EpisodePageState extends State<EpisodePage>
                   ),
                 ),
               ),
+              ElevatedButton(
+                onPressed: () => parseM3U8Link(),
+                child: Text('Text video parsing'),
+              ),
               Text(
                 'Please note that this app does not\nhave any controls over these sources',
                 textAlign: TextAlign.center,
@@ -253,6 +258,22 @@ class _EpisodePageState extends State<EpisodePage>
         ),
       );
     }).toList();
+  }
+
+  parseM3U8Link() async {
+    for (VideoServer server in this.info?.servers ?? []) {
+      final link = server.link;
+      final title = server.title;
+      if (link != null && title != null) {
+        if (title.toLowerCase().contains('vidcdn')) {
+          // this is the link we need to parse
+          final parser = M3U8Parser(link);
+          final html = await parser.downloadHTML();
+          final m3u8Link = parser.parseHTML(html);
+          print(m3u8Link);
+        }
+      }
+    }
   }
 
   /// Watch with in app player

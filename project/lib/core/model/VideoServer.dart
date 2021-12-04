@@ -12,7 +12,8 @@ class VideoServer {
     if (!link1.startsWith('http')) {
       link1 = 'https://' + link1;
     }
-    this.link = link1;
+    // we have //// in the link and must be removed
+    this.link = link1.replaceFirst('////', '//');
 
     // Get the title
     final title1 = node.nodes[0].text ?? '';
