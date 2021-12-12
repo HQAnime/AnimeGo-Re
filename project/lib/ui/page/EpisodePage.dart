@@ -8,6 +8,7 @@ import 'package:animego/core/parser/M3U8Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
+import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
@@ -270,7 +271,18 @@ class _EpisodePageState extends State<EpisodePage>
           final parser = M3U8Parser(link);
           final html = await parser.downloadHTML();
           final m3u8Link = parser.parseHTML(html);
-          print(m3u8Link);
+
+          if (m3u8Link != null && this.info?.currentEpisodeLink != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => VidePlayerPage(
+                  refererLink:
+                      global.getDomain() + this.info!.currentEpisodeLink!,
+                  videoLink: m3u8Link,
+                ),
+              ),
+            );
+          }
         }
       }
     }

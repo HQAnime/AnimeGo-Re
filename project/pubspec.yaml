@@ -32,13 +32,15 @@ dependencies:
   android_intent: ^2.0.0
   # webview
   webview_flutter: ^2.0.2
+  # video player
+  video_player: ^2.2.7
+  flick_video_player: ^0.3.1
   share: ^2.0.0
   firebase_analytics: ^8.0.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  video_player: ^2.2.7
 
 dev_dependencies:
   flutter_test:
