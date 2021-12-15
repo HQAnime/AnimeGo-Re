@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>464204365713-0500o5as0dmnevp0m83274u8eqe7t5rv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.464204365713-0500o5as0dmnevp0m83274u8eqe7t5rv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDj4uSVU-bp4iImHSnqmvVHsaF8HxGLemE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>464204365713</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.yihengquan.gogoanime</string>
+	<key>PROJECT_ID</key>
+	<string>animego-83d6a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>animego-83d6a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:464204365713:ios:337850ce6c209f09586430</string>
+	<key>DATABASE_URL</key>
+	<string>https://animego-83d6a.firebaseio.com</string>
+</dict>
+</plist>
