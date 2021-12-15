@@ -10,3 +10,11 @@ adb shell setprop debug.firebase.analytics.app com.yihengquan.gogoanime
 ~~~
 adb shell setprop debug.firebase.analytics.app .none.
 ~~~
+
+# Desktop
+## Linux
+Follow [this guide](https://docs.flutter.dev/desktop#additional-linux-requirements) to setup the environment. VLC is also required for dart_vlc.
+
+```
+sudo apt-get install vlc libvlc-dev clang cmake ninja-build pkg-config libgtk-3-dev
+```
