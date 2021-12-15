@@ -18,3 +18,5 @@ Follow [this guide](https://docs.flutter.dev/desktop#additional-linux-requiremen
 ```
 sudo apt-get install vlc libvlc-dev clang cmake ninja-build pkg-config libgtk-3-dev
 ```
+
+NOTE: `DON'T install Flutter with snap`. Download the package or use git instead. It seems that `cmake` path is set to 3.10.2 no matter what and this breaks things.
