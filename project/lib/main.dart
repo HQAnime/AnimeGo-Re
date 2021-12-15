@@ -10,6 +10,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Util.isMobile()) {
     await Firebase.initializeApp();
+  } else {
+    DartVLC.initialize();
   }
   runApp(MyApp());
 }

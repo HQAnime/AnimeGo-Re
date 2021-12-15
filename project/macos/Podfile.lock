@@ -1,4 +1,7 @@
 PODS:
+  - dart_vlc (0.0.1):
+    - FlutterMacOS
+    - VLCKit (~> 3.3)
   - Firebase/CoreOnly (8.9.1):
     - FirebaseCore (= 8.9.1)
   - firebase_core (1.10.5):
@@ -27,17 +30,22 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - path_provider_macos (0.0.1):
+    - FlutterMacOS
   - PromisesObjC (2.0.0)
   - shared_preferences_macos (0.0.1):
     - FlutterMacOS
   - url_launcher_macos (0.0.1):
     - FlutterMacOS
+  - VLCKit (3.3.17)
   - wakelock_macos (0.0.1):
     - FlutterMacOS
 
 DEPENDENCIES:
+  - dart_vlc (from `Flutter/ephemeral/.symlinks/plugins/dart_vlc/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
+  - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
   - shared_preferences_macos (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_macos/macos`)
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
   - wakelock_macos (from `Flutter/ephemeral/.symlinks/plugins/wakelock_macos/macos`)
@@ -51,12 +59,17 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - VLCKit
 
 EXTERNAL SOURCES:
+  dart_vlc:
+    :path: Flutter/ephemeral/.symlinks/plugins/dart_vlc/macos
   firebase_core:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
+  path_provider_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
   shared_preferences_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_macos/macos
   url_launcher_macos:
@@ -65,6 +78,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/wakelock_macos/macos
 
 SPEC CHECKSUMS:
+  dart_vlc: 1dbcc77b4304a8826b1fceaa1eada263b02b2123
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
   firebase_core: 15a2e2ceb41e9eb44ad4d17ea9c033781902d71d
   FirebaseCore: c5aab092d9c4b8efea894946166b04c9d9ef0e68
@@ -73,9 +87,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  path_provider_macos: 160cab0d5461f0c0e02995469a98f24bdb9a3f1f
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   shared_preferences_macos: 480ce071d0666e37cef23fe6c702293a3d21799e
   url_launcher_macos: 45af3d61de06997666568a7149c1be98b41c95d4
+  VLCKit: 21651e881f19774ecf9a86ca2c2010859fe68a08
   wakelock_macos: bc3f2a9bd8d2e6c89fee1e1822e7ddac3bd004a9
 
 PODFILE CHECKSUM: c7161fcf45d4fd9025dc0f48a76d6e64e52f8176
