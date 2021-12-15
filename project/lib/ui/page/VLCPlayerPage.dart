@@ -16,21 +16,31 @@ class VLCPlayerPage extends StatefulWidget {
 }
 
 class _VLCPlayerPageState extends State<VLCPlayerPage> {
-  late Player player;
+  late final Player player = Player(
+    id: 123456,
+    // pass the referer link to the player
+    commandlineArguments: [
+      '--http-referrer="${widget.refererLink}"',
+      '--verbose=2',
+    ],
+  );
 
   @override
   void initState() {
     super.initState();
-    this.player = Player(
-      id: 123456,
-      // pass the referer link to the player
-      commandlineArguments: ['--http-referrer="${widget.refererLink}"'],
-    );
-
-    this.player.open(Media.network(widget.videoLink));
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      player.open(Media.network('https://www.youtube.com/watch?v=S1iSJMXTkPU'));
+      player.play();
+    });
 
     print('player.open: ${widget.videoLink}');
     print('player.open: ${widget.refererLink}');
+  }
+
+  @override
+  void dispose() {
+    this.player.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,11 +51,9 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
       ),
       body: Video(
         player: player,
-        height: 1080.0,
-        width: 1920.0,
-        scale: 1.0, // default
-        showControls: true, // default
       ),
     );
   }
 }
+
+// ./VLC --verbose=2 --http-referrer="https://www26.gogoanimes.tv/da-wang-rao-ming-episode-2" "https://www14.anicdn.stream/videos/hls/aahwFXUEiUYEvZU4gN-yng/1639560677/176349/a17b6a2874a24391926da09ecae20505/ep.2.1639533863.m3u8"
