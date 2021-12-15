@@ -21,15 +21,16 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
   @override
   void initState() {
     super.initState();
-    player = Player(
+    this.player = Player(
       id: 123456,
       // pass the referer link to the player
       commandlineArguments: ['--http-referrer="${widget.refererLink}"'],
     );
 
-    player.open(
-      Media.network(widget.videoLink),
-    );
+    this.player.open(Media.network(widget.videoLink));
+
+    print('player.open: ${widget.videoLink}');
+    print('player.open: ${widget.refererLink}');
   }
 
   @override
@@ -40,10 +41,10 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
       ),
       body: Video(
         player: player,
-        height: 1920.0,
-        width: 1080.0,
+        height: 1080.0,
+        width: 1920.0,
         scale: 1.0, // default
-        showControls: false, // default
+        showControls: true, // default
       ),
     );
   }

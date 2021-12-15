@@ -78,7 +78,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/wakelock_macos/macos
 
 SPEC CHECKSUMS:
-  dart_vlc: 1dbcc77b4304a8826b1fceaa1eada263b02b2123
+  dart_vlc: de4ba59a6ded5a914a14fb026f7bcbe74c471dee
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
   firebase_core: 15a2e2ceb41e9eb44ad4d17ea9c033781902d71d
   FirebaseCore: c5aab092d9c4b8efea894946166b04c9d9ef0e68

@@ -8,6 +8,7 @@ import 'package:animego/core/parser/M3U8Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
+import 'package:animego/ui/page/VLCPlayerPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
@@ -274,14 +275,24 @@ class _EpisodePageState extends State<EpisodePage>
 
           if (m3u8Link != null && this.info?.currentEpisodeLink != null) {
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => VidePlayerPage(
-                  refererLink:
-                      global.getDomain() + this.info!.currentEpisodeLink!,
-                  videoLink: m3u8Link,
-                ),
-              ),
+              MaterialPageRoute(builder: (context) {
+                if (Util.isMobile()) {
+                  return VidePlayerPage(
+                    refererLink:
+                        global.getDomain() + this.info!.currentEpisodeLink!,
+                    videoLink: m3u8Link,
+                  );
+                } else {
+                  return VLCPlayerPage(
+                    refererLink:
+                        global.getDomain() + this.info!.currentEpisodeLink!,
+                    videoLink: m3u8Link,
+                  );
+                }
+              }),
             );
+            if (Util.isMobile()) {
+            } else {}
           }
         }
       }
