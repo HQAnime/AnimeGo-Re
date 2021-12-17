@@ -56,4 +56,4 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
   }
 }
 
-// ./VLC --verbose=2 --http-referrer="https://www26.gogoanimes.tv/da-wang-rao-ming-episode-2" "https://www14.anicdn.stream/videos/hls/aahwFXUEiUYEvZU4gN-yng/1639560677/176349/a17b6a2874a24391926da09ecae20505/ep.2.1639533863.m3u8"
+// ./VLC --verbose=2 --no-http-forward-cookies --http-referrer="https://en.gogoanimes.tv//platinum-end-episode-11" "https://www15.anicdn.stream/videos/hls/ZvWZSd-ZX-yuL6x0hqKg3Q/1639722726/176510/cefc259685d4189c9854211967ac53fd/ep.11.1639690732.m3u8"
