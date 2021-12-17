@@ -28,6 +28,8 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
     ],
   );
 
+  bool fixedVideo = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +40,16 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
         parse: true,
       );
 
-      player.open(media);
+      player.open(media, autoStart: true);
+
+      player.positionStream.listen((PositionState state) {
+        if (!fixedVideo && (state.position?.inSeconds ?? 0) > 0) {
+          fixedVideo = true;
+          // this will fix the video issue, don't know why
+          player.pause();
+          player.play();
+        }
+      });
     });
 
     print('video: ${widget.videoLink}');
@@ -47,7 +58,8 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
 
   @override
   void dispose() {
-    this.player.dispose();
+    player.stop();
+    player.dispose();
     super.dispose();
   }
 

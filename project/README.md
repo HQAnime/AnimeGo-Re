@@ -12,7 +12,7 @@ adb shell setprop debug.firebase.analytics.app .none.
 ~~~
 
 # Desktop
-VLC is used for desktop. It requires http-referrer and adaptive-use-access to be set correctly.
+VLC is used for desktop. It requires http-referrer and adaptive-use-access to be set correctly. The player has to be paused once before the video is showing correctly. 
 
 ## Linux
 Follow [this guide](https://docs.flutter.dev/desktop#additional-linux-requirements) to setup the environment. VLC is also required for dart_vlc.
