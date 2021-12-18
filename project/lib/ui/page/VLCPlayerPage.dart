@@ -75,5 +75,3 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
     );
   }
 }
-
-// ./VLC --verbose=2 --http-referrer="https://en.gogoanimes.tv//platinum-end-episode-11" "https://www15.anicdn.stream/videos/hls/ZvWZSd-ZX-yuL6x0hqKg3Q/1639722726/176510/cefc259685d4189c9854211967ac53fd/ep.11.1639690732.m3u8"
