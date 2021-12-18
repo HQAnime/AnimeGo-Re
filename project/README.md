@@ -2,6 +2,8 @@
 - Setup [flutter](https://flutter.dev/docs/get-started/install)
 - Run `flutter run` to install on your device
 
+Currently running on Flutter 2.8.1 and Dart 2.15.1.
+
 # Firebase
 It is important to enable debug mode. This way, all events are sent immediately.
 ~~~
@@ -22,3 +24,9 @@ sudo apt-get install vlc libvlc-dev clang cmake ninja-build pkg-config libgtk-3-
 ```
 
 NOTE: `DON'T install Flutter with snap`. Download the package or use git instead. It seems that `cmake` path is set to 3.10.2 no matter what and this breaks things.
+
+## Windows
+Visual Studio 2019 is required, [guide](https://docs.flutter.dev/desktop#additional-windows-requirements).
+
+## Mac OS
+Xcode is required (13 or 12), [guide](https://docs.flutter.dev/desktop#additional-macos-requirements).
