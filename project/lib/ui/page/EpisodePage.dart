@@ -1,5 +1,6 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/NativePlayer.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
@@ -274,6 +275,11 @@ class _EpisodePageState extends State<EpisodePage>
           final m3u8Link = parser.parseHTML(html);
 
           if (m3u8Link != null && this.info?.currentEpisodeLink != null) {
+            NativePlayer(
+                    link: m3u8Link,
+                    referrer:
+                        global.getDomain() + this.info!.currentEpisodeLink!)
+                .play(NativePlayerType.VLC);
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) {
                 if (Util.isMobile()) {
