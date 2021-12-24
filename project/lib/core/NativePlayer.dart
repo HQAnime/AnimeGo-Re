@@ -13,14 +13,17 @@ class NativePlayer {
     required this.referrer,
   });
 
-  play(NativePlayerType type) {
+  play(NativePlayerType type) async {
     switch (type) {
       case NativePlayerType.VLC:
-        Process.run('vlc', [
+        final output = await Process.runSync('vlc', [
           '--http-referrer="${referrer}"',
           '--adaptive-use-access',
           link,
         ]);
+
+        print(output.stderr);
+        print(output.stdout);
         break;
       default:
         break;
