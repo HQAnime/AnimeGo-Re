@@ -275,11 +275,6 @@ class _EpisodePageState extends State<EpisodePage>
           final m3u8Link = parser.parseHTML(html);
 
           if (m3u8Link != null && this.info?.currentEpisodeLink != null) {
-            NativePlayer(
-                    link: m3u8Link,
-                    referrer:
-                        global.getDomain() + this.info!.currentEpisodeLink!)
-                .play(NativePlayerType.VLC);
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) {
                 if (Util.isMobile()) {
