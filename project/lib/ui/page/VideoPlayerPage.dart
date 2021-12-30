@@ -2,24 +2,24 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class VidePlayerPage extends StatefulWidget {
-  const VidePlayerPage({
+class VideoPlayerPage extends StatefulWidget {
+  const VideoPlayerPage({
     Key? key,
-    required this.refererLink,
+    this.refererLink,
     required this.videoLink,
   }) : super(key: key);
 
-  final String refererLink;
-  final String videoLink;
+  final String? refererLink;
+  final String? videoLink;
 
   @override
-  _VidePlayerPageState createState() => _VidePlayerPageState();
+  _VideoPlayerPageState createState() => _VideoPlayerPageState();
 }
 
 /// Code is referenced from
 /// https://github.com/GeekyAnts/flick-video-player/blob/master/example/lib/default_player/default_player.dart
 
-class _VidePlayerPageState extends State<VidePlayerPage> {
+class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late FlickManager flickManager;
 
   @override
@@ -32,8 +32,8 @@ class _VidePlayerPageState extends State<VidePlayerPage> {
     /// Referer is needed in order to play the video properly
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(
-        widget.videoLink,
-        httpHeaders: {'Referer': widget.refererLink},
+        widget.videoLink!,
+        httpHeaders: {'Referer': widget.refererLink ?? ''},
       ),
       autoPlay: true,
       autoInitialize: true,

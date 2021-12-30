@@ -5,7 +5,7 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
-import 'package:animego/core/parser/M3U8Parser.dart';
+import 'package:animego/core/parser/MP4Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
@@ -270,30 +270,31 @@ class _EpisodePageState extends State<EpisodePage>
       if (link != null && title != null) {
         if (title.toLowerCase().contains('vidcdn')) {
           // this is the link we need to parse
-          final parser = M3U8Parser(link);
+          final parser = MP4Parser(link.replaceFirst('embedplus', 'download'));
           final html = await parser.downloadHTML();
-          final m3u8Link = parser.parseHTML(html);
+          final mp4s = parser.parseHTML(html);
 
-          if (m3u8Link != null && this.info?.currentEpisodeLink != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                if (Util.isMobile()) {
-                  return VidePlayerPage(
-                    refererLink:
-                        global.getDomain() + this.info!.currentEpisodeLink!,
-                    videoLink: m3u8Link,
-                  );
-                } else {
-                  return VLCPlayerPage(
-                    refererLink:
-                        global.getDomain() + this.info!.currentEpisodeLink!,
-                    videoLink: m3u8Link,
-                  );
-                }
-              }),
-            );
+          if (mp4s != null && mp4s.length > 0) {
             if (Util.isMobile()) {
-            } else {}
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => VideoPlayerPage(
+                    videoLink: mp4s.last.link,
+                  ),
+                ),
+              );
+            } else {
+              NativePlayer(link: mp4s.last.link!, referrer: '')
+                  .play(NativePlayerType.VLC);
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (context) => VLCPlayerPage(
+              //       refererLink: '',
+              //       videoLink: mp4s.last.link!,
+              //     ),
+              //   ),
+              // );
+            }
           }
         }
       }

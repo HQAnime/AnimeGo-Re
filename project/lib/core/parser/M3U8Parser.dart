@@ -2,6 +2,7 @@ import 'package:animego/core/parser/BasicParser.dart';
 import 'package:html/dom.dart';
 
 /// This parses the m3u8 link from the html
+@Deprecated('This is not used and functional anymore')
 class M3U8Parser extends BasicParser {
   M3U8Parser(
     String link,

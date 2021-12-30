@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:animego/core/Util.dart';
-
 enum NativePlayerType { VLC, MPV }
 
 class NativePlayer {
@@ -16,7 +14,7 @@ class NativePlayer {
   play(NativePlayerType type) async {
     switch (type) {
       case NativePlayerType.VLC:
-        final output = await Process.runSync('vlc', [
+        final output = await Process.runSync(_getCommand(type), [
           '--http-referrer="${referrer}"',
           '--adaptive-use-access',
           link,
@@ -27,6 +25,19 @@ class NativePlayer {
         break;
       default:
         break;
+    }
+  }
+
+  /// Get command depending on current system
+  _getCommand(NativePlayerType type) {
+    if (Platform.isLinux) {
+      return 'vlc';
+    } else if (Platform.isMacOS) {
+      return '/Applications/VLC.app/Contents/MacOS/VLC';
+    } else if (Platform.isWindows) {
+      return 'cmd';
+    } else {
+      return 'vlc';
     }
   }
 }
