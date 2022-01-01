@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/AnimeGenre.dart';
 import 'package:animego/ui/page/GenrePage.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
@@ -80,7 +81,7 @@ class GenreList extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  Util.platformPageRoute(
                     builder: (context) => GenrePage(genre: genre),
                   ),
                 );

@@ -128,7 +128,7 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
     // How to push to new screen?
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => screen),
+      Util.platformPageRoute(builder: (context) => screen),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/Util.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -129,7 +130,7 @@ class _SettingsState extends State<Settings> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute<void>(
+                Util.platformPageRoute(
                   builder: (BuildContext context) => LicensePage(
                     applicationName: 'AnimeGo',
                     applicationVersion: Global.appVersion,

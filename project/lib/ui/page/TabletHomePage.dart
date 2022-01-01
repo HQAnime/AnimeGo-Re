@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
@@ -57,7 +58,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
               tooltip: 'Search anime',
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
+                Util.platformPageRoute(
                   builder: (context) => SearchAnime(),
                   fullscreenDialog: true,
                 ),

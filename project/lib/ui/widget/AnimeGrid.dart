@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/parser/AnimeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
@@ -155,7 +156,8 @@ class _AnimeGridState extends State<AnimeGrid> {
                                   onTap: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) {
+                                      Util.platformPageRoute(
+                                          builder: (context) {
                                         if (info.isCategory())
                                           return AnimeDetailPage(info: info);
                                         return EpisodePage(info: info);

@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
 import 'package:animego/ui/widget/AnimeDrawer.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
@@ -31,7 +32,7 @@ class LastestAnime extends StatelessWidget {
         child: Icon(Icons.search),
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(
+          Util.platformPageRoute(
             builder: (context) => SearchAnime(),
             fullscreenDialog: true,
           ),

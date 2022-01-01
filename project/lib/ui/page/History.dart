@@ -1,5 +1,6 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class History extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      Util.platformPageRoute(
                         builder: (c) => EpisodePage(info: curr),
                       ),
                     );

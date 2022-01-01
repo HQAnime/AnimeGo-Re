@@ -43,4 +43,33 @@ class Util {
   Size screenSize() {
     return MediaQuery.of(context).size;
   }
+
+  static PageRoute platformPageRoute({
+    required Widget Function(BuildContext context) builder,
+    RouteSettings? settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+  }) {
+    if (isMobile()) {
+      return Util.platformPageRoute(
+        builder: builder,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+      );
+    } else {
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return builder(context);
+        },
+        transitionDuration: Duration(milliseconds: 300),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      );
+    }
+  }
 }

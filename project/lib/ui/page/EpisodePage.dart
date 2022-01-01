@@ -144,7 +144,7 @@ class _EpisodePageState extends State<EpisodePage>
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
+                    Util.platformPageRoute(
                       builder: (context) => AnimeDetailPage(info: info),
                     ),
                   );
@@ -159,7 +159,7 @@ class _EpisodePageState extends State<EpisodePage>
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
+                    Util.platformPageRoute(
                       builder: (context) => CategoryPage(
                         url: info?.categoryLink,
                         title: info?.category,
@@ -277,7 +277,7 @@ class _EpisodePageState extends State<EpisodePage>
           if (mp4s != null && mp4s.length > 0) {
             if (Util.isMobile()) {
               Navigator.of(context).push(
-                MaterialPageRoute(
+                Util.platformPageRoute(
                   builder: (context) => VideoPlayerPage(
                     videoLink: mp4s.last.link,
                   ),
@@ -287,7 +287,7 @@ class _EpisodePageState extends State<EpisodePage>
               NativePlayer(link: mp4s.last.link!, referrer: '')
                   .play(NativePlayerType.VLC);
               // Navigator.of(context).push(
-              //   MaterialPageRoute(
+              //   Util.platformPageRoute(
               //     builder: (context) => VLCPlayerPage(
               //       refererLink: '',
               //       videoLink: mp4s.last.link!,
@@ -310,7 +310,7 @@ class _EpisodePageState extends State<EpisodePage>
 
     Navigator.push(
       context,
-      MaterialPageRoute(
+      Util.platformPageRoute(
         builder: (context) => WatchAnimePage(video: e),
         fullscreenDialog: true,
       ),

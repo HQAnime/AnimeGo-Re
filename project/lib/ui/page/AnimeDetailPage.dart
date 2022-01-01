@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/AnimeDetailedInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/EpisodeSection.dart';
@@ -137,7 +138,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) {
+                              Util.platformPageRoute(builder: (context) {
                                 return CategoryPage(
                                   // The domain will be added later so DON'T ADD IT HERE
                                   url: info?.categoryLink,
@@ -182,7 +183,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) {
+                            Util.platformPageRoute(builder: (context) {
                               return GenrePage(genre: e);
                             }),
                           );
@@ -282,7 +283,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) {
+                  Util.platformPageRoute(builder: (context) {
                     return EpisodePage(info: e);
                   }),
                 );
