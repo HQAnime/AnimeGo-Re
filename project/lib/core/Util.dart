@@ -31,10 +31,14 @@ class Util {
 
   /// From https://stackoverflow.com/a/53912090
   bool isTablet() {
-    var size = MediaQuery.of(context).size;
-    var diagonal = sqrt(
-      (size.width * size.width) + (size.height * size.height),
-    );
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    // make sure it is not a long bar portait or landscape
+    if (height / width > 2.3) return false;
+
+    final diagonal = sqrt(width * width + height * height);
 
     var isTablet = diagonal > 1100.0;
     return isTablet;
