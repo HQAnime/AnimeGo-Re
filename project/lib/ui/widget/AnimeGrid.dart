@@ -41,8 +41,11 @@ class _AnimeGridState extends State<AnimeGrid> {
     super.initState();
     // Load some data here
     loadData();
-    this.controller = ScrollController()
-      ..addListener(() => this.loadMoreData());
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      this.controller = ScrollController(initialScrollOffset: 0)
+        ..addListener(() => this.loadMoreData());
+    });
   }
 
   @override
@@ -129,6 +132,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                 this.loadData(refresh: true);
               },
               child: Scrollbar(
+                controller: controller,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     final count =
