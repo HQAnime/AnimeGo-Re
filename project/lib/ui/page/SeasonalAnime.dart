@@ -1,15 +1,16 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
 /// SeasonalAnime class
-class SeasonalAnime extends StatefulWidget {
+class SeasonalAnime extends StatefulWidget implements Embeddable {
   const SeasonalAnime({
     Key? key,
-    this.showAppBar = true,
+    this.embedded = false,
   }) : super(key: key);
 
-  final bool showAppBar;
+  final bool embedded;
 
   @override
   _SeasonalAnimeState createState() => _SeasonalAnimeState();
@@ -28,7 +29,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.showAppBar ? AppBar(title: Text('New Season')) : null,
+      appBar: widget.embedded ? null : AppBar(title: Text('New Season')),
       body: Column(
         children: [
           buildPastSeasons(),

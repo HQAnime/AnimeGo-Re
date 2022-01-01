@@ -70,6 +70,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
   }
 
   Widget renderPage() {
+    /// TODO: maybe AnimeGrid shouldn't be used here???
     switch (code) {
       case PageCode.latest:
         return AnimeGrid(
@@ -77,7 +78,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
           key: Key(code.toString()),
         );
       case PageCode.seasonal:
-        return SeasonalAnime(showAppBar: false, key: Key(code.toString()));
+        return SeasonalAnime(embedded: true, key: Key(code.toString()));
       case PageCode.movie:
         return AnimeGrid(url: '/anime-movies.html', key: Key(code.toString()));
       case PageCode.popular:
@@ -85,11 +86,11 @@ class _TabletHomePageState extends State<TabletHomePage> {
       case PageCode.genre:
         return AnimeGrid(url: this.genre, key: Key(genre));
       case PageCode.history:
-        return History(showAppBar: false);
+        return History(embedded: true);
       case PageCode.favourite:
-        return Favourite(showAppBar: false);
+        return Favourite(embedded: true);
       case PageCode.setting:
-        return Settings(showAppBar: false);
+        return Settings(embedded: true);
       default:
         assert(false, 'Unknown page code');
         return Container();

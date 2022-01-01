@@ -1,19 +1,20 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
+import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
-class Settings extends StatefulWidget {
+class Settings extends StatefulWidget implements Embeddable {
   const Settings({
     Key? key,
-    this.showAppBar = true,
+    this.embedded = false,
   }) : super(key: key);
 
-  final bool showAppBar;
+  final bool embedded;
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -40,7 +41,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.showAppBar ? AppBar(title: Text('Settings')) : null,
+      appBar: widget.embedded ? null : AppBar(title: Text('Settings')),
       body: ListView(
         children: <Widget>[
           ListTile(

@@ -1,24 +1,25 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
+import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:flutter/material.dart';
 
 /// History class
-class History extends StatelessWidget {
+class History extends StatelessWidget implements Embeddable {
   const History({
     Key? key,
-    this.showAppBar = true,
+    this.embedded = false,
   }) : super(key: key);
 
-  final bool showAppBar;
+  final bool embedded;
 
   @override
   Widget build(BuildContext context) {
     FirebaseEventService().logUseHistoryList();
     final list = Global().historyList;
     return Scaffold(
-      appBar: showAppBar ? AppBar(title: Text('Watch History')) : null,
+      appBar: embedded ? null : AppBar(title: Text('Watch History')),
       body: list.length > 0
           ? ListView.builder(
               itemCount: list.length,
