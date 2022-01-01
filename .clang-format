@@ -1,0 +1,9 @@
+# Run manually to reformat a file:
+# clang-format -i --style=file <file>
+Language: Cpp
+BasedOnStyle: Chromium
+SortIncludes: true
+
+# 4 tabs by default
+IndentWidth: 4
+AccessModifierOffset: -4
