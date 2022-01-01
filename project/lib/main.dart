@@ -1,15 +1,13 @@
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/LastestAnime.dart';
-import 'package:animego/ui/page/TabletHomePage.dart';
-import 'package:dart_vlc/dart_vlc.dart';
+import 'package:animego/ui/page/tablet/TabletHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DartVLC.initialize();
   if (Util.isMobile()) {
     await Firebase.initializeApp();
   } else {}

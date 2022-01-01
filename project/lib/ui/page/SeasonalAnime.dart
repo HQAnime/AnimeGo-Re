@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 class SeasonalAnime extends StatefulWidget {
   const SeasonalAnime({
     Key? key,
+    this.showAppBar = true,
   }) : super(key: key);
+
+  final bool showAppBar;
 
   @override
   _SeasonalAnimeState createState() => _SeasonalAnimeState();
@@ -25,7 +28,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('New Season')),
+      appBar: widget.showAppBar ? AppBar(title: Text('New Season')) : null,
       body: Column(
         children: [
           buildPastSeasons(),

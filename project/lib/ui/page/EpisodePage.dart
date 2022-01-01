@@ -9,7 +9,6 @@ import 'package:animego/core/parser/MP4Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
-import 'package:animego/ui/page/VLCPlayerPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';

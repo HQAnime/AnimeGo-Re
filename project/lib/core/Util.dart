@@ -17,6 +17,11 @@ class Util {
     return Platform.isIOS || Platform.isAndroid;
   }
 
+  static bool isDesktop() {
+    if (kIsWeb) return true;
+    return Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+  }
+
   static bool isIOS() {
     if (kIsWeb) return false;
     return Platform.isIOS;
@@ -31,12 +36,13 @@ class Util {
 
   /// From https://stackoverflow.com/a/53912090
   bool isTablet() {
+    // Desktop is always true
+    if (isDesktop()) return true;
+
+    // This is for iPhone, iPad and Android phones & tablets
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-
-    // make sure it is not a long bar portait or landscape
-    if (height / width > 2.3) return false;
 
     final diagonal = sqrt(width * width + height * height);
 

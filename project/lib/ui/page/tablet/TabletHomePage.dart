@@ -2,6 +2,7 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
+import 'package:animego/ui/page/SeasonalAnime.dart';
 import 'package:animego/ui/page/Settings.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:animego/ui/widget/GenreList.dart';
@@ -76,7 +77,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
           key: Key(code.toString()),
         );
       case PageCode.seasonal:
-        return AnimeGrid(url: '/new-season.html', key: Key(code.toString()));
+        return SeasonalAnime(showAppBar: false, key: Key(code.toString()));
       case PageCode.movie:
         return AnimeGrid(url: '/anime-movies.html', key: Key(code.toString()));
       case PageCode.popular:
@@ -90,6 +91,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
       case PageCode.setting:
         return Settings(showAppBar: false);
       default:
+        assert(false, 'Unknown page code');
         return Container();
     }
   }
