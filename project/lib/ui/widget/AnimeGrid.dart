@@ -6,6 +6,7 @@ import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/parser/AnimeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
+import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/AnimeCard.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
@@ -164,6 +165,9 @@ class _AnimeGridState extends State<AnimeGrid> {
                                           builder: (context) {
                                         if (info.isCategory())
                                           return AnimeDetailPage(info: info);
+
+                                        if (Util(context).isTablet())
+                                          return TabletAnimePage(info: info);
                                         return EpisodePage(info: info);
                                       }),
                                     );

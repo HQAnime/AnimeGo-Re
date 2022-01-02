@@ -9,6 +9,7 @@ import 'package:animego/core/model/EpisodeSection.dart';
 import 'package:animego/core/model/EpisodelInfo.dart';
 import 'package:animego/core/parser/DetailedInfoParser.dart';
 import 'package:animego/core/parser/EpisodeListParser.dart';
+import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/page/GenrePage.dart';
@@ -18,13 +19,15 @@ import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeDetailPage class
-class AnimeDetailPage extends StatefulWidget {
+class AnimeDetailPage extends StatefulWidget implements Embeddable {
   const AnimeDetailPage({
     Key? key,
     required this.info,
+    this.embedded = false,
   }) : super(key: key);
 
   final BasicAnime? info;
+  final bool embedded;
 
   @override
   _AnimeDetailPageState createState() => _AnimeDetailPageState();
@@ -33,6 +36,7 @@ class AnimeDetailPage extends StatefulWidget {
 class _AnimeDetailPageState extends State<AnimeDetailPage> {
   bool loading = true;
   bool loadingEpisode = false;
+  bool error = false;
   String? currEpisode;
   AnimeDetailedInfo? info;
   List<EpisodeInfo> episodes = [];
@@ -53,6 +57,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       setState(() {
         this.loading = false;
         this.info = parser.parseHTML(body);
+        this.error = info?.status == null;
         this.isFavourite = global.isFavourite(widget.info);
 
         // Auto load if there is only one section
@@ -65,6 +70,17 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (error) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Unknown Error'),
+        ),
+        body: Center(
+          child: Text('Something went very wrong'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(loading ? 'Loading...' : info?.status ?? 'Error'),

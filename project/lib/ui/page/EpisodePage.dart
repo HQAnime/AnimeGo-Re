@@ -7,6 +7,7 @@ import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
 import 'package:animego/core/parser/MP4Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
+import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
@@ -18,13 +19,15 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// EpisodePage class
-class EpisodePage extends StatefulWidget {
+class EpisodePage extends StatefulWidget implements Embeddable {
   const EpisodePage({
     Key? key,
     required this.info,
+    this.embedded = false,
   }) : super(key: key);
 
   final BasicAnime? info;
+  final bool embedded;
 
   @override
   _EpisodePageState createState() => _EpisodePageState();
@@ -70,6 +73,7 @@ class _EpisodePageState extends State<EpisodePage>
               ? 'Loading...'
               : 'Episode ${info?.currentEpisode ?? '??'}',
         ),
+        automaticallyImplyLeading: widget.embedded ? false : true,
       ),
       body: LoadingSwitcher(
         loading: this.info == null,
@@ -134,21 +138,23 @@ class _EpisodePageState extends State<EpisodePage>
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              ListTile(
-                title: Text('Anime Info', textAlign: TextAlign.center),
-                subtitle: Text(
-                  info?.name ?? 'No information',
-                  textAlign: TextAlign.center,
-                ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    Util.platformPageRoute(
-                      builder: (context) => AnimeDetailPage(info: info),
+              widget.embedded
+                  ? SizedBox.shrink()
+                  : ListTile(
+                      title: Text('Anime Info', textAlign: TextAlign.center),
+                      subtitle: Text(
+                        info?.name ?? 'No information',
+                        textAlign: TextAlign.center,
+                      ),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          Util.platformPageRoute(
+                            builder: (context) => AnimeDetailPage(info: info),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
               ListTile(
                 title: Text('Category', textAlign: TextAlign.center),
                 subtitle: Text(
@@ -156,7 +162,7 @@ class _EpisodePageState extends State<EpisodePage>
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     Util.platformPageRoute(
                       builder: (context) => CategoryPage(
