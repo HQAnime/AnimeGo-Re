@@ -44,6 +44,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
   bool isFavourite = false;
 
+  ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -119,6 +121,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       );
     } else {
       return ListView(
+        controller: _scrollController,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -185,7 +188,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               ],
             ),
           ),
+          Divider(),
           SearchAnimeButton(name: widget.info?.name),
+          Divider(),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: ListTile(
@@ -193,6 +198,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               subtitle: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 4,
+                runSpacing: 4,
                 children: info?.genre.map((e) {
                       return ActionChip(
                         label: Text(e.getAnimeGenreName()),
@@ -235,6 +241,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                         child: Text(
                           '${e.episodeStart} - ${e.episodeEnd}',
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             decoration: currEpisode == e.episodeStart
                                 ? TextDecoration.underline
                                 : TextDecoration.none,
@@ -288,23 +295,31 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         padding: const EdgeInsets.only(bottom: 16),
         child: Wrap(
           alignment: WrapAlignment.center,
-          spacing: 8,
+          spacing: 4,
+          runSpacing: 4,
           children: this.episodes.map((e) {
-            return ElevatedButton(
-              style: ButtonStyle(
-                textStyle: MaterialStateProperty.all(
-                  TextStyle(color: Colors.white),
+            return Padding(
+              padding: const EdgeInsets.all(4),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                    TextStyle(color: Colors.white),
+                  ),
                 ),
+                onPressed: () {
+                  if (widget.embedded) {
+                    // Pass this episode to the parent
+                  } else {
+                    Navigator.push(
+                      context,
+                      Util.platformPageRoute(builder: (context) {
+                        return EpisodePage(info: e);
+                      }),
+                    );
+                  }
+                },
+                child: Text(e.name ?? '??'),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  Util.platformPageRoute(builder: (context) {
-                    return EpisodePage(info: e);
-                  }),
-                );
-              },
-              child: Text(e.name ?? '??'),
             );
           }).toList(growable: false),
         ),

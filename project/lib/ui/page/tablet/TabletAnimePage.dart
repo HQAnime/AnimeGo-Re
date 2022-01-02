@@ -1,5 +1,6 @@
 import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/EpisodelInfo.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
@@ -19,6 +20,19 @@ class TabletAnimePage extends StatefulWidget {
 }
 
 class _TabletAnimePageState extends State<TabletAnimePage> {
+  BasicAnime? animeDetail;
+  BasicAnime? episode;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.info.isCategory) {
+      animeDetail = widget.info;
+    } else if (widget.info.isEpisode) {
+      episode = widget.info;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,21 +40,52 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
         children: [
           Flexible(
             flex: 1,
-            child: AnimeDetailPage(
-              info: widget.info,
-              embedded: true,
-            ),
+            child: _renderAnimeDetail(),
           ),
           Flexible(
             flex: 1,
-            // TODO: need to send data from this widget to AnimeDetailPage
-            child: EpisodePage(
-              info: widget.info,
-              embedded: true,
-            ),
+            // need to send data back here
+            child: _renderEpisode(),
           ),
         ],
       ),
     );
+  }
+
+  _renderAnimeDetail() {
+    if (animeDetail == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    return AnimeDetailPage(
+      info: animeDetail,
+      embedded: true,
+    );
+  }
+
+  _renderEpisode() {
+    if (episode == null) {
+      return Container();
+    }
+
+    return EpisodePage(
+      info: episode,
+      embedded: true,
+      onEpisodeInfoLoaded: onUpdateAnimeDetail,
+    );
+  }
+
+  /// When a new episode is selected from anime detail, update the episode page
+  onUpdateEpisode(EpisodeInfo? info) {
+    setState(() {});
+  }
+
+  /// When the episode page is loaded, load the anime detail page
+  onUpdateAnimeDetail(OneEpisodeInfo? info) {
+    setState(() {
+      this.animeDetail = info;
+    });
   }
 }

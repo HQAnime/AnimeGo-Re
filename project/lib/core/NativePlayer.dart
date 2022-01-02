@@ -1,31 +1,24 @@
 import 'dart:io';
 
-enum NativePlayerType { VLC, MPV }
+enum NativePlayerType { VLC }
 
 class NativePlayer {
-  final String referrer;
-  final String link;
+  final String? referrer;
+  final String? link;
 
   NativePlayer({
     required this.link,
-    required this.referrer,
+    this.referrer,
   });
 
-  play(NativePlayerType type) async {
-    switch (type) {
-      case NativePlayerType.VLC:
-        final output = await Process.runSync(_getCommand(type), [
-          '--http-referrer="${referrer}"',
-          '--adaptive-use-access',
-          link,
-        ]);
+  play() async {
+    final output = await Process.runSync(_getCommand(NativePlayerType.VLC), [
+      '--http-referrer="${referrer}"',
+      '--adaptive-use-access',
+      link ?? '',
+    ]);
 
-        print(output.stderr);
-        print(output.stdout);
-        break;
-      default:
-        break;
-    }
+    print(output.stderr);
   }
 
   /// Get command depending on current system

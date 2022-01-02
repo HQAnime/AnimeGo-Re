@@ -3,6 +3,7 @@ import 'package:animego/core/Global.dart';
 import 'package:animego/core/NativePlayer.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/MP4Info.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
 import 'package:animego/core/parser/MP4Parser.dart';
@@ -24,10 +25,12 @@ class EpisodePage extends StatefulWidget implements Embeddable {
     Key? key,
     required this.info,
     this.embedded = false,
+    this.onEpisodeInfoLoaded = null,
   }) : super(key: key);
 
   final BasicAnime? info;
   final bool embedded;
+  final void Function(OneEpisodeInfo?)? onEpisodeInfoLoaded;
 
   @override
   _EpisodePageState createState() => _EpisodePageState();
@@ -39,10 +42,15 @@ class _EpisodePageState extends State<EpisodePage>
   OneEpisodeInfo? info;
   final global = Global();
   String? fomattedName;
+  List<MP4Info> mp4List = [];
+  String? downloadLink;
 
   @override
   void initState() {
     super.initState();
+    // embeded must have the callback method
+    assert(widget.embedded ^ (widget.onEpisodeInfoLoaded != null) == false,
+        'embedded must have the onEpisodeInfoLoaded method');
     this.loadEpisodeInfo(widget.info?.link);
 
     FirebaseEventService().logUseEpisode();
@@ -57,10 +65,16 @@ class _EpisodePageState extends State<EpisodePage>
     parser.downloadHTML().then((body) {
       setState(() {
         this.info = parser.parseHTML(body);
+        if (widget.onEpisodeInfoLoaded != null) {
+          widget.onEpisodeInfoLoaded!(this.info);
+        }
+
         this.info?.currentEpisodeLink = link;
         this.fomattedName =
             info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
       });
+
+      getMP4List();
     });
   }
 
@@ -177,14 +191,23 @@ class _EpisodePageState extends State<EpisodePage>
                 title: Text('Server List', textAlign: TextAlign.center),
                 subtitle: Center(
                   child: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
                     alignment: WrapAlignment.center,
                     children: renderServerList() ?? [],
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () => parseM3U8Link(),
-                child: Text('Text video parsing'),
+              ListTile(
+                title: Text('Watch Directly', textAlign: TextAlign.center),
+                subtitle: Center(
+                  child: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    alignment: WrapAlignment.center,
+                    children: renderMP4List() ?? [],
+                  ),
+                ),
               ),
               Text(
                 'Please note that this app does not\nhave any controls over these sources',
@@ -233,6 +256,7 @@ class _EpisodePageState extends State<EpisodePage>
                       content: Wrap(
                         alignment: WrapAlignment.spaceAround,
                         spacing: 2,
+                        runSpacing: 2,
                         children: [
                           ElevatedButton(
                             onPressed: () => openWithOtherApps(e),
@@ -268,38 +292,54 @@ class _EpisodePageState extends State<EpisodePage>
     }).toList();
   }
 
-  parseM3U8Link() async {
+  List<Widget>? renderMP4List() {
+    return this.mp4List.map((e) {
+      return Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: ActionChip(
+          onPressed: () {
+            if (Util.isMobile()) {
+              Navigator.of(context).push(
+                Util.platformPageRoute(builder: (context) {
+                  return VideoPlayerPage(
+                    videoLink: e.link,
+                  );
+                }),
+              );
+            } else {
+              NativePlayer(link: e.link).play();
+            }
+          },
+          label: Text(e.name ?? 'Unknown'),
+        ),
+      );
+    }).toList();
+  }
+
+  getMP4List() async {
     for (VideoServer server in this.info?.servers ?? []) {
       final link = server.link;
       final title = server.title;
       if (link != null && title != null) {
-        if (title.toLowerCase().contains('vidcdn')) {
+        final titleLower = title.toLowerCase();
+        if (titleLower.contains('streaming') || titleLower.contains('vidcdn')) {
           // this is the link we need to parse
-          final parser = MP4Parser(link.replaceFirst('embedplus', 'download'));
+          setState(() {
+            if (link.contains('embedplus'))
+              downloadLink = link.replaceFirst('embedplus', 'download');
+            else if (link.contains('streaming'))
+              downloadLink = link.replaceFirst('streaming', 'download');
+          });
+          print('Download link: $downloadLink');
+
+          final parser = MP4Parser(downloadLink ?? '');
           final html = await parser.downloadHTML();
           final mp4s = parser.parseHTML(html);
 
           if (mp4s != null && mp4s.length > 0) {
-            if (Util.isMobile()) {
-              Navigator.of(context).push(
-                Util.platformPageRoute(
-                  builder: (context) => VideoPlayerPage(
-                    videoLink: mp4s.last.link,
-                  ),
-                ),
-              );
-            } else {
-              NativePlayer(link: mp4s.last.link!, referrer: '')
-                  .play(NativePlayerType.VLC);
-              // Navigator.of(context).push(
-              //   Util.platformPageRoute(
-              //     builder: (context) => VLCPlayerPage(
-              //       refererLink: '',
-              //       videoLink: mp4s.last.link!,
-              //     ),
-              //   ),
-              // );
-            }
+            setState(() {
+              this.mp4List = mp4s;
+            });
           }
         }
       }
