@@ -307,7 +307,29 @@ class _EpisodePageState extends State<EpisodePage>
                 }),
               );
             } else {
-              NativePlayer(link: e.link).play();
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (ctx) => AlertDialog(
+                  title: Text("AnimeGo is paused"),
+                  content: Text(
+                    "Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.",
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("Continue"),
+                    ),
+                  ],
+                ),
+              );
+
+              Future.delayed(Duration(milliseconds: 300), () {
+                // Add a short delay to make sure the alert is shown
+                NativePlayer(link: e.link).play();
+              });
             }
           },
           label: Text(e.name ?? 'Unknown'),

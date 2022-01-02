@@ -54,8 +54,14 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
 
   _renderAnimeDetail() {
     if (animeDetail == null) {
-      return Center(
-        child: CircularProgressIndicator(),
+      // The AppBar here is needed to go back to the previous page
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Loading...'),
+        ),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     }
 
@@ -67,6 +73,7 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
 
   _renderEpisode() {
     if (episode == null) {
+      // TODO: maybe add an AppBar here as well? I don't know
       return Container();
     }
 
