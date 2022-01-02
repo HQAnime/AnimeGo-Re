@@ -22,7 +22,7 @@ class AnimeInfo extends BasicAnime {
     this.link = nameLink?.attributes['href'];
 
     // Category has a released class while episode only has the episode
-    if (isCategory()) {
+    if (isCategory) {
       final releaseClass = e.getElementsByClassName('released').first;
       this.episode =
           releaseClass.nodes[0].text?.trim().replaceAll('Released: ', '');
@@ -32,12 +32,9 @@ class AnimeInfo extends BasicAnime {
     }
   }
 
-  /// Category contains all available episodes
-  bool isCategory() => link?.contains('category') ?? false;
-
   /// Returns either episode or the name of name
   String? getTitle() {
-    if (isCategory()) return this.name;
+    if (isCategory) return this.name;
     return this.episode;
   }
 

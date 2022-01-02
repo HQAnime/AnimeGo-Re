@@ -22,4 +22,12 @@ class BasicAnime {
   String toString() {
     return 'name: $name, link: $link';
   }
+
+  bool get isEpisode {
+    return link?.contains('episode') ?? false;
+  }
+
+  bool get isCategory {
+    return link?.contains('category') ?? false;
+  }
 }

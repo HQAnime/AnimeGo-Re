@@ -1,5 +1,6 @@
 import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
+import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
           ),
           Flexible(
             flex: 1,
+            // TODO: need to send data from this widget to AnimeDetailPage
             child: EpisodePage(
               info: widget.info,
               embedded: true,
