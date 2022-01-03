@@ -230,36 +230,49 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           ),
           Wrap(
             alignment: WrapAlignment.center,
-            children: info?.episodes.map((e) {
-                  return Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: InkWell(
-                      onTap: this.loadingEpisode
-                          ? null
-                          : () {
-                              loadEpisode(e);
-                            },
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Text(
-                          '${e.episodeStart} - ${e.episodeEnd}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            decoration: currEpisode == e.episodeStart
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(growable: false) ??
-                [Text('No episodes')],
+            children: renderEpisodes(),
           ),
           renderEpisodeList(context),
         ],
       );
     }
+  }
+
+  List<Widget> renderEpisodes() {
+    if (info == null) return [];
+    // This is for new animes where they haven't aired yet
+    if (info!.episodes.length == 0)
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('No episodes'),
+        )
+      ];
+
+    return info!.episodes.map((e) {
+      return Padding(
+        padding: const EdgeInsets.all(2),
+        child: InkWell(
+          onTap: this.loadingEpisode
+              ? null
+              : () {
+                  loadEpisode(e);
+                },
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Text(
+              '${e.episodeStart} - ${e.episodeEnd}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: currEpisode == e.episodeStart
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList(growable: false);
   }
 
   void loadEpisode(EpisodeSection? e) {

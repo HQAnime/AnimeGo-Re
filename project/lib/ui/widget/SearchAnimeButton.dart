@@ -19,7 +19,14 @@ class SearchAnimeButton extends StatelessWidget {
       children: <Widget>[
         AnimeFlatButton(
           onPressed: () {
-            launch('https://www.google.com/search?q=$name');
+            launch(
+              Uri(
+                scheme: 'https',
+                host: 'www.google.com',
+                path: '/search',
+                queryParameters: {'q': name},
+              ).toString(),
+            );
             FirebaseEventService().logUseGoogle();
           },
           child: Text(
@@ -28,7 +35,14 @@ class SearchAnimeButton extends StatelessWidget {
         ),
         AnimeFlatButton(
           onPressed: () {
-            launch('https://duckduckgo.com/?q=$name');
+            launch(
+              Uri(
+                scheme: 'https',
+                host: 'www.duckduckgo.com',
+                path: '/',
+                queryParameters: {'q': name},
+              ).toString(),
+            );
             FirebaseEventService().logUseGoogle();
           },
           child: Text('DuckDuckGo'),

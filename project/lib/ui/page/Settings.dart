@@ -112,9 +112,7 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
-            onTap: () => launch(
-              Util.isDesktop() ? Global.emailDesktop : Global.email,
-            ),
+            onTap: () => launch(Global.email),
           ),
           ListTile(
             onTap: () {

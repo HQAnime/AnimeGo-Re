@@ -20,10 +20,13 @@ class Global {
   static final latestRelease =
       'https://github.com/HenryQuan/AnimeGo/release/latest';
 
-  /// TODO: Subject is not yet supported
-  static final emailDesktop = 'mailto:development.henryquan@gmail.com';
-  static final email =
-      'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
+  static final email = Uri(
+    scheme: 'mailto',
+    path: 'development.henryquan@gmail.com',
+    queryParameters: {
+      'subject': '[AnimeGo|$appVersion]',
+    },
+  ).toString();
 
   /// Whether the app has been init
   bool _hasInit = false;
