@@ -1,3 +1,4 @@
+import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/EpisodelInfo.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
@@ -32,6 +33,8 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
     } else if (widget.info?.isEpisode ?? false) {
       episode = widget.info;
     }
+
+    FirebaseEventService().logUseTabletPage();
   }
 
   @override

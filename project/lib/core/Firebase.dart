@@ -91,4 +91,12 @@ class FirebaseEventService {
   void logWatchWithOthers() {
     _logSimpleEvent('watch_with_others');
   }
+
+  void logWatchDirectly() {
+    _logSimpleEvent('watch_directly');
+  }
+
+  void logUseTabletPage() {
+    _logSimpleEvent('tablet_page');
+  }
 }

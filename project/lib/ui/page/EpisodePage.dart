@@ -330,6 +330,7 @@ class _EpisodePageState extends State<EpisodePage>
         padding: const EdgeInsets.only(top: 4),
         child: ActionChip(
           onPressed: () {
+            FirebaseEventService().logWatchDirectly();
             if (Util.isMobile()) {
               Navigator.of(context).push(
                 Util.platformPageRoute(builder: (context) {
