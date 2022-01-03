@@ -22,7 +22,8 @@ class MP4Parser extends BasicParser {
         var name = '';
         // we need the second one and the first should be `Download`
         if (description.length > 1 && description[0] == 'Download') {
-          name = description[1];
+          // (360P - MP4) -> 360P
+          name = description[1].split(' - ').first.replaceFirst('(', '');
         }
 
         mp4s.add(MP4Info(name, link));

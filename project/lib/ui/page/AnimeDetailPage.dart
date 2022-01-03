@@ -13,7 +13,6 @@ import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/page/GenrePage.dart';
-import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +23,12 @@ class AnimeDetailPage extends StatefulWidget implements Embeddable {
     Key? key,
     required this.info,
     this.embedded = false,
+    this.onEpisodeSelected = null,
   }) : super(key: key);
 
   final BasicAnime? info;
   final bool embedded;
+  final void Function(EpisodeInfo?)? onEpisodeSelected;
 
   @override
   _AnimeDetailPageState createState() => _AnimeDetailPageState();
@@ -49,6 +50,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   @override
   void initState() {
     super.initState();
+    // embeded must have the callback method
+    assert(widget.embedded ^ (widget.onEpisodeSelected != null) == false,
+        'embedded must have the onEpisodeSelected method');
 
     FirebaseEventService().logUseAnimeInfo();
 
@@ -308,6 +312,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                 onPressed: () {
                   if (widget.embedded) {
                     // Pass this episode to the parent
+                    if (widget.onEpisodeSelected != null) {
+                      widget.onEpisodeSelected!(e);
+                    }
                   } else {
                     Navigator.push(
                       context,

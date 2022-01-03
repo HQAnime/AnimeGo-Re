@@ -13,7 +13,7 @@ class TabletAnimePage extends StatefulWidget {
     required this.info,
   }) : super(key: key);
 
-  final BasicAnime info;
+  final BasicAnime? info;
 
   @override
   _TabletAnimePageState createState() => _TabletAnimePageState();
@@ -26,9 +26,11 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
   @override
   void initState() {
     super.initState();
-    if (widget.info.isCategory) {
+    assert(widget.info != null, 'Anime info must not be null');
+
+    if (widget.info?.isCategory ?? false) {
       animeDetail = widget.info;
-    } else if (widget.info.isEpisode) {
+    } else if (widget.info?.isEpisode ?? false) {
       episode = widget.info;
     }
   }
@@ -68,16 +70,19 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
     return AnimeDetailPage(
       info: animeDetail,
       embedded: true,
+      onEpisodeSelected: onUpdateEpisode,
     );
   }
 
   _renderEpisode() {
     if (episode == null) {
-      // TODO: maybe add an AppBar here as well? I don't know
-      return Container();
+      return Center(
+        child: Text('Pick an episode from the list'),
+      );
     }
 
     return EpisodePage(
+      key: Key(episode?.link ?? ''),
       info: episode,
       embedded: true,
       onEpisodeInfoLoaded: onUpdateAnimeDetail,
@@ -86,7 +91,10 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
 
   /// When a new episode is selected from anime detail, update the episode page
   onUpdateEpisode(EpisodeInfo? info) {
-    setState(() {});
+    if (info?.link == episode?.link) return;
+    setState(() {
+      this.episode = info;
+    });
   }
 
   /// When the episode page is loaded, load the anime detail page

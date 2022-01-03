@@ -3,6 +3,7 @@ import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
+import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:flutter/material.dart';
 
 /// Favourite class
@@ -30,9 +31,11 @@ class Favourite extends StatelessWidget implements Embeddable {
                   onTap: () {
                     Navigator.push(
                       context,
-                      Util.platformPageRoute(
-                        builder: (c) => AnimeDetailPage(info: curr),
-                      ),
+                      Util.platformPageRoute(builder: (c) {
+                        if (Util(context).isTablet())
+                          return TabletAnimePage(info: curr);
+                        return AnimeDetailPage(info: curr);
+                      }),
                     );
                   },
                 );

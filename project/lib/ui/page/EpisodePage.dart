@@ -13,6 +13,7 @@ import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
+import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:android_intent/android_intent.dart';
@@ -165,6 +166,7 @@ class _EpisodePageState extends State<EpisodePage>
                         Navigator.pushReplacement(
                           context,
                           Util.platformPageRoute(
+                            // this is only visible on mobile so no need to go to tablet page
                             builder: (context) => AnimeDetailPage(info: info),
                           ),
                         );
@@ -378,19 +380,26 @@ class _EpisodePageState extends State<EpisodePage>
             if (link.contains('embedplus'))
               downloadLink = link.replaceFirst('embedplus', 'download');
             else if (link.contains('streaming'))
-              downloadLink = link.replaceFirst('streaming', 'download');
+              downloadLink = link.replaceFirst('streaming.php', 'download');
           });
           print('Download link: $downloadLink');
 
           final parser = MP4Parser(downloadLink ?? '');
           final html = await parser.downloadHTML();
-          final mp4s = parser.parseHTML(html);
+          if (html == null) {
+            // This is probably a timeout, try another one if possible
+            continue;
+          }
 
+          final mp4s = parser.parseHTML(html);
           if (mp4s != null && mp4s.length > 0) {
             setState(() {
               this.mp4List = mp4s;
             });
           }
+
+          // there are multiple sources so need to early quit
+          break;
         }
       }
     }

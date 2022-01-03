@@ -163,8 +163,11 @@ class _AnimeGridState extends State<AnimeGrid> {
                                       context,
                                       Util.platformPageRoute(
                                           builder: (context) {
-                                        if (info.isCategory)
+                                        if (info.isCategory) {
+                                          if (Util(context).isTablet())
+                                            return TabletAnimePage(info: info);
                                           return AnimeDetailPage(info: info);
+                                        }
 
                                         if (Util(context).isTablet())
                                           return TabletAnimePage(info: info);
