@@ -1,4 +1,3 @@
-import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/EpisodelInfo.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';

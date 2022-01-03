@@ -10,6 +10,7 @@ abstract class BasicAnimeList {
   }
 
   void add(BasicAnime? anime) {
+    if (anime == null) return;
     if (contains(anime)) return;
     list.insert(0, anime);
   }

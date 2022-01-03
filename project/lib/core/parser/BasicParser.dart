@@ -13,7 +13,7 @@ abstract class BasicParser {
 
   BasicParser(String link) {
     this._link = link;
-    print(this._link);
+    print('${this.runtimeType} - ${this._link}');
   }
 
   /// Download HTML string from link

@@ -4,7 +4,7 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Settings class
@@ -25,6 +25,7 @@ class _SettingsState extends State<Settings> {
   bool? hideDUB;
   late String input;
   TextEditingController? controller;
+  final scrollController = ScrollController();
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       appBar: widget.embedded ? null : AppBar(title: Text('Settings')),
       body: ListView(
+        controller: scrollController,
         children: <Widget>[
           ListTile(
             isThreeLine: true,
@@ -110,7 +112,9 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
-            onTap: () => launch(Global.email),
+            onTap: () => launch(
+              Util.isDesktop() ? Global.emailDesktop : Global.email,
+            ),
           ),
           ListTile(
             onTap: () {
@@ -146,9 +150,29 @@ class _SettingsState extends State<Settings> {
             subtitle: Text(Global.appVersion),
             onTap: () => global.checkForUpdate(context, force: true),
           ),
+          ...renderExtra(),
         ],
       ),
     );
+  }
+
+  /// Render different UI based on Desktop or Mobile
+  List<Widget> renderExtra() {
+    if (Util.isDesktop()) {
+      return [
+        Divider(),
+        ListTile(
+          title: Text('VLC media player'),
+          onTap: () => launch('https://www.videolan.org/vlc/'),
+        ),
+        ListTile(
+          title: Text('MPV player'),
+          onTap: () => launch('https://mpv.io/'),
+        ),
+      ];
+    } else {
+      return [];
+    }
   }
 
   /// Hides dub

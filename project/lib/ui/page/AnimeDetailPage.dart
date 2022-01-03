@@ -254,7 +254,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                     ),
                   );
                 }).toList(growable: false) ??
-                [],
+                [Text('No episodes')],
           ),
           renderEpisodeList(context),
         ],

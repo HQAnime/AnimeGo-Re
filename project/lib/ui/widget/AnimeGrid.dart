@@ -86,17 +86,21 @@ class _AnimeGridState extends State<AnimeGrid> {
       if (global.hideDUB ?? false) moreData.removeWhere((e) => e.isDUB);
 
       // Append more data
-      setState(() {
-        this.loading = false;
-        // If refresh, just reset the list to more data
-        if (refresh)
-          this.list = moreData;
-        else
-          this.list += moreData;
-        // If more data is emptp, we have reached the end
-        this.canLoadMore = moreData.length > 0;
-        this.showIndicator = false;
-      });
+      if (mounted) {
+        setState(() {
+          this.loading = false;
+          // If refresh, just reset the list to more data
+          if (refresh)
+            this.list = moreData;
+          else
+            this.list += moreData;
+          // If more data is emptp, we have reached the end
+          this.canLoadMore = moreData.length > 0;
+          this.showIndicator = false;
+        });
+      } else {
+        print('WARNING: AnimeGrid is setting state after the view is disposed');
+      }
     });
   }
 

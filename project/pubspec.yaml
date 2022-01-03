@@ -36,7 +36,7 @@ dependencies:
   # video player
   video_player: ^2.2.7
   flick_video_player: ^0.3.1
-  share: ^2.0.0
+  share_plus: ^3.0.4
   firebase_analytics: ^8.0.4
 
   # The following adds the Cupertino Icons font to your application.

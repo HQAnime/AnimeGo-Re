@@ -19,6 +19,9 @@ class Global {
   static final github = 'https://github.com/HenryQuan/AnimeGo';
   static final latestRelease =
       'https://github.com/HenryQuan/AnimeGo/release/latest';
+
+  /// TODO: Subject is not yet supported
+  static final emailDesktop = 'mailto:development.henryquan@gmail.com';
   static final email =
       'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
 
@@ -52,7 +55,8 @@ class Global {
   List<BasicAnime?> get historyList => _history.list;
   bool hasWatched(BasicAnime? anime) => _history.contains(anime);
   void clearAll() => prefs.setString(watchHistory, 'null');
-  void addToHistory(BasicAnime anime) {
+  void addToHistory(BasicAnime? anime) {
+    if (anime == null) return;
     print('Adding ${anime.toString()} to history');
     _history.add(anime);
     // Save

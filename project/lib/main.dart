@@ -19,23 +19,27 @@ class MyApp extends StatelessWidget {
   final lightTheme = ThemeData(
     primarySwatch: Colors.deepOrange,
     appBarTheme: AppBarTheme(
-      brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
   );
 
   // TODO: find a better solution, this is too manual
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: Colors.orange,
-    accentColor: Colors.orange,
     appBarTheme: AppBarTheme(
-      brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(Colors.orange),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
+    ),
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.orange,
+      brightness: Brightness.dark,
+    ).copyWith(
+      secondary: Colors.orange,
     ),
   );
 

@@ -13,7 +13,6 @@ import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
-import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:android_intent/android_intent.dart';
@@ -301,7 +300,10 @@ class _EpisodePageState extends State<EpisodePage>
                   openInAppPlayer(e);
                 }
               } else {
-                if (e.link != null) launch(e.link!);
+                if (e.link == null) {
+                  launch(e.link!);
+                  _addToHistory();
+                }
               }
             },
             label: Text(e.title ?? 'Unknown'),
@@ -348,6 +350,7 @@ class _EpisodePageState extends State<EpisodePage>
                   actions: [
                     TextButton(
                       onPressed: () {
+                        _addToHistory();
                         Navigator.of(context).pop();
                       },
                       child: Text("Continue"),
