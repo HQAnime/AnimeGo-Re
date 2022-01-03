@@ -152,8 +152,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           'Episode(s)', info?.lastEpisode ?? 'Unkown'),
                       ListTile(
                         title: Text('Category', textAlign: TextAlign.center),
-                        // TODO: This button is very hidden so the user may not know about this
-                        subtitle: AnimeFlatButton(
+                        subtitle: ActionChip(
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
@@ -166,7 +165,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                               }),
                             );
                           },
-                          child: Text(
+                          label: Text(
                             info?.category ?? 'Unknown',
                             textAlign: TextAlign.center,
                           ),

@@ -59,6 +59,7 @@ class _EpisodePageState extends State<EpisodePage>
   loadEpisodeInfo(String? link) {
     setState(() {
       info = null;
+      mp4List = [];
     });
 
     final parser = OneEpisodeParser(global.getDomain() + (link ?? ''));
@@ -187,37 +188,52 @@ class _EpisodePageState extends State<EpisodePage>
                   );
                 },
               ),
-              ListTile(
-                title: Text('Server List', textAlign: TextAlign.center),
-                subtitle: Center(
-                  child: Wrap(
-                    spacing: 4,
-                    runSpacing: 4,
-                    alignment: WrapAlignment.center,
-                    children: renderServerList() ?? [],
+              Divider(),
+              Row(
+                // move Watch Directly section up
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      title: Text('Server List', textAlign: TextAlign.center),
+                      subtitle: Center(
+                        child: Column(
+                          children: renderServerList(),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              ListTile(
-                title: Text('Watch Directly', textAlign: TextAlign.center),
-                subtitle: Center(
-                  child: Wrap(
-                    spacing: 4,
-                    runSpacing: 4,
-                    alignment: WrapAlignment.center,
-                    children: renderMP4List() ?? [],
+                  Expanded(
+                    child: ListTile(
+                      title: Text(
+                        'Watch Directly',
+                        textAlign: TextAlign.center,
+                      ),
+                      subtitle: Center(
+                        child: Column(
+                          children: renderMP4List(),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Text(
-                'Please note that this app does not\nhave any controls over these sources',
-                textAlign: TextAlign.center,
+                ],
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Divider(),
               ),
               buildWatchStatus(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Divider(),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Please note that this app does not have any controls over these sources',
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
@@ -235,10 +251,11 @@ class _EpisodePageState extends State<EpisodePage>
     );
   }
 
-  List<Widget>? renderServerList() {
-    return this.info?.servers.map((e) {
+  List<Widget> renderServerList() {
+    if (info == null) return [];
+    return info!.servers.map((e) {
       return Padding(
-        padding: const EdgeInsets.only(right: 8),
+        padding: const EdgeInsets.only(top: 4),
         child: Tooltip(
           message: 'Watch on ${e.title} server',
           child: ActionChip(
@@ -292,10 +309,21 @@ class _EpisodePageState extends State<EpisodePage>
     }).toList();
   }
 
-  List<Widget>? renderMP4List() {
+  List<Widget> renderMP4List() {
+    if (mp4List.length == 0) {
+      return [
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ];
+    }
+
     return this.mp4List.map((e) {
       return Padding(
-        padding: const EdgeInsets.only(right: 8),
+        padding: const EdgeInsets.only(top: 4),
         child: ActionChip(
           onPressed: () {
             if (Util.isMobile()) {

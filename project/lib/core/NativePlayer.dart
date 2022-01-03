@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:url_launcher/url_launcher.dart';
+
 enum NativePlayerType { VLC }
 
 class NativePlayer {
@@ -12,13 +14,18 @@ class NativePlayer {
   });
 
   play() async {
-    final output = await Process.runSync(_getCommand(NativePlayerType.VLC), [
-      '--http-referrer="${referrer}"',
-      '--adaptive-use-access',
-      link ?? '',
-    ]);
-
-    print(output.stderr);
+    final link = this.link ?? '';
+    try {
+      await Process.runSync(_getCommand(NativePlayerType.VLC), [
+        '--http-referrer="${referrer}"',
+        '--adaptive-use-access',
+        link,
+      ]);
+    } catch (e) {
+      print(e);
+      // simply launch with the default broswer here
+      launch(link);
+    }
   }
 
   /// Get command depending on current system
