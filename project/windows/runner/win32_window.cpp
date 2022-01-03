@@ -192,9 +192,9 @@ Win32Window::MessageHandler(HWND hwnd,
             return 0;
 
         case WM_GETMINMAXINFO:
-            LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
-            lpMMI->ptMinTrackSize.x = 970;
-            lpMMI->ptMinTrackSize.y = 600;
+            LPMINMAXINFO lpMMI = (LPMINMAXINFO)lparam;
+            lpMMI->ptMinTrackSize.x = 1280;
+            lpMMI->ptMinTrackSize.y = 720;
     }
 
     return DefWindowProc(window_handle_, message, wparam, lparam);

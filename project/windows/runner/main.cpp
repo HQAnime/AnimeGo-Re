@@ -27,7 +27,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance,
 
     FlutterWindow window(project);
     Win32Window::Point origin(10, 10);
-    Win32Window::Size size(970, 600);
+    Win32Window::Size size(1280, 720);
     if (!window.CreateAndShow(L"AnimeGo", origin, size)) {
         return EXIT_FAILURE;
     }

@@ -35,7 +35,7 @@ class NativePlayer {
     } else if (Platform.isMacOS) {
       return '/Applications/VLC.app/Contents/MacOS/VLC';
     } else if (Platform.isWindows) {
-      return 'cmd';
+      return 'C:\\Program Files\\VideoLAN\\VLC\\vlc.exe';
     } else {
       return 'vlc';
     }
