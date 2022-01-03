@@ -128,6 +128,11 @@ class _SettingsState extends State<Settings> {
             onTap: () => launch(Global.github),
           ),
           ListTile(
+            title: Text('Privacy Policy'),
+            subtitle: Text('AnimeGo collects limited data to improve the app'),
+            onTap: () => launch(Global.privacyPolicy),
+          ),
+          ListTile(
             title: Text('Licenses'),
             subtitle: Text('Check all open source licenses'),
             onTap: () {

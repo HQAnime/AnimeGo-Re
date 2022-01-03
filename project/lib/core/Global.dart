@@ -20,6 +20,9 @@ class Global {
   static final latestRelease =
       'https://github.com/HenryQuan/AnimeGo/release/latest';
 
+  static final privacyPolicy =
+      'https://raw.githubusercontent.com/HenryQuan/AnimeGo-Re/master/project/lib/core/Firebase.dart';
+
   static final email = Uri(
     scheme: 'mailto',
     path: 'development.henryquan@gmail.com',

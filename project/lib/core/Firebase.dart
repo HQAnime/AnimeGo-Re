@@ -2,11 +2,14 @@ import 'package:animego/core/Util.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 /// PRIVACY POLICY
-/// April 3, 2021
+/// REVISION 2
+/// Jan 3, 2022
 ///
 /// AnimeGo (starting form version 1.3.0) logs some user events via Firebase. The data is used for analytics purposes.
 /// No personal data is collected as you can see from `_logSimpleEvent` method. Only `true` is sent.
-/// All data are anonymous. Please see https://firebase.google.com/policies/analytics/ for Firebase's privacy policy.
+/// Data are only collected from mobile users. There is no tracking of desktop users.
+/// All data are anonymous meaning that only an identifier string is visible to the developer.
+/// Please see https://firebase.google.com/policies/analytics/ for Firebase's privacy policy.
 ///
 /// If you have any concerns, please contact the developer via email.
 ///
