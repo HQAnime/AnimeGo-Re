@@ -1,5 +1,6 @@
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/VideoServer.dart';
+import 'package:animego/ui/interface/FullscreenPlayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -17,41 +18,17 @@ class WatchAnimePage extends StatefulWidget {
   _WatchAnimePageState createState() => _WatchAnimePageState();
 }
 
-class _WatchAnimePageState extends State<WatchAnimePage> {
+class _WatchAnimePageState extends State<WatchAnimePage> with FullscreenPlayer {
   @override
   void initState() {
     // TODO: maybe toggle the native here???
     super.initState();
-    // Fullscreen mode
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: [
-        SystemUiOverlay.top,
-      ],
-    );
-    // Landscape only
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    setLandscape();
   }
 
   @override
   void dispose() {
-    // Reset UI overlay
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
-    // Reset orientation
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-
+    resetOrientation();
     super.dispose();
   }
 

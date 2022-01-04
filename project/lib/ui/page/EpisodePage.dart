@@ -242,7 +242,7 @@ class _EpisodePageState extends State<EpisodePage>
                 child: Divider(),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 32, right: 32),
                 child: Text(
                   'Please note that this app does not have any controls over these sources',
                   textAlign: TextAlign.center,

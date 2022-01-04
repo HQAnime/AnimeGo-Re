@@ -1,5 +1,8 @@
+import 'package:animego/core/Util.dart';
+import 'package:animego/ui/interface/FullscreenPlayer.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
@@ -19,7 +22,8 @@ class VideoPlayerPage extends StatefulWidget {
 /// Code is referenced from
 /// https://github.com/GeekyAnts/flick-video-player/blob/master/example/lib/default_player/default_player.dart
 
-class _VideoPlayerPageState extends State<VideoPlayerPage> {
+class _VideoPlayerPageState extends State<VideoPlayerPage>
+    with FullscreenPlayer {
   late FlickManager flickManager;
 
   @override
@@ -42,6 +46,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   void dispose() {
+    // the player doesn't reset the orientation
+    resetOrientation();
     flickManager.dispose();
     super.dispose();
   }
@@ -49,12 +55,19 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Video Player'),
-      ),
+      appBar: Util.isIOS()
+          ? AppBar(
+              title: Text('Video Player'),
+            )
+          : null,
       body: Container(
         child: FlickVideoPlayer(
           flickManager: flickManager,
+          // force landscape
+          preferredDeviceOrientation: [
+            DeviceOrientation.landscapeLeft,
+            DeviceOrientation.landscapeRight,
+          ],
           flickVideoWithControls: FlickVideoWithControls(
             videoFit: BoxFit.contain,
             controls: FlickPortraitControls(),
