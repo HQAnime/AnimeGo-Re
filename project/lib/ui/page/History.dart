@@ -3,6 +3,8 @@ import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
+import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
+import 'package:animego/ui/page/tablet/TabletHomePage.dart';
 import 'package:flutter/material.dart';
 
 /// History class
@@ -31,7 +33,11 @@ class History extends StatelessWidget implements Embeddable {
                     Navigator.push(
                       context,
                       Util.platformPageRoute(
-                        builder: (c) => EpisodePage(info: curr),
+                        builder: (c) {
+                          if (Util(context).isTablet())
+                            return TabletAnimePage(info: curr);
+                          return EpisodePage(info: curr);
+                        },
                       ),
                     );
                   },
