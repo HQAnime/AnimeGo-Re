@@ -23,7 +23,12 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
     // TODO: maybe toggle the native here???
     super.initState();
     // Fullscreen mode
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [
+        SystemUiOverlay.top,
+      ],
+    );
     // Landscape only
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,

@@ -105,7 +105,8 @@ class _EpisodePageState extends State<EpisodePage>
       body: LoadingSwitcher(
         loading: this.info == null,
         child: this.renderBody(),
-        repeat: true,
+        // Only do the animation for the first time, not for the mp4 list
+        repeat: mp4List.length == 0,
       ),
       bottomNavigationBar: AnimatedOpacity(
         duration: Duration(milliseconds: 300),
@@ -348,6 +349,7 @@ class _EpisodePageState extends State<EpisodePage>
                 Util.platformPageRoute(builder: (context) {
                   return VideoPlayerPage(
                     videoLink: e.link,
+                    refererLink: e.referrer,
                   );
                 }),
               );
