@@ -37,7 +37,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage>
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(
         widget.videoLink!,
-        httpHeaders: {'Referer': widget.refererLink ?? ''},
+        httpHeaders: {
+          'Referer': widget.refererLink ?? '',
+          'User-Agent': 'Mozilla/5.0',
+        },
       ),
       autoPlay: true,
       autoInitialize: true,

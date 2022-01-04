@@ -19,6 +19,7 @@ class NativePlayer {
       await Process.runSync(_getCommand(NativePlayerType.VLC), [
         '--http-referrer="${referrer}"',
         '--adaptive-use-access',
+        '--http-user-agent=Mozilla/5.0',
         link,
       ]);
     } catch (e) {
