@@ -64,18 +64,20 @@ class _EpisodePageState extends State<EpisodePage>
 
     final parser = OneEpisodeParser(global.getDomain() + (link ?? ''));
     parser.downloadHTML().then((body) {
-      setState(() {
-        this.info = parser.parseHTML(body);
-        if (widget.onEpisodeInfoLoaded != null) {
-          widget.onEpisodeInfoLoaded!(this.info);
-        }
+      if (mounted) {
+        setState(() {
+          this.info = parser.parseHTML(body);
+          if (widget.onEpisodeInfoLoaded != null) {
+            widget.onEpisodeInfoLoaded!(this.info);
+          }
 
-        this.info?.currentEpisodeLink = link;
-        this.fomattedName =
-            info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
-      });
+          this.info?.currentEpisodeLink = link;
+          this.fomattedName =
+              info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
+        });
 
-      getMP4List();
+        getMP4List();
+      }
     });
   }
 
@@ -390,13 +392,15 @@ class _EpisodePageState extends State<EpisodePage>
         final titleLower = title.toLowerCase();
         if (titleLower.contains('streaming') || titleLower.contains('vidcdn')) {
           // this is the link we need to parse
-          setState(() {
-            if (link.contains('embedplus'))
-              downloadLink = link.replaceFirst('embedplus', 'download');
-            else if (link.contains('streaming'))
-              downloadLink = link.replaceFirst('streaming.php', 'download');
-          });
-          print('Download link: $downloadLink');
+          if (mounted) {
+            setState(() {
+              if (link.contains('embedplus'))
+                downloadLink = link.replaceFirst('embedplus', 'download');
+              else if (link.contains('streaming'))
+                downloadLink = link.replaceFirst('streaming.php', 'download');
+            });
+            print('Download link: $downloadLink');
+          }
 
           final parser = MP4Parser(downloadLink ?? '');
           final html = await parser.downloadHTML();
@@ -406,7 +410,7 @@ class _EpisodePageState extends State<EpisodePage>
           }
 
           final mp4s = parser.parseHTML(html);
-          if (mp4s != null && mp4s.length > 0) {
+          if (mounted && mp4s != null && mp4s.length > 0) {
             setState(() {
               this.mp4List = mp4s;
             });

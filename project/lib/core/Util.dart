@@ -61,7 +61,7 @@ class Util {
     bool fullscreenDialog = false,
   }) {
     if (isMobile()) {
-      return Util.platformPageRoute(
+      return MaterialPageRoute(
         builder: builder,
         settings: settings,
         maintainState: maintainState,
