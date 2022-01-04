@@ -362,7 +362,7 @@ class _EpisodePageState extends State<EpisodePage>
 
               Future.delayed(Duration(milliseconds: 300), () {
                 // Add a short delay to make sure the alert is shown
-                NativePlayer(link: e.link).play();
+                NativePlayer(link: e.link, referrer: e.referrer).play();
               });
             }
           },

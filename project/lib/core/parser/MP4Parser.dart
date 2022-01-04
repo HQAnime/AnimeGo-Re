@@ -26,7 +26,8 @@ class MP4Parser extends BasicParser {
           name = description[1].split(' - ').first.replaceFirst('(', '');
         }
 
-        mp4s.add(MP4Info(name, link));
+        // The referrer is now needed to download or stream the video
+        mp4s.add(MP4Info(name, link, getLink()));
       }
 
       return mp4s;
