@@ -52,13 +52,17 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       appBar: AppBar(
         title: Text('Video Player'),
       ),
-      body: FlickVideoPlayer(
-        flickManager: flickManager,
-        flickVideoWithControls: FlickVideoWithControls(
-          controls: FlickPortraitControls(),
-        ),
-        flickVideoWithControlsFullscreen: FlickVideoWithControls(
-          controls: FlickLandscapeControls(),
+      body: Container(
+        child: FlickVideoPlayer(
+          flickManager: flickManager,
+          flickVideoWithControls: FlickVideoWithControls(
+            videoFit: BoxFit.contain,
+            controls: FlickPortraitControls(),
+          ),
+          flickVideoWithControlsFullscreen: FlickVideoWithControls(
+            videoFit: BoxFit.contain,
+            controls: FlickLandscapeControls(),
+          ),
         ),
       ),
     );
