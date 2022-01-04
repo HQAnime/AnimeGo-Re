@@ -88,6 +88,16 @@ class _EpisodePageState extends State<EpisodePage>
               ? 'Loading...'
               : 'Episode ${info?.currentEpisode ?? '??'}',
         ),
+        actions: [
+          downloadLink != null
+              ? IconButton(
+                  onPressed: () {
+                    launch(downloadLink!);
+                  },
+                  icon: Icon(Icons.download),
+                )
+              : SizedBox.shrink(),
+        ],
         automaticallyImplyLeading: widget.embedded ? false : true,
       ),
       body: LoadingSwitcher(
