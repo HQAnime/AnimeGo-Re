@@ -8,12 +8,14 @@ import 'package:video_player/video_player.dart';
 class VideoPlayerPage extends StatefulWidget {
   const VideoPlayerPage({
     Key? key,
-    this.refererLink,
     required this.videoLink,
+    this.refererLink,
+    this.title,
   }) : super(key: key);
 
   final String? refererLink;
   final String? videoLink;
+  final String? title;
 
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
@@ -60,10 +62,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage>
     return Scaffold(
       appBar: Util.isIOS()
           ? AppBar(
-              title: Text('Video Player'),
+              title: Text(widget.title ?? 'Video Player'),
             )
           : null,
-      body: Container(
+      body: SafeArea(
         child: FlickVideoPlayer(
           flickManager: flickManager,
           // force landscape

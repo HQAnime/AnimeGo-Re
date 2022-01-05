@@ -13,6 +13,7 @@ import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
+import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:android_intent/android_intent.dart';
@@ -179,7 +180,11 @@ class _EpisodePageState extends State<EpisodePage>
                           context,
                           Util.platformPageRoute(
                             // this is only visible on mobile so no need to go to tablet page
-                            builder: (context) => AnimeDetailPage(info: info),
+                            builder: (context) {
+                              if (Util(context).isTablet())
+                                return TabletAnimePage(info: info);
+                              return AnimeDetailPage(info: info);
+                            },
                           ),
                         );
                       },
@@ -350,6 +355,7 @@ class _EpisodePageState extends State<EpisodePage>
                   return VideoPlayerPage(
                     videoLink: e.link,
                     refererLink: e.referrer,
+                    title: info?.episodeName,
                   );
                 }),
               );
