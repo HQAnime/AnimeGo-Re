@@ -314,7 +314,7 @@ class _EpisodePageState extends State<EpisodePage>
                   openInAppPlayer(e);
                 }
               } else {
-                if (e.link == null) {
+                if (e.link != null) {
                   launch(e.link!);
                   _addToHistory();
                 }
