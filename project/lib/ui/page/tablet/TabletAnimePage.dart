@@ -43,11 +43,9 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
       body: Row(
         children: [
           Flexible(
-            flex: 1,
             child: _renderAnimeDetail(),
           ),
           Flexible(
-            flex: 1,
             // need to send data back here
             child: _renderEpisode(),
           ),

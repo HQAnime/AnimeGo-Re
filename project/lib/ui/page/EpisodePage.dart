@@ -215,10 +215,8 @@ class _EpisodePageState extends State<EpisodePage>
                   Expanded(
                     child: ListTile(
                       title: Text('Server List', textAlign: TextAlign.center),
-                      subtitle: Center(
-                        child: Column(
-                          children: renderServerList(),
-                        ),
+                      subtitle: Column(
+                        children: renderServerList(),
                       ),
                     ),
                   ),
@@ -228,10 +226,8 @@ class _EpisodePageState extends State<EpisodePage>
                         'Watch Directly',
                         textAlign: TextAlign.center,
                       ),
-                      subtitle: Center(
-                        child: Column(
-                          children: renderMP4List(),
-                        ),
+                      subtitle: Column(
+                        children: renderMP4List(),
                       ),
                     ),
                   ),
@@ -363,7 +359,7 @@ class _EpisodePageState extends State<EpisodePage>
               showDialog(
                 context: context,
                 barrierDismissible: false,
-                builder: (ctx) => AlertDialog(
+                builder: (context) => AlertDialog(
                   title: Text("AnimeGo is paused"),
                   content: Text(
                     "Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.",
