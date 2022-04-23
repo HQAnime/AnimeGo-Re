@@ -44,11 +44,11 @@ class _TabletHomePageState extends State<TabletHomePage> {
       body: Row(
         children: <Widget>[
           Flexible(
-            flex: 3,
+            flex: 2,
             child: renderMenu(),
           ),
           Flexible(
-            flex: 7,
+            flex: 8,
             child: renderPage(),
           ),
         ],
