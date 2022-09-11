@@ -2,15 +2,27 @@ import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/LastestAnime.dart';
 import 'package:animego/ui/page/tablet/TabletHomePage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:logging/logging.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // setup logger and make sure it only prints in debug mode
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    if (kDebugMode) {
+      final message = '${record.loggerName}: ${record.message}';
+      print('${record.level.name}|$message');
+    }
+  });
+
   if (Util.isMobile()) {
     await Firebase.initializeApp();
-  } else {}
+  }
   runApp(MyApp());
 }
 
@@ -18,7 +30,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final lightTheme = ThemeData(
     primarySwatch: Colors.deepOrange,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
   );
@@ -26,13 +38,13 @@ class MyApp extends StatelessWidget {
   // TODO: find a better solution, this is too manual
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(Colors.orange),
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
     ),
     colorScheme: ColorScheme.fromSwatch(
@@ -43,6 +55,8 @@ class MyApp extends StatelessWidget {
     ),
   );
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,9 +66,9 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: Global().init(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          final window = WidgetsBinding.instance?.window;
+          final window = WidgetsBinding.instance.window;
           // This listens to platform change
-          window?.onPlatformBrightnessChanged = () {
+          window.onPlatformBrightnessChanged = () {
             final useDark = window.platformBrightness == Brightness.dark;
             // Setup navigation bar colour
             SystemChrome.setSystemUIOverlayStyle(
@@ -72,15 +86,15 @@ class MyApp extends StatelessWidget {
             // Check for update after init has been done
             Global().checkForUpdate(context);
             // Use another view for tablets (or devices with a large screen)
-            if (Util(context).isTablet()) return TabletHomePage();
-            return LastestAnime();
+            if (Util(context).isTablet()) return const TabletHomePage();
+            return const LastestAnime();
           } else {
             // A simple loading screen so that it is not that boring
             return Scaffold(
               appBar: AppBar(
-                title: Text('Loading...'),
+                title: const Text('Loading...'),
               ),
-              body: Center(
+              body: const Center(
                 child: CircularProgressIndicator(),
               ),
             );

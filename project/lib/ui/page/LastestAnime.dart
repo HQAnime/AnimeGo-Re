@@ -14,8 +14,8 @@ class LastestAnime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Release'),
-        actions: [
+        title: const Text('New Release'),
+        actions: const [
           // IconButton(
           //   icon: Icon(Icons.refresh),
           //   onPressed: () {
@@ -24,16 +24,16 @@ class LastestAnime extends StatelessWidget {
           // ),
         ],
       ),
-      body: AnimeGrid(
+      body: const AnimeGrid(
         url: '/page-recent-release.html',
       ),
-      drawer: AnimeDrawer(),
+      drawer: const AnimeDrawer(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
+        child: const Icon(Icons.search),
         onPressed: () => Navigator.push(
           context,
           Util.platformPageRoute(
-            builder: (context) => SearchAnime(),
+            builder: (context) => const SearchAnime(),
             fullscreenDialog: true,
           ),
         ),

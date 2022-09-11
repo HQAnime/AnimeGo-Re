@@ -13,7 +13,7 @@ class VLCPlayerPage extends StatefulWidget {
   final String videoLink;
 
   @override
-  _VLCPlayerPageState createState() => _VLCPlayerPageState();
+  State<VLCPlayerPage> createState() => _VLCPlayerPageState();
 }
 
 class _VLCPlayerPageState extends State<VLCPlayerPage> {
@@ -34,7 +34,7 @@ class _VLCPlayerPageState extends State<VLCPlayerPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // final media = Media.network(
       //   // use 720p to play
       //   widget.videoLink,

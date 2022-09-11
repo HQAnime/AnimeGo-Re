@@ -12,8 +12,8 @@ class Movie extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseEventService().logUseMovie();
     return Scaffold(
-      appBar: AppBar(title: Text('Movie')),
-      body: AnimeGrid(url: '/anime-movies.html'),
+      appBar: AppBar(title: const Text('Movie')),
+      body: const AnimeGrid(url: '/anime-movies.html'),
     );
   }
 }

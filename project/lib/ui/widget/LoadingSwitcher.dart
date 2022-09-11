@@ -15,7 +15,7 @@ class LoadingSwitcher extends StatefulWidget {
   final bool? repeat;
 
   @override
-  _LoadingSwitcherState createState() => _LoadingSwitcherState();
+  State<LoadingSwitcher> createState() => _LoadingSwitcherState();
 }
 
 class _LoadingSwitcherState extends State<LoadingSwitcher>
@@ -28,13 +28,13 @@ class _LoadingSwitcherState extends State<LoadingSwitcher>
   void initState() {
     super.initState();
     if (showAnimation) {
-      this.controller = AnimationController(
+      controller = AnimationController(
         duration: const Duration(milliseconds: 600),
         vsync: this,
         value: 0.0,
       );
-      this.scale = CurvedAnimation(
-        parent: this.controller,
+      scale = CurvedAnimation(
+        parent: controller,
         curve: Curves.linearToEaseOut,
       );
     }
@@ -48,7 +48,7 @@ class _LoadingSwitcherState extends State<LoadingSwitcher>
       if (widget.repeat == true) controller.reset();
       controller.forward();
       return ScaleTransition(
-        scale: this.scale,
+        scale: scale,
         child: widget.child,
       );
     } else {

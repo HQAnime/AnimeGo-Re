@@ -72,7 +72,7 @@ class Util {
         pageBuilder: (context, animation, secondaryAnimation) {
           return builder(context);
         },
-        transitionDuration: Duration(milliseconds: 300),
+        transitionDuration: const Duration(milliseconds: 300),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(
             opacity: animation,

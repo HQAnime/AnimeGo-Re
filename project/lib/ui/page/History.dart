@@ -4,7 +4,6 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
-import 'package:animego/ui/page/tablet/TabletHomePage.dart';
 import 'package:flutter/material.dart';
 
 /// History class
@@ -14,6 +13,7 @@ class History extends StatelessWidget implements Embeddable {
     this.embedded = false,
   }) : super(key: key);
 
+  @override
   final bool embedded;
 
   @override
@@ -21,8 +21,8 @@ class History extends StatelessWidget implements Embeddable {
     FirebaseEventService().logUseHistoryList();
     final list = Global().historyList;
     return Scaffold(
-      appBar: embedded ? null : AppBar(title: Text('Watch History')),
-      body: list.length > 0
+      appBar: embedded ? null : AppBar(title: const Text('Watch History')),
+      body: list.isNotEmpty
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {
@@ -34,8 +34,9 @@ class History extends StatelessWidget implements Embeddable {
                       context,
                       Util.platformPageRoute(
                         builder: (c) {
-                          if (Util(context).isTablet())
+                          if (Util(context).isTablet()) {
                             return TabletAnimePage(info: curr);
+                          }
                           return EpisodePage(info: curr);
                         },
                       ),
@@ -44,7 +45,7 @@ class History extends StatelessWidget implements Embeddable {
                 );
               },
             )
-          : Center(
+          : const Center(
               child: Text('No anime found'),
             ),
     );

@@ -3,17 +3,19 @@ import 'dart:async';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:logging/logging.dart';
 
 /// This is the parent of all parsers and it handles 404 not found.
 abstract class BasicParser {
+  final _logger = Logger('BasicParser');
   String? _link;
 
   /// Get the link for current page
-  String? getLink() => this._link;
+  String? getLink() => _link;
 
   BasicParser(String link) {
-    this._link = link;
-    print('${this.runtimeType} - ${this._link}');
+    _link = link;
+    _logger.info('$runtimeType - $_link');
   }
 
   /// Download HTML string from link
@@ -21,9 +23,9 @@ abstract class BasicParser {
     try {
       final response = await http
           .get(
-            Uri.parse(this._link!),
+            Uri.parse(_link!),
           )
-          .timeout(Duration(seconds: 8)); // Timeout in 8s
+          .timeout(const Duration(seconds: 8)); // Timeout in 8s
 
       if (response.statusCode == 200) {
         return parse(response.body);
@@ -32,7 +34,7 @@ abstract class BasicParser {
         return null;
       }
     } catch (e) {
-      print(e);
+      _logger.severe(e);
       return null;
     }
   }

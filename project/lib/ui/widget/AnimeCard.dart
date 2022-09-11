@@ -35,11 +35,11 @@ class AnimeCard extends StatelessWidget {
             child: Text(
               info.name ?? 'Unknown',
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
               maxLines: 2,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Container(
@@ -49,7 +49,7 @@ class AnimeCard extends StatelessWidget {
                 child: Text(
                   info.episode ?? '??',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

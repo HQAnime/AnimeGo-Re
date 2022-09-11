@@ -1,10 +1,12 @@
 import 'dart:io';
 
-import 'package:url_launcher/url_launcher.dart';
+import 'package:logging/logging.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-enum NativePlayerType { VLC }
+enum NativePlayerType { vlc }
 
 class NativePlayer {
+  final _logger = Logger('NativePlayer');
   final String? referrer;
   final String? link;
 
@@ -13,24 +15,24 @@ class NativePlayer {
     this.referrer,
   });
 
-  play() async {
+  void play() async {
     final link = this.link ?? '';
     try {
-      await Process.runSync(_getCommand(NativePlayerType.VLC), [
-        '--http-referrer="${referrer}"',
+      await Process.run(_getCommand(NativePlayerType.vlc), [
+        '--http-referrer="$referrer"',
         '--adaptive-use-access',
         '--http-user-agent=Mozilla/5.0',
         link,
       ]);
     } catch (e) {
-      print(e);
+      _logger.severe(e);
       // simply launch with the default broswer here
-      launch(link);
+      launchUrlString(link);
     }
   }
 
   /// Get command depending on current system
-  _getCommand(NativePlayerType type) {
+  String _getCommand(NativePlayerType type) {
     if (Platform.isLinux) {
       return 'vlc';
     } else if (Platform.isMacOS) {

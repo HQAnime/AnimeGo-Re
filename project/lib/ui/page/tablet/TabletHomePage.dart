@@ -15,7 +15,7 @@ class TabletHomePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TabletHomePageState createState() => _TabletHomePageState();
+  State<TabletHomePage> createState() => _TabletHomePageState();
 }
 
 enum PageCode {
@@ -39,7 +39,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AnimeGo'),
+        title: const Text('AnimeGo'),
       ),
       body: Row(
         children: <Widget>[
@@ -55,15 +55,15 @@ class _TabletHomePageState extends State<TabletHomePage> {
       ),
       floatingActionButton: showFab
           ? FloatingActionButton(
-              child: Icon(Icons.search),
               tooltip: 'Search anime',
               onPressed: () => Navigator.push(
                 context,
                 Util.platformPageRoute(
-                  builder: (context) => SearchAnime(),
+                  builder: (context) => const SearchAnime(),
                   fullscreenDialog: true,
                 ),
               ),
+              child: const Icon(Icons.search),
             )
           : null,
     );
@@ -84,13 +84,13 @@ class _TabletHomePageState extends State<TabletHomePage> {
       case PageCode.popular:
         return AnimeGrid(url: '/popular.html', key: Key(code.toString()));
       case PageCode.genre:
-        return AnimeGrid(url: this.genre, key: Key(genre));
+        return AnimeGrid(url: genre, key: Key(genre));
       case PageCode.history:
-        return History(embedded: true);
+        return const History(embedded: true);
       case PageCode.favourite:
-        return Favourite(embedded: true);
+        return const Favourite(embedded: true);
       case PageCode.setting:
-        return Settings(embedded: true);
+        return const Settings(embedded: true);
       default:
         assert(false, 'Unknown page code');
         return Container();
@@ -102,56 +102,56 @@ class _TabletHomePageState extends State<TabletHomePage> {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text('Latest'),
-          leading: Icon(Icons.new_releases),
+          title: const Text('Latest'),
+          leading: const Icon(Icons.new_releases),
           onTap: () => setCode(PageCode.latest),
           selected: code == PageCode.latest,
         ),
         ListTile(
-          title: Text('Seasonal'),
-          leading: Icon(Icons.fiber_new),
+          title: const Text('Seasonal'),
+          leading: const Icon(Icons.fiber_new),
           onTap: () => setCode(PageCode.seasonal),
           selected: code == PageCode.seasonal,
         ),
         ListTile(
-          title: Text('Movie'),
-          leading: Icon(Icons.movie),
+          title: const Text('Movie'),
+          leading: const Icon(Icons.movie),
           onTap: () => setCode(PageCode.movie),
           selected: code == PageCode.movie,
         ),
         ListTile(
-          title: Text('Popular'),
-          leading: Icon(Icons.label),
+          title: const Text('Popular'),
+          leading: const Icon(Icons.label),
           onTap: () => setCode(PageCode.popular),
           selected: code == PageCode.popular,
         ),
         ExpansionTile(
-          title: Text('Genre'),
-          leading: Icon(Icons.list),
+          title: const Text('Genre'),
+          leading: const Icon(Icons.list),
           children: <Widget>[
             GenreList(func: (g) {
-              this.genre = g;
+              genre = g;
               setCode(PageCode.genre);
             })
           ],
         ),
-        Divider(),
+        const Divider(),
         ListTile(
-          title: Text('History'),
-          leading: Icon(Icons.history),
+          title: const Text('History'),
+          leading: const Icon(Icons.history),
           onTap: () => setCode(PageCode.history),
           selected: code == PageCode.history,
         ),
         ListTile(
-          title: Text('Favourite'),
-          leading: Icon(Icons.favorite),
+          title: const Text('Favourite'),
+          leading: const Icon(Icons.favorite),
           onTap: () => setCode(PageCode.favourite),
           selected: code == PageCode.favourite,
         ),
-        Divider(),
+        const Divider(),
         ListTile(
-          title: Text('Settings'),
-          leading: Icon(Icons.settings),
+          title: const Text('Settings'),
+          leading: const Icon(Icons.settings),
           onTap: () => setCode(PageCode.setting),
           selected: code == PageCode.setting,
         ),
@@ -170,12 +170,12 @@ class _TabletHomePageState extends State<TabletHomePage> {
       case PageCode.favourite:
       case PageCode.setting:
         setState(() {
-          this.showFab = false;
+          showFab = false;
         });
         break;
       default:
         setState(() {
-          this.showFab = true;
+          showFab = true;
         });
         break;
     }

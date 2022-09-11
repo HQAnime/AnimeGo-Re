@@ -10,14 +10,16 @@ class SeasonalAnime extends StatefulWidget implements Embeddable {
     this.embedded = false,
   }) : super(key: key);
 
+  @override
   final bool embedded;
 
   @override
-  _SeasonalAnimeState createState() => _SeasonalAnimeState();
+  State<SeasonalAnime> createState() => _SeasonalAnimeState();
 }
 
+const _seasons = ['winter', 'spring', 'summer', 'fall'];
+
 class _SeasonalAnimeState extends State<SeasonalAnime> {
-  static const SEASONS = ['winter', 'spring', 'summer', 'fall'];
   String url = '/new-season.html';
 
   @override
@@ -29,11 +31,11 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.embedded ? null : AppBar(title: Text('New Season')),
+      appBar: widget.embedded ? null : AppBar(title: const Text('New Season')),
       body: Column(
         children: [
           buildPastSeasons(),
-          Expanded(child: AnimeGrid(url: this.url, key: Key(this.url))),
+          Expanded(child: AnimeGrid(url: url, key: Key(url))),
         ],
       ),
     );
@@ -53,7 +55,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
             padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
             child: ActionChip(
               label: Text(_format(filter)),
-              onPressed: () => setState(() => this.url = filter),
+              onPressed: () => setState(() => url = filter),
             ),
           );
         },
@@ -71,14 +73,14 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   /// This returns pas 4 seasons
   List<String> _getSeasonList() {
     final List<String> seasons = [];
-    DateTime _date = DateTime.now();
+    DateTime date = DateTime.now();
 
     // Add past 9 seasons including current season so past 8
     int offset = 0; // make it 0 to show current seacon
     for (int i = 0; i < 25; i++, offset -= 3) {
       // Keep updating the date, 31 days just in case
-      var temp = this._getYearAndSeason(_date.add(Duration(days: offset * 30)));
-      seasons.add('sub-category/${SEASONS[temp[1]]}-${temp[0]}-anime');
+      var temp = _getYearAndSeason(date.add(Duration(days: offset * 30)));
+      seasons.add('sub-category/${_seasons[temp[1]]}-${temp[0]}-anime');
     }
 
     return seasons;
@@ -90,14 +92,15 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
     int month = dt.month;
 
     int season;
-    if (month < 4)
+    if (month < 4) {
       season = 0;
-    else if (month < 7)
+    } else if (month < 7) {
       season = 1;
-    else if (month < 10)
+    } else if (month < 10) {
       season = 2;
-    else
+    } else {
       season = 3;
+    }
 
     return [year, season];
   }

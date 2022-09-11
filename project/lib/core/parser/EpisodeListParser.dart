@@ -17,11 +17,11 @@ class EpisodeListParser extends BasicParser {
     List<EpisodeInfo> list = [];
     final episodeClass = body?.getElementById('episode_related');
     // It starts from the latest (reversed) but it might be a good idea
-    episodeClass?.nodes.forEach((element) {
+    for (final element in episodeClass?.nodes ?? []) {
       if (element.runtimeType == Element) {
         list.add(EpisodeInfo(element as Element));
       }
-    });
+    }
 
     return list;
   }

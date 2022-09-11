@@ -12,30 +12,29 @@ class AnimeInfo extends BasicAnime {
   AnimeInfo(Element e) : super.fromJson(null) {
     // Image class has image and also name, link but I will use name class instead
     final imageClass = e.getElementsByClassName('img').first;
-    this.coverImage = imageClass.nodes[1].nodes[1].attributes['src'];
+    coverImage = imageClass.nodes[1].nodes[1].attributes['src'];
 
     // In order to call isCategory(), link needs to be parsed first
     final nameClass = e.getElementsByClassName('name').first;
     final nameLink = nameClass.firstChild;
-    this.name = nameLink?.attributes['title']?.trim();
+    name = nameLink?.attributes['title']?.trim();
     _formatAnimeName(name);
-    this.link = nameLink?.attributes['href'];
+    link = nameLink?.attributes['href'];
 
     // Category has a released class while episode only has the episode
     if (isCategory) {
       final releaseClass = e.getElementsByClassName('released').first;
-      this.episode =
-          releaseClass.nodes[0].text?.trim().replaceAll('Released: ', '');
+      episode = releaseClass.nodes[0].text?.trim().replaceAll('Released: ', '');
     } else {
       final episodeClass = e.getElementsByClassName('episode').first;
-      this.episode = episodeClass.nodes[0].text;
+      episode = episodeClass.nodes[0].text;
     }
   }
 
   /// Returns either episode or the name of name
   String? getTitle() {
-    if (isCategory) return this.name;
-    return this.episode;
+    if (isCategory) return name;
+    return episode;
   }
 
   /// Some anime are DUB and I will put the name in the front
@@ -45,7 +44,7 @@ class AnimeInfo extends BasicAnime {
       isDUB = true;
       final component = name.split(' ')..removeLast();
       // remove extra spaces and append it to DUB
-      this.name = '[Dub] ' + component.join(' ').trimRight();
+      this.name = '[Dub] ${component.join(' ').trimRight()}';
     }
   }
 }

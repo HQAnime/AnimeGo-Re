@@ -3,6 +3,7 @@ import 'package:animego/ui/interface/FullscreenPlayer.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:logging/logging.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
@@ -18,7 +19,7 @@ class VideoPlayerPage extends StatefulWidget {
   final String? title;
 
   @override
-  _VideoPlayerPageState createState() => _VideoPlayerPageState();
+  State<VideoPlayerPage> createState() => _VideoPlayerPageState();
 }
 
 /// Code is referenced from
@@ -26,13 +27,14 @@ class VideoPlayerPage extends StatefulWidget {
 
 class _VideoPlayerPageState extends State<VideoPlayerPage>
     with FullscreenPlayer {
+  final _logger = Logger('VideoPlayerPage');
   late FlickManager flickManager;
 
   @override
   void initState() {
     super.initState();
-    print(widget.refererLink);
-    print(widget.videoLink);
+    _logger.info(widget.refererLink);
+    _logger.info(widget.videoLink);
 
     /// Based on https://github.com/pystardust/ani-cli/blob/1a1909b1f7bced503cd9173e433d9a712eae137c/ani-cli#L280
     /// Referer is needed in order to play the video properly
@@ -69,15 +71,15 @@ class _VideoPlayerPageState extends State<VideoPlayerPage>
         child: FlickVideoPlayer(
           flickManager: flickManager,
           // force landscape
-          preferredDeviceOrientation: [
+          preferredDeviceOrientation: const [
             DeviceOrientation.landscapeLeft,
             DeviceOrientation.landscapeRight,
           ],
-          flickVideoWithControls: FlickVideoWithControls(
+          flickVideoWithControls: const FlickVideoWithControls(
             videoFit: BoxFit.contain,
             controls: FlickPortraitControls(),
           ),
-          flickVideoWithControlsFullscreen: FlickVideoWithControls(
+          flickVideoWithControlsFullscreen: const FlickVideoWithControls(
             videoFit: BoxFit.contain,
             controls: FlickLandscapeControls(),
           ),

@@ -7,14 +7,14 @@ class BasicAnime {
 
   BasicAnime.fromJson(Map<String, dynamic>? json) {
     if (json == null) return;
-    this.name = json['name'];
-    this.link = json['link'];
+    name = json['name'];
+    link = json['link'];
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': this.name,
-      'link': this.link,
+      'name': name,
+      'link': link,
     };
   }
 

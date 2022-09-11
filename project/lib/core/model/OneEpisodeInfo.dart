@@ -16,6 +16,7 @@ class OneEpisodeInfo extends BasicAnime {
   List<VideoServer> servers = [];
 
   /// Only need to save current episode
+  @override
   Map<String, dynamic> toJson() => {
         'name': name,
         'link': link,
@@ -23,7 +24,7 @@ class OneEpisodeInfo extends BasicAnime {
       };
 
   OneEpisodeInfo.fromJson(Map<String, dynamic> json)
-      : this.currentEpisode = json['currentEpisode'],
+      : currentEpisode = json['currentEpisode'],
         super.fromJson(json);
 
   OneEpisodeInfo(Element? e) : super.fromJson(null) {
@@ -33,36 +34,36 @@ class OneEpisodeInfo extends BasicAnime {
     if (rawTitle != null) {
       final regex = RegExp(r"Episode (\w.*?) ");
       final match = regex.firstMatch(rawTitle);
-      this.currentEpisode = match?.group(1);
+      currentEpisode = match?.group(1);
     }
 
     final categoryClass = body?.nodes[3];
-    this.category = categoryClass?.attributes['title'];
-    this.categoryLink = categoryClass?.attributes['href'];
+    category = categoryClass?.attributes['title'];
+    categoryLink = categoryClass?.attributes['href'];
 
     final nameClass = body?.nodes[5].nodes[3];
-    this.name = nameClass?.attributes['title'];
-    this.link = nameClass?.attributes['href'];
+    name = nameClass?.attributes['title'];
+    link = nameClass?.attributes['href'];
 
     // Get all video servers
     final server = e?.getElementsByClassName('anime_muti_link').first;
     final serverList = server?.nodes[1];
-    serverList?.nodes.forEach((element) {
+    for (final element in serverList?.nodes ?? []) {
       if (element.runtimeType == Element) {
         // Add to servers
-        this.servers.add(VideoServer(element as Element));
+        servers.add(VideoServer(element as Element));
       }
-    });
+    }
 
     final episode =
         e?.getElementsByClassName('anime_video_body_episodes').first;
 
     // TODO: make this look nicer
     try {
-      this.nextEpisodeLink = episode?.nodes[3].nodes[1].attributes['href'];
+      nextEpisodeLink = episode?.nodes[3].nodes[1].attributes['href'];
     } catch (_) {}
     try {
-      this.prevEpisodeLink = episode?.nodes[1].nodes[1].attributes['href'];
+      prevEpisodeLink = episode?.nodes[1].nodes[1].attributes['href'];
     } catch (_) {}
   }
 }

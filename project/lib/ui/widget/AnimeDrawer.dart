@@ -16,7 +16,7 @@ class AnimeDrawer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimeDrawerState createState() => _AnimeDrawerState();
+  State<AnimeDrawer> createState() => _AnimeDrawerState();
 }
 
 class _AnimeDrawerState extends State<AnimeDrawer> {
@@ -34,6 +34,10 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
       child: Column(
         children: <Widget>[
           DrawerHeader(
+            decoration: BoxDecoration(
+              // Use black instead orange to not hurt users' eyes at night
+              color: darkMode ? Colors.black38 : Colors.deepOrange,
+            ),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Text(
@@ -46,10 +50,6 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
                 ),
               ),
             ),
-            decoration: BoxDecoration(
-              // Use black instead orange to not hurt users' eyes at night
-              color: darkMode ? Colors.black38 : Colors.deepOrange,
-            ),
           ),
           Expanded(
             child: MediaQuery.removePadding(
@@ -58,58 +58,58 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
               child: ListView(
                 children: <Widget>[
                   ListTile(
-                    title: Text('Seasonal'),
-                    leading: Icon(Icons.fiber_new),
-                    onTap: () => this.push(
+                    title: const Text('Seasonal'),
+                    leading: const Icon(Icons.fiber_new),
+                    onTap: () => push(
                       context,
-                      SeasonalAnime(),
+                      const SeasonalAnime(),
                     ),
                   ),
                   ListTile(
-                    title: Text('Movie'),
-                    leading: Icon(Icons.movie),
-                    onTap: () => this.push(
+                    title: const Text('Movie'),
+                    leading: const Icon(Icons.movie),
+                    onTap: () => push(
                       context,
-                      Movie(),
+                      const Movie(),
                     ),
                   ),
                   ListTile(
-                    title: Text('Popular'),
-                    leading: Icon(Icons.label),
-                    onTap: () => this.push(
+                    title: const Text('Popular'),
+                    leading: const Icon(Icons.label),
+                    onTap: () => push(
                       context,
-                      PopularAnime(),
+                      const PopularAnime(),
                     ),
                   ),
                   ExpansionTile(
-                    title: Text('Genre'),
-                    leading: Icon(Icons.list),
+                    title: const Text('Genre'),
+                    leading: const Icon(Icons.list),
                     children: <Widget>[GenreList()],
                   ),
-                  Divider(),
+                  const Divider(),
                   ListTile(
-                    title: Text('History'),
-                    leading: Icon(Icons.history),
-                    onTap: () => this.push(
+                    title: const Text('History'),
+                    leading: const Icon(Icons.history),
+                    onTap: () => push(
                       context,
-                      History(),
+                      const History(),
                     ),
                   ),
                   ListTile(
-                    title: Text('Favourite'),
-                    leading: Icon(Icons.favorite),
-                    onTap: () => this.push(
+                    title: const Text('Favourite'),
+                    leading: const Icon(Icons.favorite),
+                    onTap: () => push(
                       context,
-                      Favourite(),
+                      const Favourite(),
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                   ListTile(
-                    title: Text('Settings'),
-                    leading: Icon(Icons.settings),
-                    onTap: () => this.push(
+                    title: const Text('Settings'),
+                    leading: const Icon(Icons.settings),
+                    onTap: () => push(
                       context,
-                      Settings(),
+                      const Settings(),
                     ),
                   ),
                 ],

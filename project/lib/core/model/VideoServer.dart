@@ -13,14 +13,14 @@ class VideoServer {
       link1 = 'https://' + link1;
     }
     // we have //// in the link and must be removed
-    this.link = link1.replaceFirst('////', '//');
+    link = link1.replaceFirst('////', '//');
 
     // Get the title
     final title1 = node.nodes[0].text ?? '';
     if (title1.trim().isEmpty) {
-      this.title = node.nodes[2].text?.toUpperCase();
+      title = node.nodes[2].text?.toUpperCase();
     } else {
-      this.title = title1.toUpperCase();
+      title = title1.toUpperCase();
     }
   }
 }

@@ -16,7 +16,7 @@ class TabletAnimePage extends StatefulWidget {
   final BasicAnime? info;
 
   @override
-  _TabletAnimePageState createState() => _TabletAnimePageState();
+  State<TabletAnimePage> createState() => _TabletAnimePageState();
 }
 
 class _TabletAnimePageState extends State<TabletAnimePage> {
@@ -59,9 +59,9 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
       // The AppBar here is needed to go back to the previous page
       return Scaffold(
         appBar: AppBar(
-          title: Text('Loading...'),
+          title: const Text('Loading...'),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -76,7 +76,7 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
 
   _renderEpisode() {
     if (episode == null) {
-      return Center(
+      return const Center(
         child: Text('Pick an episode from the list'),
       );
     }
@@ -93,14 +93,14 @@ class _TabletAnimePageState extends State<TabletAnimePage> {
   onUpdateEpisode(EpisodeInfo? info) {
     if (info?.link == episode?.link) return;
     setState(() {
-      this.episode = info;
+      episode = info;
     });
   }
 
   /// When the episode page is loaded, load the anime detail page
   onUpdateAnimeDetail(OneEpisodeInfo? info) {
     setState(() {
-      this.animeDetail = info;
+      animeDetail = info;
     });
   }
 }

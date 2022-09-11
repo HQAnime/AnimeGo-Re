@@ -1,7 +1,9 @@
 import 'package:http/http.dart';
+import 'package:logging/logging.dart';
 
 /// It gets the current domain and will be called when app opens
 class DomainParser {
+  final _logger = Logger('DomainParser');
   final String _gogoanime;
   DomainParser(this._gogoanime);
 
@@ -17,7 +19,7 @@ class DomainParser {
     String finalDomain = _gogoanime;
 
     try {
-      String? newDomain = _replaceHttp(this._gogoanime);
+      String? newDomain = _replaceHttp(_gogoanime);
       // WHen it is null, it means that there is no more redirect and it is the latest domain
       while (newDomain != null) {
         // Request but don't follow redirects
@@ -34,7 +36,7 @@ class DomainParser {
 
       return finalDomain;
     } catch (e) {
-      print(e);
+      _logger.info(e);
       return finalDomain;
     }
   }

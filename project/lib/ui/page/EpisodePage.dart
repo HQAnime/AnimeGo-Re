@@ -18,7 +18,8 @@ import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:logging/logging.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// EpisodePage class
 class EpisodePage extends StatefulWidget implements Embeddable {
@@ -26,19 +27,21 @@ class EpisodePage extends StatefulWidget implements Embeddable {
     Key? key,
     required this.info,
     this.embedded = false,
-    this.onEpisodeInfoLoaded = null,
+    this.onEpisodeInfoLoaded,
   }) : super(key: key);
 
   final BasicAnime? info;
+  @override
   final bool embedded;
   final void Function(OneEpisodeInfo?)? onEpisodeInfoLoaded;
 
   @override
-  _EpisodePageState createState() => _EpisodePageState();
+  State<EpisodePage> createState() => _EpisodePageState();
 }
 
 class _EpisodePageState extends State<EpisodePage>
     with SingleTickerProviderStateMixin {
+  final _logger = Logger('EpisodePage');
   String? link;
   OneEpisodeInfo? info;
   final global = Global();
@@ -52,7 +55,7 @@ class _EpisodePageState extends State<EpisodePage>
     // embeded must have the callback method
     assert(widget.embedded ^ (widget.onEpisodeInfoLoaded != null) == false,
         'embedded must have the onEpisodeInfoLoaded method');
-    this.loadEpisodeInfo(widget.info?.link);
+    loadEpisodeInfo(widget.info?.link);
 
     FirebaseEventService().logUseEpisode();
   }
@@ -67,14 +70,13 @@ class _EpisodePageState extends State<EpisodePage>
     parser.downloadHTML().then((body) {
       if (mounted) {
         setState(() {
-          this.info = parser.parseHTML(body);
+          info = parser.parseHTML(body);
           if (widget.onEpisodeInfoLoaded != null) {
-            widget.onEpisodeInfoLoaded!(this.info);
+            widget.onEpisodeInfoLoaded!(info);
           }
 
-          this.info?.currentEpisodeLink = link;
-          this.fomattedName =
-              info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
+          info?.currentEpisodeLink = link;
+          fomattedName = info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
         });
 
         getMP4List();
@@ -95,53 +97,53 @@ class _EpisodePageState extends State<EpisodePage>
           downloadLink != null
               ? IconButton(
                   onPressed: () {
-                    launch(downloadLink!);
+                    launchUrlString(downloadLink!);
                   },
-                  icon: Icon(Icons.download),
+                  icon: const Icon(Icons.download),
                 )
-              : SizedBox.shrink(),
+              : const SizedBox.shrink(),
         ],
         automaticallyImplyLeading: widget.embedded ? false : true,
       ),
       body: LoadingSwitcher(
-        loading: this.info == null,
-        child: this.renderBody(),
+        loading: info == null,
         // Only do the animation for the first time, not for the mp4 list
-        repeat: mp4List.length == 0,
+        repeat: mp4List.isEmpty,
+        child: renderBody(),
       ),
       bottomNavigationBar: AnimatedOpacity(
-        duration: Duration(milliseconds: 300),
-        opacity: this.info != null ? 1 : 0,
+        duration: const Duration(milliseconds: 300),
+        opacity: info != null ? 1 : 0,
         child: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: this.info != null
+            children: info != null
                 ? <Widget>[
                     Tooltip(
                       message: 'Previous episode',
                       child: IconButton(
-                        onPressed: this.info?.prevEpisodeLink != null
+                        onPressed: info?.prevEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(
-                                  this.info?.prevEpisodeLink,
+                                loadEpisodeInfo(
+                                  info?.prevEpisodeLink,
                                 );
                               }
                             : null,
-                        icon: Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.arrow_back),
                       ),
                     ),
                     SearchAnimeButton(name: fomattedName),
                     Tooltip(
                       message: 'Next episode',
                       child: IconButton(
-                        onPressed: this.info?.nextEpisodeLink != null
+                        onPressed: info?.nextEpisodeLink != null
                             ? () {
-                                this.loadEpisodeInfo(
-                                  this.info?.nextEpisodeLink,
+                                loadEpisodeInfo(
+                                  info?.nextEpisodeLink,
                                 );
                               }
                             : null,
-                        icon: Icon(Icons.arrow_forward),
+                        icon: const Icon(Icons.arrow_forward),
                       ),
                     ),
                   ]
@@ -153,13 +155,13 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   Widget renderBody() {
-    if (this.info == null) {
-      return Center(
+    if (info == null) {
+      return const Center(
         child: CircularProgressIndicator(),
       );
-    } else if (this.info?.currentEpisode == null) {
+    } else if (info?.currentEpisode == null) {
       // Sometimes, it doesn't load properly
-      return Center(
+      return const Center(
         child: Text('Failed to load. Please try again.'),
       );
     } else {
@@ -168,9 +170,10 @@ class _EpisodePageState extends State<EpisodePage>
           child: Column(
             children: <Widget>[
               widget.embedded
-                  ? SizedBox.shrink()
+                  ? const SizedBox.shrink()
                   : ListTile(
-                      title: Text('Anime Info', textAlign: TextAlign.center),
+                      title:
+                          const Text('Anime Info', textAlign: TextAlign.center),
                       subtitle: Text(
                         info?.name ?? 'No information',
                         textAlign: TextAlign.center,
@@ -181,8 +184,9 @@ class _EpisodePageState extends State<EpisodePage>
                           Util.platformPageRoute(
                             // this is only visible on mobile so no need to go to tablet page
                             builder: (context) {
-                              if (Util(context).isTablet())
+                              if (Util(context).isTablet()) {
                                 return TabletAnimePage(info: info);
+                              }
                               return AnimeDetailPage(info: info);
                             },
                           ),
@@ -190,7 +194,7 @@ class _EpisodePageState extends State<EpisodePage>
                       },
                     ),
               ListTile(
-                title: Text('Category', textAlign: TextAlign.center),
+                title: const Text('Category', textAlign: TextAlign.center),
                 subtitle: Text(
                   info?.category ?? 'Unknown',
                   textAlign: TextAlign.center,
@@ -207,14 +211,15 @@ class _EpisodePageState extends State<EpisodePage>
                   );
                 },
               ),
-              Divider(),
+              const Divider(),
               Row(
                 // move Watch Directly section up
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: ListTile(
-                      title: Text('Server List', textAlign: TextAlign.center),
+                      title: const Text('Server List',
+                          textAlign: TextAlign.center),
                       subtitle: Column(
                         children: renderServerList(),
                       ),
@@ -222,7 +227,7 @@ class _EpisodePageState extends State<EpisodePage>
                   ),
                   Expanded(
                     child: ListTile(
-                      title: Text(
+                      title: const Text(
                         'Watch Directly',
                         textAlign: TextAlign.center,
                       ),
@@ -233,17 +238,17 @@ class _EpisodePageState extends State<EpisodePage>
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Divider(),
               ),
               buildWatchStatus(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Divider(),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 32, right: 32),
+              const Padding(
+                padding: EdgeInsets.only(left: 32, right: 32),
                 child: Text(
                   'Please note that this app does not have any controls over these sources',
                   textAlign: TextAlign.center,
@@ -281,7 +286,7 @@ class _EpisodePageState extends State<EpisodePage>
                   showDialog(
                     context: context,
                     builder: (c) => AlertDialog(
-                      title: Text(
+                      title: const Text(
                         'Video playback',
                         textAlign: TextAlign.center,
                       ),
@@ -292,14 +297,14 @@ class _EpisodePageState extends State<EpisodePage>
                         children: [
                           ElevatedButton(
                             onPressed: () => openWithOtherApps(e),
-                            child: Text('Use other apps'),
+                            child: const Text('Use other apps'),
                           ),
                           ElevatedButton(
                             onPressed: () => openInAppPlayer(e),
-                            child: Text('Use in-app player'),
+                            child: const Text('Use in-app player'),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 16.0),
                             child: Text(
                               'In-app player is simple and blocks all pop-ups while other apps might have more advanced features',
                               textAlign: TextAlign.center,
@@ -315,7 +320,7 @@ class _EpisodePageState extends State<EpisodePage>
                 }
               } else {
                 if (e.link != null) {
-                  launch(e.link!);
+                  launchUrlString(e.link!);
                   _addToHistory();
                 }
               }
@@ -328,18 +333,18 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   List<Widget> renderMP4List() {
-    if (mp4List.length == 0) {
+    if (mp4List.isEmpty) {
       return [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: CircularProgressIndicator(),
           ),
         ),
       ];
     }
 
-    return this.mp4List.map((e) {
+    return mp4List.map((e) {
       return Padding(
         padding: const EdgeInsets.only(top: 4),
         child: ActionChip(
@@ -360,8 +365,8 @@ class _EpisodePageState extends State<EpisodePage>
                 context: context,
                 barrierDismissible: false,
                 builder: (context) => AlertDialog(
-                  title: Text("AnimeGo is paused"),
-                  content: Text(
+                  title: const Text("AnimeGo is paused"),
+                  content: const Text(
                     "Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.",
                   ),
                   actions: [
@@ -370,13 +375,13 @@ class _EpisodePageState extends State<EpisodePage>
                         _addToHistory();
                         Navigator.of(context).pop();
                       },
-                      child: Text("Continue"),
+                      child: const Text("Continue"),
                     ),
                   ],
                 ),
               );
 
-              Future.delayed(Duration(milliseconds: 300), () {
+              Future.delayed(const Duration(milliseconds: 300), () {
                 // Add a short delay to make sure the alert is shown
                 NativePlayer(link: e.link, referrer: e.referrer).play();
               });
@@ -389,7 +394,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   getMP4List() async {
-    for (VideoServer server in this.info?.servers ?? []) {
+    for (VideoServer server in info?.servers ?? []) {
       final link = server.link;
       final title = server.title;
       if (link != null && title != null) {
@@ -398,12 +403,13 @@ class _EpisodePageState extends State<EpisodePage>
           // this is the link we need to parse
           if (mounted) {
             setState(() {
-              if (link.contains('embedplus'))
+              if (link.contains('embedplus')) {
                 downloadLink = link.replaceFirst('embedplus', 'download');
-              else if (link.contains('streaming'))
+              } else if (link.contains('streaming')) {
                 downloadLink = link.replaceFirst('streaming.php', 'download');
+              }
             });
-            print('Download link: $downloadLink');
+            _logger.info('Download link: $downloadLink');
           }
 
           final parser = MP4Parser(downloadLink ?? '');
@@ -414,9 +420,9 @@ class _EpisodePageState extends State<EpisodePage>
           }
 
           final mp4s = parser.parseHTML(html);
-          if (mounted && mp4s != null && mp4s.length > 0) {
+          if (mounted && mp4s != null && mp4s.isNotEmpty) {
             setState(() {
-              this.mp4List = mp4s;
+              mp4List = mp4s;
             });
           }
 

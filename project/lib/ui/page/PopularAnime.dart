@@ -12,8 +12,8 @@ class PopularAnime extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseEventService().logUseEpisode();
     return Scaffold(
-      appBar: AppBar(title: Text('Popular')),
-      body: AnimeGrid(url: '/popular.html'),
+      appBar: AppBar(title: const Text('Popular')),
+      body: const AnimeGrid(url: '/popular.html'),
     );
   }
 }

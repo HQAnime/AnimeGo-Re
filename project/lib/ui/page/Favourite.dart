@@ -13,6 +13,7 @@ class Favourite extends StatelessWidget implements Embeddable {
     this.embedded = false,
   }) : super(key: key);
 
+  @override
   final bool embedded;
 
   @override
@@ -20,8 +21,8 @@ class Favourite extends StatelessWidget implements Embeddable {
     FirebaseEventService().logUseFavouriteList();
     final list = Global().favouriteList;
     return Scaffold(
-      appBar: embedded ? null : AppBar(title: Text('Favourite Anime')),
-      body: list.length > 0
+      appBar: embedded ? null : AppBar(title: const Text('Favourite Anime')),
+      body: list.isNotEmpty
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {
@@ -32,8 +33,9 @@ class Favourite extends StatelessWidget implements Embeddable {
                     Navigator.push(
                       context,
                       Util.platformPageRoute(builder: (c) {
-                        if (Util(context).isTablet())
+                        if (Util(context).isTablet()) {
                           return TabletAnimePage(info: curr);
+                        }
                         return AnimeDetailPage(info: curr);
                       }),
                     );
@@ -41,7 +43,7 @@ class Favourite extends StatelessWidget implements Embeddable {
                 );
               },
             )
-          : Center(
+          : const Center(
               child: Text('No anime found'),
             ),
     );

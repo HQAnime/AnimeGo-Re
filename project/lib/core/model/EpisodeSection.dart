@@ -8,8 +8,8 @@ class EpisodeSection {
 
   EpisodeSection(Element e, this.movieID) {
     final episode = e.nodes[1];
-    this.episodeStart = episode.attributes['ep_start'];
-    this.episodeEnd = episode.attributes['ep_end'];
+    episodeStart = episode.attributes['ep_start'];
+    episodeEnd = episode.attributes['ep_end'];
   }
 
   String getLink() => '?ep_start=$episodeStart&ep_end=$episodeEnd&id=$movieID';

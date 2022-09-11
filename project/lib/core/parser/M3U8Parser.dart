@@ -16,7 +16,7 @@ class M3U8Parser extends BasicParser {
       final regex = RegExp(r"sources:\[{file: .(.*)\.m3u8'");
       final m3u8Link = regex.firstMatch(script)?.group(1);
       if (m3u8Link != null) {
-        return m3u8Link + '.m3u8';
+        return '$m3u8Link.m3u8';
       }
     }
 

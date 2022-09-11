@@ -9,7 +9,7 @@ class SearchAnime extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchAnimeState createState() => _SearchAnimeState();
+  State<SearchAnime> createState() => _SearchAnimeState();
 }
 
 class _SearchAnimeState extends State<SearchAnime> {
@@ -22,8 +22,8 @@ class _SearchAnimeState extends State<SearchAnime> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          style: TextStyle(color: Colors.white, fontSize: 20),
-          decoration: InputDecoration.collapsed(
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+          decoration: const InputDecoration.collapsed(
             hintText: 'Search anime',
             hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
           ),
@@ -32,8 +32,8 @@ class _SearchAnimeState extends State<SearchAnime> {
           autofocus: true,
           onChanged: (t) {
             setState(() {
-              this.search = t;
-              this.formattedSearch = '';
+              search = t;
+              formattedSearch = '';
             });
           },
           onEditingComplete: () {

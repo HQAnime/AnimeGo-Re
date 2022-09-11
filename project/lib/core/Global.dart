@@ -8,19 +8,20 @@ import 'package:animego/core/parser/DomainParser.dart';
 import 'package:animego/core/parser/UpdateParser.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// It handles global data
 class Global {
   // Constants
-  static final defaultDomain = 'https://gogoanimes.to/';
-  static final appVersion = '1.3.1';
-  static final github = 'https://github.com/HenryQuan/AnimeGo';
-  static final latestRelease =
+  static const defaultDomain = 'https://gogoanimes.to/';
+  static const appVersion = '1.3.5';
+  static const github = 'https://github.com/HenryQuan/AnimeGo';
+  static const latestRelease =
       'https://github.com/HenryQuan/AnimeGo/release/latest';
 
-  static final privacyPolicy =
+  static const privacyPolicy =
       'https://raw.githubusercontent.com/HenryQuan/AnimeGo-Re/master/project/lib/core/Firebase.dart';
 
   static final email = Uri(
@@ -31,6 +32,8 @@ class Global {
     },
   ).toString();
 
+  final _logger = Logger('Global');
+
   /// Whether the app has been init
   bool _hasInit = false;
 
@@ -39,7 +42,7 @@ class Global {
   // Return default if null
   String getDomain() => _domain ?? Global.defaultDomain;
   updateDomain(String domain) {
-    this._domain = domain;
+    _domain = domain;
     prefs.setString(websiteDomain, domain);
   }
 
@@ -52,7 +55,7 @@ class Global {
   bool? _hideDUB;
   bool? get hideDUB => _hideDUB;
   set hideDUB(bool? value) {
-    this._hideDUB = value;
+    _hideDUB = value;
     prefs.setBool(hideDubAnime, _hideDUB ?? false);
   }
 
@@ -63,7 +66,7 @@ class Global {
   void clearAll() => prefs.setString(watchHistory, 'null');
   void addToHistory(BasicAnime? anime) {
     if (anime == null) return;
-    print('Adding ${anime.toString()} to history');
+    _logger.info('Adding ${anime.toString()} to history');
     _history.add(anime);
     // Save
     prefs.setString(watchHistory, jsonEncode(_history.toJson()));
@@ -94,7 +97,7 @@ class Global {
 
   // Singleton pattern
   Global._init();
-  static final Global _instance = new Global._init();
+  static final Global _instance = Global._init();
 
   // Use dart's factory constructor to implement this patternx
   factory Global() {
@@ -113,31 +116,31 @@ class Global {
         dateString = DateTime.now().toString();
         prefs.setString(lastUpdateDate, dateString);
       }
-      this._lastDate = DateTime.parse(dateString);
+      _lastDate = DateTime.parse(dateString);
 
       // Get currently saved domain, use default if it is null
       String currDomain =
           prefs.getString(websiteDomain) ?? Global.defaultDomain;
-      print('Saved domain is $currDomain');
+      _logger.info('Saved domain is $currDomain');
 
       // Load history and favourite anime
       String? historyString = prefs.getString(watchHistory);
       if (historyString != null) {
-        this._history = WatchHistory.fromJson(jsonDecode(historyString));
+        _history = WatchHistory.fromJson(jsonDecode(historyString));
       }
 
       String? favouriteString = prefs.getString(favouriteAnime);
       if (favouriteString != null) {
-        this._favourite = FavouriteAnime.fromJson(jsonDecode(favouriteString));
+        _favourite = FavouriteAnime.fromJson(jsonDecode(favouriteString));
       }
 
       // Set to false by default
-      this._hideDUB = prefs.getBool(hideDubAnime) ?? false;
+      _hideDUB = prefs.getBool(hideDubAnime) ?? false;
 
       // Get the latest domain
       String latestDomain = await DomainParser(currDomain).getNewDomain();
       updateDomain(latestDomain);
-      print('The latest domain is $latestDomain');
+      _logger.info('The latest domain is $latestDomain');
 
       // Set the flag to true
       _hasInit = true;
@@ -151,7 +154,7 @@ class Global {
       {bool force = false}) async {
     // Check if the difference is at least 30 days
     if (!force && _lastDate.difference(DateTime.now()).inDays < 15) {
-      print('No need to check for update');
+      _logger.info('No need to check for update');
       return;
     }
 
@@ -159,13 +162,13 @@ class Global {
     if (!_hasChecked) {
       _hasChecked = true;
       final parser = UpdateParser();
-      this._update = parser.parseHTML(
+      _update = parser.parseHTML(
         await parser.downloadHTML(),
       );
     }
 
     if (_update.version != appVersion) {
-      print('There is an update');
+      _logger.info('There is an update');
       // Update the date
       prefs.setString(lastUpdateDate, _lastDate.toString());
       // Show update dialog
@@ -178,29 +181,29 @@ class Global {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
             TextButton(
-              onPressed: () => launch(_update.downloadLink ??
+              onPressed: () => launchUrlString(_update.downloadLink ??
                   'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
-              child: Text('Update now (Android only)'),
+              child: const Text('Update now (Android only)'),
             ),
           ],
         ),
       );
     } else {
-      print('Up to date');
+      _logger.info('Up to date');
       // Only show this in force mode
       if (force) {
         showDialog(
           context: context,
           builder: (c) => AlertDialog(
-            title: Text('Update to date'),
-            content: Text('You are using the latest version.'),
+            title: const Text('Update to date'),
+            content: const Text('You are using the latest version.'),
             actions: [
               AnimeFlatButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text('Close'),
+                child: const Text('Close'),
               ),
             ],
           ),

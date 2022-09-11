@@ -11,7 +11,7 @@ class GithubUpdate {
   final String? downloadLink;
 
   factory GithubUpdate.fromJson(Map<String, dynamic>? json) {
-    if (json == null) return GithubUpdate();
+    if (json == null) return const GithubUpdate();
     return GithubUpdate(
       version: json['version'],
       newFeatures: json['new'],

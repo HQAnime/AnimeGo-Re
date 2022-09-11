@@ -23,15 +23,16 @@ class AnimeDetailPage extends StatefulWidget implements Embeddable {
     Key? key,
     required this.info,
     this.embedded = false,
-    this.onEpisodeSelected = null,
+    this.onEpisodeSelected,
   }) : super(key: key);
 
   final BasicAnime? info;
+  @override
   final bool embedded;
   final void Function(EpisodeInfo?)? onEpisodeSelected;
 
   @override
-  _AnimeDetailPageState createState() => _AnimeDetailPageState();
+  State<AnimeDetailPage> createState() => _AnimeDetailPageState();
 }
 
 class _AnimeDetailPageState extends State<AnimeDetailPage> {
@@ -45,7 +46,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
   bool isFavourite = false;
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -61,14 +62,14 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         DetailedInfoParser(global.getDomain() + (widget.info?.link ?? ''));
     parser.downloadHTML().then((body) {
       setState(() {
-        this.loading = false;
-        this.info = parser.parseHTML(body);
-        this.error = info?.status == null;
-        this.isFavourite = global.isFavourite(widget.info);
+        loading = false;
+        info = parser.parseHTML(body);
+        error = info?.status == null;
+        isFavourite = global.isFavourite(widget.info);
 
         // Auto load if there is only one section
         if (info?.episodes.length == 1) {
-          this.loadEpisode(info?.episodes.first);
+          loadEpisode(info?.episodes.first);
         }
       });
     });
@@ -79,9 +80,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
     if (error) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Unknown Error'),
+          title: const Text('Unknown Error'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('Something went very wrong'),
         ),
       );
@@ -98,10 +99,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               ),
               onPressed: () {
                 FirebaseEventService().logUseFavourite();
-                if (isFavourite)
+                if (isFavourite) {
                   global.removeFromFavourite(widget.info);
-                else
+                } else {
                   global.addToFavourite(widget.info);
+                }
 
                 setState(() {
                   isFavourite = !isFavourite;
@@ -111,16 +113,17 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         ],
       ),
       body: SafeArea(
-          child: LoadingSwitcher(
-        child: this.renderBody(),
-        loading: this.loading,
-      )),
+        child: LoadingSwitcher(
+          loading: loading,
+          child: renderBody(),
+        ),
+      ),
     );
   }
 
   Widget renderBody() {
     if (loading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else {
@@ -132,7 +135,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
             child: Text(
               info?.name ?? '',
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
             ),
           ),
           Padding(
@@ -155,7 +158,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       centeredListTile(
                           'Episode(s)', info?.lastEpisode ?? 'Unkown'),
                       ListTile(
-                        title: Text('Category', textAlign: TextAlign.center),
+                        title:
+                            const Text('Category', textAlign: TextAlign.center),
                         subtitle: ActionChip(
                           onPressed: () {
                             Navigator.pushReplacement(
@@ -191,13 +195,13 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           SearchAnimeButton(name: widget.info?.name),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: ListTile(
-              title: Text('Genre', textAlign: TextAlign.center),
+              title: const Text('Genre', textAlign: TextAlign.center),
               subtitle: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 4,
@@ -220,8 +224,8 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
             ),
           ),
           centeredListTile('Summary', info?.summary ?? 'No summary'),
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
+          const Padding(
+            padding: EdgeInsets.only(top: 8),
             child: Text(
               'Episode List',
               textAlign: TextAlign.center,
@@ -241,19 +245,20 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
   List<Widget> renderEpisodes() {
     if (info == null) return [];
     // This is for new animes where they haven't aired yet
-    if (info!.episodes.length == 0)
+    if (info!.episodes.isEmpty) {
       return [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Text('No episodes'),
         )
       ];
+    }
 
     return info!.episodes.map((e) {
       return Padding(
         padding: const EdgeInsets.all(2),
         child: InkWell(
-          onTap: this.loadingEpisode
+          onTap: loadingEpisode
               ? null
               : () {
                   loadEpisode(e);
@@ -277,24 +282,24 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
   void loadEpisode(EpisodeSection? e) {
     // Don't update if the selection is the same
-    if (e?.episodeStart == this.currEpisode) return;
+    if (e?.episodeStart == currEpisode) return;
 
     setState(() {
-      this.currEpisode = e?.episodeStart;
-      this.loadingEpisode = true;
+      currEpisode = e?.episodeStart;
+      loadingEpisode = true;
     });
 
     FirebaseEventService().logUseEpisodeList();
 
     final parser = EpisodeListParser(
-      global.getDomain() + '/load-list-episode',
+      '${global.getDomain()}/load-list-episode',
       e,
     );
 
     parser.downloadHTML().then((body) {
       setState(() {
-        this.episodes = parser.parseHTML(body);
-        this.loadingEpisode = false;
+        episodes = parser.parseHTML(body);
+        loadingEpisode = false;
       });
     });
   }
@@ -303,7 +308,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
     if (currEpisode == null) {
       return Container();
     } else if (loadingEpisode) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else {
@@ -313,13 +318,13 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           alignment: WrapAlignment.center,
           spacing: 4,
           runSpacing: 4,
-          children: this.episodes.map((e) {
+          children: episodes.map((e) {
             return Padding(
               padding: const EdgeInsets.all(4),
               child: ElevatedButton(
                 style: ButtonStyle(
                   textStyle: MaterialStateProperty.all(
-                    TextStyle(color: Colors.white),
+                    const TextStyle(color: Colors.white),
                   ),
                 ),
                 onPressed: () {

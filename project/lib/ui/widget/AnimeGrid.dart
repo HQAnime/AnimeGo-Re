@@ -10,6 +10,7 @@ import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/AnimeCard.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 /// AnimeGrid class
 class AnimeGrid extends StatefulWidget {
@@ -21,11 +22,12 @@ class AnimeGrid extends StatefulWidget {
   final String? url;
 
   @override
-  _AnimeGridState createState() => _AnimeGridState();
+  State<AnimeGrid> createState() => _AnimeGridState();
 }
 
 class _AnimeGridState extends State<AnimeGrid> {
   final global = Global();
+  final _logger = Logger('AnimeGrid');
 
   bool loading = true;
   List<AnimeInfo> list = [];
@@ -43,21 +45,21 @@ class _AnimeGridState extends State<AnimeGrid> {
     // Load some data here
     loadData();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      this.controller = ScrollController(initialScrollOffset: 0)
-        ..addListener(() => this.loadMoreData());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller = ScrollController(initialScrollOffset: 0)
+        ..addListener(() => loadMoreData());
     });
   }
 
   @override
   void didChangeDependencies() {
-    print(widget.url);
+    _logger.info(widget.url);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    this.controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -73,11 +75,9 @@ class _AnimeGridState extends State<AnimeGrid> {
 
     bool isSearch = widget.url?.startsWith('/search') ?? false;
     // For search, you need to use &
-    final link = global.getDomain() +
-        widget.url! +
-        (isSearch ? '&' : '?') +
-        'page=$page';
-    print('Current link is $link');
+    final link =
+        '${global.getDomain()}${widget.url!}${isSearch ? '&' : '?'}page=$page';
+    _logger.info('Current link is $link');
     final parser = AnimeParser(link);
     parser.downloadHTML().then((body) {
       final moreData = parser.parseHTML(body);
@@ -88,18 +88,21 @@ class _AnimeGridState extends State<AnimeGrid> {
       // Append more data
       if (mounted) {
         setState(() {
-          this.loading = false;
+          loading = false;
           // If refresh, just reset the list to more data
-          if (refresh)
-            this.list = moreData;
-          else
-            this.list += moreData;
+          if (refresh) {
+            list = moreData;
+          } else {
+            list += moreData;
+          }
           // If more data is emptp, we have reached the end
-          this.canLoadMore = moreData.length > 0;
-          this.showIndicator = false;
+          canLoadMore = moreData.isNotEmpty;
+          showIndicator = false;
         });
       } else {
-        print('WARNING: AnimeGrid is setting state after the view is disposed');
+        _logger.warning(
+          'AnimeGrid is setting state after the view is disposed',
+        );
       }
     });
   }
@@ -107,24 +110,24 @@ class _AnimeGridState extends State<AnimeGrid> {
   /// Load more data if the grid is close to the end
   void loadMoreData() {
     if (controller.position.extentAfter < 10 && canLoadMore) {
-      print('Loading new data');
-      this.page += 1;
-      this.loadData();
+      _logger.info('Loading new data');
+      page += 1;
+      loadData();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return LoadingSwitcher(
-      loading: this.loading,
-      child: this.renderBody(),
+      loading: loading,
+      child: renderBody(),
     );
   }
 
   Widget renderBody() {
     if (loading) {
       // While loading, show a loading indicator and a normal app bar
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else {
@@ -134,7 +137,7 @@ class _AnimeGridState extends State<AnimeGrid> {
           children: <Widget>[
             RefreshIndicator(
               onRefresh: () async {
-                this.loadData(refresh: true);
+                loadData(refresh: true);
               },
               child: Scrollbar(
                 controller: controller,
@@ -145,18 +148,18 @@ class _AnimeGridState extends State<AnimeGrid> {
                     final imageWidth = constraints.maxWidth / count.toDouble();
                     // Calculat ratio, adjust the offset (70)
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
-                    final length = this.list.length;
+                    final length = list.length;
 
                     return length > 0
                         ? GridView.builder(
-                            controller: this.controller,
+                            controller: controller,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: count,
                               childAspectRatio: ratio,
                             ),
                             itemBuilder: (BuildContext context, int index) {
-                              final info = this.list[index];
+                              final info = list[index];
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
@@ -168,13 +171,15 @@ class _AnimeGridState extends State<AnimeGrid> {
                                       Util.platformPageRoute(
                                           builder: (context) {
                                         if (info.isCategory) {
-                                          if (Util(context).isTablet())
+                                          if (Util(context).isTablet()) {
                                             return TabletAnimePage(info: info);
+                                          }
                                           return AnimeDetailPage(info: info);
                                         }
 
-                                        if (Util(context).isTablet())
+                                        if (Util(context).isTablet()) {
                                           return TabletAnimePage(info: info);
+                                        }
                                         return EpisodePage(info: info);
                                       }),
                                     );
@@ -188,7 +193,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Nothing was found. Try loading it again.\nDouble check the website link in Settings as well.',
                                   textAlign: TextAlign.center,
                                 ),
@@ -199,7 +204,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                                     });
                                     loadData(refresh: true);
                                   },
-                                  icon: Icon(Icons.refresh),
+                                  icon: const Icon(Icons.refresh),
                                 ),
                               ],
                             ),
@@ -209,7 +214,7 @@ class _AnimeGridState extends State<AnimeGrid> {
               ),
             ),
             showIndicator
-                ? Align(
+                ? const Align(
                     alignment: Alignment.bottomCenter,
                     child: LinearProgressIndicator(),
                   )
