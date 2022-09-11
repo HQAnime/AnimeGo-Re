@@ -30,6 +30,49 @@
             {
               "client_id": "464204365713-nvevu55t4lqi3fl6fqmc203gbeas0762.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "464204365713-0500o5as0dmnevp0m83274u8eqe7t5rv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yihengquan.gogoanime"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464204365713:android:8a945190d94d65fa586430",
+        "android_client_info": {
+          "package_name": "com.yihengquan.gogoanime.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464204365713-nvevu55t4lqi3fl6fqmc203gbeas0762.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByJy0id1iAt75w1QmK1q5TM1VqhWViyf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464204365713-nvevu55t4lqi3fl6fqmc203gbeas0762.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "464204365713-0500o5as0dmnevp0m83274u8eqe7t5rv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yihengquan.gogoanime"
+              }
             }
           ]
         }
