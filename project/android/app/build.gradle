@@ -59,6 +59,7 @@ android {
         }
         prod {
             dimension 'github'
+            resValue "string", "app_name", "AnimeGo"
         }
     }
 }
