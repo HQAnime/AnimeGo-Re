@@ -32,7 +32,7 @@ class OneEpisodeInfo extends BasicAnime {
     final body = e?.getElementsByClassName('anime_video_body_cate').first;
     final rawTitle = e?.nodes[1].text;
     if (rawTitle != null) {
-      final regex = RegExp(r"Episode (\w.*?) ");
+      final regex = RegExp(r'Episode (\w.*?) ');
       final match = regex.firstMatch(rawTitle);
       currentEpisode = match?.group(1);
     }

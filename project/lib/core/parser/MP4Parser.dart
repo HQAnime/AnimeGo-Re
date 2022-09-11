@@ -18,7 +18,7 @@ class MP4Parser extends BasicParser {
       List<MP4Info> mp4s = [];
       for (final d in downloads) {
         final link = d.firstChild?.attributes['href'];
-        final description = d.text.replaceAll("  ", "").split('\n');
+        final description = d.text.replaceAll('  ', '').split('\n');
         var name = '';
         // we need the second one and the first should be `Download`
         if (description.length > 1 && description[0] == 'Download') {

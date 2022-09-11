@@ -76,7 +76,7 @@ class _EpisodePageState extends State<EpisodePage>
           }
 
           info?.currentEpisodeLink = link;
-          fomattedName = info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
+          fomattedName = info?.name?.split(RegExp(r'[^a-zA-Z0-9]')).join('+');
         });
 
         getMP4List();
@@ -365,9 +365,9 @@ class _EpisodePageState extends State<EpisodePage>
                 context: context,
                 barrierDismissible: false,
                 builder: (context) => AlertDialog(
-                  title: const Text("AnimeGo is paused"),
+                  title: const Text('AnimeGo is paused'),
                   content: const Text(
-                    "Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.",
+                    'Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.',
                   ),
                   actions: [
                     TextButton(
@@ -375,7 +375,7 @@ class _EpisodePageState extends State<EpisodePage>
                         _addToHistory();
                         Navigator.of(context).pop();
                       },
-                      child: const Text("Continue"),
+                      child: const Text('Continue'),
                     ),
                   ],
                 ),

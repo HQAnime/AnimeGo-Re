@@ -10,7 +10,7 @@ class VideoServer {
     // Fix link with https
     var link1 = node.attributes['data-video'] ?? '';
     if (!link1.startsWith('http')) {
-      link1 = 'https://' + link1;
+      link1 = 'https://$link1';
     }
     // we have //// in the link and must be removed
     link = link1.replaceFirst('////', '//');

@@ -1,7 +1,7 @@
 // import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
 
-@Deprecated("dart_vlc is no longer used due to its potential memory")
+@Deprecated('dart_vlc is no longer used due to its potential memory')
 class VLCPlayerPage extends StatefulWidget {
   const VLCPlayerPage({
     Key? key,
