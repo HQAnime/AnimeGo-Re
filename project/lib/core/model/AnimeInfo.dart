@@ -39,7 +39,7 @@ class AnimeInfo extends BasicAnime {
 
   /// Some anime are DUB and I will put the name in the front
   void _formatAnimeName(String? name) {
-    if (name != null && name.toLowerCase().contains("(dub)")) {
+    if (name != null && name.toLowerCase().contains('(dub)')) {
       // It is 100% that dub will be at the end
       isDUB = true;
       final component = name.split(' ')..removeLast();
