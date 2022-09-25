@@ -1,6 +1,7 @@
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/LastestAnime.dart';
+import 'package:animego/ui/page/adaptive_home.dart';
 import 'package:animego/ui/page/tablet/TabletHomePage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +34,13 @@ class MyApp extends StatelessWidget {
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
+    useMaterial3: true,
   );
 
   // TODO: find a better solution, this is too manual
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
@@ -81,26 +84,41 @@ class MyApp extends StatelessWidget {
             );
           };
 
-          // The data is simply a `true`
-          if (snapshot.hasData) {
-            // Check for update after init has been done
-            Global().checkForUpdate(context);
-            // Use another view for tablets (or devices with a large screen)
-            if (Util(context).isTablet()) return const TabletHomePage();
-            return const LastestAnime();
-          } else {
-            // A simple loading screen so that it is not that boring
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Loading...'),
-              ),
-              body: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: _buildHome(context, snapshot),
+            // scale in from a circle
+            transitionBuilder: (child, animation) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          );
         },
       ),
     );
+  }
+
+  Widget _buildHome(BuildContext context, AsyncSnapshot snapshot) {
+    // The data is simply a `true`
+    if (snapshot.hasData) {
+      // Check for update after init has been done
+      Global().checkForUpdate(context);
+
+      // TODO: try out the new adaptive widget
+      return AdaptiveHomePage();
+
+      // Use another view for tablets (or devices with a large screen)
+      if (Util(context).isTablet()) return const TabletHomePage();
+      return const LastestAnime();
+    } else {
+      // A simple loading screen so that it is not that boring
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Loading...'),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
   }
 }
