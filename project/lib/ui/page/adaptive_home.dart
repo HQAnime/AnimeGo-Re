@@ -74,6 +74,8 @@ const _navigationItems = [
 ];
 
 class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
+  _PageCode _selectedPage = _PageCode.latest;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -101,7 +103,12 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
 
   NavigationRail _renderRail() {
     return NavigationRail(
-      labelType: NavigationRailLabelType.selected,
+      labelType: NavigationRailLabelType.all,
+      // leading: Image.asset(
+      //   'assets/images/placeholder.png',
+      //   width: 48,
+      //   height: 48,
+      // ),
       destinations: [
         for (final item in _navigationItems)
           NavigationRailDestination(
@@ -109,7 +116,10 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
             label: Text(item.title),
           ),
       ],
-      selectedIndex: 0,
+      selectedIndex: _selectedPage.index,
+      onDestinationSelected: (value) => setState(() {
+        _selectedPage = _navigationItems[value].code;
+      }),
     );
   }
 
@@ -122,6 +132,8 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
             ListTile(
               leading: Icon(item.icon),
               title: Text(item.title),
+              selected: _PageCode == item.code,
+              onTap: () => setState(() => _selectedPage = item.code),
             )
         ],
       ),
