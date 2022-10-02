@@ -8,6 +8,7 @@ import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
 import 'package:animego/core/parser/MP4Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
+import 'package:animego/core/webview_player.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
@@ -320,7 +321,9 @@ class _EpisodePageState extends State<EpisodePage>
                 }
               } else {
                 if (e.link != null) {
-                  launchUrlString(e.link!);
+                  // launchUrlString(e.link!);
+                  final webview = WebViewPlayer(e.link!);
+                  webview.play();
                   _addToHistory();
                 }
               }
