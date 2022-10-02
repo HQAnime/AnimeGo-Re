@@ -120,7 +120,15 @@ class _AnimeGridState extends State<AnimeGrid> {
   Widget build(BuildContext context) {
     return LoadingSwitcher(
       loading: loading,
-      child: renderBody(),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        child: renderBody(),
+        transitionBuilder: (child, animation) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+        layoutBuilder: (currentChild, previousChildren) => currentChild!,
+      ),
     );
   }
 

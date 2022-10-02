@@ -19,7 +19,8 @@ class SeasonalAnime extends StatefulWidget implements Embeddable {
 
 const _seasons = ['winter', 'spring', 'summer', 'fall'];
 
-class _SeasonalAnimeState extends State<SeasonalAnime> {
+class _SeasonalAnimeState extends State<SeasonalAnime>
+    with AutomaticKeepAliveClientMixin {
   String url = '/new-season.html';
 
   @override
@@ -30,6 +31,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: widget.embedded ? null : AppBar(title: const Text('New Season')),
       body: Column(
@@ -104,4 +106,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
 
     return [year, season];
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

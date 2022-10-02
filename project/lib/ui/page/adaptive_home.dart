@@ -5,15 +5,6 @@ import 'package:animego/ui/page/Settings.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
-class AdaptiveHomePage extends StatefulWidget {
-  const AdaptiveHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<AdaptiveHomePage> createState() => _AdaptiveHomePageState();
-}
-
 enum _PageCode {
   latest,
   seasonal,
@@ -78,6 +69,15 @@ const _navigationItems = [
   ),
 ];
 
+class AdaptiveHomePage extends StatefulWidget {
+  const AdaptiveHomePage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<AdaptiveHomePage> createState() => _AdaptiveHomePageState();
+}
+
 class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
   _PageCode _selectedPage = _PageCode.latest;
 
@@ -109,8 +109,8 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
     _LazyAliveWidget(
       child: AnimeGrid(url: '/popular.html'),
     ),
-    const History(embedded: true),
-    const Favourite(embedded: true),
+    History(embedded: true),
+    Favourite(embedded: true),
     const Settings(embedded: true),
   ];
 
@@ -170,7 +170,7 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
             ListTile(
               leading: Icon(item.icon),
               title: Text(item.title),
-              selected: _PageCode == item.code,
+              selected: _selectedPage == item.code,
               onTap: () => setState(() => _selectedPage = item.code),
             )
         ],
