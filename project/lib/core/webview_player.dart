@@ -22,6 +22,7 @@ class WebViewPlayer {
       // use the native channel
       final channel = MethodChannel('AnimeGo');
       final result = await channel.invokeMethod('webview_player', link);
+      assert(result != null, 'Failed to play $link');
       return result;
     }
 

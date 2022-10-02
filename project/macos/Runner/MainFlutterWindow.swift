@@ -33,8 +33,7 @@ class MainFlutterWindow: NSWindow {
 
     private func launchWebView(_ link: String, result: @escaping FlutterResult) {
         // get webview_rust path from resources
-        let bundle = Bundle.main
-        guard let path = bundle.path(forResource: "webview_rust", ofType: nil) else {
+        guard let path = Bundle.main.path(forResource: "webview_rust", ofType: nil) else {
             result(nil)
             assertionFailure("webview_rust is not found, make sure you build it with cargo build --release in the webview folder")
             return
