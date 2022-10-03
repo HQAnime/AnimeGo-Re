@@ -1,5 +1,7 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
+import 'package:animego/ui/page/SearchAnime.dart';
 import 'package:animego/ui/page/SeasonalAnime.dart';
 import 'package:animego/ui/page/Settings.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
@@ -133,6 +135,16 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
                 ),
               ],
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  Util.platformPageRoute(builder: (context) {
+                    return SearchAnime();
+                  }),
+                );
+              },
+              child: const Icon(Icons.search),
+            ),
           ),
         ),
       ],
@@ -142,11 +154,6 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
   NavigationRail _renderRail() {
     return NavigationRail(
       labelType: NavigationRailLabelType.all,
-      // leading: Image.asset(
-      //   'assets/images/placeholder.png',
-      //   width: 48,
-      //   height: 48,
-      // ),
       destinations: [
         for (final item in _navigationItems)
           NavigationRailDestination(
@@ -154,6 +161,16 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
             label: Text(item.title),
           ),
       ],
+      leading: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            Util.platformPageRoute(builder: (context) {
+              return SearchAnime();
+            }),
+          );
+        },
+        child: const Icon(Icons.search),
+      ),
       selectedIndex: _selectedPage.index,
       onDestinationSelected: (value) => setState(() {
         _selectedPage = _navigationItems[value].code;
@@ -166,6 +183,21 @@ class _AdaptiveHomePageState extends State<AdaptiveHomePage> {
       child: ListView(
         children: [
           DrawerHeader(child: Text('Drawer Header')),
+          // render a search button aligned to the left
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.of(context).push(
+                  Util.platformPageRoute(builder: (context) {
+                    return SearchAnime();
+                  }),
+                );
+              },
+              icon: const Icon(Icons.search),
+              label: const Text('Search'),
+            ),
+          ),
           for (final item in _navigationItems)
             ListTile(
               leading: Icon(item.icon),
