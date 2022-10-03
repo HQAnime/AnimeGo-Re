@@ -4,10 +4,35 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+// headers for method channel
+// https://stackoverflow.com/a/69821423
+#include <flutter/binary_messenger.h>
+#include <flutter/method_channel.h>
+#include <flutter/method_result_functions.h>
+#include <flutter/standard_method_codec.h>
+
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
     : project_(project) {}
 
 FlutterWindow::~FlutterWindow() {}
+
+void launchWebView(const flutter::MethodCall<>&,
+                   std::unique_ptr<flutter::MethodResult<>>);
+void setupMethodChannel(flutter::BinaryMessenger* messenger) {
+    const std::string channelName = "AnimeGo";
+    const auto channel =
+        std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
+            messenger, channelName,
+            &flutter::StandardMethodCodec::GetInstance());
+
+    channel->SetMethodCallHandler([](const auto& call, auto result) {
+        if (call.method_name().compare("webview_player") == 0) {
+            launchWebView(call, std::move(result));
+        } else {
+            result->NotImplemented();
+        }
+    });
+}
 
 bool FlutterWindow::OnCreate() {
     if (!Win32Window::OnCreate()) {
@@ -26,6 +51,8 @@ bool FlutterWindow::OnCreate() {
     }
     RegisterPlugins(flutter_controller_->engine());
     SetChildContent(flutter_controller_->view()->GetNativeWindow());
+    // similar to macOS the messenger is coming from the engine
+    setupMethodChannel(flutter_controller_->engine()->messenger());
     return true;
 }
 
@@ -60,4 +87,33 @@ FlutterWindow::MessageHandler(HWND hwnd,
     }
 
     return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+}
+
+// Callbacks from Flutter
+void launchWebView(const flutter::MethodCall<>& call,
+                   std::unique_ptr<flutter::MethodResult<>> result) {
+    // errors are not handled here so pass result->Success(); back to Flutter
+    try {
+        auto argument = call.arguments();
+        if (argument->IsNull()) {
+            result->Success();
+            return;
+        }
+
+        // get the exe running path
+        char path[MAX_PATH];
+        GetCurrentDirectoryA(MAX_PATH, path);
+        // get the directory of the exe
+        std::string exePath = std::string(path);
+        std::string exeDir = exePath.substr(0, exePath.find_last_of("\\/"));
+
+        std::string url = std::get<std::string>(*argument);
+        // run it with the webview_rust.exe which is under the same directory
+        std::string command = "\"" + exeDir + "\\webview_rust.exe\" " + url;
+        std::cout << command << std::endl;
+        int returnCode = system(command.c_str());
+        result->Success(flutter::EncodableValue(returnCode == 0));
+    } catch (const std::exception&) {
+        result->Success();
+    }
 }

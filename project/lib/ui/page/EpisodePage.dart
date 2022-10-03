@@ -323,8 +323,11 @@ class _EpisodePageState extends State<EpisodePage>
                 if (e.link != null) {
                   // launchUrlString(e.link!);
                   final webview = WebViewPlayer(e.link!);
-                  webview.play();
-                  _addToHistory();
+                  webview.play().then((value) {
+                    if (value) {
+                      _addToHistory();
+                    }
+                  });
                 }
               }
             },

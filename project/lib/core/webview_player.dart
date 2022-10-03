@@ -18,25 +18,27 @@ class WebViewPlayer {
     }
 
     if (Platform.isMacOS) {
-      _logger.info('Playing $link on macOS');
-      // use the native channel
       final channel = MethodChannel('AnimeGo');
       final result = await channel.invokeMethod('webview_player', link);
       assert(result != null, 'Failed to play $link');
       return result;
     }
 
-    link = '"$link"';
-    _logger.info('Playing $_link');
-    final pwd = await Process.run('pwd', []);
-    _logger.info('pwd: ${pwd.stdout}');
+    if (Platform.isWindows) {
+      // get the path of the executable
+      String path = Platform.resolvedExecutable;
+      _logger.info('Path: $path');
+      // remove the executable name
+      path = path.substring(0, path.lastIndexOf('\\'));
+      _logger.info('Path: $path');
+      final result = await Process.run(
+        'webview_rust.exe',
+        [link],
+        workingDirectory: path,
+      );
+      return result.exitCode == 0;
+    }
 
-    // get current app path
-    final appPath = Platform.script.toFilePath();
-    _logger.info('appPath: $appPath');
-
-    final webview = await Process.run('./webview_rust', ['"$_link"']);
-    _logger.info(webview.stdout);
-    return webview.exitCode == 0;
+    return false;
   }
 }
