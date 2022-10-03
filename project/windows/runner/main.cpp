@@ -9,6 +9,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance,
                       _In_opt_ HINSTANCE prev,
                       _In_ wchar_t* command_line,
                       _In_ int show_command) {
+
+    // check if another instance is already running
+    const char uniqueMutexName[] = "AnimeGo::Flutter::Runner::Mutex";
+    HANDLE hMutex = CreateMutexA(nullptr, TRUE, uniqueMutexName);
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        CloseHandle(hMutex);
+        return false;
+    }
+
     // Attach to console when present (e.g., 'flutter run') or create a
     // new console when running with a debugger.
     if (!::AttachConsole(ATTACH_PARENT_PROCESS) && ::IsDebuggerPresent()) {
@@ -40,5 +49,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance,
     }
 
     ::CoUninitialize();
+
+
+    // free up the mutex
+    ReleaseMutex(hMutex);
+    CloseHandle(hMutex);
+
     return EXIT_SUCCESS;
 }
