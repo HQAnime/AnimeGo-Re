@@ -25,17 +25,12 @@ class WebViewPlayer {
     }
 
     if (Platform.isWindows) {
-      // get the path of the executable
+      // get the path of the executable and get its folder to make sure the path is correct and absolute
       String path = Platform.resolvedExecutable;
-      _logger.info('Path: $path');
-      // remove the executable name
       path = path.substring(0, path.lastIndexOf('\\'));
-      _logger.info('Path: $path');
-      final result = await Process.run(
-        'webview_rust.exe',
-        [link],
-        workingDirectory: path,
-      );
+      final command = '"$path\\webview_rust.exe"';
+      _logger.info('Program is at $command');
+      final result = await Process.run(command, [link]);
       return result.exitCode == 0;
     }
 
