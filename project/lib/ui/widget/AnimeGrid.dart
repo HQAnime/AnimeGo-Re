@@ -152,7 +152,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     final count =
-                        max(min((constraints.maxWidth / 200).floor(), 7), 2);
+                        max(min((constraints.maxWidth / 200).floor(), 8), 2);
                     final imageWidth = constraints.maxWidth / count.toDouble();
                     // Calculat ratio, adjust the offset (70)
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
