@@ -22,12 +22,11 @@ class _SearchAnimeState extends State<SearchAnime> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          style: const TextStyle(color: Colors.white, fontSize: 20),
+          style: const TextStyle(fontSize: 20),
           decoration: const InputDecoration.collapsed(
             hintText: 'Search anime',
-            hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
+            hintStyle: TextStyle(fontSize: 20),
           ),
-          cursorColor: Colors.white70,
           autocorrect: false,
           autofocus: true,
           onChanged: (t) {
