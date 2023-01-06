@@ -77,7 +77,15 @@ class _EpisodePageState extends State<EpisodePage>
           }
 
           info?.currentEpisodeLink = link;
-          fomattedName = info?.name?.split(RegExp(r'[^a-zA-Z0-9]')).join('+');
+          final normalised = info?.name?.replaceAll(
+            RegExp(r'\(.*censor.*\)'),
+            '',
+          );
+          // split and remove empty string
+          fomattedName = normalised
+              ?.split(RegExp(r'[^a-zA-Z0-9]'))
+              .where((element) => element.isNotEmpty)
+              .join('_');
         });
 
         getMP4List();
@@ -211,6 +219,14 @@ class _EpisodePageState extends State<EpisodePage>
                     ),
                   );
                 },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  launchUrlString(
+                    'https://myanimelist.net/search/all?q=$fomattedName',
+                  );
+                },
+                child: const Text('Check on MyAnimeList'),
               ),
               const Divider(),
               Row(
