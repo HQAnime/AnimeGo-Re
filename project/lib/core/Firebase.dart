@@ -57,6 +57,10 @@ class FirebaseEventService {
     _logSimpleEvent('google_anime');
   }
 
+  void logUseMAL() {
+    _logSimpleEvent('mal_anime');
+  }
+
   void logUseHistoryList() {
     _logSimpleEvent('history');
   }

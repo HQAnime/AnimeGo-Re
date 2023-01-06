@@ -47,6 +47,20 @@ class SearchAnimeButton extends StatelessWidget {
           },
           child: const Text('DuckDuckGo'),
         ),
+        AnimeFlatButton(
+          onPressed: () {
+            launchUrlString(
+              Uri(
+                scheme: 'https',
+                host: 'myanimelist.net',
+                path: '/search/all',
+                queryParameters: {'q': name},
+              ).toString(),
+            );
+            FirebaseEventService().logUseMAL();
+          },
+          child: const Text('MAL'),
+        ),
       ],
     );
   }
