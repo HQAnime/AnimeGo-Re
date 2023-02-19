@@ -30,9 +30,9 @@ void main() async {
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
   final lightTheme = ThemeData(
-    primarySwatch: Colors.deepOrange,
-    appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.deepOrange,
+      backgroundColor: Colors.white,
     ),
     useMaterial3: true,
   );

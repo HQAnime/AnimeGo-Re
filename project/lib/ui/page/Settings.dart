@@ -163,6 +163,7 @@ class _SettingsState extends State<Settings> {
 
   /// Render different UI based on Desktop or Mobile
   List<Widget> renderExtra() {
+    return [];
     if (Util.isDesktop()) {
       return [
         const Divider(),

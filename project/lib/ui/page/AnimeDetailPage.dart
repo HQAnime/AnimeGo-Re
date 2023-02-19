@@ -70,8 +70,18 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
         // Auto load if there is only one section
         if (info?.episodes.length == 1) {
           loadEpisode(info?.episodes.first);
+        } else {
+          // load the last episode
+          loadEpisode(info?.episodes.last);
         }
       });
+
+      // scroll the view to the bottom to show episode list
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     });
   }
 

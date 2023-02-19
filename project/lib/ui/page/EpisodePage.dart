@@ -1,18 +1,15 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
-import 'package:animego/core/NativePlayer.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/MP4Info.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
-import 'package:animego/core/parser/MP4Parser.dart';
 import 'package:animego/core/parser/OneEpisodeParser.dart';
 import 'package:animego/core/webview_player.dart';
 import 'package:animego/ui/interface/Embeddable.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
-import 'package:animego/ui/page/VideoPlayerPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/page/tablet/TabletAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
@@ -87,8 +84,6 @@ class _EpisodePageState extends State<EpisodePage>
               .where((element) => element.isNotEmpty)
               .join('_');
         });
-
-        getMP4List();
       }
     });
   }
@@ -229,31 +224,11 @@ class _EpisodePageState extends State<EpisodePage>
                 child: const Text('Check on MyAnimeList'),
               ),
               const Divider(),
-              Row(
-                // move Watch Directly section up
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ListTile(
-                      title: const Text('Server List',
-                          textAlign: TextAlign.center),
-                      subtitle: Column(
-                        children: renderServerList(),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListTile(
-                      title: const Text(
-                        'Watch Directly',
-                        textAlign: TextAlign.center,
-                      ),
-                      subtitle: Column(
-                        children: renderMP4List(),
-                      ),
-                    ),
-                  ),
-                ],
+              ListTile(
+                title: const Text('Server List', textAlign: TextAlign.center),
+                subtitle: Column(
+                  children: renderServerList(),
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.all(8.0),
@@ -354,109 +329,8 @@ class _EpisodePageState extends State<EpisodePage>
     }).toList();
   }
 
-  List<Widget> renderMP4List() {
-    if (mp4List.isEmpty) {
-      return [
-        const Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ];
-    }
-
-    return mp4List.map((e) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 4),
-        child: ActionChip(
-          onPressed: () {
-            FirebaseEventService().logWatchDirectly();
-            if (Util.isMobile()) {
-              Navigator.of(context).push(
-                Util.platformPageRoute(builder: (context) {
-                  return VideoPlayerPage(
-                    videoLink: e.link,
-                    refererLink: e.referrer,
-                    title: info?.episodeName,
-                  );
-                }),
-              );
-            } else {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) => AlertDialog(
-                  title: const Text('AnimeGo is paused'),
-                  content: const Text(
-                    'Please close the program after you finish watching.\nMake sure it is closed not minimised or running in the background. \nOn macOS, you can use ⌘Q to quit the app.',
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        _addToHistory();
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Continue'),
-                    ),
-                  ],
-                ),
-              );
-
-              Future.delayed(const Duration(milliseconds: 300), () {
-                // Add a short delay to make sure the alert is shown
-                NativePlayer(link: e.link, referrer: e.referrer).play();
-              });
-            }
-          },
-          label: Text(e.name ?? 'Unknown'),
-        ),
-      );
-    }).toList();
-  }
-
-  getMP4List() async {
-    for (VideoServer server in info?.servers ?? []) {
-      final link = server.link;
-      final title = server.title;
-      if (link != null && title != null) {
-        final titleLower = title.toLowerCase();
-        if (titleLower.contains('streaming') || titleLower.contains('vidcdn')) {
-          // this is the link we need to parse
-          if (mounted) {
-            setState(() {
-              if (link.contains('embedplus')) {
-                downloadLink = link.replaceFirst('embedplus', 'download');
-              } else if (link.contains('streaming')) {
-                downloadLink = link.replaceFirst('streaming.php', 'download');
-              }
-            });
-            _logger.info('Download link: $downloadLink');
-          }
-
-          final parser = MP4Parser(downloadLink ?? '');
-          final html = await parser.downloadHTML();
-          if (html == null) {
-            // This is probably a timeout, try another one if possible
-            continue;
-          }
-
-          final mp4s = parser.parseHTML(html);
-          if (mounted && mp4s != null && mp4s.isNotEmpty) {
-            setState(() {
-              mp4List = mp4s;
-            });
-          }
-
-          // there are multiple sources so need to early quit
-          break;
-        }
-      }
-    }
-  }
-
   /// Watch with in app player
-  openInAppPlayer(VideoServer e) {
+  void openInAppPlayer(VideoServer e) {
     // Only android has the
     if (Util.isAndroid()) {
       Navigator.pop(context);
@@ -476,7 +350,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Watch with in app player
-  openWithOtherApps(VideoServer e) {
+  void openWithOtherApps(VideoServer e) {
     Navigator.pop(context);
     AndroidIntent(
       action: 'action_view',
@@ -489,7 +363,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Save this to watch history
-  _addToHistory() => Global().addToHistory(
+  void _addToHistory() => Global().addToHistory(
         BasicAnime(
           info?.episodeName,
           info?.currentEpisodeLink,

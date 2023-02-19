@@ -33,20 +33,20 @@ class SearchAnimeButton extends StatelessWidget {
             'Google',
           ),
         ),
-        AnimeFlatButton(
-          onPressed: () {
-            launchUrlString(
-              Uri(
-                scheme: 'https',
-                host: 'www.duckduckgo.com',
-                path: '/',
-                queryParameters: {'q': name},
-              ).toString(),
-            );
-            FirebaseEventService().logUseGoogle();
-          },
-          child: const Text('DuckDuckGo'),
-        ),
+        // AnimeFlatButton(
+        //   onPressed: () {
+        //     launchUrlString(
+        //       Uri(
+        //         scheme: 'https',
+        //         host: 'www.duckduckgo.com',
+        //         path: '/',
+        //         queryParameters: {'q': name},
+        //       ).toString(),
+        //     );
+        //     FirebaseEventService().logUseGoogle();
+        //   },
+        //   child: const Text('DuckDuckGo'),
+        // ),
         AnimeFlatButton(
           onPressed: () {
             launchUrlString(

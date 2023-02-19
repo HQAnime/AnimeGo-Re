@@ -23,6 +23,35 @@ class _WatchAnimePageState extends State<WatchAnimePage> with FullscreenPlayer {
   final _logger = Logger('WatchAnimePage');
   int count = 0;
 
+  late final link = widget.video.link;
+  late final _webController = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setNavigationDelegate(
+        NavigationDelegate(onNavigationRequest: (request) async {
+      // enter fullscreen
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: [],
+      );
+
+      if (count == 0) {
+        // the first one should be allowed to load
+        count++;
+        return NavigationDecision.navigate;
+      }
+
+      _logger.info(request.url);
+      if (link != null) {
+        if (!request.url.contains(link as Pattern)) {
+          return NavigationDecision.prevent;
+        }
+        return NavigationDecision.navigate;
+      } else {
+        return NavigationDecision.prevent;
+      }
+    }))
+    ..loadRequest(Uri.parse(link ?? ''));
+
   @override
   void initState() {
     // TODO: maybe toggle the native here???
@@ -38,7 +67,6 @@ class _WatchAnimePageState extends State<WatchAnimePage> with FullscreenPlayer {
 
   @override
   Widget build(BuildContext context) {
-    final link = widget.video.link;
     _logger.info(link);
 
     return Scaffold(
@@ -48,33 +76,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> with FullscreenPlayer {
             )
           : null,
       body: SafeArea(
-        child: WebView(
-          initialUrl: widget.video.link,
-          javascriptMode: JavascriptMode.unrestricted,
-          initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-          navigationDelegate: (request) async {
-            // enter fullscreen
-            SystemChrome.setEnabledSystemUIMode(
-              SystemUiMode.manual,
-              overlays: [],
-            );
-
-            if (count == 0) {
-              // the first one should be allowed to load
-              count++;
-              return NavigationDecision.navigate;
-            }
-
-            _logger.info(request.url);
-            if (link != null) {
-              if (!request.url.contains(link)) {
-                return NavigationDecision.prevent;
-              }
-              return NavigationDecision.navigate;
-            } else {
-              return NavigationDecision.prevent;
-            }
-          },
+        child: WebViewWidget(
+          controller: _webController,
         ),
       ),
     );
