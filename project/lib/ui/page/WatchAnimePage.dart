@@ -23,7 +23,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
     // TODO: maybe toggle the native here???
     super.initState();
     // Fullscreen mode
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     // Landscape only
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -34,7 +34,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
   @override
   void dispose() {
     // Reset UI overlay
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     // Reset orientation
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

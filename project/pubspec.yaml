@@ -14,7 +14,7 @@ description: An unofficial app for gogoanime
 version: 1.3.1+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   flutter:

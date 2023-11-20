@@ -7,7 +7,6 @@ import 'package:animego/core/model/WatchHistory.dart';
 import 'package:animego/core/parser/DomainParser.dart';
 import 'package:animego/core/parser/UpdateParser.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Global {
   // Constants
   static final defaultDomain = 'https://www26.gogoanimes.tv/';
-  static final appVersion = '1.3.0';
+  static final appVersion = '1.3.1';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
   static final latestRelease =
       'https://github.com/HenryQuan/AnimeGo/release/latest';

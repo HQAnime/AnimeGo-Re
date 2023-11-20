@@ -15,7 +15,7 @@ class UpdateParser extends BasicParser {
   @override
   GithubUpdate parseHTML(Document? body) {
     final test = body?.body?.text;
-    dynamic? json;
+    dynamic json;
     if (test != null) json = jsonDecode(test);
     return GithubUpdate.fromJson(json);
   }
