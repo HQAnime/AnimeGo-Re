@@ -21,7 +21,7 @@ dependencies:
     sdk: flutter
 
   # easy request
-  http: ^0.13.0
+  http: ^1.1.0
   # parse html
   html: ^0.15.0
   # persist data locally
@@ -29,11 +29,11 @@ dependencies:
   # open links in browser
   url_launcher: ^6.0.2
   # open in another apps for android
-  android_intent: ^2.0.0
+  android_intent_plus: ^4.0.3
   # webview
-  webview_flutter: ^2.0.2
-  share: ^2.0.0
-  firebase_analytics: ^8.0.4
+  webview_flutter: ^4.4.2
+  share_plus: ^7.2.1
+  firebase_analytics: ^10.7.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

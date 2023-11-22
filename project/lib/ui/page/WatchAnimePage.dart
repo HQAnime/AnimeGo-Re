@@ -34,7 +34,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
   @override
   void dispose() {
     // Reset UI overlay
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     // Reset orientation
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -57,7 +58,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
               title: Text(widget.video.title ?? ''),
             )
           : null,
-      body: WebView(
+      body: WebViewWidget(
         initialUrl: widget.video.link,
         javascriptMode: JavascriptMode.unrestricted,
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,

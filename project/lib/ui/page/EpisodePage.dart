@@ -1,3 +1,4 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
@@ -10,7 +11,6 @@ import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
-import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
