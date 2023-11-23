@@ -1,7 +1,7 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// SearchAnimeButton class
 class SearchAnimeButton extends StatelessWidget {
@@ -19,7 +19,7 @@ class SearchAnimeButton extends StatelessWidget {
       children: <Widget>[
         AnimeFlatButton(
           onPressed: () {
-            launch('https://www.google.com/search?q=$name');
+            launchUrlString('https://www.google.com/search?q=$name');
             FirebaseEventService().logUseGoogle();
           },
           child: Text(
@@ -28,7 +28,7 @@ class SearchAnimeButton extends StatelessWidget {
         ),
         AnimeFlatButton(
           onPressed: () {
-            launch('https://duckduckgo.com/?q=$name');
+            launchUrlString('https://duckduckgo.com/?q=$name');
             FirebaseEventService().logUseGoogle();
           },
           child: Text('DuckDuckGo'),

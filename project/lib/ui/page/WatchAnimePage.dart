@@ -18,6 +18,24 @@ class WatchAnimePage extends StatefulWidget {
 }
 
 class _WatchAnimePageState extends State<WatchAnimePage> {
+  late final _controller = WebViewController();
+
+  void _setupWebViewController() {
+    _controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(NavigationDelegate(
+        onNavigationRequest: (request) async {
+          if (widget.video.link != null) {
+            if (!request.url.contains(widget.video.link!))
+              return NavigationDecision.prevent;
+            return NavigationDecision.navigate;
+          } else
+            return NavigationDecision.prevent;
+        },
+      ))
+      ..loadRequest(Uri.parse(widget.video.link ?? ''));
+  }
+
   @override
   void initState() {
     // TODO: maybe toggle the native here???
@@ -29,6 +47,8 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+
+    _setupWebViewController();
   }
 
   @override
@@ -59,17 +79,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
             )
           : null,
       body: WebViewWidget(
-        initialUrl: widget.video.link,
-        javascriptMode: JavascriptMode.unrestricted,
-        initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
-        navigationDelegate: (request) async {
-          if (widget.video.link != null) {
-            if (!request.url.contains(widget.video.link!))
-              return NavigationDecision.prevent;
-            return NavigationDecision.navigate;
-          } else
-            return NavigationDecision.prevent;
-        },
+        controller: _controller,
       ),
     );
   }

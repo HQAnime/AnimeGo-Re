@@ -12,7 +12,7 @@ import 'package:animego/ui/page/WatchAnimePage.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
 import 'package:animego/ui/widget/SearchAnimeButton.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// EpisodePage class
 class EpisodePage extends StatefulWidget {
@@ -245,7 +245,7 @@ class _EpisodePageState extends State<EpisodePage>
                   openInAppPlayer(e);
                 }
               } else {
-                if (e.link != null) launch(e.link!);
+                if (e.link != null) launchUrlString(e.link!);
               }
             },
             label: Text(e.title ?? 'Unknown'),

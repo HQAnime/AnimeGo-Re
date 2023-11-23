@@ -9,7 +9,7 @@ import 'package:animego/core/parser/UpdateParser.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// It handles global data
 class Global {
@@ -171,7 +171,7 @@ class Global {
               child: Text('Close'),
             ),
             TextButton(
-              onPressed: () => launch(_update.downloadLink ??
+              onPressed: () => launchUrlString(_update.downloadLink ??
                   'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
               child: Text('Update now (Android only)'),
             ),

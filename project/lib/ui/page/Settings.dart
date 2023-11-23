@@ -3,7 +3,7 @@ import 'package:animego/core/Global.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// Settings class
 class Settings extends StatefulWidget {
@@ -47,7 +47,7 @@ class _SettingsState extends State<Settings> {
             title: Text('Support me :)'),
             subtitle: Text(
                 'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
-            onTap: () => launch('https://www.paypal.me/yihengquan'),
+            onTap: () => launchUrlString('https://www.paypal.me/yihengquan'),
           ),
           ListTile(
             title: Padding(
@@ -96,7 +96,7 @@ class _SettingsState extends State<Settings> {
                 ),
               ],
             ),
-            onTap: () => launch(global.getDomain()),
+            onTap: () => launchUrlString(global.getDomain()),
           ),
           CheckboxListTile(
             title: Text('Hide Dub'),
@@ -108,7 +108,7 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Feedback'),
             subtitle: Text('Send an email to the developer'),
-            onTap: () => launch(Global.email),
+            onTap: () => launchUrlString(Global.email),
           ),
           ListTile(
             onTap: () {
@@ -121,7 +121,7 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Text('Source code'),
             subtitle: Text(Global.github),
-            onTap: () => launch(Global.github),
+            onTap: () => launchUrlString(Global.github),
           ),
           ListTile(
             title: Text('Licenses'),

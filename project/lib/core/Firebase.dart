@@ -10,7 +10,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 /// If you have any concerns, please contact the developer via email.
 ///
 class FirebaseEventService {
-  final analytics = FirebaseAnalytics();
+  final analytics = FirebaseAnalytics.instance;
 
   void _logEvent(String name, Map<String, String> parameters) {
     analytics.logEvent(name: name, parameters: parameters);
