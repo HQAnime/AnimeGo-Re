@@ -223,17 +223,17 @@ class _EpisodePageState extends State<EpisodePage>
                         spacing: 2,
                         children: [
                           ElevatedButton(
-                            onPressed: () => openWithOtherApps(e),
-                            child: Text('Use other apps'),
+                            onPressed: () => openInAppPlayer(e),
+                            child: Text('Use built-in player'),
                           ),
                           ElevatedButton(
-                            onPressed: () => openInAppPlayer(e),
-                            child: Text('Use in-app player'),
+                            onPressed: () => openWithOtherApps(e),
+                            child: Text('Use other apps'),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
-                              'In-app player is simple and blocks all pop-ups while other apps might have more advanced features',
+                              'The built-in player is improved to blocks all pop-ups & ads while other apps might have more advanced features',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12),
                             ),
