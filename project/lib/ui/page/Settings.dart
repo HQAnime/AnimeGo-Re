@@ -42,13 +42,13 @@ class _SettingsState extends State<Settings> {
       appBar: widget.showAppBar ? AppBar(title: Text('Settings')) : null,
       body: ListView(
         children: <Widget>[
-          ListTile(
-            isThreeLine: true,
-            title: Text('Support me :)'),
-            subtitle: Text(
-                'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
-            onTap: () => launchUrlString('https://www.paypal.me/yihengquan'),
-          ),
+          // ListTile(
+          //   isThreeLine: true,
+          //   title: Text('Support me :)'),
+          //   subtitle: Text(
+          //       'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
+          //   onTap: () => launchUrlString('https://www.paypal.me/yihengquan'),
+          // ),
           ListTile(
             title: Padding(
               padding: const EdgeInsets.only(top: 16),

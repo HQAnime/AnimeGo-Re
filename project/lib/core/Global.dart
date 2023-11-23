@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 /// It handles global data
 class Global {
   // Constants
-  static final defaultDomain = 'https://www26.gogoanimes.tv/';
+  static final defaultDomain = 'https://gogoanimes.to';
   static final appVersion = '1.3.1';
   static final github = 'https://github.com/HenryQuan/AnimeGo';
   static final latestRelease =

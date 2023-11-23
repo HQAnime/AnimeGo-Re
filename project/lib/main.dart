@@ -15,26 +15,32 @@ void main() async {
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
   final lightTheme = ThemeData(
-    primarySwatch: Colors.deepOrange,
-    appBarTheme: AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.deepOrange,
+      backgroundColor: Colors.white,
     ),
+    useMaterial3: true,
   );
 
   // TODO: find a better solution, this is too manual
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    appBarTheme: AppBarTheme(
+    useMaterial3: true,
+    appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(Colors.orange),
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
     ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
-        .copyWith(secondary: Colors.orange),
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.orange,
+      brightness: Brightness.dark,
+    ).copyWith(
+      secondary: Colors.orange,
+    ),
   );
 
   @override
