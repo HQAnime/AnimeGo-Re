@@ -77,6 +77,7 @@ class _EpisodePageState extends State<EpisodePage>
         duration: Duration(milliseconds: 300),
         opacity: this.info != null ? 1 : 0,
         child: BottomAppBar(
+          height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: this.info != null

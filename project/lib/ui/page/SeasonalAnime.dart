@@ -61,7 +61,9 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   String _format(String url) {
     String temp = url.split('/').last.replaceFirst('-anime', '');
     final split = temp.split('-');
-    return '${split[0]} ${split[1]}';
+    final season =
+        split[0].substring(0, 1).toUpperCase() + split[0].substring(1);
+    return '$season ${split[1]}';
   }
 
   /// This returns pas 4 seasons
@@ -74,7 +76,7 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
     for (int i = 0; i < 25; i++, offset -= 3) {
       // Keep updating the date, 31 days just in case
       var temp = this._getYearAndSeason(_date.add(Duration(days: offset * 30)));
-      seasons.add('sub-category/${SEASONS[temp[1]]}-${temp[0]}-anime');
+      seasons.add('/sub-category/${SEASONS[temp[1]]}-${temp[0]}-anime');
     }
 
     return seasons;

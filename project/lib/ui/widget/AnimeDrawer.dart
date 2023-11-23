@@ -41,14 +41,14 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
                 style: TextStyle(
                   fontSize: 32,
                   // Different colour for dark mode
-                  color: darkMode ? Colors.orange : Colors.white,
+                  color: Colors.orange,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             decoration: BoxDecoration(
               // Use black instead orange to not hurt users' eyes at night
-              color: darkMode ? Colors.black38 : Colors.deepOrange,
+              color: darkMode ? Colors.black38 : Colors.white,
             ),
           ),
           Expanded(

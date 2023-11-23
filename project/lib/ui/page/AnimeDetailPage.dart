@@ -117,19 +117,19 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Flexible(
-                  flex: 1,
+                  flex: 2,
                   child: info?.image != null
                       ? Image.network(info!.image!)
                       : Container(),
                 ),
                 Flexible(
-                  flex: 1,
+                  flex: 3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       centeredListTile('Released', info?.released ?? 'Unkown'),
                       centeredListTile(
-                          'Episode(s)', info?.lastEpisode ?? 'Unkown'),
+                          'Episode', info?.lastEpisode ?? 'Unkown'),
                       ListTile(
                         title: Text('Category', textAlign: TextAlign.center),
                         // TODO: This button is very hidden so the user may not know about this
@@ -156,7 +156,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   ),
                 ),
                 Flexible(
-                  flex: 1,
+                  flex: 2,
                   child: Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationY(pi),

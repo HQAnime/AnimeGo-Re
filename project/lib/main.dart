@@ -35,9 +35,21 @@ class MyApp extends StatelessWidget {
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,
     ),
+    dividerTheme: DividerThemeData(
+      color: Colors.white30,
+      thickness: 0.5,
+      space: 0,
+    ),
+    expansionTileTheme: ExpansionTileThemeData(
+      shape: LinearBorder(),
+    ),
+    chipTheme: ChipThemeData(
+      side: BorderSide.none,
+    ),
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.orange,
       brightness: Brightness.dark,
+      backgroundColor: Colors.grey[800],
     ).copyWith(
       secondary: Colors.orange,
     ),
