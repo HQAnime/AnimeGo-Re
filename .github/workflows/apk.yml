@@ -33,10 +33,9 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk
       - name: Move APK to root folder
-          run: |
-            mv project/android/app/release/app-release.apk app-release.apk
+        run: mv project/android/app/release/app-release.apk app-release.apk
       - name: Make a draft release
         uses: softprops/action-gh-release@v1
         with:
           draft: true
-          files: '/home/runner/work/<<project name>>/<<project name>>/project/android/app/release/'
+          files: app-release.apk
