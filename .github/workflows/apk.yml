@@ -30,7 +30,10 @@ jobs:
         with:
           flutter-version: '3.16.0'
           channel: 'stable'
-      - run: flutter build apk
+      - name: Get dependencies
+        run: cd project && flutter pub get
+      - name: Build APK
+        run: cd project && flutter build apk
       - name: Move APK to root folder
         run: mv project/android/app/release/app-release.apk app-release.apk
       - name: Make a draft release
