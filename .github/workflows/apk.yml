@@ -20,8 +20,16 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'android_keystore.jks'
-          fileDir: '/home/runner/work/<<project name>>/<<project name>>/project/android/app/keystore/'
+          fileDir: project/android/app/keystore/
           encodedString: ${{ secrets.KEYSTORE }}
+      - name: Validate Keystore
+        run: |
+          if test -f project/android/app/keystore/android_keystore.jks; then
+            echo "Keystore file exists."
+          else
+            echo "Keystore file does not exist."
+            exit 1
+          fi
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
