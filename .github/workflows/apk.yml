@@ -56,7 +56,7 @@ jobs:
       - name: Build APK
         run: cd project && flutter build apk
       - name: Move APK to root folder
-        run: mv project/android/app/release/app-release.apk app-release.apk
+        run: mv project/build/app/outputs/flutter-apk/app-release.apk app-release.apk
       - name: Make a draft release
         uses: softprops/action-gh-release@v1
         with:
