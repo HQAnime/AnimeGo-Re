@@ -1,0 +1,42 @@
+name: Build AnimeGo APK for release
+
+on: workflow_dispatch
+# Manual input if needed
+# inputs:
+#   version:
+#     description: 'Application version'
+#     required: true
+#     default: '1.0'
+
+# build apk using Flutter
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: 'android_keystore.jks'
+          fileDir: '/home/runner/work/<<project name>>/<<project name>>/project/android/app/keystore/'
+          encodedString: ${{ secrets.KEYSTORE }}
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter build apk
+      - name: Move APK to root folder
+          run: |
+            mv project/android/app/release/app-release.apk app-release.apk
+      - name: Make a draft release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          files: '/home/runner/work/<<project name>>/<<project name>>/project/android/app/release/'
