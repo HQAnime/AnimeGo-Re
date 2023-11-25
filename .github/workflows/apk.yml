@@ -30,7 +30,6 @@ jobs:
         with:
           flutter-version: '3.16.0'
           channel: 'stable'
-      - run: flutter pub get
       - run: flutter build apk
       - name: Move APK to root folder
         run: mv project/android/app/release/app-release.apk app-release.apk
