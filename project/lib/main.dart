@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.all(Colors.orange),
+      fillColor: WidgetStateProperty.all(Colors.orange),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.orange,

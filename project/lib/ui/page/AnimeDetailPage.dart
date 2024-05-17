@@ -275,7 +275,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           children: this.episodes.map((e) {
             return ElevatedButton(
               style: ButtonStyle(
-                textStyle: MaterialStateProperty.all(
+                textStyle: WidgetStateProperty.all(
                   TextStyle(color: Colors.white),
                 ),
               ),
