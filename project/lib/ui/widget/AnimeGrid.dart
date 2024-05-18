@@ -130,6 +130,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                 this.loadData(refresh: true);
               },
               child: Scrollbar(
+                controller: this.controller,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     final count =
