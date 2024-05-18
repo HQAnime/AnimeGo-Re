@@ -16,11 +16,15 @@ class Global {
   // Constants
   static final defaultDomain = 'https://gogoanime3.co/';
   static final appVersion = '1.3.1';
-  static final github = 'https://github.com/HenryQuan/AnimeGo';
+  static final github = 'https://github.com/HQAnime/AnimeGo-Re';
   static final latestRelease =
-      'https://github.com/HenryQuan/AnimeGo/release/latest';
+      'https://github.com/HQAnime/AnimeGo-Re/releases/latest';
   static final email =
       'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
+  static const ajaxDomains = [
+    "page-recent-release",
+    "load-list-episode",
+  ];
 
   /// Whether the app has been init
   bool _hasInit = false;
@@ -28,7 +32,20 @@ class Global {
   /// The domain that will be used globally
   String? _domain;
   // Return default if null
-  String getDomain() => _domain ?? Global.defaultDomain;
+  String getDomain({String? url = null}) {
+    final defaultDomain = _domain ?? Global.defaultDomain;
+    if (url == null) {
+      return defaultDomain;
+    }
+
+    print('Checking domain for $url');
+    for (final domain in ajaxDomains) {
+      if (url.contains(domain)) return "https://ajax.gogocdn.net/ajax/";
+    }
+
+    return defaultDomain;
+  }
+
   updateDomain(String domain) {
     this._domain = domain;
     prefs.setString(websiteDomain, domain);
@@ -172,7 +189,7 @@ class Global {
             ),
             TextButton(
               onPressed: () => launchUrlString(_update.downloadLink ??
-                  'https://github.com/HenryQuan/AnimeGo-Re/releases/latest'),
+                  'https://github.com/HQAnime/AnimeGo-Re/releases/latest'),
               child: Text('Update now (Android only)'),
             ),
           ],

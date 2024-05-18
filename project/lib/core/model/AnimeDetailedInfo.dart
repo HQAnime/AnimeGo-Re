@@ -30,7 +30,8 @@ class AnimeDetailedInfo {
     // Remove the title
     try {
       // Can be empty
-      this.summary = infoClass?.nodes[9].nodes[1].text?.trimRight();
+      this.summary =
+          infoClass?.getElementsByClassName("description").first.text.trim();
     } catch (e, s) {
       print(e);
       print(s);

@@ -15,7 +15,7 @@ class VideoServer {
     this.link = link1;
 
     // Get the title
-    final title1 = node.nodes[0].text ?? '';
+    final title1 = node.nodes[1].text ?? '';
     if (title1.trim().isEmpty) {
       this.title = node.nodes[2].text?.toUpperCase();
     } else {

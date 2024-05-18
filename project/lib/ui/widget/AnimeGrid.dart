@@ -67,9 +67,11 @@ class _AnimeGridState extends State<AnimeGrid> {
     });
 
     bool isSearch = widget.url?.startsWith('/search') ?? false;
+
     // For search, you need to use &
-    final link = global.getDomain() +
-        widget.url! +
+    final currentUrl = widget.url!;
+    final link = Global().getDomain(url: currentUrl) +
+        currentUrl +
         (isSearch ? '&' : '?') +
         'page=$page';
     print('Current link is $link');

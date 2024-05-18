@@ -9,7 +9,7 @@ class UpdateParser extends BasicParser {
   // The link is static so...
   UpdateParser()
       : super(
-          'https://raw.githubusercontent.com/HenryQuan/AnimeGo-Re/api/version.json',
+          'https://raw.githubusercontent.com/HQAnime/AnimeGo-Re/api/version.json',
         );
 
   @override
