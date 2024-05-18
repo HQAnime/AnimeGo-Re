@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 /// PRIVACY POLICY
@@ -10,10 +11,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 /// If you have any concerns, please contact the developer via email.
 ///
 class FirebaseEventService {
-  final analytics = FirebaseAnalytics.instance;
+  final analytics = Util.isMobile() ? FirebaseAnalytics.instance : null;
 
   void _logEvent(String name, Map<String, String> parameters) {
-    analytics.logEvent(name: name, parameters: parameters);
+    analytics?.logEvent(name: name, parameters: parameters);
   }
 
   void _logSimpleEvent(String name) {
