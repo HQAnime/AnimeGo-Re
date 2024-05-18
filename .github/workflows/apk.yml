@@ -49,7 +49,7 @@ jobs:
           java-version: '11'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.0'
+          flutter-version: '3.22.0'
           channel: 'stable'
       - name: Get dependencies
         run: cd project && flutter pub get
