@@ -175,7 +175,7 @@ class _EpisodePageState extends State<EpisodePage>
                 ),
               ),
               Text(
-                'Please note that this app does not\nhave any controls over these sources',
+                'Please note that AnimeGo does not\nhave any controls over these sources\nVIDSTREAMING is the recommeneded source',
                 textAlign: TextAlign.center,
               ),
               Padding(
@@ -233,7 +233,7 @@ class _EpisodePageState extends State<EpisodePage>
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
-                              'The built-in player is improved to blocks all pop-ups & ads while other apps might have more advanced features',
+                              'The built-in player has been improved to blocks all pop-ups & ads while other apps might have more advanced features',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12),
                             ),

@@ -37,7 +37,7 @@ class _TabletHomePageState extends State<TabletHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AnimeGo'),
+        title: Text('AnimeGo Re'),
       ),
       body: Row(
         children: <Widget>[
