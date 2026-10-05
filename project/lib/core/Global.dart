@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 /// It handles global data
 class Global {
   // Constants
-  static final appVersion = '1.3.1';
+  static final appVersion = '1.4.0';
   static final github = 'https://github.com/HQAnime/AnimeGo-Re';
   static final latestRelease =
       'https://github.com/HQAnime/AnimeGo-Re/releases/latest';
