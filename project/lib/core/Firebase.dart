@@ -30,6 +30,10 @@ class FirebaseEventService {
     _logSimpleEvent('category');
   }
 
+  void logUseChatGPT() {
+    _logSimpleEvent('chatgpt_anime');
+  }
+
   void logUseEpisode() {
     _logSimpleEvent('episode');
   }
