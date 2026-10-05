@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/http/CloudflareManager.dart';
 import 'package:animego/core/model/AnimeInfo.dart';
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/SourceManager.dart';
@@ -64,6 +65,9 @@ class _AnimeGridState extends State<AnimeGrid> {
     });
 
     widget.loadPage(page).then((moreData) {
+      // The page can be popped before the request finishes.
+      if (!mounted) return;
+
       // Filter out dub
       if (global.hideDUB ?? false) moreData.removeWhere((e) => e.isDUB);
 
@@ -89,6 +93,68 @@ class _AnimeGridState extends State<AnimeGrid> {
       this.page += 1;
       this.loadData();
     }
+  }
+
+  /// Run the native Cloudflare check, then reload this page.
+  Future<void> _verifyAccess() async {
+    final source = SourceManager().active;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final ok = await CloudflareManager().verify(
+      source.id,
+      source.baseUrl,
+      dark: dark,
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(ok ? 'Access verified' : 'Verification failed')),
+    );
+    if (ok) {
+      setState(() {
+        loading = true;
+      });
+      loadData(refresh: true);
+    }
+  }
+
+  /// Torrent results read much better as rows than as poster cards.
+  Widget _buildTorrentList() {
+    return ListView.separated(
+      controller: this.controller,
+      itemCount: this.list.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (context, index) {
+        final info = this.list[index];
+        return ListTile(
+          leading: const Icon(Icons.movie_filter_outlined),
+          title: Text(
+            info.name ?? 'Unknown',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: (info.episode == null || info.episode!.isEmpty)
+              ? null
+              : Text(info.episode!),
+          trailing: const Icon(Icons.open_in_new),
+          onTap: () => showTorrentSheet(context, info),
+        );
+      },
+    );
+  }
+
+  /// Open a browse/search result: torrents hand off to the magnet sheet,
+  /// streaming anime open the detail or episode page.
+  void _open(AnimeInfo info) {
+    if (SourceManager().active.kind == SourceKind.torrent) {
+      showTorrentSheet(context, info);
+      return;
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        if (info.isCategory()) return AnimeDetailPage(info: info);
+        return EpisodePage(info: info);
+      }),
+    );
   }
 
   @override
@@ -124,44 +190,32 @@ class _AnimeGridState extends State<AnimeGrid> {
                     // Calculat ratio, adjust the offset (70)
                     final ratio = imageWidth / (imageWidth / 0.7 + 70);
                     final length = this.list.length;
+                    final isTorrent =
+                        SourceManager().active.kind == SourceKind.torrent;
 
                     return length > 0
-                        ? GridView.builder(
-                            controller: this.controller,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: count,
-                              childAspectRatio: ratio,
-                            ),
-                            itemBuilder: (BuildContext context, int index) {
-                              final info = this.list[index];
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: AnimeCard(info: info),
-                                  onTap: () {
-                                    // Torrent sources hand the magnet off to
-                                    // an external client instead of playing.
-                                    if (SourceManager().active.kind ==
-                                        SourceKind.torrent) {
-                                      showTorrentSheet(context, info);
-                                      return;
-                                    }
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) {
-                                        if (info.isCategory())
-                                          return AnimeDetailPage(info: info);
-                                        return EpisodePage(info: info);
-                                      }),
-                                    );
-                                  },
+                        ? (isTorrent
+                            ? _buildTorrentList()
+                            : GridView.builder(
+                                controller: this.controller,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: count,
+                                  childAspectRatio: ratio,
                                 ),
-                              );
-                            },
-                            itemCount: length,
-                          )
+                                itemBuilder: (BuildContext context, int index) {
+                                  final info = this.list[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: AnimeCard(info: info),
+                                      onTap: () => _open(info),
+                                    ),
+                                  );
+                                },
+                                itemCount: length,
+                              ))
                         : Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -170,6 +224,16 @@ class _AnimeGridState extends State<AnimeGrid> {
                                   'Nothing was found. Try loading it again.\nDouble check the source and website link in Settings as well.',
                                   textAlign: TextAlign.center,
                                 ),
+                                if (SourceManager().active.requiresCloudflare &&
+                                    CloudflareManager().isSupported)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: FilledButton.icon(
+                                      icon: const Icon(Icons.verified_user),
+                                      label: const Text('Verify site access'),
+                                      onPressed: _verifyAccess,
+                                    ),
+                                  ),
                                 IconButton(
                                   onPressed: () {
                                     setState(() {

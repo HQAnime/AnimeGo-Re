@@ -2,8 +2,7 @@ import 'package:animego/core/model/AnimeDetailedInfo.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/anilist/AniListService.dart';
-import 'package:animego/core/source/gogoanime/GogoanimeSource.dart';
-import 'package:animego/core/source/hianime/AniwatchSource.dart';
+import 'package:animego/core/source/aniwatch/AniwatchSource.dart';
 import 'package:animego/core/source/hianime/HianimeSource.dart';
 import 'package:animego/core/source/miruro/MiruroSource.dart';
 import 'package:animego/core/source/nyaa/NyaaSource.dart';
@@ -44,7 +43,6 @@ class SourceManager {
   /// Register the built in sources and restore the last active one.
   Future<void> init() async {
     if (_sources.isEmpty) {
-      register(GogoanimeSource());
       register(HianimeSource());
       register(AniwatchSource());
       register(MiruroSource());

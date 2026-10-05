@@ -29,10 +29,19 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
     _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
-        onNavigationRequest: (request) async {
-          // Embed sources (e.g. HiAnime) load a full player page, so let it
-          // navigate freely. gogoanime is kept locked to the chosen server.
-          if (isEmbed) return NavigationDecision.navigate;
+        onNavigationRequest: (request) {
+          final uri = Uri.tryParse(request.url);
+          if (uri == null) return NavigationDecision.prevent;
+
+          // Embed players (e.g. HiAnime) are full pages that must load, but
+          // clicking an ad overlay would otherwise navigate the whole WebView
+          // away. Only allow the player's own site and inline schemes.
+          if (isEmbed) {
+            if (_isAllowedEmbed(uri)) return NavigationDecision.navigate;
+            return NavigationDecision.prevent;
+          }
+
+          // gogoanime is kept locked to the chosen server.
           final link = widget.video.link;
           if (link != null && request.url.contains(link)) {
             return NavigationDecision.navigate;
@@ -57,6 +66,27 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  /// Whether [uri] is the embed player itself or an inline/non-http scheme.
+  ///
+  /// Ads almost always live on an unrelated domain, so anything outside the
+  /// player's registrable domain is treated as an ad and blocked.
+  bool _isAllowedEmbed(Uri uri) {
+    const inlineSchemes = {'about', 'data', 'blob', 'javascript'};
+    if (inlineSchemes.contains(uri.scheme)) return true;
+
+    final base = Uri.tryParse(widget.video.link ?? '');
+    if (base == null || base.host.isEmpty) return true;
+
+    return _registrableDomain(uri.host) == _registrableDomain(base.host);
+  }
+
+  /// The last two labels of a host (e.g. `a.b.example.com` -> `example.com`).
+  String _registrableDomain(String host) {
+    final parts = host.split('.');
+    if (parts.length <= 2) return host;
+    return parts.sublist(parts.length - 2).join('.');
   }
 
   @override

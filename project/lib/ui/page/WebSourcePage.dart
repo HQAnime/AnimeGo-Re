@@ -1,6 +1,7 @@
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/web/WebViewScripts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// Embeds a web-only [AnimeSource] (e.g. Miruro) in a WebView.
@@ -23,18 +24,35 @@ class WebSourcePage extends StatefulWidget {
 class _WebSourcePageState extends State<WebSourcePage> {
   late final WebViewController _controller;
   double _progress = 0;
+  bool _landscape = false;
+
+  static const _rotations = <DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ];
 
   @override
   void initState() {
     super.initState();
 
+    // Web sources play video inline, so let the device rotate freely.
+    SystemChrome.setPreferredOrientations(_rotations);
+
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.black)
+      ..addJavaScriptChannel(
+        'Flutter',
+        onMessageReceived: _onJavaScriptMessage,
+      )
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (progress) => setState(() => _progress = progress / 100),
-          onPageFinished: (_) => _controller.runJavaScript(WebViewScripts.adBlock),
+          onPageFinished: (_) => _controller.runJavaScript(
+            '${WebViewScripts.adBlock}\n${WebViewScripts.fullscreenReporter}',
+          ),
           onNavigationRequest: (request) {
             // Keep browsing inside the web source. External apps are left to
             // the player links instead of hijacking navigation.
@@ -46,6 +64,35 @@ class _WebSourcePageState extends State<WebSourcePage> {
         ),
       )
       ..loadRequest(Uri.parse(widget.source.webHomeUrl));
+  }
+
+  @override
+  void dispose() {
+    // Restore the default portrait-leaning rotation.
+    SystemChrome.setPreferredOrientations(_rotations);
+    super.dispose();
+  }
+
+  void _onJavaScriptMessage(JavaScriptMessage message) {
+    if (message.message == 'fullscreen::true') {
+      _rotate(true);
+    } else if (message.message == 'fullscreen::false') {
+      _rotate(false);
+    }
+  }
+
+  /// Force landscape while a video is fullscreen, otherwise allow rotation.
+  void _rotate(bool landscape) {
+    if (!mounted || _landscape == landscape) return;
+    setState(() => _landscape = landscape);
+    SystemChrome.setPreferredOrientations(
+      landscape
+          ? const [
+              DeviceOrientation.landscapeLeft,
+              DeviceOrientation.landscapeRight,
+            ]
+          : _rotations,
+    );
   }
 
   @override
@@ -91,6 +138,13 @@ class _WebSourcePageState extends State<WebSourcePage> {
             tooltip: 'Reload',
             icon: Icon(Icons.refresh),
             onPressed: () => _controller.reload(),
+          ),
+          IconButton(
+            tooltip: _landscape ? 'Portrait' : 'Landscape',
+            icon: Icon(
+              _landscape ? Icons.stay_current_portrait : Icons.stay_current_landscape,
+            ),
+            onPressed: () => _rotate(!_landscape),
           ),
         ],
       ),

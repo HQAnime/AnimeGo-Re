@@ -24,7 +24,17 @@ class NyaaParser {
     final cells = row.children.where((e) => e.localName == 'td').toList();
     if (cells.length < 8) return null;
 
-    final nameAnchor = cells[1].querySelector('a');
+    // The name cell also contains a "N comments" link; only the /view/ link
+    // without a #comments fragment is the actual release title.
+    Element? nameAnchor;
+    for (final anchor in cells[1].querySelectorAll('a')) {
+      final href = anchor.attributes['href'] ?? '';
+      if (href.startsWith('/view/') && !href.contains('#')) {
+        nameAnchor = anchor;
+        break;
+      }
+    }
+
     final magnet =
         cells[2].querySelector('a[href^="magnet:"]')?.attributes['href'];
     final title =

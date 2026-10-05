@@ -15,8 +15,8 @@ void main() {
     final manager = SourceManager();
     await manager.init();
 
-    expect(manager.sources.map((source) => source.id), contains('gogoanime'));
-    expect(manager.active.id, 'gogoanime');
+    expect(manager.sources.map((source) => source.id), contains('hianime'));
+    expect(manager.active.id, 'hianime');
   });
 
   test('selecting a source updates the active source and notifier', () async {
@@ -36,6 +36,6 @@ void main() {
 
     await manager.select('does-not-exist');
 
-    expect(manager.active.id, 'gogoanime');
+    expect(manager.active.id, 'hianime');
   });
 }

@@ -4,7 +4,6 @@ import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/FavouriteAnime.dart';
 import 'package:animego/core/model/GithubUpdate.dart';
 import 'package:animego/core/model/WatchHistory.dart';
-import 'package:animego/core/parser/DomainParser.dart';
 import 'package:animego/core/parser/UpdateParser.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
@@ -14,42 +13,15 @@ import 'package:url_launcher/url_launcher_string.dart';
 /// It handles global data
 class Global {
   // Constants
-  static final defaultDomain = 'https://gogoanime3.co/';
   static final appVersion = '1.3.1';
   static final github = 'https://github.com/HQAnime/AnimeGo-Re';
   static final latestRelease =
       'https://github.com/HQAnime/AnimeGo-Re/releases/latest';
   static final email =
       'mailto:development.henryquan@gmail.com?subject=[AnimeGo $appVersion] ';
-  static const ajaxDomains = [
-    "page-recent-release",
-    "load-list-episode",
-  ];
 
   /// Whether the app has been init
   bool _hasInit = false;
-
-  /// The domain that will be used globally
-  String? _domain;
-  // Return default if null
-  String getDomain({String? url = null}) {
-    final defaultDomain = _domain ?? Global.defaultDomain;
-    if (url == null) {
-      return defaultDomain;
-    }
-
-    print('Checking domain for $url');
-    for (final domain in ajaxDomains) {
-      if (url.contains(domain)) return "https://ajax.gogocdn.net/ajax/";
-    }
-
-    return defaultDomain;
-  }
-
-  void updateDomain(String domain) {
-    this._domain = domain;
-    prefs.setString(websiteDomain, domain);
-  }
 
   /// Relating to app update
   bool _hasChecked = false;
@@ -93,7 +65,6 @@ class Global {
 
   // Relating to local data
   late SharedPreferences prefs;
-  final websiteDomain = 'AnimeGo:Domain';
   final watchHistory = 'AnimeGo:WatchHistory';
   final favouriteAnime = 'AnimeGo:FavouriteAnime';
   final hideDubAnime = 'AnimeGo:HideDUB';
@@ -122,11 +93,6 @@ class Global {
       }
       this._lastDate = DateTime.parse(dateString);
 
-      // Get currently saved domain, use default if it is null
-      String currDomain =
-          prefs.getString(websiteDomain) ?? Global.defaultDomain;
-      print('Saved domain is $currDomain');
-
       // Load history and favourite anime
       String? historyString = prefs.getString(watchHistory);
       if (historyString != null) {
@@ -140,11 +106,6 @@ class Global {
 
       // Set to false by default
       this._hideDUB = prefs.getBool(hideDubAnime) ?? false;
-
-      // Get the latest domain
-      String latestDomain = await DomainParser(currDomain).getNewDomain();
-      updateDomain(latestDomain);
-      print('The latest domain is $latestDomain');
 
       // Set the flag to true
       _hasInit = true;

@@ -1,4 +1,5 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +32,17 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
         valueListenable: SourceManager.activeNotifier,
         builder: (context, activeId, child) {
           final source = SourceManager().active;
+          // Torrent sources have no season paths; use their seasonal feed.
+          final isTorrent = source.kind == SourceKind.torrent;
           return Column(
             children: [
-              buildPastSeasons(),
+              if (!isTorrent) buildPastSeasons(),
               Expanded(
                 child: AnimeGrid(
-                  key: ValueKey('$activeId:$url'),
-                  loadPage: (page) => source.category(this.url, page: page),
+                  key: ValueKey('$activeId:${isTorrent ? 'seasonal' : url}'),
+                  loadPage: (page) => isTorrent
+                      ? source.browse(BrowseKind.seasonal, page: page)
+                      : source.category(this.url, page: page),
                 ),
               ),
             ],

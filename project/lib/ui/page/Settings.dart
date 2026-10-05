@@ -23,17 +23,11 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   final global = Global();
   bool? hideDUB;
-  late String input;
-  TextEditingController? controller;
 
   @override
   void initState() {
     super.initState();
     hideDUB = global.hideDUB;
-    final currentDomain = global.getDomain();
-    controller =
-        TextEditingController.fromValue(TextEditingValue(text: currentDomain));
-    input = currentDomain;
 
     FirebaseEventService().logUseSettings();
   }
@@ -106,59 +100,6 @@ class _SettingsState extends State<Settings> {
                   'Open the browser check if this source fails to load'),
               onTap: verifyAccess,
             ),
-          if (SourceManager().active.id == 'gogoanime')
-          ListTile(
-            title: Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Website link'),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextField(
-                  maxLines: 1,
-                  autocorrect: false,
-                  controller: controller,
-                  autofocus: false,
-                  onChanged: (value) => this.input = value,
-                  onEditingComplete: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    global.updateDomain(this.input);
-                    Future.delayed(Duration(milliseconds: 400)).then(
-                      (_) {
-                        if (!context.mounted) return;
-                        showDialog(
-                          context: context,
-                          builder: (c) => AlertDialog(
-                            title: Text('Domain has been updated'),
-                            content: Text(
-                              "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain.",
-                            ),
-                            actions: [
-                              AnimeFlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Close'),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    "The link will be updated automatically.\nIn certain regions, this website doesn't work.\nTry using a VPN and restart the app.\nPlease tap me and check if it works for you.\n\nDon't change it if you don't know what you are doing.\nThe default domain is ${Global.defaultDomain}.\nPlease try updating to the default if current one is not working.",
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-                  ),
-                ),
-              ],
-            ),
-            onTap: () => launchUrlString(global.getDomain()),
-          ),
           CheckboxListTile(
             title: Text('Hide Dub'),
             subtitle: Text('Hide all dub anime if you prefer sub'),
@@ -196,7 +137,7 @@ class _SettingsState extends State<Settings> {
                   builder: (BuildContext context) => LicensePage(
                     applicationName: 'AnimeGo',
                     applicationVersion: Global.appVersion,
-                    applicationLegalese: 'An unofficial app for gogoanime',
+                    applicationLegalese: 'An unofficial anime streaming app',
                   ),
                 ),
               );

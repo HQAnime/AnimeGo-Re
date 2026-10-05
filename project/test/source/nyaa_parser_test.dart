@@ -53,5 +53,30 @@ void main() {
 
       expect(releases.map((r) => r.title), isNot(contains('No magnet release')));
     });
+
+    test('ignores the comments link in the name cell', () {
+      const withComments = '''
+<table class="torrent-list"><tbody>
+  <tr>
+    <td><a href="/?c=1_2">Anime</a></td>
+    <td>
+      <a class="comments" href="/view/99#comments" title="1 comment">1</a>
+      <a href="/view/99" title="[Group] Real Title">[Group] Real Title</a>
+    </td>
+    <td><a href="magnet:?xt=urn:btih:abc">m</a></td>
+    <td>1.0 GiB</td>
+    <td>2026-01-01</td>
+    <td>10</td>
+    <td>1</td>
+    <td>3</td>
+  </tr>
+</tbody></table>
+''';
+
+      final releases = NyaaParser.parse(withComments);
+
+      expect(releases, hasLength(1));
+      expect(releases.first.title, '[Group] Real Title');
+    });
   });
 }

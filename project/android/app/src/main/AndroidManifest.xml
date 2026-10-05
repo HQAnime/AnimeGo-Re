@@ -3,6 +3,7 @@
 
    <application
         android:label="AnimeGo"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

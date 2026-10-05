@@ -11,7 +11,7 @@ class RequestService {
     required this.sourceId,
     required this.baseUrl,
     this.extraHeaders = const {},
-    this.timeout = const Duration(seconds: 10),
+    this.timeout = const Duration(seconds: 20),
   });
 
   /// The source this service belongs to, used to look up its cookie.
@@ -41,7 +41,9 @@ class RequestService {
 
   String resolve(String path) {
     if (path.startsWith('http')) return path;
-    return '$baseUrl$path';
+    final base = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
+    final clean = path.startsWith('/') ? path.substring(1) : path;
+    return '$base$clean';
   }
 
   Future<http.Response?> get(

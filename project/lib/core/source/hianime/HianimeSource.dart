@@ -15,27 +15,19 @@ import 'package:animego/core/source/hianime/HianimeParser.dart';
 /// The site is a Laravel app that renders anime/search/detail pages as HTML
 /// and exposes an internal REST API for episode lists and server links.
 class HianimeSource extends AnimeSource {
-  HianimeSource({
-    String baseUrl = 'https://hianime.tr/',
-    String id = 'hianime',
-    String name = 'HiAnime',
-  })  : _id = id,
-        _name = name,
-        _baseUrl = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
+  HianimeSource({String baseUrl = 'https://hianime.tr/'})
+      : _baseUrl = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
 
   late String _baseUrl;
-
-  final String _id;
-  final String _name;
 
   @override
   String get baseUrl => _baseUrl;
 
   @override
-  String get id => _id;
+  String get id => 'hianime';
 
   @override
-  String get name => _name;
+  String get name => 'HiAnime';
 
   @override
   SourceKind get kind => SourceKind.streaming;
@@ -47,7 +39,7 @@ class HianimeSource extends AnimeSource {
   bool get supportsSearch => true;
 
   @override
-  bool get requiresCloudflare => false;
+  bool get requiresCloudflare => true;
 
   @override
   bool get isConfigurable => true;
