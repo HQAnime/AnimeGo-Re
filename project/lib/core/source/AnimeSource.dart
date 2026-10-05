@@ -62,6 +62,12 @@ abstract class AnimeSource {
   /// Whether this source sits behind Cloudflare and needs the native bypass.
   bool get requiresCloudflare => false;
 
+  /// Whether the user may edit [baseUrl] from settings (mirrors rotate).
+  bool get isConfigurable => false;
+
+  /// Update the base URL at runtime (from a saved override).
+  void updateBaseUrl(String url) {}
+
   /// Latest / seasonal / movie / popular feeds
   Future<List<AnimeInfo>> browse(BrowseKind kind, {int page = 1});
 

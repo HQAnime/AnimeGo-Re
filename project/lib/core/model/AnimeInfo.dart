@@ -9,6 +9,10 @@ class AnimeInfo extends BasicAnime {
   String? episode = '??';
   bool isDUB = false;
 
+  /// Whether this card points at an anime detail page (rather than straight
+  /// to an episode). API based sources always set this.
+  bool detailed = false;
+
   /// Build without parsing HTML, used by API based sources.
   AnimeInfo.create({
     String? name,
@@ -16,6 +20,7 @@ class AnimeInfo extends BasicAnime {
     this.coverImage,
     this.episode = '??',
     this.isDUB = false,
+    this.detailed = false,
   }) : super.fromJson(null) {
     this.name = name;
     this.link = link;
@@ -51,7 +56,7 @@ class AnimeInfo extends BasicAnime {
   }
 
   /// Category contains all available episodes
-  bool isCategory() => link?.contains('category') ?? false;
+  bool isCategory() => detailed || (link?.contains('category') ?? false);
 
   /// Returns either episode or the name of name
   String? getTitle() {

@@ -4,10 +4,14 @@ class VideoServer {
   String? title;
   String? link;
 
-  /// Build without parsing HTML, used by API based sources.
-  VideoServer.create({this.title, this.link});
+  /// Whether [link] is a full player/embed page that should be opened as-is
+  /// (as opposed to a gogoanime page that still needs to find the video).
+  bool isEmbed;
 
-  VideoServer(Element e) {
+  /// Build without parsing HTML, used by API based sources.
+  VideoServer.create({this.title, this.link, this.isEmbed = false});
+
+  VideoServer(Element e) : isEmbed = false {
     final node = e.nodes[1];
 
     // Fix link with https

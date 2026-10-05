@@ -24,20 +24,24 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
   late final _controller = WebViewController();
 
   void _setupWebViewController() {
+    final isEmbed = widget.video.isEmbed;
     _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (request) async {
-          if (widget.video.link != null) {
-            if (!request.url.contains(widget.video.link!))
-              return NavigationDecision.prevent;
+          // Embed sources (e.g. HiAnime) load a full player page, so let it
+          // navigate freely. gogoanime is kept locked to the chosen server.
+          if (isEmbed) return NavigationDecision.navigate;
+          final link = widget.video.link;
+          if (link != null && request.url.contains(link)) {
             return NavigationDecision.navigate;
-          } else
-            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.prevent;
         },
         onPageFinished: (url) async {
           // inject our js script
-          await _controller.runJavaScript(_JS_SCRIPT);
+          await _controller
+              .runJavaScript(isEmbed ? _EMBED_JS_SCRIPT : _JS_SCRIPT);
         },
       ))
       ..addJavaScriptChannel(
@@ -216,4 +220,23 @@ const _JS_SCRIPT = """
 
     // styling changes
     document.body.style.backgroundColor = "black";
+""";
+
+/// A lighter script for embed player pages (HiAnime / AniWatch).
+///
+/// These pages bring their own player, so we must NOT strip iframes. We only
+/// block pop-ups, disable the context menu and keep the page dark.
+const _EMBED_JS_SCRIPT = """
+    // block popups
+    window.open = function() { };
+
+    // remove right click menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // styling changes
+    if (document.body) {
+        document.body.style.backgroundColor = "black";
+    }
 """;

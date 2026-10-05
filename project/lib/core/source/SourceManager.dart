@@ -1,5 +1,7 @@
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/gogoanime/GogoanimeSource.dart';
+import 'package:animego/core/source/hianime/AniwatchSource.dart';
+import 'package:animego/core/source/hianime/HianimeSource.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// The active source is persisted so the user's choice survives restarts.
 class SourceManager {
   static const prefsKey = 'AnimeGo:Source';
+  static const _domainPrefix = 'AnimeGo:Domain:';
 
   SourceManager._();
   static final SourceManager _instance = SourceManager._();
@@ -37,9 +40,18 @@ class SourceManager {
   Future<void> init() async {
     if (_sources.isEmpty) {
       register(GogoanimeSource());
+      register(HianimeSource());
+      register(AniwatchSource());
     }
 
     final prefs = await SharedPreferences.getInstance();
+
+    // Apply saved per-source domain overrides (mirrors rotate often).
+    for (final source in _sources.values) {
+      final saved = prefs.getString('$_domainPrefix${source.id}');
+      if (saved != null) source.updateBaseUrl(saved);
+    }
+
     final saved = prefs.getString(prefsKey);
     if (saved != null && _sources.containsKey(saved)) {
       _activeId = saved;
@@ -56,5 +68,14 @@ class SourceManager {
     activeNotifier.value = id;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(prefsKey, id);
+  }
+
+  /// Override a source's base URL and persist it.
+  Future<void> updateBaseUrl(String id, String url) async {
+    final source = _sources[id];
+    if (source == null || url.trim().isEmpty) return;
+    source.updateBaseUrl(url);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('$_domainPrefix$id', url.trim());
   }
 }

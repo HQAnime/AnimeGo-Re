@@ -88,6 +88,16 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
+          if (SourceManager().active.isConfigurable)
+            ListTile(
+              title: Text('Website domain'),
+              subtitle: Text(
+                SourceManager().active.baseUrl,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: editDomain,
+            ),
           if (SourceManager().active.requiresCloudflare &&
               CloudflareManager().isSupported)
             ListTile(
@@ -211,9 +221,39 @@ class _SettingsState extends State<Settings> {
     });
   }
 
-  /// Runs the Cloudflare browser check for the active source.
-  Future<void> verifyAccess() async {
+  /// Edit the active source's base URL (mirrors rotate often).
+  Future<void> editDomain() async {
     final source = SourceManager().active;
+    final controller = TextEditingController(text: source.baseUrl);
+    final value = await showDialog<String>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text('${source.name} domain'),
+        content: TextField(
+          controller: controller,
+          autocorrect: false,
+          decoration: InputDecoration(hintText: 'https://example.com/'),
+        ),
+        actions: [
+          AnimeFlatButton(
+            onPressed: () => Navigator.pop(c),
+            child: Text('Cancel'),
+          ),
+          AnimeFlatButton(
+            onPressed: () => Navigator.pop(c, controller.text),
+            child: Text('Save'),
+          ),
+        ],
+      ),
+    );
+    if (value == null || value.trim().isEmpty) return;
+    await SourceManager().updateBaseUrl(source.id, value);
+    if (!mounted) return;
+    setState(() {});
+  }
+
+  /// Runs the Cloudflare browser check for the active source.
+  Future<void> verifyAccess() async {    final source = SourceManager().active;
     final dark = Theme.of(context).brightness == Brightness.dark;
     final ok = await CloudflareManager().verify(
       source.id,
