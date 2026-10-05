@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/VideoServer.dart';
+import 'package:animego/core/web/WebViewScripts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -41,7 +42,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
         onPageFinished: (url) async {
           // inject our js script
           await _controller
-              .runJavaScript(isEmbed ? _EMBED_JS_SCRIPT : _JS_SCRIPT);
+              .runJavaScript(isEmbed ? WebViewScripts.adBlock : _JS_SCRIPT);
         },
       ))
       ..addJavaScriptChannel(
@@ -222,21 +223,3 @@ const _JS_SCRIPT = """
     document.body.style.backgroundColor = "black";
 """;
 
-/// A lighter script for embed player pages (HiAnime / AniWatch).
-///
-/// These pages bring their own player, so we must NOT strip iframes. We only
-/// block pop-ups, disable the context menu and keep the page dark.
-const _EMBED_JS_SCRIPT = """
-    // block popups
-    window.open = function() { };
-
-    // remove right click menu
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    // styling changes
-    if (document.body) {
-        document.body.style.backgroundColor = "black";
-    }
-""";

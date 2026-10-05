@@ -68,6 +68,13 @@ abstract class AnimeSource {
   /// Update the base URL at runtime (from a saved override).
   void updateBaseUrl(String url) {}
 
+  /// A web-only source is not scraped at all. The app simply embeds the
+  /// website in a WebView (with ads blocked) and lets its own player run.
+  bool get isWebView => false;
+
+  /// The page a [isWebView] source should open first.
+  String get webHomeUrl => baseUrl;
+
   /// Latest / seasonal / movie / popular feeds
   Future<List<AnimeInfo>> browse(BrowseKind kind, {int page = 1});
 

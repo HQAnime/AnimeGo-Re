@@ -4,6 +4,7 @@ import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
 import 'package:animego/ui/page/Settings.dart';
+import 'package:animego/ui/page/WebSourcePage.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:animego/ui/widget/GenreList.dart';
 import 'package:flutter/material.dart';
@@ -56,24 +57,39 @@ class _TabletHomePageState extends State<TabletHomePage> {
           ),
         ],
       ),
-      floatingActionButton: showFab
-          ? FloatingActionButton(
-              child: Icon(Icons.search),
-              tooltip: 'Search anime',
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SearchAnime(),
-                  fullscreenDialog: true,
-                ),
+      floatingActionButton: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          if (!showFab || SourceManager().active.isWebView) {
+            return const SizedBox.shrink();
+          }
+          return FloatingActionButton(
+            child: Icon(Icons.search),
+            tooltip: 'Search anime',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchAnime(),
+                fullscreenDialog: true,
               ),
-            )
-          : null,
+            ),
+          );
+        },
+      ),
     );
   }
 
   Widget renderPage(String activeId) {
     final source = SourceManager().active;
+
+    // Web-only sources replace every browsable feed with the embedded site.
+    if (source.isWebView &&
+        code != PageCode.history &&
+        code != PageCode.favourite &&
+        code != PageCode.setting) {
+      return WebSourcePage(key: ValueKey(activeId), source: source);
+    }
+
     switch (code) {
       case PageCode.latest:
         return AnimeGrid(

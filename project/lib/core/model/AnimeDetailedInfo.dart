@@ -17,6 +17,11 @@ class AnimeDetailedInfo {
   List<EpisodeSection> episodes = [];
   String? lastEpisode;
 
+  /// Canonical ids (resolved from AniList) used to match this anime across
+  /// sources. Null until [SourceManager] enriches the detail.
+  int? anilistId;
+  int? malId;
+
   /// Build without parsing HTML, used by API based sources.
   AnimeDetailedInfo.create({
     this.image,
@@ -29,6 +34,8 @@ class AnimeDetailedInfo {
     this.status,
     List<EpisodeSection>? episodes,
     this.lastEpisode,
+    this.anilistId,
+    this.malId,
   }) {
     if (genre != null) this.genre = genre;
     if (episodes != null) this.episodes = episodes;

@@ -54,7 +54,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       });
       return;
     }
-    SourceManager().active.detail(target).then((detail) {
+    SourceManager().detailWithFallback(target).then((detail) {
       setState(() {
         this.loading = false;
         this.info = detail;

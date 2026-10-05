@@ -253,7 +253,8 @@ class _SettingsState extends State<Settings> {
   }
 
   /// Runs the Cloudflare browser check for the active source.
-  Future<void> verifyAccess() async {    final source = SourceManager().active;
+  Future<void> verifyAccess() async {
+    final source = SourceManager().active;
     final dark = Theme.of(context).brightness == Brightness.dark;
     final ok = await CloudflareManager().verify(
       source.id,

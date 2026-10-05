@@ -1,7 +1,12 @@
+import 'package:animego/core/model/AnimeDetailedInfo.dart';
+import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/source/AnimeSource.dart';
+import 'package:animego/core/source/anilist/AniListService.dart';
 import 'package:animego/core/source/gogoanime/GogoanimeSource.dart';
 import 'package:animego/core/source/hianime/AniwatchSource.dart';
 import 'package:animego/core/source/hianime/HianimeSource.dart';
+import 'package:animego/core/source/miruro/MiruroSource.dart';
+import 'package:animego/core/source/nyaa/NyaaSource.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +47,8 @@ class SourceManager {
       register(GogoanimeSource());
       register(HianimeSource());
       register(AniwatchSource());
+      register(MiruroSource());
+      register(NyaaSource());
     }
 
     final prefs = await SharedPreferences.getInstance();
@@ -77,5 +84,47 @@ class SourceManager {
     source.updateBaseUrl(url);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('$_domainPrefix$id', url.trim());
+  }
+
+  /// Resolve a detail page, falling back to the other streaming sources when
+  /// the active one is down or cannot find the anime.
+  Future<AnimeDetailedInfo?> detailWithFallback(BasicAnime anime) async {
+    final activeDetail = await active.detail(anime);
+    if (activeDetail != null) return _enrich(activeDetail);
+
+    final name = anime.name;
+    if (name == null || name.isEmpty) return null;
+
+    for (final source in _sources.values) {
+      if (source.id == active.id ||
+          source.isWebView ||
+          source.kind != SourceKind.streaming) {
+        continue;
+      }
+      try {
+        final results = await source.search(name);
+        if (results.isEmpty) continue;
+        final detail = await source.detail(results.first);
+        if (detail != null) return _enrich(detail);
+      } catch (e) {
+        // Try the next source.
+      }
+    }
+    return null;
+  }
+
+  /// Fill the AniList/MAL ids and any missing metadata from AniList.
+  Future<AnimeDetailedInfo> _enrich(AnimeDetailedInfo detail) async {
+    if (detail.anilistId != null || detail.name == null) return detail;
+    final canonical = await AniListService.instance.search(detail.name!);
+    if (canonical == null) return detail;
+
+    detail.anilistId = canonical.anilistId;
+    detail.malId = canonical.malId;
+    detail.image ??= canonical.coverImage;
+    if (detail.summary == null || detail.summary!.isEmpty) {
+      detail.summary = canonical.summary;
+    }
+    return detail;
   }
 }

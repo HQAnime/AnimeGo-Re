@@ -18,17 +18,27 @@ class AnimeCard extends StatelessWidget {
         children: <Widget>[
           AspectRatio(
             aspectRatio: 0.7,
-            child: Ink(
-              decoration: BoxDecoration(
-                image: info.coverImage != null
-                    ? DecorationImage(
+            child: info.coverImage != null
+                ? Ink(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
                         image: NetworkImage(info.coverImage!),
                         fit: BoxFit.cover,
-                      )
-                    : null,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  )
+                : Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(
+                      Icons.movie,
+                      size: 40,
+                      color: Colors.white54,
+                    ),
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

@@ -2,10 +2,13 @@ import 'dart:math';
 
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/model/AnimeInfo.dart';
+import 'package:animego/core/source/AnimeSource.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/widget/AnimeCard.dart';
 import 'package:animego/ui/widget/LoadingSwitcher.dart';
+import 'package:animego/ui/widget/TorrentSheet.dart';
 import 'package:flutter/material.dart';
 
 /// AnimeGrid class
@@ -138,6 +141,13 @@ class _AnimeGridState extends State<AnimeGrid> {
                                   borderRadius: BorderRadius.circular(12),
                                   child: AnimeCard(info: info),
                                   onTap: () {
+                                    // Torrent sources hand the magnet off to
+                                    // an external client instead of playing.
+                                    if (SourceManager().active.kind ==
+                                        SourceKind.torrent) {
+                                      showTorrentSheet(context, info);
+                                      return;
+                                    }
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) {
