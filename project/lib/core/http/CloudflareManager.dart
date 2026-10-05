@@ -31,8 +31,7 @@ class CloudflareManager {
     await store.save(
       sourceId,
       cookie: cookie,
-      userAgent:
-          userAgent.isEmpty ? CookieStore.defaultUserAgent : userAgent,
+      userAgent: userAgent.isEmpty ? CookieStore.defaultUserAgent : userAgent,
     );
     return true;
   }

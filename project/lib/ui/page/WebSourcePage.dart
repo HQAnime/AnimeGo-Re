@@ -142,7 +142,9 @@ class _WebSourcePageState extends State<WebSourcePage> {
           IconButton(
             tooltip: _landscape ? 'Portrait' : 'Landscape',
             icon: Icon(
-              _landscape ? Icons.stay_current_portrait : Icons.stay_current_landscape,
+              _landscape
+                  ? Icons.stay_current_portrait
+                  : Icons.stay_current_landscape,
             ),
             onPressed: () => _rotate(!_landscape),
           ),

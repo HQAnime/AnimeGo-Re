@@ -91,10 +91,8 @@ class HianimeSource extends AnimeSource {
 
   @override
   Future<List<AnimeInfo>> genre(String genre, {int page = 1}) {
-    final slug = genre
-        .toLowerCase()
-        .replaceAll(' & ', '-')
-        .replaceAll(' ', '-');
+    final slug =
+        genre.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-');
     return _cards('/genres/$slug?page=$page');
   }
 

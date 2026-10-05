@@ -42,10 +42,9 @@ class HianimeParser {
   }
 
   static AnimeInfo? _parseCard(Element item) {
-    final nameAnchor =
-        item.getElementsByClassName('film-name').isNotEmpty
-            ? item.getElementsByClassName('film-name').first.querySelector('a')
-            : null;
+    final nameAnchor = item.getElementsByClassName('film-name').isNotEmpty
+        ? item.getElementsByClassName('film-name').first.querySelector('a')
+        : null;
     if (nameAnchor == null) return null;
 
     final poster = item.getElementsByClassName('film-poster-img');
@@ -62,8 +61,7 @@ class HianimeParser {
         : (sub.isNotEmpty ? sub.first.text.trim() : '??');
 
     return AnimeInfo.create(
-      name: nameAnchor.attributes['title']?.trim() ??
-          nameAnchor.text.trim(),
+      name: nameAnchor.attributes['title']?.trim() ?? nameAnchor.text.trim(),
       link: _toPath(nameAnchor.attributes['href']),
       coverImage: cover,
       episode: episode,
@@ -93,10 +91,7 @@ class HianimeParser {
 
     final overview = doc.getElementsByClassName('anisc-info');
     final summary = overview.isNotEmpty
-        ? overview.first
-            .querySelector('.item.w-hide .text')
-            ?.text
-            .trim()
+        ? overview.first.querySelector('.item.w-hide .text')?.text.trim()
         : null;
 
     final info = _parseInfoItems(doc);

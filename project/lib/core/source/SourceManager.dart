@@ -26,11 +26,9 @@ class SourceManager {
   final Map<String, AnimeSource> _sources = {};
   String? _activeId;
 
-  List<AnimeSource> get sources =>
-      _sources.values.toList(growable: false);
+  List<AnimeSource> get sources => _sources.values.toList(growable: false);
 
-  AnimeSource get active =>
-      _sources[_activeId] ?? _sources.values.first;
+  AnimeSource get active => _sources[_activeId] ?? _sources.values.first;
 
   String get activeId => active.id;
 

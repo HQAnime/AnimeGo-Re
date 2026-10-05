@@ -1,5 +1,3 @@
-import 'package:html/dom.dart';
-
 /// This contains maximum 100 episode
 class EpisodeSection {
   String? episodeStart;
@@ -8,19 +6,11 @@ class EpisodeSection {
 
   /// Source specific payload used to resolve the episode list.
   ///
-  /// For gogoanime this is the `?ep_start=..&ep_end=..&id=..` query. Other
-  /// sources can store their own identifier here.
+  /// A streaming source stores its own identifier here (for HiAnime it is the
+  /// numeric anime id).
   String? payload;
 
-  EpisodeSection(Element e, this.movieID) {
-    final episode = e.nodes[1];
-    this.episodeStart = episode.attributes['ep_start'];
-    this.episodeEnd = episode.attributes['ep_end'];
-    this.payload =
-        '?ep_start=$episodeStart&ep_end=$episodeEnd&id=$movieID';
-  }
-
-  /// Build a section without parsing HTML, used by non-HTML sources.
+  /// The only way to build a section; sources pass their own payload.
   EpisodeSection.create({
     this.episodeStart,
     this.episodeEnd,

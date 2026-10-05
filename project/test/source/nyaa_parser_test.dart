@@ -41,7 +41,8 @@ void main() {
       expect(releases.first.title, '[AnoZu] One Piece S23E25 1080p');
       expect(
         releases.first.magnet,
-        contains('magnet:?xt=urn:btih:8cf49ef107cd1d8f1a097092edf7afef9c4d147c'),
+        contains(
+            'magnet:?xt=urn:btih:8cf49ef107cd1d8f1a097092edf7afef9c4d147c'),
       );
       expect(releases.first.size, '1.3 GiB');
       expect(releases.first.seeders, 1303);
@@ -51,7 +52,8 @@ void main() {
     test('skips rows without a magnet link', () {
       final releases = NyaaParser.parse(_table);
 
-      expect(releases.map((r) => r.title), isNot(contains('No magnet release')));
+      expect(
+          releases.map((r) => r.title), isNot(contains('No magnet release')));
     });
 
     test('ignores the comments link in the name cell', () {

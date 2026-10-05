@@ -115,7 +115,8 @@ void main() {
     });
 
     test('returns null without an anime id', () {
-      expect(HianimeParser.parseDetail('<html><body>nope</body></html>'), isNull);
+      expect(
+          HianimeParser.parseDetail('<html><body>nope</body></html>'), isNull);
     });
   });
 

@@ -59,8 +59,8 @@ class _SettingsState extends State<Settings> {
               CloudflareManager().isSupported)
             ListTile(
               title: Text('Verify site access'),
-              subtitle: Text(
-                  'Open the browser check if this source fails to load'),
+              subtitle:
+                  Text('Open the browser check if this source fails to load'),
               onTap: verifyAccess,
             ),
           CheckboxListTile(

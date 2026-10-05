@@ -41,7 +41,7 @@ class _WatchAnimePageState extends State<WatchAnimePage> {
             return NavigationDecision.prevent;
           }
 
-          // gogoanime is kept locked to the chosen server.
+          // Non-embed players stay locked to the chosen server's link.
           final link = widget.video.link;
           if (link != null && request.url.contains(link)) {
             return NavigationDecision.navigate;
@@ -252,4 +252,3 @@ const _JS_SCRIPT = """
     // styling changes
     document.body.style.backgroundColor = "black";
 """;
-

@@ -36,8 +36,7 @@ Future<void> showTorrentSheet(BuildContext context, AnimeInfo info) {
             FilledButton.icon(
               icon: const Icon(Icons.download),
               label: const Text('Open with torrent app'),
-              onPressed:
-                  magnet == null ? null : () => openMagnetLink(magnet),
+              onPressed: magnet == null ? null : () => openMagnetLink(magnet),
             ),
             TextButton.icon(
               icon: const Icon(Icons.copy),

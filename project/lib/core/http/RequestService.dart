@@ -31,7 +31,8 @@ class RequestService {
     return <String, String>{
       'user-agent': userAgent,
       if (cookie.isNotEmpty) 'cookie': cookie,
-      'accept': 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
+      'accept':
+          'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
       'accept-language': 'en-US,en;q=0.9',
       'referer': baseUrl,
       ...extraHeaders,

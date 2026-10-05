@@ -41,7 +41,7 @@ class TorrentRelease {
 /// The app only ever talks to this interface, never to a website directly,
 /// so new sources can be added without touching the UI.
 abstract class AnimeSource {
-  /// Stable identifier, e.g. `gogoanime`
+  /// Stable identifier, e.g. `hianime`
   String get id;
 
   /// Human readable name shown in the source picker
