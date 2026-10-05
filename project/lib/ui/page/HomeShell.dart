@@ -1,3 +1,4 @@
+import 'package:animego/core/Util.dart';
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/LastestAnime.dart';
@@ -21,12 +22,13 @@ class _TabSpec {
   final IconData selectedIcon;
 }
 
-/// The mobile home: one bottom tab per content source.
+/// The mobile home: one tab per content source.
 ///
-/// Tapping a tab switches [SourceManager]'s active source, so the rest of the
-/// app (History, Favourites, detail pages) keeps working unchanged. HiAnime
-/// keeps the original native UI; the web sources embed their site and Nyaa
-/// shows a torrent list.
+/// Phones use a bottom [NavigationBar]; tablets/large screens use a
+/// [NavigationRail]. Tapping a tab switches [SourceManager]'s active source, so
+/// the rest of the app (History, Favourites, detail pages) keeps working
+/// unchanged. HiAnime keeps the original native UI; the web sources embed their
+/// site and Nyaa shows a torrent list.
 class HomeShell extends StatefulWidget {
   const HomeShell({Key? key}) : super(key: key);
 
@@ -71,16 +73,39 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final index = _index;
+    if (Util(context).isTablet()) {
+      return Scaffold(
+        body: Row(
+          children: <Widget>[
+            SafeArea(
+              right: false,
+              child: NavigationRail(
+                selectedIndex: index,
+                onDestinationSelected: _select,
+                labelType: NavigationRailLabelType.all,
+                destinations: _tabs
+                    .map(
+                      (tab) => NavigationRailDestination(
+                        icon: Icon(tab.icon),
+                        selectedIcon: Icon(tab.selectedIcon),
+                        label: Text(tab.label),
+                      ),
+                    )
+                    .toList(growable: false),
+              ),
+            ),
+            const VerticalDivider(width: 1),
+            Expanded(child: _buildTab(_tabs[index].id)),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: _buildTab(_tabs[index].id),
       bottomNavigationBar: NavigationBar(
         selectedIndex: index,
-        onDestinationSelected: (selected) {
-          if (selected == index) return;
-          SourceManager().select(_tabs[selected].id).then((_) {
-            if (mounted) setState(() {});
-          });
-        },
+        onDestinationSelected: _select,
         destinations: _tabs
             .map(
               (tab) => NavigationDestination(
@@ -92,6 +117,13 @@ class _HomeShellState extends State<HomeShell> {
             .toList(growable: false),
       ),
     );
+  }
+
+  void _select(int selected) {
+    if (selected == _index) return;
+    SourceManager().select(_tabs[selected].id).then((_) {
+      if (mounted) setState(() {});
+    });
   }
 
   Widget _buildTab(String id) {

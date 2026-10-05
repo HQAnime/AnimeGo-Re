@@ -1,4 +1,3 @@
-import 'package:animego/core/Firebase.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -27,27 +26,18 @@ class SearchAnimeButton extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: <Widget>[
         AnimeFlatButton(
-          onPressed: () {
-            _open('https://www.google.com/search', {'q': query});
-            FirebaseEventService().logUseGoogle();
-          },
+          onPressed: () => _open('https://www.google.com/search', {'q': query}),
           child: Text('Google'),
         ),
         AnimeFlatButton(
-          onPressed: () {
-            _open('https://duckduckgo.com/', {'q': query});
-            FirebaseEventService().logUseGoogle();
-          },
+          onPressed: () => _open('https://duckduckgo.com/', {'q': query}),
           child: Text('DuckDuckGo'),
         ),
         AnimeFlatButton(
-          onPressed: () {
-            _open(
-              'https://chatgpt.com/',
-              {'q': _chatGptPrompt.replaceAll('{name}', query)},
-            );
-            FirebaseEventService().logUseChatGPT();
-          },
+          onPressed: () => _open(
+            'https://chatgpt.com/',
+            {'q': _chatGptPrompt.replaceAll('{name}', query)},
+          ),
           child: Text('ChatGPT'),
         ),
       ],

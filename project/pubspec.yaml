@@ -1,5 +1,5 @@
 name: animego
-description: An unofficial app for gogoanime
+description: An unofficial anime app with multiple sources
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -33,7 +33,6 @@ dependencies:
   # webview
   webview_flutter: ^4.13.0
   share_plus: ^13.3.1
-  firebase_analytics: ^12.6.0
   # material you dynamic colour
   dynamic_color: ^1.7.0
 
@@ -41,7 +40,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^2.0.0
 
-  firebase_core: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

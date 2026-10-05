@@ -1,5 +1,4 @@
 import 'package:android_intent_plus/android_intent.dart';
-import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
@@ -38,8 +37,6 @@ class _EpisodePageState extends State<EpisodePage>
   void initState() {
     super.initState();
     this.loadEpisodeInfo(widget.info?.link);
-
-    FirebaseEventService().logUseEpisode();
   }
 
   void loadEpisodeInfo(String? link) {
@@ -270,8 +267,6 @@ class _EpisodePageState extends State<EpisodePage>
       ),
     );
 
-    FirebaseEventService().logWatchInApp();
-
     _addToHistory();
   }
 
@@ -282,8 +277,6 @@ class _EpisodePageState extends State<EpisodePage>
       action: 'action_view',
       data: e.link,
     ).launch();
-
-    FirebaseEventService().logWatchWithOthers();
 
     _addToHistory();
   }

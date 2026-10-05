@@ -23,7 +23,7 @@ class WebActivity : AppCompatActivity() {
 
         // Fall back to the default site so the bypass never starts empty.
         val link = intent.getStringExtra("link")?.takeIf { it.isNotBlank() }
-            ?: "https://gogoanime3.co/"
+            ?: "https://hianime.tr/"
 
         // Clear cookies to get a fresh cf_clearance.
         CookieManager.getInstance().removeAllCookies {

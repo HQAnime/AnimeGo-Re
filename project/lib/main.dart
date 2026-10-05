@@ -1,10 +1,7 @@
 import 'package:animego/core/Global.dart';
-import 'package:animego/core/Util.dart';
 import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/HomeShell.dart';
-import 'package:animego/ui/page/TabletHomePage.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,9 +11,6 @@ void main() async {
   // Draw behind the status and navigation bars (Android 15+ / Material You).
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-  if (Util.isMobile()) {
-    await Firebase.initializeApp();
-  }
   await SourceManager().init();
   runApp(const MyApp());
 }
@@ -81,8 +75,6 @@ class _Root extends StatelessWidget {
         if (snapshot.hasData) {
           // Check for update after init has been done
           Global().checkForUpdate(context);
-          // Use another view for tablets (or devices with a large screen)
-          if (Util(context).isTablet()) return TabletHomePage();
           return HomeShell();
         }
         return Scaffold(

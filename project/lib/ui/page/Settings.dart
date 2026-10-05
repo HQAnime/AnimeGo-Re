@@ -1,4 +1,3 @@
-import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/http/CloudflareManager.dart';
 import 'package:animego/core/source/SourceManager.dart';
@@ -28,8 +27,6 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     hideDUB = global.hideDUB;
-
-    FirebaseEventService().logUseSettings();
   }
 
   @override

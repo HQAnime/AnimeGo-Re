@@ -3,10 +3,12 @@ import 'package:animego/ui/page/GenrePage.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 
-/// GenreList class
+/// The full genre list, rendered as tappable chips.
 class GenreList extends StatelessWidget {
-  /// The entire genre list all in one
-  final genreList = [
+  const GenreList({Key? key}) : super(key: key);
+
+  /// Every genre the app supports, all in one place.
+  static const genreList = <String>[
     'Action',
     'Adventure',
     'Cars',
@@ -48,16 +50,8 @@ class GenreList extends StatelessWidget {
     'Thriller',
     'Vampire',
     'Yaoi',
-    'Yuri'
+    'Yuri',
   ];
-
-  GenreList({
-    Key? key,
-    this.func,
-  }) : super(key: key);
-
-  /// This is only used by TabletHomePage
-  final Function? func;
 
   @override
   Widget build(BuildContext context) {
@@ -67,26 +61,20 @@ class GenreList extends StatelessWidget {
     );
   }
 
-  /// Render all genres as chips
+  /// Render all genres as chips that open the matching [GenrePage].
   List<Widget> renderGenres(BuildContext context) {
-    // Return a fixed length array (growable to be false)
     return genreList
         .map(
           (item) => AnimeFlatButton(
             child: Text(item),
             onPressed: () {
-              final genre = AnimeGenre(item);
-              if (func == null) {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GenrePage(genre: genre),
-                  ),
-                );
-              } else {
-                func!(genre.getFullLink());
-              }
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GenrePage(genre: AnimeGenre(item)),
+                ),
+              );
             },
           ),
         )

@@ -1,4 +1,3 @@
-import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/source/AnimeSource.dart';
 import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
@@ -12,7 +11,6 @@ class PopularAnime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseEventService().logUseEpisode();
     return Scaffold(
       appBar: AppBar(title: Text('Popular')),
       body: ValueListenableBuilder<String>(

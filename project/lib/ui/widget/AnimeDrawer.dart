@@ -1,4 +1,3 @@
-import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Util.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
@@ -20,12 +19,6 @@ class AnimeDrawer extends StatefulWidget {
 }
 
 class _AnimeDrawerState extends State<AnimeDrawer> {
-  @override
-  void initState() {
-    super.initState();
-    FirebaseEventService().logFabMenu();
-  }
-
   @override
   Widget build(BuildContext context) {
     bool darkMode = Util(context).isDarkMode();
@@ -84,7 +77,7 @@ class _AnimeDrawerState extends State<AnimeDrawer> {
                   ExpansionTile(
                     title: Text('Genre'),
                     leading: Icon(Icons.list),
-                    children: <Widget>[GenreList()],
+                    children: <Widget>[const GenreList()],
                   ),
                   Divider(),
                   ListTile(
