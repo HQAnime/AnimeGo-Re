@@ -110,8 +110,14 @@ const _JS_SCRIPT = """
     function send_flutter(...args) {
         Flutter.postMessage(JSON.stringify(args));
     }
+
+    // send an event message with event:: prefix
+    function send_event(event, message) {
+        send_flutter('event::' + event, message);
+    }
   
     // macOS needs some additional work to fullscreen the video
+    const is_mac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
     var has_seen_video = false;
     var has_setup = false;
 
@@ -140,8 +146,8 @@ const _JS_SCRIPT = """
             const the_video = videos[0];
             const video_src = the_video.src;
             if (video_src != "") {
-                send_flutter("getting video src");
                 has_seen_video = true;
+                send_flutter('Video', video_src);
 
                 // this event is only required on macOS
                 the_video.click();
@@ -156,7 +162,7 @@ const _JS_SCRIPT = """
                 }, 1000);
             }
         }
-    }, 100);
+    }, is_mac ? 1000 : 300);
 
     const valid_video_extensions = [".m3u8", ".ts", ".jpg", ".svg", ".ico", ".css", ".tff", ".vtt", ".srt", ".html", ".woff", ".js"];
     const valid_url_string = ["/ep."];
@@ -196,6 +202,16 @@ const _JS_SCRIPT = """
         links.forEach(function(link) {
             link.href = 'javascript:void(0)';
         });
+    });
+
+    // detect fullscreen
+    document.addEventListener('fullscreenchange', function() {
+        send_event('fullscreen');
+    });
+
+    // remove right click menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
     });
 
     // styling changes
