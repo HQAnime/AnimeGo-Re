@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/model/AnimeInfo.dart';
-import 'package:animego/core/parser/AnimeParser.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/EpisodePage.dart';
 import 'package:animego/ui/widget/AnimeCard.dart';
@@ -13,10 +12,11 @@ import 'package:flutter/material.dart';
 class AnimeGrid extends StatefulWidget {
   const AnimeGrid({
     Key? key,
-    required this.url,
+    required this.loadPage,
   }) : super(key: key);
 
-  final String? url;
+  /// Loads a single page of anime from the active source.
+  final Future<List<AnimeInfo>> Function(int page) loadPage;
 
   @override
   _AnimeGridState createState() => _AnimeGridState();
@@ -45,12 +45,6 @@ class _AnimeGridState extends State<AnimeGrid> {
   }
 
   @override
-  void didChangeDependencies() {
-    print(widget.url);
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     this.controller.dispose();
     super.dispose();
@@ -66,19 +60,7 @@ class _AnimeGridState extends State<AnimeGrid> {
       showIndicator = true;
     });
 
-    bool isSearch = widget.url?.startsWith('/search') ?? false;
-
-    // For search, you need to use &
-    final currentUrl = widget.url!;
-    final link = Global().getDomain(url: currentUrl) +
-        currentUrl +
-        (isSearch ? '&' : '?') +
-        'page=$page';
-    print('Current link is $link');
-    final parser = AnimeParser(link);
-    parser.downloadHTML().then((body) {
-      final moreData = parser.parseHTML(body);
-
+    widget.loadPage(page).then((moreData) {
       // Filter out dub
       if (global.hideDUB ?? false) moreData.removeWhere((e) => e.isDUB);
 
@@ -91,7 +73,7 @@ class _AnimeGridState extends State<AnimeGrid> {
         else
           this.list += moreData;
         // If more data is emptp, we have reached the end
-        this.canLoadMore = moreData.length > 0;
+        this.canLoadMore = moreData.isNotEmpty;
         this.showIndicator = false;
       });
     });
@@ -175,7 +157,7 @@ class _AnimeGridState extends State<AnimeGrid> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Nothing was found. Try loading it again.\nDouble check the website link in Settings as well.',
+                                  'Nothing was found. Try loading it again.\nDouble check the source and website link in Settings as well.',
                                   textAlign: TextAlign.center,
                                 ),
                                 IconButton(

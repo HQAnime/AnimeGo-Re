@@ -17,6 +17,23 @@ class AnimeDetailedInfo {
   List<EpisodeSection> episodes = [];
   String? lastEpisode;
 
+  /// Build without parsing HTML, used by API based sources.
+  AnimeDetailedInfo.create({
+    this.image,
+    this.name,
+    this.category,
+    this.categoryLink,
+    this.summary,
+    List<AnimeGenre>? genre,
+    this.released,
+    this.status,
+    List<EpisodeSection>? episodes,
+    this.lastEpisode,
+  }) {
+    if (genre != null) this.genre = genre;
+    if (episodes != null) this.episodes = episodes;
+  }
+
   AnimeDetailedInfo(Document? body) {
     // Parse basic info
     final infoClass = body?.getElementsByClassName('anime_info_body_bg').first;
@@ -63,6 +80,6 @@ class AnimeDetailedInfo {
     });
 
     // Make sure it is not empty at least
-    if (this.episodes.length > 0) lastEpisode = this.episodes.last.episodeEnd;
+    if (this.episodes.isNotEmpty) lastEpisode = this.episodes.last.episodeEnd;
   }
 }

@@ -16,6 +16,7 @@ class OneEpisodeInfo extends BasicAnime {
   List<VideoServer> servers = [];
 
   /// Only need to save current episode
+  @override
   Map<String, dynamic> toJson() => {
         'name': name,
         'link': link,
@@ -25,6 +26,23 @@ class OneEpisodeInfo extends BasicAnime {
   OneEpisodeInfo.fromJson(Map<String, dynamic> json)
       : this.currentEpisode = json['currentEpisode'],
         super.fromJson(json);
+
+  /// Build without parsing HTML, used by API based sources.
+  OneEpisodeInfo.create({
+    String? name,
+    String? link,
+    this.category,
+    this.categoryLink,
+    this.currentEpisode,
+    this.currentEpisodeLink,
+    this.prevEpisodeLink,
+    this.nextEpisodeLink,
+    List<VideoServer>? servers,
+  }) : super.fromJson(null) {
+    this.name = name;
+    this.link = link;
+    if (servers != null) this.servers = servers;
+  }
 
   OneEpisodeInfo(Element? e) : super.fromJson(null) {
     // Get name and category

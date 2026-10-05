@@ -1,3 +1,5 @@
+import 'package:animego/core/source/AnimeSource.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/Favourite.dart';
 import 'package:animego/ui/page/History.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
@@ -47,7 +49,10 @@ class _TabletHomePageState extends State<TabletHomePage> {
           ),
           Flexible(
             flex: 7,
-            child: renderPage(),
+            child: ValueListenableBuilder<String>(
+              valueListenable: SourceManager.activeNotifier,
+              builder: (context, activeId, child) => renderPage(activeId),
+            ),
           ),
         ],
       ),
@@ -67,29 +72,40 @@ class _TabletHomePageState extends State<TabletHomePage> {
     );
   }
 
-  Widget renderPage() {
+  Widget renderPage(String activeId) {
+    final source = SourceManager().active;
     switch (code) {
       case PageCode.latest:
         return AnimeGrid(
-          url: '/page-recent-release.html',
-          key: Key(code.toString()),
+          key: ValueKey('$activeId:latest'),
+          loadPage: (page) => source.browse(BrowseKind.latest, page: page),
         );
       case PageCode.seasonal:
-        return AnimeGrid(url: '/new-season.html', key: Key(code.toString()));
+        return AnimeGrid(
+          key: ValueKey('$activeId:seasonal'),
+          loadPage: (page) => source.browse(BrowseKind.seasonal, page: page),
+        );
       case PageCode.movie:
-        return AnimeGrid(url: '/anime-movies.html', key: Key(code.toString()));
+        return AnimeGrid(
+          key: ValueKey('$activeId:movie'),
+          loadPage: (page) => source.browse(BrowseKind.movie, page: page),
+        );
       case PageCode.popular:
-        return AnimeGrid(url: '/popular.html', key: Key(code.toString()));
+        return AnimeGrid(
+          key: ValueKey('$activeId:popular'),
+          loadPage: (page) => source.browse(BrowseKind.popular, page: page),
+        );
       case PageCode.genre:
-        return AnimeGrid(url: this.genre, key: Key(genre));
+        return AnimeGrid(
+          key: ValueKey('$activeId:$genre'),
+          loadPage: (page) => source.category(this.genre, page: page),
+        );
       case PageCode.history:
         return History(showAppBar: false);
       case PageCode.favourite:
         return Favourite(showAppBar: false);
       case PageCode.setting:
         return Settings(showAppBar: false);
-      default:
-        return Container();
     }
   }
 

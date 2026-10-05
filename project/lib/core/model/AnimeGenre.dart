@@ -1,5 +1,5 @@
 class AnimeGenre {
-  String? _name;
+  final String? _name;
   String getAnimeGenreName() => _name ?? 'Unknown';
 
   /// Merge domain name and formatted name

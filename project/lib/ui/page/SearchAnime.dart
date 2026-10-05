@@ -1,4 +1,5 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,16 @@ class _SearchAnimeState extends State<SearchAnime> {
     if (formattedSearch.length < 3) {
       return Container();
     } else {
-      return AnimeGrid(url: '/search.html?keyword=$formattedSearch');
+      return ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return AnimeGrid(
+            key: ValueKey(activeId),
+            loadPage: (page) => source.search(this.search, page: page),
+          );
+        },
+      );
     }
   }
 }

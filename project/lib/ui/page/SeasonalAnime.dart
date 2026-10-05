@@ -1,4 +1,5 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,22 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('New Season')),
-      body: Column(
-        children: [
-          buildPastSeasons(),
-          Expanded(child: AnimeGrid(url: this.url, key: Key(this.url))),
-        ],
+      body: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return Column(
+            children: [
+              buildPastSeasons(),
+              Expanded(
+                child: AnimeGrid(
+                  key: ValueKey('$activeId:$url'),
+                  loadPage: (page) => source.category(this.url, page: page),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -69,13 +81,13 @@ class _SeasonalAnimeState extends State<SeasonalAnime> {
   /// This returns pas 4 seasons
   List<String> _getSeasonList() {
     final List<String> seasons = [];
-    DateTime _date = DateTime.now();
+    DateTime date = DateTime.now();
 
     // Add past 9 seasons including current season so past 8
     int offset = 0; // make it 0 to show current seacon
     for (int i = 0; i < 25; i++, offset -= 3) {
       // Keep updating the date, 31 days just in case
-      var temp = this._getYearAndSeason(_date.add(Duration(days: offset * 30)));
+      var temp = this._getYearAndSeason(date.add(Duration(days: offset * 30)));
       seasons.add('/sub-category/${SEASONS[temp[1]]}-${temp[0]}-anime');
     }
 

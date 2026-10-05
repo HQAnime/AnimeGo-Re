@@ -18,7 +18,7 @@ class History extends StatelessWidget {
     final list = Global().historyList;
     return Scaffold(
       appBar: showAppBar ? AppBar(title: Text('Watch History')) : null,
-      body: list.length > 0
+      body: list.isNotEmpty
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {

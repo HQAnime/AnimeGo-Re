@@ -9,6 +9,18 @@ class AnimeInfo extends BasicAnime {
   String? episode = '??';
   bool isDUB = false;
 
+  /// Build without parsing HTML, used by API based sources.
+  AnimeInfo.create({
+    String? name,
+    String? link,
+    this.coverImage,
+    this.episode = '??',
+    this.isDUB = false,
+  }) : super.fromJson(null) {
+    this.name = name;
+    this.link = link;
+  }
+
   AnimeInfo(Element e) : super.fromJson(null) {
     // Image class has image and also name, link but I will use name class instead
     final imageClass = e.getElementsByClassName('img').first;
@@ -16,7 +28,7 @@ class AnimeInfo extends BasicAnime {
 
     // In order to call isCategory(), link needs to be parsed first
     final nameClass = e.getElementsByClassName('name').first;
-    var nameLink;
+    dynamic nameLink;
     // for search it is different, it becomes 1 somehow
     try {
       nameLink = nameClass.nodes[1];
@@ -54,7 +66,7 @@ class AnimeInfo extends BasicAnime {
       isDUB = true;
       final component = name.split(' ')..removeLast();
       // remove extra spaces and append it to DUB
-      this.name = '[Dub] ' + component.join(' ').trimRight();
+      this.name = '[Dub] ${component.join(' ').trimRight()}';
     }
   }
 }

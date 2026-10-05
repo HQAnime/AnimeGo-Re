@@ -18,7 +18,7 @@ class Favourite extends StatelessWidget {
     final list = Global().favouriteList;
     return Scaffold(
       appBar: showAppBar ? AppBar(title: Text('Favourite Anime')) : null,
-      body: list.length > 0
+      body: list.isNotEmpty
           ? ListView.builder(
               itemCount: list.length,
               itemBuilder: (c, i) {

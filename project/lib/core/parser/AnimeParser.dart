@@ -19,12 +19,12 @@ class AnimeParser extends BasicParser {
         if (!items.text.contains('Sorry')) {
           // It can be an empty list
           if (items.hasChildNodes()) {
-            items.nodes.forEach((element) {
+            for (final element in items.nodes) {
               // Only parse elements, no Text
               if (element is Element) {
                 list.add(AnimeInfo(element));
               }
-            });
+            }
           }
         }
       }

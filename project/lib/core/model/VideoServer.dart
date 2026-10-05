@@ -4,13 +4,16 @@ class VideoServer {
   String? title;
   String? link;
 
+  /// Build without parsing HTML, used by API based sources.
+  VideoServer.create({this.title, this.link});
+
   VideoServer(Element e) {
     final node = e.nodes[1];
 
     // Fix link with https
     var link1 = node.attributes['data-video'] ?? '';
     if (!link1.startsWith('http')) {
-      link1 = 'https://' + link1;
+      link1 = 'https://$link1';
     }
     this.link = link1;
 

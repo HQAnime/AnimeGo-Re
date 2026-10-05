@@ -1,4 +1,6 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/core/source/AnimeSource.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,16 @@ class PopularAnime extends StatelessWidget {
     FirebaseEventService().logUseEpisode();
     return Scaffold(
       appBar: AppBar(title: Text('Popular')),
-      body: AnimeGrid(url: '/popular.html'),
+      body: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return AnimeGrid(
+            key: ValueKey(activeId),
+            loadPage: (page) => source.browse(BrowseKind.popular, page: page),
+          );
+        },
+      ),
     );
   }
 }

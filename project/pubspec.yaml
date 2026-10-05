@@ -29,20 +29,21 @@ dependencies:
   # open links in browser
   url_launcher: ^6.0.2
   # open in another apps for android
-  android_intent_plus: ^5.0.2
+  android_intent_plus: ^6.1.0
   # webview
-  webview_flutter: ^4.4.2
-  share_plus: ^9.0.0
-  firebase_analytics: ^10.7.1
+  webview_flutter: ^4.13.0
+  share_plus: ^13.3.1
+  firebase_analytics: ^12.6.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^2.0.0
 
   firebase_core: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

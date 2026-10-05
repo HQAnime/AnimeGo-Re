@@ -1,5 +1,6 @@
 import 'package:animego/core/Global.dart';
 import 'package:animego/core/Util.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/LastestAnime.dart';
 import 'package:animego/ui/page/TabletHomePage.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,14 @@ void main() async {
   if (Util.isMobile()) {
     await Firebase.initializeApp();
   }
+  await SourceManager().init();
   runApp(MyApp());
 }
 
 // This widget is the root of the application.
 class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+
   final lightTheme = ThemeData(
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.deepOrange,

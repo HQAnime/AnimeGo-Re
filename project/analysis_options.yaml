@@ -5,24 +5,27 @@
 # IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
 # invoked from the command line by running `flutter analyze`.
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
+# Recommended lints for Flutter apps, packages, and plugins.
 include: package:flutter_lints/flutter.yaml
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # The existing codebase predates the newer style guides. These rules are
+    # disabled so the linter stays useful without forcing a repo-wide cosmetic
+    # rewrite. New code should still follow the recommended style where it is
+    # reasonable.
+    file_names: false
+    use_super_parameters: false
+    unnecessary_this: false
+    prefer_const_constructors: false
+    prefer_const_literals_to_create_immutables: false
+    prefer_const_declarations: false
+    avoid_print: false
+    curly_braces_in_flow_control_structures: false
+    library_private_types_in_public_api: false
+    sort_child_properties_last: false
+    constant_identifier_names: false
+    avoid_init_to_null: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -1,4 +1,5 @@
 import 'package:animego/core/Firebase.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,16 @@ class CategoryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title ?? 'Unknown'),
       ),
-      body: AnimeGrid(url: url),
+      body: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return AnimeGrid(
+            key: ValueKey(activeId),
+            loadPage: (page) => source.category(url ?? '', page: page),
+          );
+        },
+      ),
     );
   }
 }

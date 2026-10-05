@@ -1,5 +1,7 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/Global.dart';
+import 'package:animego/core/http/CloudflareManager.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeFlatButton.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -52,6 +54,52 @@ class _SettingsState extends State<Settings> {
           ListTile(
             title: Padding(
               padding: const EdgeInsets.only(top: 16),
+              child: Text('Source'),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                DropdownButton<String>(
+                  isExpanded: true,
+                  value: SourceManager().activeId,
+                  items: SourceManager()
+                      .sources
+                      .map(
+                        (source) => DropdownMenuItem<String>(
+                          value: source.id,
+                          child: Text(source.name),
+                        ),
+                      )
+                      .toList(growable: false),
+                  onChanged: (id) {
+                    if (id == null) return;
+                    SourceManager().select(id).then((_) {
+                      setState(() {});
+                    });
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    "Choose which website the app should use for anime. Each source has its own library and playback servers.",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (SourceManager().active.requiresCloudflare &&
+              CloudflareManager().isSupported)
+            ListTile(
+              title: Text('Verify site access'),
+              subtitle: Text(
+                  'Open the browser check if this source fails to load'),
+              onTap: verifyAccess,
+            ),
+          if (SourceManager().active.id == 'gogoanime')
+          ListTile(
+            title: Padding(
+              padding: const EdgeInsets.only(top: 16),
               child: Text('Website link'),
             ),
             subtitle: Column(
@@ -67,23 +115,26 @@ class _SettingsState extends State<Settings> {
                     FocusScope.of(context).requestFocus(FocusNode());
                     global.updateDomain(this.input);
                     Future.delayed(Duration(milliseconds: 400)).then(
-                      (_) => showDialog(
-                        context: context,
-                        builder: (c) => AlertDialog(
-                          title: Text('Domain has been updated'),
-                          content: Text(
-                            "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain.",
+                      (_) {
+                        if (!context.mounted) return;
+                        showDialog(
+                          context: context,
+                          builder: (c) => AlertDialog(
+                            title: Text('Domain has been updated'),
+                            content: Text(
+                              "The domain is now $input.\n\nIf it doesn't load, please change it back to the default domain. Note that the app will always get the latest domain based on the saved domain automatically and it might override your custom domain.",
+                            ),
+                            actions: [
+                              AnimeFlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Close'),
+                              )
+                            ],
                           ),
-                          actions: [
-                            AnimeFlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('Close'),
-                            )
-                          ],
-                        ),
-                      ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -112,7 +163,9 @@ class _SettingsState extends State<Settings> {
           ),
           ListTile(
             onTap: () {
-              Share.share(Global.latestRelease);
+              SharePlus.instance.share(
+                ShareParams(text: Global.latestRelease),
+              );
             },
             title: Text('Share AnimeGo'),
             subtitle: Text('Share to your friends if you like AnimeGo'),
@@ -156,5 +209,22 @@ class _SettingsState extends State<Settings> {
     setState(() {
       hideDUB = value;
     });
+  }
+
+  /// Runs the Cloudflare browser check for the active source.
+  Future<void> verifyAccess() async {
+    final source = SourceManager().active;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final ok = await CloudflareManager().verify(
+      source.id,
+      source.baseUrl,
+      dark: dark,
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(ok ? 'Access verified' : 'Verification failed'),
+      ),
+    );
   }
 }

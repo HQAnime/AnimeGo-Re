@@ -1,5 +1,6 @@
 import 'package:animego/core/Firebase.dart';
 import 'package:animego/core/model/AnimeGenre.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,17 @@ class GenrePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(genre.getAnimeGenreName()),
       ),
-      body: AnimeGrid(url: genre.getFullLink()),
+      body: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return AnimeGrid(
+            key: ValueKey(activeId),
+            loadPage: (page) =>
+                source.genre(genre.getAnimeGenreName(), page: page),
+          );
+        },
+      ),
     );
   }
 }

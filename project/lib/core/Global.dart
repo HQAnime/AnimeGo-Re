@@ -46,7 +46,7 @@ class Global {
     return defaultDomain;
   }
 
-  updateDomain(String domain) {
+  void updateDomain(String domain) {
     this._domain = domain;
     prefs.setString(websiteDomain, domain);
   }
@@ -101,7 +101,7 @@ class Global {
 
   // Singleton pattern
   Global._init();
-  static final Global _instance = new Global._init();
+  static final Global _instance = Global._init();
 
   // Use dart's factory constructor to implement this patternx
   factory Global() {
@@ -175,6 +175,8 @@ class Global {
       print('There is an update');
       // Update the date
       prefs.setString(lastUpdateDate, _lastDate.toString());
+      // The context may be gone if the async download took a while.
+      if (!context.mounted) return;
       // Show update dialog
       showDialog(
         context: context,
@@ -199,6 +201,7 @@ class Global {
       print('Up to date');
       // Only show this in force mode
       if (force) {
+        if (!context.mounted) return;
         showDialog(
           context: context,
           builder: (c) => AlertDialog(

@@ -1,3 +1,5 @@
+import 'package:animego/core/source/AnimeSource.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/SearchAnime.dart';
 import 'package:animego/ui/widget/AnimeDrawer.dart';
 import 'package:animego/ui/widget/AnimeGrid.dart';
@@ -14,17 +16,16 @@ class LastestAnime extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('New Release'),
-        actions: [
-          // IconButton(
-          //   icon: Icon(Icons.refresh),
-          //   onPressed: () {
-
-          //   },
-          // ),
-        ],
       ),
-      body: AnimeGrid(
-        url: '/page-recent-release.html',
+      body: ValueListenableBuilder<String>(
+        valueListenable: SourceManager.activeNotifier,
+        builder: (context, activeId, child) {
+          final source = SourceManager().active;
+          return AnimeGrid(
+            key: ValueKey(activeId),
+            loadPage: (page) => source.browse(BrowseKind.latest, page: page),
+          );
+        },
       ),
       drawer: AnimeDrawer(),
       floatingActionButton: FloatingActionButton(

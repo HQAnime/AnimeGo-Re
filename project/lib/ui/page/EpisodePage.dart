@@ -5,7 +5,7 @@ import 'package:animego/core/Util.dart';
 import 'package:animego/core/model/BasicAnime.dart';
 import 'package:animego/core/model/OneEpisodeInfo.dart';
 import 'package:animego/core/model/VideoServer.dart';
-import 'package:animego/core/parser/OneEpisodeParser.dart';
+import 'package:animego/core/source/SourceManager.dart';
 import 'package:animego/ui/page/AnimeDetailPage.dart';
 import 'package:animego/ui/page/CategoryPage.dart';
 import 'package:animego/ui/page/WatchAnimePage.dart';
@@ -42,16 +42,15 @@ class _EpisodePageState extends State<EpisodePage>
     FirebaseEventService().logUseEpisode();
   }
 
-  loadEpisodeInfo(String? link) {
+  void loadEpisodeInfo(String? link) {
     setState(() {
       info = null;
     });
 
-    final parser = OneEpisodeParser(global.getDomain() + (link ?? ''));
-    parser.downloadHTML().then((body) {
+    final parser = SourceManager().active;
+    parser.episode(BasicAnime(null, link)).then((info) {
       setState(() {
-        this.info = parser.parseHTML(body);
-        this.info?.currentEpisodeLink = link;
+        this.info = info;
         this.fomattedName =
             info?.name?.split(RegExp(r"[^a-zA-Z0-9]")).join('+');
       });
@@ -257,7 +256,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Watch with in app player
-  openInAppPlayer(VideoServer e) {
+  void openInAppPlayer(VideoServer e) {
     // Only android has the
     if (Util.isAndroid()) {
       Navigator.pop(context);
@@ -277,7 +276,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Watch with in app player
-  openWithOtherApps(VideoServer e) {
+  void openWithOtherApps(VideoServer e) {
     Navigator.pop(context);
     AndroidIntent(
       action: 'action_view',
@@ -290,7 +289,7 @@ class _EpisodePageState extends State<EpisodePage>
   }
 
   /// Save this to watch history
-  _addToHistory() => Global().addToHistory(
+  void _addToHistory() => Global().addToHistory(
         BasicAnime(
           info?.episodeName,
           info?.currentEpisodeLink,
