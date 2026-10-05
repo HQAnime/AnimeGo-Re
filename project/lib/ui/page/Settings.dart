@@ -45,43 +45,6 @@ class _SettingsState extends State<Settings> {
           //       'If you really like this app, you can consider buying me a pizza but any amount is greatly appreciated'),
           //   onTap: () => launchUrlString('https://www.paypal.me/yihengquan'),
           // ),
-          ListTile(
-            title: Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Source'),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                DropdownButton<String>(
-                  isExpanded: true,
-                  value: SourceManager().activeId,
-                  items: SourceManager()
-                      .sources
-                      .map(
-                        (source) => DropdownMenuItem<String>(
-                          value: source.id,
-                          child: Text(source.name),
-                        ),
-                      )
-                      .toList(growable: false),
-                  onChanged: (id) {
-                    if (id == null) return;
-                    SourceManager().select(id).then((_) {
-                      setState(() {});
-                    });
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    "Choose which website the app should use for anime. Each source has its own library and playback servers.",
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-                  ),
-                ),
-              ],
-            ),
-          ),
           if (SourceManager().active.isConfigurable)
             ListTile(
               title: Text('Website domain'),
